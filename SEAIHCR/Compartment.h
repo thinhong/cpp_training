@@ -1,7 +1,6 @@
 #ifndef SEAIHCR_COMPARTMENT_H
 #define SEAIHCR_COMPARTMENT_H
 
-
 #include <iostream>
 #include <vector>
 #include <memory>
@@ -14,7 +13,7 @@ private:
     std::vector<std::shared_ptr<Compartment>> linkedCompartment;
     std::vector<std::shared_ptr<double>> linkedWeight;
     std::vector<bool> isIn;
-    std::vector<std::shared_ptr<Compartment>> extraParam;
+    std::vector<bool> extraParam;
 public:
     explicit Compartment(std::string name, size_t size, double initVal) {
         value.resize(size);
@@ -26,16 +25,20 @@ public:
     // Getters
     std::vector<double> getValue() {return value;};
     std::string getName() {return name;};
-    std::vector<std::shared_ptr<Compartment>> getExtraParam() {return extraParam;};
+    std::vector<bool> getExtraParam() {return extraParam;};
 
     // Setters
     void setLinkedCompartment(std::shared_ptr<Compartment>& newLinkCompartment);
     void setLinkedWeight(std::shared_ptr<double>& newLinkWeight);
     void setIsIn(bool isInVal);
-    void setExtraParam(std::shared_ptr<Compartment>& newExtraParam);
+    void setExtraParam(bool newExtraParam);
 
     // Method for update value in each iteration
-    void updateValue(long iter);
+    void updateValue(long iter, std::vector<std::shared_ptr<Compartment>>& listComps);
+
+    // Update weight
+    double updateWeight(std::vector<std::shared_ptr<Compartment>>& otherCompartments, long iter);
+
 };
 
 

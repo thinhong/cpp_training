@@ -3,7 +3,7 @@
 #include "Compartment.h"
 #include "Model.h"
 
-const double lambda = 2.0 / 100000;
+const double lambda = 2.0 / 500000;
 const double theta = 1.0 / 3;
 const double tau = 1.0 / 2;
 const double p_h = 0.2;
@@ -22,8 +22,8 @@ int main() {
     // Create all compartments
     Compartment S("S", 1000, 100000);
     Compartment E("E", 1000, 0);
-    Compartment A("A", 1000, 1);
-    Compartment A_r("A_r", 1000, 1);
+    Compartment A("A", 1000, 0);
+    Compartment A_r("A_r", 1000, 0);
     Compartment I("I", 1000, 1);
     Compartment H_h("H_h", 1000, 0);
     Compartment H_c("H_c", 1000, 0);
@@ -79,47 +79,41 @@ int main() {
     myModel.setComps(pR);
 
     // Connect S -> E -> A
-    myModel.connect(pS, pE, pLambda);
-    myModel.connect(pE, pA, pTheta);
+    myModel.connect(pS, pE, pLambda, true);
+    myModel.connect(pE, pA, pTheta, false);
     // A -> A_r and I
-    myModel.connect(pA, pA_r, pTau_sumP_comp);
-    myModel.connect(pA, pI, pTau_sumP);
+    myModel.connect(pA, pA_r, pTau_sumP_comp, false);
+    myModel.connect(pA, pI, pTau_sumP, false);
     // A_r -> R
-    myModel.connect(pA_r, pR, pGamma_a);
+    myModel.connect(pA_r, pR, pGamma_a, false);
     // I -> H_h, H_c and H_d
-    myModel.connect(pI, pH_h, pP_h);
-    myModel.connect(pI, pH_c, pP_c);
-    myModel.connect(pI, pH_d, pP_d);
+    myModel.connect(pI, pH_h, pP_h, false);
+    myModel.connect(pI, pH_c, pP_c, false);
+    myModel.connect(pI, pH_d, pP_d, false);
     // H_h -> R
-    myModel.connect(pH_h, pR, pGamma_h);
+    myModel.connect(pH_h, pR, pGamma_h, false);
     // H_c -> C_c -> R
-    myModel.connect(pH_c, pC_c, pAlpha_c);
-    myModel.connect(pC_c, pR, pGamma_c);
+    myModel.connect(pH_c, pC_c, pAlpha_c, false);
+    myModel.connect(pC_c, pR, pGamma_c, false);
     // H_d -> C_d -> D
-    myModel.connect(pH_d, pC_d, pAlpha_d);
-    myModel.connect(pC_d, pD, pBeta_d);
+    myModel.connect(pH_d, pC_d, pAlpha_d, false);
+    myModel.connect(pC_d, pD, pBeta_d, false);
 
-    // Set extra parameters to S
-    myModel.getComps()[0]->setExtraParam(pA);
-    myModel.getComps()[0]->setExtraParam(pA_r);
-    myModel.getComps()[0]->setExtraParam(pI);
 
-    for (auto i: myModel.getComps()[0]->getExtraParam()) {
-        std::cout << i << ' ';
-    }
+    std::vector<std::shared_ptr<Compartment>> otherCompartments {pA, pA_r, pI};
 
     // Update this model
-    myModel.update();
+    myModel.update(otherCompartments);
 
-//    for (size_t i {}; i < 30; i++) {
-//        for (size_t j {}; j < myModel.getComps().size(); ++j) {
-//            if (j == myModel.getComps().size() - 1) {
-//                std::cout << myModel.getComps()[j]->getValue()[i] << "\n";
-//            } else {
-//                std::cout << myModel.getComps()[j]->getValue()[i] << ",";
-//            }
-//        }
-//    }
+    for (size_t i {}; i < 30; i++) {
+        for (size_t j {}; j < myModel.getComps().size(); ++j) {
+            if (j == myModel.getComps().size() - 1) {
+                std::cout << myModel.getComps()[j]->getValue()[i] << "\n";
+            } else {
+                std::cout << myModel.getComps()[j]->getValue()[i] << ",";
+            }
+        }
+    }
 
     std::ofstream myFile ("/home/thinh/Downloads/SIR_test.csv");
     if (myFile.is_open()) {
