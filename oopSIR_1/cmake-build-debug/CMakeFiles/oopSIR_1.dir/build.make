@@ -63,10 +63,10 @@ RM = /snap/clion/139/bin/cmake/linux/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/thinh/Dropbox/oucru/cpp/oopSIR_1
+CMAKE_SOURCE_DIR = /home/thinh/Dropbox/oucru/cpp/cpp_training/oopSIR_1
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/thinh/Dropbox/oucru/cpp/oopSIR_1/cmake-build-debug
+CMAKE_BINARY_DIR = /home/thinh/Dropbox/oucru/cpp/cpp_training/oopSIR_1/cmake-build-debug
 
 # Include any dependencies generated for this target.
 include CMakeFiles/oopSIR_1.dir/depend.make
@@ -79,42 +79,42 @@ include CMakeFiles/oopSIR_1.dir/flags.make
 
 CMakeFiles/oopSIR_1.dir/main.cpp.o: CMakeFiles/oopSIR_1.dir/flags.make
 CMakeFiles/oopSIR_1.dir/main.cpp.o: ../main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/thinh/Dropbox/oucru/cpp/oopSIR_1/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/oopSIR_1.dir/main.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/oopSIR_1.dir/main.cpp.o -c /home/thinh/Dropbox/oucru/cpp/oopSIR_1/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/thinh/Dropbox/oucru/cpp/cpp_training/oopSIR_1/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/oopSIR_1.dir/main.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/oopSIR_1.dir/main.cpp.o -c /home/thinh/Dropbox/oucru/cpp/cpp_training/oopSIR_1/main.cpp
 
 CMakeFiles/oopSIR_1.dir/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/oopSIR_1.dir/main.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thinh/Dropbox/oucru/cpp/oopSIR_1/main.cpp > CMakeFiles/oopSIR_1.dir/main.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thinh/Dropbox/oucru/cpp/cpp_training/oopSIR_1/main.cpp > CMakeFiles/oopSIR_1.dir/main.cpp.i
 
 CMakeFiles/oopSIR_1.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/oopSIR_1.dir/main.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thinh/Dropbox/oucru/cpp/oopSIR_1/main.cpp -o CMakeFiles/oopSIR_1.dir/main.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thinh/Dropbox/oucru/cpp/cpp_training/oopSIR_1/main.cpp -o CMakeFiles/oopSIR_1.dir/main.cpp.s
 
 CMakeFiles/oopSIR_1.dir/Compartment.cpp.o: CMakeFiles/oopSIR_1.dir/flags.make
 CMakeFiles/oopSIR_1.dir/Compartment.cpp.o: ../Compartment.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/thinh/Dropbox/oucru/cpp/oopSIR_1/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/oopSIR_1.dir/Compartment.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/oopSIR_1.dir/Compartment.cpp.o -c /home/thinh/Dropbox/oucru/cpp/oopSIR_1/Compartment.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/thinh/Dropbox/oucru/cpp/cpp_training/oopSIR_1/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/oopSIR_1.dir/Compartment.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/oopSIR_1.dir/Compartment.cpp.o -c /home/thinh/Dropbox/oucru/cpp/cpp_training/oopSIR_1/Compartment.cpp
 
 CMakeFiles/oopSIR_1.dir/Compartment.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/oopSIR_1.dir/Compartment.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thinh/Dropbox/oucru/cpp/oopSIR_1/Compartment.cpp > CMakeFiles/oopSIR_1.dir/Compartment.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thinh/Dropbox/oucru/cpp/cpp_training/oopSIR_1/Compartment.cpp > CMakeFiles/oopSIR_1.dir/Compartment.cpp.i
 
 CMakeFiles/oopSIR_1.dir/Compartment.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/oopSIR_1.dir/Compartment.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thinh/Dropbox/oucru/cpp/oopSIR_1/Compartment.cpp -o CMakeFiles/oopSIR_1.dir/Compartment.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thinh/Dropbox/oucru/cpp/cpp_training/oopSIR_1/Compartment.cpp -o CMakeFiles/oopSIR_1.dir/Compartment.cpp.s
 
 CMakeFiles/oopSIR_1.dir/Model.cpp.o: CMakeFiles/oopSIR_1.dir/flags.make
 CMakeFiles/oopSIR_1.dir/Model.cpp.o: ../Model.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/thinh/Dropbox/oucru/cpp/oopSIR_1/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/oopSIR_1.dir/Model.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/oopSIR_1.dir/Model.cpp.o -c /home/thinh/Dropbox/oucru/cpp/oopSIR_1/Model.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/thinh/Dropbox/oucru/cpp/cpp_training/oopSIR_1/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/oopSIR_1.dir/Model.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/oopSIR_1.dir/Model.cpp.o -c /home/thinh/Dropbox/oucru/cpp/cpp_training/oopSIR_1/Model.cpp
 
 CMakeFiles/oopSIR_1.dir/Model.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/oopSIR_1.dir/Model.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thinh/Dropbox/oucru/cpp/oopSIR_1/Model.cpp > CMakeFiles/oopSIR_1.dir/Model.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thinh/Dropbox/oucru/cpp/cpp_training/oopSIR_1/Model.cpp > CMakeFiles/oopSIR_1.dir/Model.cpp.i
 
 CMakeFiles/oopSIR_1.dir/Model.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/oopSIR_1.dir/Model.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thinh/Dropbox/oucru/cpp/oopSIR_1/Model.cpp -o CMakeFiles/oopSIR_1.dir/Model.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thinh/Dropbox/oucru/cpp/cpp_training/oopSIR_1/Model.cpp -o CMakeFiles/oopSIR_1.dir/Model.cpp.s
 
 # Object files for target oopSIR_1
 oopSIR_1_OBJECTS = \
@@ -130,7 +130,7 @@ oopSIR_1: CMakeFiles/oopSIR_1.dir/Compartment.cpp.o
 oopSIR_1: CMakeFiles/oopSIR_1.dir/Model.cpp.o
 oopSIR_1: CMakeFiles/oopSIR_1.dir/build.make
 oopSIR_1: CMakeFiles/oopSIR_1.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/thinh/Dropbox/oucru/cpp/oopSIR_1/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable oopSIR_1"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/thinh/Dropbox/oucru/cpp/cpp_training/oopSIR_1/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable oopSIR_1"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/oopSIR_1.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -143,6 +143,6 @@ CMakeFiles/oopSIR_1.dir/clean:
 .PHONY : CMakeFiles/oopSIR_1.dir/clean
 
 CMakeFiles/oopSIR_1.dir/depend:
-	cd /home/thinh/Dropbox/oucru/cpp/oopSIR_1/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/thinh/Dropbox/oucru/cpp/oopSIR_1 /home/thinh/Dropbox/oucru/cpp/oopSIR_1 /home/thinh/Dropbox/oucru/cpp/oopSIR_1/cmake-build-debug /home/thinh/Dropbox/oucru/cpp/oopSIR_1/cmake-build-debug /home/thinh/Dropbox/oucru/cpp/oopSIR_1/cmake-build-debug/CMakeFiles/oopSIR_1.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/thinh/Dropbox/oucru/cpp/cpp_training/oopSIR_1/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/thinh/Dropbox/oucru/cpp/cpp_training/oopSIR_1 /home/thinh/Dropbox/oucru/cpp/cpp_training/oopSIR_1 /home/thinh/Dropbox/oucru/cpp/cpp_training/oopSIR_1/cmake-build-debug /home/thinh/Dropbox/oucru/cpp/cpp_training/oopSIR_1/cmake-build-debug /home/thinh/Dropbox/oucru/cpp/cpp_training/oopSIR_1/cmake-build-debug/CMakeFiles/oopSIR_1.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/oopSIR_1.dir/depend
 

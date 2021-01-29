@@ -6,7 +6,11 @@
 
 #IncludeRegexTransform: 
 
-/home/thinh/Dropbox/oucru/cpp/oopSIR_1/Compartment.h
+/home/thinh/Dropbox/oucru/cpp/cpp_training/oopSIR_1/Compartment.cpp
+Compartment.h
+/home/thinh/Dropbox/oucru/cpp/cpp_training/oopSIR_1/Compartment.h
+
+/home/thinh/Dropbox/oucru/cpp/cpp_training/oopSIR_1/Compartment.h
 iostream
 -
 vector
@@ -16,21 +20,25 @@ memory
 string
 -
 
-/home/thinh/Dropbox/oucru/cpp/oopSIR_1/Model.h
+/home/thinh/Dropbox/oucru/cpp/cpp_training/oopSIR_1/Model.cpp
+Model.h
+/home/thinh/Dropbox/oucru/cpp/cpp_training/oopSIR_1/Model.h
+
+/home/thinh/Dropbox/oucru/cpp/cpp_training/oopSIR_1/Model.h
 vector
 -
 memory
 -
 Compartment.h
-/home/thinh/Dropbox/oucru/cpp/oopSIR_1/Compartment.h
+/home/thinh/Dropbox/oucru/cpp/cpp_training/oopSIR_1/Compartment.h
 
-/home/thinh/Dropbox/oucru/cpp/oopSIR_1/main.cpp
+/home/thinh/Dropbox/oucru/cpp/cpp_training/oopSIR_1/main.cpp
 iostream
 -
 fstream
 -
 Compartment.h
-/home/thinh/Dropbox/oucru/cpp/oopSIR_1/Compartment.h
+/home/thinh/Dropbox/oucru/cpp/cpp_training/oopSIR_1/Compartment.h
 Model.h
-/home/thinh/Dropbox/oucru/cpp/oopSIR_1/Model.h
+/home/thinh/Dropbox/oucru/cpp/cpp_training/oopSIR_1/Model.h
 

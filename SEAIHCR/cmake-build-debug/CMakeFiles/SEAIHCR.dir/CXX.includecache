@@ -1,0 +1,36 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/thinh/Dropbox/oucru/cpp/SEAIHCR/Compartment.h
+iostream
+-
+vector
+-
+memory
+-
+string
+-
+
+/home/thinh/Dropbox/oucru/cpp/SEAIHCR/Model.h
+vector
+-
+memory
+-
+Compartment.h
+/home/thinh/Dropbox/oucru/cpp/SEAIHCR/Compartment.h
+
+/home/thinh/Dropbox/oucru/cpp/SEAIHCR/main.cpp
+iostream
+-
+fstream
+-
+Compartment.h
+/home/thinh/Dropbox/oucru/cpp/SEAIHCR/Compartment.h
+Model.h
+/home/thinh/Dropbox/oucru/cpp/SEAIHCR/Model.h
+

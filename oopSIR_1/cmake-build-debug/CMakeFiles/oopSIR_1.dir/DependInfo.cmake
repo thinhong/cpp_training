@@ -4,9 +4,9 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/thinh/Dropbox/oucru/cpp/oopSIR_1/Compartment.cpp" "/home/thinh/Dropbox/oucru/cpp/oopSIR_1/cmake-build-debug/CMakeFiles/oopSIR_1.dir/Compartment.cpp.o"
-  "/home/thinh/Dropbox/oucru/cpp/oopSIR_1/Model.cpp" "/home/thinh/Dropbox/oucru/cpp/oopSIR_1/cmake-build-debug/CMakeFiles/oopSIR_1.dir/Model.cpp.o"
-  "/home/thinh/Dropbox/oucru/cpp/oopSIR_1/main.cpp" "/home/thinh/Dropbox/oucru/cpp/oopSIR_1/cmake-build-debug/CMakeFiles/oopSIR_1.dir/main.cpp.o"
+  "/home/thinh/Dropbox/oucru/cpp/cpp_training/oopSIR_1/Compartment.cpp" "/home/thinh/Dropbox/oucru/cpp/cpp_training/oopSIR_1/cmake-build-debug/CMakeFiles/oopSIR_1.dir/Compartment.cpp.o"
+  "/home/thinh/Dropbox/oucru/cpp/cpp_training/oopSIR_1/Model.cpp" "/home/thinh/Dropbox/oucru/cpp/cpp_training/oopSIR_1/cmake-build-debug/CMakeFiles/oopSIR_1.dir/Model.cpp.o"
+  "/home/thinh/Dropbox/oucru/cpp/cpp_training/oopSIR_1/main.cpp" "/home/thinh/Dropbox/oucru/cpp/cpp_training/oopSIR_1/cmake-build-debug/CMakeFiles/oopSIR_1.dir/main.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
