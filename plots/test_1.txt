@@ -12,3 +12,16 @@ const double gamma_c = 1.0 / 12;
 const double alpha_c = 1.0 / 5;
 const double alpha_d = 1.0 / 5;
 const double beta_d = 1.0 / 5;
+
+Compartment S("S", 1000, 100000);
+Compartment E("E", 1000, 0);
+Compartment A("A", 1000, 0);
+Compartment A_r("A_r", 1000, 0);
+Compartment I("I", 1000, 1);
+Compartment H_h("H_h", 1000, 0);
+Compartment H_c("H_c", 1000, 0);
+Compartment H_d("H_d", 1000, 0);
+Compartment C_c("C_c", 1000, 0);
+Compartment C_d("C_d", 1000, 0);
+Compartment D("D", 1000, 0);
+Compartment R("R", 1000, 0);

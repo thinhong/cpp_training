@@ -3,104 +3,75 @@
 #include "Compartment.h"
 #include "Model.h"
 
-const double lambda = 2.0 / 500000;
-const double theta = 1.0 / 3;
-const double tau = 1.0 / 2;
-const double p_h = 0.2;
-const double p_c = 0.1;
-const double p_d = 0.02;
-const double tau_sumP = tau * (p_h + p_c + p_d);
-const double tau_sumP_comp = tau * (1 - (p_h + p_c + p_d));
-const double gamma_a = 1.0 / 5;
-const double gamma_h = 1.0 / 7;
-const double gamma_c = 1.0 / 12;
-const double alpha_c = 1.0 / 5;
-const double alpha_d = 1.0 / 5;
-const double beta_d = 1.0 / 5;
-
 int main() {
-    // Create all compartments
-    Compartment S("S", 1000, 100000);
-    Compartment E("E", 1000, 0);
-    Compartment A("A", 1000, 0);
-    Compartment A_r("A_r", 1000, 0);
-    Compartment I("I", 1000, 1);
-    Compartment H_h("H_h", 1000, 0);
-    Compartment H_c("H_c", 1000, 0);
-    Compartment H_d("H_d", 1000, 0);
-    Compartment C_c("C_c", 1000, 0);
-    Compartment C_d("C_d", 1000, 0);
-    Compartment D("D", 1000, 0);
-    Compartment R("R", 1000, 0);
-
     // Make shared pointer for Compartment S, I and R
-    auto pS = std::make_shared<Compartment>(S);
-    auto pE = std::make_shared<Compartment>(E);
-    auto pA = std::make_shared<Compartment>(A);
-    auto pA_r = std::make_shared<Compartment>(A_r);
-    auto pI = std::make_shared<Compartment>(I);
-    auto pH_h = std::make_shared<Compartment>(H_h);
-    auto pH_c = std::make_shared<Compartment>(H_c);
-    auto pH_d = std::make_shared<Compartment>(H_d);
-    auto pC_c = std::make_shared<Compartment>(C_c);
-    auto pC_d = std::make_shared<Compartment>(C_d);
-    auto pD = std::make_shared<Compartment>(D);
-    auto pR = std::make_shared<Compartment>(R);
+    auto S = std::make_shared<Compartment>("S", 1000, 100000);
+    auto E = std::make_shared<Compartment>("E", 1000, 0);
+    auto A = std::make_shared<Compartment>("A", 1000, 0);
+    auto A_r = std::make_shared<Compartment>("A_r", 1000, 0);
+    auto I = std::make_shared<Compartment>("I", 1000, 1);
+    auto H_h = std::make_shared<Compartment>("H_h", 1000, 0);
+    auto H_c = std::make_shared<Compartment>("H_c", 1000, 0);
+    auto H_d = std::make_shared<Compartment>("H_d", 1000, 0);
+    auto C_c = std::make_shared<Compartment>("C_c", 1000, 0);
+    auto C_d = std::make_shared<Compartment>("C_d", 1000, 0);
+    auto D = std::make_shared<Compartment>("D", 1000, 0);
+    auto R = std::make_shared<Compartment>("R", 1000, 0);
 
     // Also shared pointer for parameters
-    std::shared_ptr<double> pLambda = std::make_shared<double>(lambda);
-    std::shared_ptr<double> pTheta = std::make_shared<double>(theta);
-    std::shared_ptr<double> pTau = std::make_shared<double>(tau);
-    std::shared_ptr<double> pP_h = std::make_shared<double>(p_h);
-    std::shared_ptr<double> pP_c = std::make_shared<double>(p_c);
-    std::shared_ptr<double> pP_d = std::make_shared<double>(p_d);
-    std::shared_ptr<double> pTau_sumP = std::make_shared<double>(tau_sumP);
-    std::shared_ptr<double> pTau_sumP_comp = std::make_shared<double>(tau_sumP_comp);
-    std::shared_ptr<double> pGamma_a = std::make_shared<double>(gamma_a);
-    std::shared_ptr<double> pGamma_h = std::make_shared<double>(gamma_h);
-    std::shared_ptr<double> pGamma_c = std::make_shared<double>(gamma_c);
-    std::shared_ptr<double> pAlpha_c = std::make_shared<double>(alpha_c);
-    std::shared_ptr<double> pAlpha_d = std::make_shared<double>(alpha_d);
-    std::shared_ptr<double> pBeta_d = std::make_shared<double>(beta_d);
+    auto lambda = std::make_shared<double>(2.0 / 500000);
+    auto theta = std::make_shared<double>(1.0 / 3);
+    auto tau = std::make_shared<double>(1.0 / 2);
+    auto p_h = std::make_shared<double>(0.2);
+    auto p_c = std::make_shared<double>(0.1);
+    auto p_d = std::make_shared<double>(0.02);
+    auto tau_sum = std::make_shared<double>((*p_h) + (*p_c) + (*p_d));
+    auto tau_sum_comp = std::make_shared<double>(1 - (*tau_sum));
+    auto gamma_a = std::make_shared<double>(1.0 / 5);
+    auto gamma_h = std::make_shared<double>(1.0 / 7);
+    auto gamma_c = std::make_shared<double>(1.0 / 12);
+    auto alpha_c = std::make_shared<double>(1.0 / 5);
+    auto alpha_d = std::make_shared<double>(1.0 / 5);
+    auto beta_d = std::make_shared<double>(1.0 / 5);
 
     // Model myModel consists of S, I and R
     Model myModel;
-    myModel.setComps(pS);
-    myModel.setComps(pE);
-    myModel.setComps(pA);
-    myModel.setComps(pA_r);
-    myModel.setComps(pI);
-    myModel.setComps(pH_h);
-    myModel.setComps(pH_c);
-    myModel.setComps(pH_d);
-    myModel.setComps(pC_c);
-    myModel.setComps(pC_d);
-    myModel.setComps(pD);
-    myModel.setComps(pR);
+    myModel.setComps(S);
+    myModel.setComps(E);
+    myModel.setComps(A);
+    myModel.setComps(A_r);
+    myModel.setComps(I);
+    myModel.setComps(H_h);
+    myModel.setComps(H_c);
+    myModel.setComps(H_d);
+    myModel.setComps(C_c);
+    myModel.setComps(C_d);
+    myModel.setComps(D);
+    myModel.setComps(R);
 
     // Connect S -> E -> A
-    myModel.connect(pS, pE, pLambda, true);
-    myModel.connect(pE, pA, pTheta, false);
+    myModel.connect(S, E, lambda, true);
+    myModel.connect(E, A, theta, false);
     // A -> A_r and I
-    myModel.connect(pA, pA_r, pTau_sumP_comp, false);
-    myModel.connect(pA, pI, pTau_sumP, false);
+    myModel.connect(A, A_r, tau_sum_comp, false);
+    myModel.connect(A, I, tau_sum, false);
     // A_r -> R
-    myModel.connect(pA_r, pR, pGamma_a, false);
+    myModel.connect(A_r, R, gamma_a, false);
     // I -> H_h, H_c and H_d
-    myModel.connect(pI, pH_h, pP_h, false);
-    myModel.connect(pI, pH_c, pP_c, false);
-    myModel.connect(pI, pH_d, pP_d, false);
+    myModel.connect(I, H_h, p_h, false);
+    myModel.connect(I, H_c, p_c, false);
+    myModel.connect(I, H_d, p_d, false);
     // H_h -> R
-    myModel.connect(pH_h, pR, pGamma_h, false);
+    myModel.connect(H_h, R, gamma_h, false);
     // H_c -> C_c -> R
-    myModel.connect(pH_c, pC_c, pAlpha_c, false);
-    myModel.connect(pC_c, pR, pGamma_c, false);
+    myModel.connect(H_c, C_c, alpha_c, false);
+    myModel.connect(C_c, R, gamma_c, false);
     // H_d -> C_d -> D
-    myModel.connect(pH_d, pC_d, pAlpha_d, false);
-    myModel.connect(pC_d, pD, pBeta_d, false);
+    myModel.connect(H_d, C_d, alpha_d, false);
+    myModel.connect(C_d, D, beta_d, false);
 
 
-    std::vector<std::shared_ptr<Compartment>> otherCompartments {pA, pA_r, pI};
+    std::vector<std::shared_ptr<Compartment>> otherCompartments {A, A_r, I};
 
     // Update this model
     myModel.update(otherCompartments);

@@ -31,8 +31,8 @@ void Compartment::updateValue(long iter, std::vector<std::shared_ptr<Compartment
         if (isIn[i]) {sign = 1;} else {sign = -1;}
         double weight {};
         if (extraParam[i]) {
-            double updateValue = updateWeight(listComps, iter);
-            weight = (*linkedWeight[i]) * updateValue;
+            double updateVal = updateWeight(listComps, iter);
+            weight = (*linkedWeight[i]) * updateVal;
         } else {
             weight = (*linkedWeight[i]);
         }
