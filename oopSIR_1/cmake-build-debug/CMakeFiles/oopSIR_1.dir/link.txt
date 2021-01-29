@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/oopSIR_1.dir/main.cpp.o CMakeFiles/oopSIR_1.dir/Compartment.cpp.o CMakeFiles/oopSIR_1.dir/Model.cpp.o  -o oopSIR_1 
