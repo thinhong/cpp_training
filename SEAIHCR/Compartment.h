@@ -10,8 +10,8 @@ class Compartment {
 private:
     std::vector<double> value;
     std::string name;
-    std::vector<std::shared_ptr<Compartment>> linkedCompartment;
-    std::vector<std::shared_ptr<double>> linkedWeight;
+    std::vector<std::weak_ptr<Compartment>> linkedCompartment;
+    std::vector<std::weak_ptr<double>> linkedWeight;
     std::vector<bool> isIn;
     std::vector<bool> extraParam;
 public:
@@ -21,6 +21,9 @@ public:
         this->name = name;
     };
     Compartment() = default;
+    ~Compartment() {
+        std::cout << name << " destructor called." << std::endl;
+    }
 
     // Getters
     std::vector<double> getValue() {return value;};

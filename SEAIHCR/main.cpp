@@ -76,15 +76,15 @@ int main() {
     // Update this model
     myModel.update(otherCompartments);
 
-    for (size_t i {}; i < 30; i++) {
-        for (size_t j {}; j < myModel.getComps().size(); ++j) {
-            if (j == myModel.getComps().size() - 1) {
-                std::cout << myModel.getComps()[j]->getValue()[i] << "\n";
-            } else {
-                std::cout << myModel.getComps()[j]->getValue()[i] << ",";
-            }
-        }
-    }
+//    for (size_t i {}; i < 30; i++) {
+//        for (size_t j {}; j < myModel.getComps().size(); ++j) {
+//            if (j == myModel.getComps().size() - 1) {
+//                std::cout << myModel.getComps()[j]->getValue()[i] << "\n";
+//            } else {
+//                std::cout << myModel.getComps()[j]->getValue()[i] << ",";
+//            }
+//        }
+//    }
 
     std::ofstream myFile ("/home/thinh/Downloads/SIR_test.csv");
     if (myFile.is_open()) {
@@ -105,8 +105,8 @@ int main() {
             }
         }
         myFile.close();
-        std::cout << "Successfully written into file";
+        std::cout << "Successfully written into file" << std::endl;
     }
-    else std::cout << "Unable to open file";
+    else std::cout << "Unable to open file" << std::endl;
     return 0;
 }
