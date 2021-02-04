@@ -14,7 +14,7 @@ public:
     void setComps(std::shared_ptr<Compartment>& pComp);
     void connect(std::shared_ptr<Compartment>& A, std::shared_ptr<Compartment>& B,
                  std::shared_ptr<double>& weight, bool newExtraParam);
-    void update(std::vector<std::shared_ptr<Compartment>>& otherCompartments);
+    void update(long iter);
 };
 
 

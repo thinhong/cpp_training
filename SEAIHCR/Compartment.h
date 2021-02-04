@@ -11,16 +11,18 @@ private:
     std::vector<double> value;
     std::string name;
     std::vector<std::weak_ptr<Compartment>> linkedCompartment;
-    std::vector<std::weak_ptr<double>> linkedWeight;
+    std::vector<std::shared_ptr<double>> linkedWeight;
     std::vector<bool> isIn;
-    std::vector<bool> extraParam;
 public:
     explicit Compartment(std::string name, size_t size, double initVal) {
         value.resize(size);
         value[0] = initVal;
         this->name = name;
     };
-    Compartment() = default;
+    Compartment() = delete;
+
+    Compartment(const Compartment& comp) = delete;
+
     ~Compartment() {
         std::cout << name << " destructor called." << std::endl;
     }
@@ -28,19 +30,14 @@ public:
     // Getters
     std::vector<double> getValue() {return value;};
     std::string getName() {return name;};
-    std::vector<bool> getExtraParam() {return extraParam;};
 
-    // Setters
-    void setLinkedCompartment(std::shared_ptr<Compartment>& newLinkCompartment);
-    void setLinkedWeight(std::shared_ptr<double>& newLinkWeight);
-    void setIsIn(bool isInVal);
-    void setExtraParam(bool newExtraParam);
+    // Setters (add)
+    void addLinkedCompartment(std::shared_ptr<Compartment>& newLinkCompartment);
+    void addLinkedWeight(std::shared_ptr<double>& newLinkWeight);
+    void addIsIn(bool isInputComp);
 
     // Method for update value in each iteration
-    void updateValue(long iter, std::vector<std::shared_ptr<Compartment>>& listComps);
-
-    // Update weight
-    double updateWeight(std::vector<std::shared_ptr<Compartment>>& otherCompartments, long iter);
+    void updateValue(long iter);
 
 };
 

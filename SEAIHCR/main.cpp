@@ -2,9 +2,23 @@
 #include <fstream>
 #include "Compartment.h"
 #include "Model.h"
+#include "rapidcsv.h"
+#include <array>
 
 int main() {
-    // Make shared pointer for Compartment S, I and R
+
+//    rapidcsv::Document doc("/home/thinh/Downloads/test_cpp.csv");
+//    std::vector<std::string> names = doc.GetColumn<std::string>("name");
+//    std::vector<double> values = doc.GetColumn<double>("value");
+//
+//    std::array<std::shared_ptr<Compartment>, 12> compartment_list;
+//
+//    // Make shared pointer for Compartment S, I and R
+//    for (size_t i {}; i < compartment_list.size(); ++i) {
+//        compartment_list[i] = std::make_shared<Compartment>(names[i], 1000, values[i]);
+//    }
+//    std::cout << compartment_list[1]->getName() << std::endl;
+
     auto S = std::make_shared<Compartment>("S", 1000, 100000);
     auto E = std::make_shared<Compartment>("E", 1000, 0);
     auto A = std::make_shared<Compartment>("A", 1000, 0);
@@ -74,7 +88,11 @@ int main() {
     std::vector<std::shared_ptr<Compartment>> otherCompartments {A, A_r, I};
 
     // Update this model
-    myModel.update(otherCompartments);
+    const double lambda_origin = *lambda;
+    for (size_t i {1}; i < 1000; ++i) {
+        *lambda = lambda_origin * ((*A).getValue()[i - 1] + (*A_r).getValue()[i - 1] + (*I).getValue()[i - 1]);
+        myModel.update(i);
+    }
 
 //    for (size_t i {}; i < 30; i++) {
 //        for (size_t j {}; j < myModel.getComps().size(); ++j) {
