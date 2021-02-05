@@ -88,6 +88,12 @@
 		<Unit filename="/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Compartment.h">
 			<Option target="SEAIHCR"/>
 		</Unit>
+		<Unit filename="/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Distribution.cpp">
+			<Option target="SEAIHCR"/>
+		</Unit>
+		<Unit filename="/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Distribution.h">
+			<Option target="SEAIHCR"/>
+		</Unit>
 		<Unit filename="/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Model.cpp">
 			<Option target="SEAIHCR"/>
 		</Unit>
@@ -95,6 +101,12 @@
 			<Option target="SEAIHCR"/>
 		</Unit>
 		<Unit filename="/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/main.cpp">
+			<Option target="SEAIHCR"/>
+		</Unit>
+		<Unit filename="/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/prob.cpp">
+			<Option target="SEAIHCR"/>
+		</Unit>
+		<Unit filename="/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/prob.hpp">
 			<Option target="SEAIHCR"/>
 		</Unit>
 		<Unit filename="/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/CMakeLists.txt">

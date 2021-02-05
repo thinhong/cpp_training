@@ -5,8 +5,10 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
   "/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Compartment.cpp" "/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/cmake-build-debug/CMakeFiles/SEAIHCR.dir/Compartment.cpp.o"
+  "/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Distribution.cpp" "/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/cmake-build-debug/CMakeFiles/SEAIHCR.dir/Distribution.cpp.o"
   "/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Model.cpp" "/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/cmake-build-debug/CMakeFiles/SEAIHCR.dir/Model.cpp.o"
   "/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/main.cpp" "/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/cmake-build-debug/CMakeFiles/SEAIHCR.dir/main.cpp.o"
+  "/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/prob.cpp" "/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/cmake-build-debug/CMakeFiles/SEAIHCR.dir/prob.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

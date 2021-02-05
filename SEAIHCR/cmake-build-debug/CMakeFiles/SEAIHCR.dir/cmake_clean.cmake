@@ -1,7 +1,9 @@
 file(REMOVE_RECURSE
   "CMakeFiles/SEAIHCR.dir/Compartment.cpp.o"
+  "CMakeFiles/SEAIHCR.dir/Distribution.cpp.o"
   "CMakeFiles/SEAIHCR.dir/Model.cpp.o"
   "CMakeFiles/SEAIHCR.dir/main.cpp.o"
+  "CMakeFiles/SEAIHCR.dir/prob.cpp.o"
   "SEAIHCR"
   "SEAIHCR.pdb"
 )

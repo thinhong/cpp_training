@@ -2,7 +2,7 @@
 #include <fstream>
 #include "Compartment.h"
 #include "Model.h"
-#include "rapidcsv.h"
+#include "Distribution.h"
 #include <array>
 
 int main() {
@@ -94,6 +94,17 @@ int main() {
         myModel.update(i);
     }
 
+    Distribution gamma("gamma", 0, 3, 2, 0.99);
+    gamma.calcWeight();
+    std::cout << gamma.getMaxDay() << std::endl;
+    for (auto i: gamma.getWeight()) {
+        std::cout << i << ' ';
+    }
+    std::cout << std::endl;
+    Distribution weibull("weibull", 0, 1, 1.5, 0.999);
+    weibull.calcWeight();
+    std::cout << weibull.getMaxDay() << std::endl;
+
 //    for (size_t i {}; i < 30; i++) {
 //        for (size_t j {}; j < myModel.getComps().size(); ++j) {
 //            if (j == myModel.getComps().size() - 1) {
@@ -104,27 +115,28 @@ int main() {
 //        }
 //    }
 
-    std::ofstream myFile ("/home/thinh/Downloads/SIR_test.csv");
-    if (myFile.is_open()) {
-        for (size_t j {}; j < myModel.getComps().size(); ++j) {
-            if (j == myModel.getComps().size() - 1) {
-                myFile << myModel.getComps()[j]->getName() << "\n";
-            } else {
-                myFile << myModel.getComps()[j]->getName() << ",";
-            }
-        }
-        for (size_t i {}; i < 1000; ++i) {
-            for (size_t j {}; j < myModel.getComps().size(); ++j) {
-                if (j == myModel.getComps().size() - 1) {
-                    myFile << myModel.getComps()[j]->getValue()[i] << "\n";
-                } else {
-                    myFile << myModel.getComps()[j]->getValue()[i] << ",";
-                }
-            }
-        }
-        myFile.close();
-        std::cout << "Successfully written into file" << std::endl;
-    }
-    else std::cout << "Unable to open file" << std::endl;
-    return 0;
+//    std::ofstream myFile ("/home/thinh/Downloads/SIR_test.csv");
+//    if (myFile.is_open()) {
+//        for (size_t j {}; j < myModel.getComps().size(); ++j) {
+//            if (j == myModel.getComps().size() - 1) {
+//                myFile << myModel.getComps()[j]->getName() << "\n";
+//            } else {
+//                myFile << myModel.getComps()[j]->getName() << ",";
+//            }
+//        }
+//        for (size_t i {}; i < 1000; ++i) {
+//            for (size_t j {}; j < myModel.getComps().size(); ++j) {
+//                if (j == myModel.getComps().size() - 1) {
+//                    myFile << myModel.getComps()[j]->getValue()[i] << "\n";
+//                } else {
+//                    myFile << myModel.getComps()[j]->getValue()[i] << ",";
+//                }
+//            }
+//        }
+//        myFile.close();
+//        std::cout << "Successfully written into file" << std::endl;
+//    }
+//    else std::cout << "Unable to open file" << std::endl;
+//    return 0;
+
 }

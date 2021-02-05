@@ -170,6 +170,33 @@ Compartment.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SEAIHCR.dir/build.make CMakeFiles/SEAIHCR.dir/Compartment.cpp.s
 .PHONY : Compartment.cpp.s
 
+Distribution.o: Distribution.cpp.o
+
+.PHONY : Distribution.o
+
+# target to build an object file
+Distribution.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SEAIHCR.dir/build.make CMakeFiles/SEAIHCR.dir/Distribution.cpp.o
+.PHONY : Distribution.cpp.o
+
+Distribution.i: Distribution.cpp.i
+
+.PHONY : Distribution.i
+
+# target to preprocess a source file
+Distribution.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SEAIHCR.dir/build.make CMakeFiles/SEAIHCR.dir/Distribution.cpp.i
+.PHONY : Distribution.cpp.i
+
+Distribution.s: Distribution.cpp.s
+
+.PHONY : Distribution.s
+
+# target to generate assembly for a file
+Distribution.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SEAIHCR.dir/build.make CMakeFiles/SEAIHCR.dir/Distribution.cpp.s
+.PHONY : Distribution.cpp.s
+
 Model.o: Model.cpp.o
 
 .PHONY : Model.o
@@ -224,6 +251,33 @@ main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SEAIHCR.dir/build.make CMakeFiles/SEAIHCR.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+prob.o: prob.cpp.o
+
+.PHONY : prob.o
+
+# target to build an object file
+prob.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SEAIHCR.dir/build.make CMakeFiles/SEAIHCR.dir/prob.cpp.o
+.PHONY : prob.cpp.o
+
+prob.i: prob.cpp.i
+
+.PHONY : prob.i
+
+# target to preprocess a source file
+prob.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SEAIHCR.dir/build.make CMakeFiles/SEAIHCR.dir/prob.cpp.i
+.PHONY : prob.cpp.i
+
+prob.s: prob.cpp.s
+
+.PHONY : prob.s
+
+# target to generate assembly for a file
+prob.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SEAIHCR.dir/build.make CMakeFiles/SEAIHCR.dir/prob.cpp.s
+.PHONY : prob.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -236,12 +290,18 @@ help:
 	@echo "... Compartment.o"
 	@echo "... Compartment.i"
 	@echo "... Compartment.s"
+	@echo "... Distribution.o"
+	@echo "... Distribution.i"
+	@echo "... Distribution.s"
 	@echo "... Model.o"
 	@echo "... Model.i"
 	@echo "... Model.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... prob.o"
+	@echo "... prob.i"
+	@echo "... prob.s"
 .PHONY : help
 
 
