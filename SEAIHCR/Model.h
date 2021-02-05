@@ -13,7 +13,7 @@ public:
     std::vector<std::shared_ptr<Compartment>> getComps() {return comps;};
     void setComps(std::shared_ptr<Compartment>& pComp);
     void connect(std::shared_ptr<Compartment>& A, std::shared_ptr<Compartment>& B,
-                 std::shared_ptr<double>& weight, bool newExtraParam);
+                 std::shared_ptr<double>& weight);
     void update(long iter);
 };
 

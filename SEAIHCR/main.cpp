@@ -64,25 +64,25 @@ int main() {
     myModel.setComps(R);
 
     // Connect S -> E -> A
-    myModel.connect(S, E, lambda, true);
-    myModel.connect(E, A, theta, false);
+    myModel.connect(S, E, lambda);
+    myModel.connect(E, A, theta);
     // A -> A_r and I
-    myModel.connect(A, A_r, tau_sum_comp, false);
-    myModel.connect(A, I, tau_sum, false);
+    myModel.connect(A, A_r, tau_sum_comp);
+    myModel.connect(A, I, tau_sum);
     // A_r -> R
-    myModel.connect(A_r, R, gamma_a, false);
+    myModel.connect(A_r, R, gamma_a);
     // I -> H_h, H_c and H_d
-    myModel.connect(I, H_h, p_h, false);
-    myModel.connect(I, H_c, p_c, false);
-    myModel.connect(I, H_d, p_d, false);
+    myModel.connect(I, H_h, p_h);
+    myModel.connect(I, H_c, p_c);
+    myModel.connect(I, H_d, p_d);
     // H_h -> R
-    myModel.connect(H_h, R, gamma_h, false);
+    myModel.connect(H_h, R, gamma_h);
     // H_c -> C_c -> R
-    myModel.connect(H_c, C_c, alpha_c, false);
-    myModel.connect(C_c, R, gamma_c, false);
+    myModel.connect(H_c, C_c, alpha_c);
+    myModel.connect(C_c, R, gamma_c);
     // H_d -> C_d -> D
-    myModel.connect(H_d, C_d, alpha_d, false);
-    myModel.connect(C_d, D, beta_d, false);
+    myModel.connect(H_d, C_d, alpha_d);
+    myModel.connect(C_d, D, beta_d);
 
 
     std::vector<std::shared_ptr<Compartment>> otherCompartments {A, A_r, I};

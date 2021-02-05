@@ -8,7 +8,7 @@ void Model::setComps(std::shared_ptr<Compartment> &pComp) {
 // S has: linkedCompartment = S, linkedWeight = weight_StoI, isIn = false (S-> is moving out of S)
 // I has: linkedCompartment = S, linkedWeight = weight_StoI, isIn = true (->I is moving to I)
 void Model::connect(std::shared_ptr<Compartment> &A, std::shared_ptr<Compartment> &B,
-                    std::shared_ptr<double> &weight, bool newExtraParam) {
+                    std::shared_ptr<double> &weight) {
     A->addLinkedCompartment(A);
     B->addLinkedCompartment(A);
     A->addLinkedWeight(weight);
