@@ -170,6 +170,33 @@ Compartment.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SEAIHCR.dir/build.make CMakeFiles/SEAIHCR.dir/Compartment.cpp.s
 .PHONY : Compartment.cpp.s
 
+DiscreteGammaDistribution.o: DiscreteGammaDistribution.cpp.o
+
+.PHONY : DiscreteGammaDistribution.o
+
+# target to build an object file
+DiscreteGammaDistribution.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SEAIHCR.dir/build.make CMakeFiles/SEAIHCR.dir/DiscreteGammaDistribution.cpp.o
+.PHONY : DiscreteGammaDistribution.cpp.o
+
+DiscreteGammaDistribution.i: DiscreteGammaDistribution.cpp.i
+
+.PHONY : DiscreteGammaDistribution.i
+
+# target to preprocess a source file
+DiscreteGammaDistribution.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SEAIHCR.dir/build.make CMakeFiles/SEAIHCR.dir/DiscreteGammaDistribution.cpp.i
+.PHONY : DiscreteGammaDistribution.cpp.i
+
+DiscreteGammaDistribution.s: DiscreteGammaDistribution.cpp.s
+
+.PHONY : DiscreteGammaDistribution.s
+
+# target to generate assembly for a file
+DiscreteGammaDistribution.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SEAIHCR.dir/build.make CMakeFiles/SEAIHCR.dir/DiscreteGammaDistribution.cpp.s
+.PHONY : DiscreteGammaDistribution.cpp.s
+
 Distribution.o: Distribution.cpp.o
 
 .PHONY : Distribution.o
@@ -290,6 +317,9 @@ help:
 	@echo "... Compartment.o"
 	@echo "... Compartment.i"
 	@echo "... Compartment.s"
+	@echo "... DiscreteGammaDistribution.o"
+	@echo "... DiscreteGammaDistribution.i"
+	@echo "... DiscreteGammaDistribution.s"
 	@echo "... Distribution.o"
 	@echo "... Distribution.i"
 	@echo "... Distribution.s"

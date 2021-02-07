@@ -15,6 +15,12 @@ memory
 -
 string
 -
+Distribution.h
+/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Distribution.h
+
+/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/DiscreteGammaDistribution.h
+Distribution.h
+/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Distribution.h
 
 /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Distribution.h
 string
@@ -35,12 +41,14 @@ iostream
 -
 fstream
 -
+array
+-
 Compartment.h
 /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Compartment.h
 Model.h
 /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Model.h
 Distribution.h
 /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Distribution.h
-array
--
+DiscreteGammaDistribution.h
+/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/DiscreteGammaDistribution.h
 

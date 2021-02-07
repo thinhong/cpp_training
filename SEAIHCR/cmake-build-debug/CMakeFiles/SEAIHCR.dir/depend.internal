@@ -4,16 +4,24 @@
 CMakeFiles/SEAIHCR.dir/Compartment.cpp.o
  /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Compartment.cpp
  /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Compartment.h
+ /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Distribution.h
+CMakeFiles/SEAIHCR.dir/DiscreteGammaDistribution.cpp.o
+ /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/DiscreteGammaDistribution.cpp
+ /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/DiscreteGammaDistribution.h
+ /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Distribution.h
+ /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/prob.hpp
 CMakeFiles/SEAIHCR.dir/Distribution.cpp.o
  /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Distribution.cpp
  /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Distribution.h
  /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/prob.hpp
 CMakeFiles/SEAIHCR.dir/Model.cpp.o
  /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Compartment.h
+ /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Distribution.h
  /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Model.cpp
  /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Model.h
 CMakeFiles/SEAIHCR.dir/main.cpp.o
  /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Compartment.h
+ /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/DiscreteGammaDistribution.h
  /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Distribution.h
  /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Model.h
  /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/main.cpp

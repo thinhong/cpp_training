@@ -1,1 +1,1 @@
-/usr/bin/c++  -g   CMakeFiles/SEAIHCR.dir/main.cpp.o CMakeFiles/SEAIHCR.dir/Compartment.cpp.o CMakeFiles/SEAIHCR.dir/Model.cpp.o CMakeFiles/SEAIHCR.dir/Distribution.cpp.o CMakeFiles/SEAIHCR.dir/prob.cpp.o  -o SEAIHCR 
+/usr/bin/c++  -g   CMakeFiles/SEAIHCR.dir/main.cpp.o CMakeFiles/SEAIHCR.dir/Compartment.cpp.o CMakeFiles/SEAIHCR.dir/Model.cpp.o CMakeFiles/SEAIHCR.dir/Distribution.cpp.o CMakeFiles/SEAIHCR.dir/prob.cpp.o CMakeFiles/SEAIHCR.dir/DiscreteGammaDistribution.cpp.o  -o SEAIHCR 

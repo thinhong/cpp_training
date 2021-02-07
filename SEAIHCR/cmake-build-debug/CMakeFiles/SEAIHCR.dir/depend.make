@@ -3,16 +3,24 @@
 
 CMakeFiles/SEAIHCR.dir/Compartment.cpp.o: ../Compartment.cpp
 CMakeFiles/SEAIHCR.dir/Compartment.cpp.o: ../Compartment.h
+CMakeFiles/SEAIHCR.dir/Compartment.cpp.o: ../Distribution.h
+
+CMakeFiles/SEAIHCR.dir/DiscreteGammaDistribution.cpp.o: ../DiscreteGammaDistribution.cpp
+CMakeFiles/SEAIHCR.dir/DiscreteGammaDistribution.cpp.o: ../DiscreteGammaDistribution.h
+CMakeFiles/SEAIHCR.dir/DiscreteGammaDistribution.cpp.o: ../Distribution.h
+CMakeFiles/SEAIHCR.dir/DiscreteGammaDistribution.cpp.o: ../prob.hpp
 
 CMakeFiles/SEAIHCR.dir/Distribution.cpp.o: ../Distribution.cpp
 CMakeFiles/SEAIHCR.dir/Distribution.cpp.o: ../Distribution.h
 CMakeFiles/SEAIHCR.dir/Distribution.cpp.o: ../prob.hpp
 
 CMakeFiles/SEAIHCR.dir/Model.cpp.o: ../Compartment.h
+CMakeFiles/SEAIHCR.dir/Model.cpp.o: ../Distribution.h
 CMakeFiles/SEAIHCR.dir/Model.cpp.o: ../Model.cpp
 CMakeFiles/SEAIHCR.dir/Model.cpp.o: ../Model.h
 
 CMakeFiles/SEAIHCR.dir/main.cpp.o: ../Compartment.h
+CMakeFiles/SEAIHCR.dir/main.cpp.o: ../DiscreteGammaDistribution.h
 CMakeFiles/SEAIHCR.dir/main.cpp.o: ../Distribution.h
 CMakeFiles/SEAIHCR.dir/main.cpp.o: ../Model.h
 CMakeFiles/SEAIHCR.dir/main.cpp.o: ../main.cpp
