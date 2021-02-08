@@ -82,6 +82,12 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/BernoulliDistribution.cpp">
+			<Option target="SEAIHCR"/>
+		</Unit>
+		<Unit filename="/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/BernoulliDistribution.h">
+			<Option target="SEAIHCR"/>
+		</Unit>
 		<Unit filename="/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Compartment.cpp">
 			<Option target="SEAIHCR"/>
 		</Unit>
@@ -92,6 +98,12 @@
 			<Option target="SEAIHCR"/>
 		</Unit>
 		<Unit filename="/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/DiscreteGammaDistribution.h">
+			<Option target="SEAIHCR"/>
+		</Unit>
+		<Unit filename="/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/DiscreteWeibullDistribution.cpp">
+			<Option target="SEAIHCR"/>
+		</Unit>
+		<Unit filename="/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/DiscreteWeibullDistribution.h">
 			<Option target="SEAIHCR"/>
 		</Unit>
 		<Unit filename="/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Distribution.cpp">

@@ -143,6 +143,33 @@ SEAIHCR/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SEAIHCR.dir/build.make CMakeFiles/SEAIHCR.dir/build
 .PHONY : SEAIHCR/fast
 
+BernoulliDistribution.o: BernoulliDistribution.cpp.o
+
+.PHONY : BernoulliDistribution.o
+
+# target to build an object file
+BernoulliDistribution.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SEAIHCR.dir/build.make CMakeFiles/SEAIHCR.dir/BernoulliDistribution.cpp.o
+.PHONY : BernoulliDistribution.cpp.o
+
+BernoulliDistribution.i: BernoulliDistribution.cpp.i
+
+.PHONY : BernoulliDistribution.i
+
+# target to preprocess a source file
+BernoulliDistribution.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SEAIHCR.dir/build.make CMakeFiles/SEAIHCR.dir/BernoulliDistribution.cpp.i
+.PHONY : BernoulliDistribution.cpp.i
+
+BernoulliDistribution.s: BernoulliDistribution.cpp.s
+
+.PHONY : BernoulliDistribution.s
+
+# target to generate assembly for a file
+BernoulliDistribution.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SEAIHCR.dir/build.make CMakeFiles/SEAIHCR.dir/BernoulliDistribution.cpp.s
+.PHONY : BernoulliDistribution.cpp.s
+
 Compartment.o: Compartment.cpp.o
 
 .PHONY : Compartment.o
@@ -196,6 +223,33 @@ DiscreteGammaDistribution.s: DiscreteGammaDistribution.cpp.s
 DiscreteGammaDistribution.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SEAIHCR.dir/build.make CMakeFiles/SEAIHCR.dir/DiscreteGammaDistribution.cpp.s
 .PHONY : DiscreteGammaDistribution.cpp.s
+
+DiscreteWeibullDistribution.o: DiscreteWeibullDistribution.cpp.o
+
+.PHONY : DiscreteWeibullDistribution.o
+
+# target to build an object file
+DiscreteWeibullDistribution.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SEAIHCR.dir/build.make CMakeFiles/SEAIHCR.dir/DiscreteWeibullDistribution.cpp.o
+.PHONY : DiscreteWeibullDistribution.cpp.o
+
+DiscreteWeibullDistribution.i: DiscreteWeibullDistribution.cpp.i
+
+.PHONY : DiscreteWeibullDistribution.i
+
+# target to preprocess a source file
+DiscreteWeibullDistribution.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SEAIHCR.dir/build.make CMakeFiles/SEAIHCR.dir/DiscreteWeibullDistribution.cpp.i
+.PHONY : DiscreteWeibullDistribution.cpp.i
+
+DiscreteWeibullDistribution.s: DiscreteWeibullDistribution.cpp.s
+
+.PHONY : DiscreteWeibullDistribution.s
+
+# target to generate assembly for a file
+DiscreteWeibullDistribution.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SEAIHCR.dir/build.make CMakeFiles/SEAIHCR.dir/DiscreteWeibullDistribution.cpp.s
+.PHONY : DiscreteWeibullDistribution.cpp.s
 
 Distribution.o: Distribution.cpp.o
 
@@ -314,12 +368,18 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... SEAIHCR"
+	@echo "... BernoulliDistribution.o"
+	@echo "... BernoulliDistribution.i"
+	@echo "... BernoulliDistribution.s"
 	@echo "... Compartment.o"
 	@echo "... Compartment.i"
 	@echo "... Compartment.s"
 	@echo "... DiscreteGammaDistribution.o"
 	@echo "... DiscreteGammaDistribution.i"
 	@echo "... DiscreteGammaDistribution.s"
+	@echo "... DiscreteWeibullDistribution.o"
+	@echo "... DiscreteWeibullDistribution.i"
+	@echo "... DiscreteWeibullDistribution.s"
 	@echo "... Distribution.o"
 	@echo "... Distribution.i"
 	@echo "... Distribution.s"

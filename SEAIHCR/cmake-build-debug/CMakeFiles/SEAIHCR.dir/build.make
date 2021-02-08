@@ -155,6 +155,32 @@ CMakeFiles/SEAIHCR.dir/DiscreteGammaDistribution.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SEAIHCR.dir/DiscreteGammaDistribution.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/DiscreteGammaDistribution.cpp -o CMakeFiles/SEAIHCR.dir/DiscreteGammaDistribution.cpp.s
 
+CMakeFiles/SEAIHCR.dir/DiscreteWeibullDistribution.cpp.o: CMakeFiles/SEAIHCR.dir/flags.make
+CMakeFiles/SEAIHCR.dir/DiscreteWeibullDistribution.cpp.o: ../DiscreteWeibullDistribution.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/SEAIHCR.dir/DiscreteWeibullDistribution.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/SEAIHCR.dir/DiscreteWeibullDistribution.cpp.o -c /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/DiscreteWeibullDistribution.cpp
+
+CMakeFiles/SEAIHCR.dir/DiscreteWeibullDistribution.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SEAIHCR.dir/DiscreteWeibullDistribution.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/DiscreteWeibullDistribution.cpp > CMakeFiles/SEAIHCR.dir/DiscreteWeibullDistribution.cpp.i
+
+CMakeFiles/SEAIHCR.dir/DiscreteWeibullDistribution.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SEAIHCR.dir/DiscreteWeibullDistribution.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/DiscreteWeibullDistribution.cpp -o CMakeFiles/SEAIHCR.dir/DiscreteWeibullDistribution.cpp.s
+
+CMakeFiles/SEAIHCR.dir/BernoulliDistribution.cpp.o: CMakeFiles/SEAIHCR.dir/flags.make
+CMakeFiles/SEAIHCR.dir/BernoulliDistribution.cpp.o: ../BernoulliDistribution.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/SEAIHCR.dir/BernoulliDistribution.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/SEAIHCR.dir/BernoulliDistribution.cpp.o -c /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/BernoulliDistribution.cpp
+
+CMakeFiles/SEAIHCR.dir/BernoulliDistribution.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SEAIHCR.dir/BernoulliDistribution.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/BernoulliDistribution.cpp > CMakeFiles/SEAIHCR.dir/BernoulliDistribution.cpp.i
+
+CMakeFiles/SEAIHCR.dir/BernoulliDistribution.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SEAIHCR.dir/BernoulliDistribution.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/BernoulliDistribution.cpp -o CMakeFiles/SEAIHCR.dir/BernoulliDistribution.cpp.s
+
 # Object files for target SEAIHCR
 SEAIHCR_OBJECTS = \
 "CMakeFiles/SEAIHCR.dir/main.cpp.o" \
@@ -162,7 +188,9 @@ SEAIHCR_OBJECTS = \
 "CMakeFiles/SEAIHCR.dir/Model.cpp.o" \
 "CMakeFiles/SEAIHCR.dir/Distribution.cpp.o" \
 "CMakeFiles/SEAIHCR.dir/prob.cpp.o" \
-"CMakeFiles/SEAIHCR.dir/DiscreteGammaDistribution.cpp.o"
+"CMakeFiles/SEAIHCR.dir/DiscreteGammaDistribution.cpp.o" \
+"CMakeFiles/SEAIHCR.dir/DiscreteWeibullDistribution.cpp.o" \
+"CMakeFiles/SEAIHCR.dir/BernoulliDistribution.cpp.o"
 
 # External object files for target SEAIHCR
 SEAIHCR_EXTERNAL_OBJECTS =
@@ -173,9 +201,11 @@ SEAIHCR: CMakeFiles/SEAIHCR.dir/Model.cpp.o
 SEAIHCR: CMakeFiles/SEAIHCR.dir/Distribution.cpp.o
 SEAIHCR: CMakeFiles/SEAIHCR.dir/prob.cpp.o
 SEAIHCR: CMakeFiles/SEAIHCR.dir/DiscreteGammaDistribution.cpp.o
+SEAIHCR: CMakeFiles/SEAIHCR.dir/DiscreteWeibullDistribution.cpp.o
+SEAIHCR: CMakeFiles/SEAIHCR.dir/BernoulliDistribution.cpp.o
 SEAIHCR: CMakeFiles/SEAIHCR.dir/build.make
 SEAIHCR: CMakeFiles/SEAIHCR.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX executable SEAIHCR"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking CXX executable SEAIHCR"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/SEAIHCR.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

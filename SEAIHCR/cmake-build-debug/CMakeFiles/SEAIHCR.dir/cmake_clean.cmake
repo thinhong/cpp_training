@@ -1,6 +1,8 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/SEAIHCR.dir/BernoulliDistribution.cpp.o"
   "CMakeFiles/SEAIHCR.dir/Compartment.cpp.o"
   "CMakeFiles/SEAIHCR.dir/DiscreteGammaDistribution.cpp.o"
+  "CMakeFiles/SEAIHCR.dir/DiscreteWeibullDistribution.cpp.o"
   "CMakeFiles/SEAIHCR.dir/Distribution.cpp.o"
   "CMakeFiles/SEAIHCR.dir/Model.cpp.o"
   "CMakeFiles/SEAIHCR.dir/main.cpp.o"

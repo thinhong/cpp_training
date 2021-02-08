@@ -6,6 +6,10 @@
 
 #IncludeRegexTransform: 
 
+/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Compartment.cpp
+Compartment.h
+/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Compartment.h
+
 /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Compartment.h
 iostream
 -
@@ -18,37 +22,9 @@ string
 Distribution.h
 /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Distribution.h
 
-/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/DiscreteGammaDistribution.h
-Distribution.h
-/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Distribution.h
-
 /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Distribution.h
 string
 -
 vector
 -
-
-/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Model.h
-vector
--
-memory
--
-Compartment.h
-/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Compartment.h
-
-/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/main.cpp
-iostream
--
-fstream
--
-array
--
-Compartment.h
-/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Compartment.h
-Model.h
-/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Model.h
-Distribution.h
-/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Distribution.h
-DiscreteGammaDistribution.h
-/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/DiscreteGammaDistribution.h
 

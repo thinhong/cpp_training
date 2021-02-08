@@ -11,6 +11,7 @@
 class Distribution {
 public:
     static inline double errorTolerance;
+    virtual size_t getMaxDay() = 0;
     virtual double getCumulativeProb(size_t index) = 0;
 };
 
