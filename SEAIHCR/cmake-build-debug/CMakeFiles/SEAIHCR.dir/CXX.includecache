@@ -6,10 +6,6 @@
 
 #IncludeRegexTransform: 
 
-/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Compartment.cpp
-Compartment.h
-/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Compartment.h
-
 /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Compartment.h
 iostream
 -
@@ -27,4 +23,36 @@ string
 -
 vector
 -
+
+/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/File.h
+string
+-
+memory
+-
+Model.h
+/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Model.h
+
+/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/FileCSV.cpp
+fstream
+-
+FileCSV.h
+/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/FileCSV.h
+
+/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/FileCSV.h
+string
+-
+memory
+-
+File.h
+/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/File.h
+Model.h
+/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Model.h
+
+/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Model.h
+vector
+-
+memory
+-
+Compartment.h
+/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Compartment.h
 

@@ -7,25 +7,26 @@
 #include "BernoulliDistribution.h"
 #include "DiscreteGammaDistribution.h"
 #include "DiscreteWeibullDistribution.h"
+#include "FileCSV.h"
 
 int main() {
     // Set error tolerance to all distribution
-    Distribution::errorTolerance = 0.01;
-
-    auto bernoulli = std::make_shared<BernoulliDistribution>(0.02);
-    bernoulli->calcCumulativeProb();
-    auto gamma1 = std::make_shared<DiscreteGammaDistribution>(1, 2);
-    gamma1->calcCumulativeProb();
-    auto weibull1 = std::make_shared<DiscreteWeibullDistribution>(1, 1.5);
-    weibull1->calcCumulativeProb();
+//    Distribution::errorTolerance = 0.01;
+//
+//    auto bernoulli = std::make_shared<BernoulliDistribution>(0.02);
+//    bernoulli->calcCumulativeProb();
+//    auto gamma1 = std::make_shared<DiscreteGammaDistribution>(1, 2);
+//    gamma1->calcCumulativeProb();
+//    auto weibull1 = std::make_shared<DiscreteWeibullDistribution>(1, 1.5);
+//    weibull1->calcCumulativeProb();
 
     // Setup compartments
     auto S = std::make_shared<Compartment>("S", 1000, 100000);
-    S->setDistribution(bernoulli);
+//    S->setDistribution(bernoulli);
     auto E = std::make_shared<Compartment>("E", 1000, 0);
-    E->setDistribution(gamma1);
+//    E->setDistribution(gamma1);
     auto A = std::make_shared<Compartment>("A", 1000, 0);
-    A->setDistribution(weibull1);
+//    A->setDistribution(weibull1);
     auto A_r = std::make_shared<Compartment>("A_r", 1000, 0);
     auto I = std::make_shared<Compartment>("I", 1000, 1);
     auto H_h = std::make_shared<Compartment>("H_h", 1000, 0);
@@ -89,21 +90,21 @@ int main() {
     myModel.connect(H_d, C_d, alpha_d);
     myModel.connect(C_d, D, beta_d);
 
-    *forceInfection = (*transRate) * ((*A).getTotal()[0] + (*A_r).getTotal()[0] + (*I).getTotal()[0]);
-    for (auto i: S->getCurrentValues()) {
-        std::cout << i << std::endl;
-    }
-    S->updateValue(1);
-    std::cout << S->getOutValue() << "\n";
-    E->updateValue(1);
-    std::cout << E->getCurrentValues()[0];
+//    *forceInfection = (*transRate) * ((*A).getTotal()[0] + (*A_r).getTotal()[0] + (*I).getTotal()[0]);
+//    for (auto i: S->getCurrentValues()) {
+//        std::cout << i << std::endl;
+//    }
+//    S->updateValue(1);
+//    std::cout << S->getOutValue() << "\n";
+//    E->updateValue(1);
+//    std::cout << E->getCurrentValues()[0];
 
     // Update this model
-//    for (size_t i {1}; i < 1000; ++i) {
-//        *forceInfection = (*transRate) * ((*A).getTotal()[i - 1] + (*A_r).getTotal()[i - 1] + (*I).getTotal()[i - 1]);
-//        myModel.update(i);
-//    }
-//
+    for (size_t i {1}; i < 1000; ++i) {
+        *forceInfection = (*transRate) * ((*A).getTotal()[i - 1] + (*A_r).getTotal()[i - 1] + (*I).getTotal()[i - 1]);
+        myModel.update(i);
+    }
+
 //    for (auto i: myModel.getComps()[0]->getCurrentValues()) {
 //        std::cout << i << ' ';
 //    }
@@ -118,28 +119,11 @@ int main() {
 //        }
 //    }
 
-//    std::ofstream myFile ("/home/thinh/Downloads/SIR_test.csv");
-//    if (myFile.is_open()) {
-//        for (size_t j {}; j < myModel.getComps().size(); ++j) {
-//            if (j == myModel.getComps().size() - 1) {
-//                myFile << myModel.getComps()[j]->getName() << "\n";
-//            } else {
-//                myFile << myModel.getComps()[j]->getName() << ",";
-//            }
-//        }
-//        for (size_t i {}; i < 1000; ++i) {
-//            for (size_t j {}; j < myModel.getComps().size(); ++j) {
-//                if (j == myModel.getComps().size() - 1) {
-//                    myFile << myModel.getComps()[j]->getTotal()[i] << "\n";
-//                } else {
-//                    myFile << myModel.getComps()[j]->getTotal()[i] << ",";
-//                }
-//            }
-//        }
-//        myFile.close();
-//        std::cout << "Successfully written into file" << std::endl;
-//    }
-//    else std::cout << "Unable to open file" << std::endl;
-//    return 0;
+    // File output
+    Model* pModel = &myModel;
+
+    FileCSV file("/home/thinh/Downloads", "test.csv");
+    file.setModel(pModel);
+    file.writeFile();
 
 }

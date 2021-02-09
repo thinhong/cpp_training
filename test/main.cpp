@@ -73,7 +73,7 @@ int main() {
     std::cout << std::endl;
 
     std::vector<std::shared_ptr<Compartment>> model = {S, E, A};
-    for (size_t iter {0}; iter < 3; ++iter) {
+    for (size_t iter {0}; iter < 4; ++iter) {
         for (auto& comp: model) {
             comp->updateValue(iter);
         }

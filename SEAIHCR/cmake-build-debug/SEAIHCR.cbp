@@ -112,6 +112,18 @@
 		<Unit filename="/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Distribution.h">
 			<Option target="SEAIHCR"/>
 		</Unit>
+		<Unit filename="/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/File.cpp">
+			<Option target="SEAIHCR"/>
+		</Unit>
+		<Unit filename="/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/File.h">
+			<Option target="SEAIHCR"/>
+		</Unit>
+		<Unit filename="/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/FileCSV.cpp">
+			<Option target="SEAIHCR"/>
+		</Unit>
+		<Unit filename="/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/FileCSV.h">
+			<Option target="SEAIHCR"/>
+		</Unit>
 		<Unit filename="/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Model.cpp">
 			<Option target="SEAIHCR"/>
 		</Unit>

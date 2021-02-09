@@ -17,28 +17,28 @@ void Compartment::setDistribution(std::shared_ptr<Distribution> dist) {
     current_values.resize(this->dist->getMaxDay());
 }
 
-//void Compartment::updateValue(long iter) {
-//    total[iter] = total[iter - 1];
-//    int sign {-1};
-//    for (size_t i = 0; i < linkedCompartment.size(); ++i) {
-//        if (isIn[i]) {
-//            sign = 1;
-//        } else {
-//            sign = -1;
-//        }
-//        total[iter] += sign * (*linkedWeight[i]) * linkedCompartment[i].lock()->total[iter - 1];
-//    }
-//}
-
 void Compartment::updateValue(long iter) {
     total[iter] = total[iter - 1];
-    out_value = current_values[current_values.size() - 1] * dist->getCumulativeProb(0);
     int sign {-1};
     for (size_t i = 0; i < linkedCompartment.size(); ++i) {
-        if (isIn[i]) {sign = 1;} else {sign = -1;}
-        for (size_t j {current_values.size() - 2}; j > 0; --j) {
-
+        if (isIn[i]) {
+            sign = 1;
+        } else {
+            sign = -1;
         }
         total[iter] += sign * (*linkedWeight[i]) * linkedCompartment[i].lock()->total[iter - 1];
     }
 }
+
+//void Compartment::updateValue(long iter) {
+//    total[iter] = total[iter - 1];
+//    out_value = current_values[current_values.size() - 1] * dist->getCumulativeProb(0);
+//    int sign {-1};
+//    for (size_t i = 0; i < linkedCompartment.size(); ++i) {
+//        if (isIn[i]) {sign = 1;} else {sign = -1;}
+//        for (size_t j {current_values.size() - 2}; j > 0; --j) {
+//
+//        }
+//        total[iter] += sign * (*linkedWeight[i]) * linkedCompartment[i].lock()->total[iter - 1];
+//    }
+//}
