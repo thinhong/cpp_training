@@ -16,7 +16,6 @@ private:
     std::shared_ptr<Distribution> dist;
     std::vector<std::weak_ptr<Compartment>> linkedCompartment;
     double weight {1};
-    std::vector<double> linkedWeight;
     std::vector<bool> isIn;
 public:
     Compartment(std::string name, size_t size, double initVal);
@@ -32,20 +31,13 @@ public:
     std::vector<double> getTotal() {return total;};
     std::vector<double> getCurrentValues() {return currentValues;};
     std::string getName() {return name;};
-    double getWeight() {return weight;};
-    std::shared_ptr<Distribution> getDistribution() {return dist;};
-    double getOutValue() {return outValueNextIter;};
-    std::vector<double> getlinkedWeight() {return linkedWeight;};
-
-    std::vector<bool> getisIn() {return isIn;};
-    std::vector<std::weak_ptr<Compartment>> getlinkedCompartment() {return linkedCompartment;};
+    std::vector<bool> getIsIn() {return isIn;};
 
     // Setters
-    void addLinkedCompartment(std::shared_ptr<Compartment>& linkedCompartment);
-    void addLinkedWeight(double linkedWeight);
-    void addIsIn(bool isIn);
     void setWeight(double weight);
     void setDistribution(std::shared_ptr<Distribution> dist);
+    void addLinkedCompartment(std::shared_ptr<Compartment>& linkedCompartment);
+    void addIsIn(bool isIn);
 
     // Method for update total in each iteration
     void updateValue(long iter);

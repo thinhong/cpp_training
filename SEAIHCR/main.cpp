@@ -16,11 +16,14 @@ int main() {
     auto forceInfection = std::make_shared<double>();
     auto bernoulli = std::make_shared<BernoulliDistribution>(forceInfection);
     bernoulli->calcCumulativeProb();
+
     auto removed = std::make_shared<double>(0.0);
     auto bernoulli_removed = std::make_shared<BernoulliDistribution>(removed);
     bernoulli_removed->calcCumulativeProb();
+
     auto gamma1 = std::make_shared<DiscreteGammaDistribution>(1, 2);
     gamma1->calcCumulativeProb();
+
     auto weibull1 = std::make_shared<DiscreteWeibullDistribution>(1, 1.5);
     weibull1->calcCumulativeProb();
 
@@ -93,45 +96,7 @@ int main() {
     myModel.connect(H_d, C_d);
     myModel.connect(C_d, D);
 
-
-    // Update this model
-//    for (size_t i {1}; i < 1000; ++i) {
-////        *forceInfection = (*transRate) * ((*A).getTotal()[i - 1] + (*A_r).getTotal()[i - 1] + (*I).getTotal()[i - 1]);
-//        myModel.update(i);
-//    }
-
-//    for (auto i: myModel.getComps()[0]->getCurrentValues()) {
-//        std::cout << i << ' ';
-//    }
-
-//
-//    for (size_t i {0}; i < 4; i++) {
-//        for (size_t j {0}; j < myModel.getComps().size(); ++j) {
-//            if (j == myModel.getComps().size() - 1) {
-//                std::cout << myModel.getComps()[j]->getTotal()[i] << "\n";
-//            } else {
-//                std::cout << myModel.getComps()[j]->getTotal()[i] << ",";
-//            }
-//        }
-//    }
-
-//    for (auto i: R->getTotal()) {
-//        std::cout << i << ' ';
-//    }
-//    std::cout << std::endl;
-//    for (auto i: R->getCurrentValues()) {
-//        std::cout << i << ' ';
-//    }
-//    std::cout << std::endl;
-//    for (auto i: R->getlinkedCompartment()) {
-//        std::cout << i.lock()->getName() << ' ';
-//    }
-//    std::cout << std::endl;
-//    for (auto i: R->getisIn()) {
-//        std::cout << i << ' ';
-//    }
-//    std::cout << std::endl;
-
+    // Update model
     for (size_t i {1}; i < 1000; i++) {
         *forceInfection = (*transRate) * ((*A).getTotal()[i - 1] + (*A_r).getTotal()[i - 1] + (*I).getTotal()[i - 1]);
         myModel.update(i);
@@ -144,16 +109,9 @@ int main() {
             std::cout << std::endl;
         }
     }
-//    for (auto i: A_r->getlinkedCompartment()) {
-//        std::cout << i.lock()->getName() << ' ';
-//    }
-//    for (auto i: A_r->getlinkedWeight()) {
-//        std::cout << i << ' ';
-//    }
 
     // File output
     Model* pModel = &myModel;
-
     FileCSV file("/home/thinh/Downloads", "test.csv");
     file.setModel(pModel);
     file.writeFile();

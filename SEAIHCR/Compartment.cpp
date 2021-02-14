@@ -1,10 +1,10 @@
 #include "Compartment.h"
 
+// Constructor
 Compartment::Compartment(std::string name, size_t size, double initVal) {
     this->name = name;
     total.resize(size);
     total[0] = initVal;
-// Note: just for test
     currentValues.push_back(initVal);
 }
 
@@ -14,10 +14,6 @@ void Compartment::addLinkedCompartment(std::shared_ptr<Compartment>& linkedCompa
 
 void Compartment::setWeight(double weight) {
     this->weight = weight;
-}
-
-void Compartment::addLinkedWeight(double linkedWeight) {
-    this->linkedWeight.push_back(linkedWeight);
 }
 
 void Compartment::addIsIn(bool isIn) {
@@ -46,7 +42,7 @@ void Compartment::updateValue(long iter) {
         currentValues[0] = 0;
         // Loop over all linkedCompartment, find the linkedCompartment with isIn == true
         // Let currentValues[0] = outValueNextIter of that linkedCompartment
-        // Multiply with linkedWeight for situations such as A -> Ar and I, I -> H_h, H_c and H_d
+        // Multiply with weight for situations such as A -> Ar and I, I -> H_h, H_c and H_d
         for (size_t j {0}; j < linkedCompartment.size(); ++j) {
             if (isIn[j]) {
                 currentValues[0] += linkedCompartment[j].lock()->outValueNextIter * weight;
