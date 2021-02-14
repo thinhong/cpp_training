@@ -4,7 +4,7 @@
 
 #include "BernoulliDistribution.h"
 
-BernoulliDistribution::BernoulliDistribution(double successRate) {
+BernoulliDistribution::BernoulliDistribution(std::shared_ptr<double> successRate) {
     this->successRate = successRate;
     maxDay = 1;
 }
@@ -17,7 +17,7 @@ double BernoulliDistribution::getCumulativeProb(size_t index) {
     if (index > cumulativeProb.size()) {
         return 1;
     } else {
-        return cumulativeProb[index];
+        return *cumulativeProb[index];
     }
 }
 

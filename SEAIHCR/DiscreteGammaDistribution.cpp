@@ -22,6 +22,7 @@ void DiscreteGammaDistribution::calcCumulativeProb() {
         cumulativeProb.push_back(tempProb);
         ++i;
     }
+    cumulativeProb.push_back(1);
     maxDay = cumulativeProb.size();
 }
 

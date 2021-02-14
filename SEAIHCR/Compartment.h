@@ -9,22 +9,17 @@
 
 class Compartment {
 private:
-    std::vector<double> total;
-    std::vector<double> current_values;
-    double out_value {0};
-    std::shared_ptr<Distribution> dist;
     std::string name;
+    std::vector<double> total;
+    std::vector<double> currentValues;
+    double outValueNextIter {0};
+    std::shared_ptr<Distribution> dist;
     std::vector<std::weak_ptr<Compartment>> linkedCompartment;
-    std::vector<std::shared_ptr<double>> linkedWeight;
+    double weight {1};
+    std::vector<double> linkedWeight;
     std::vector<bool> isIn;
 public:
-    Compartment(std::string name, size_t size, double initVal) {
-        total.resize(size);
-        total[0] = initVal;
-        // Note: just for test
-        current_values.push_back(initVal);
-        this->name = name;
-    };
+    Compartment(std::string name, size_t size, double initVal);
 
     Compartment() = delete;
     Compartment(const Compartment& comp) = delete;
@@ -35,15 +30,21 @@ public:
 
     // Getters
     std::vector<double> getTotal() {return total;};
-    std::vector<double> getCurrentValues() {return current_values;};
+    std::vector<double> getCurrentValues() {return currentValues;};
     std::string getName() {return name;};
+    double getWeight() {return weight;};
     std::shared_ptr<Distribution> getDistribution() {return dist;};
-    double getOutValue() {return out_value;};
+    double getOutValue() {return outValueNextIter;};
+    std::vector<double> getlinkedWeight() {return linkedWeight;};
+
+    std::vector<bool> getisIn() {return isIn;};
+    std::vector<std::weak_ptr<Compartment>> getlinkedCompartment() {return linkedCompartment;};
 
     // Setters
-    void addLinkedCompartment(std::shared_ptr<Compartment>& newLinkCompartment);
-    void addLinkedWeight(std::shared_ptr<double>& newLinkWeight);
-    void addIsIn(bool isInputComp);
+    void addLinkedCompartment(std::shared_ptr<Compartment>& linkedCompartment);
+    void addLinkedWeight(double linkedWeight);
+    void addIsIn(bool isIn);
+    void setWeight(double weight);
     void setDistribution(std::shared_ptr<Distribution> dist);
 
     // Method for update total in each iteration

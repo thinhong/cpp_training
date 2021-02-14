@@ -12,8 +12,7 @@ public:
     Model() = default;
     std::vector<std::shared_ptr<Compartment>> getComps() {return comps;};
     void setComps(std::shared_ptr<Compartment>& pComp);
-    void connect(std::shared_ptr<Compartment>& A, std::shared_ptr<Compartment>& B,
-                 std::shared_ptr<double>& weight);
+    void connect(std::shared_ptr<Compartment>& A, std::shared_ptr<Compartment>& B);
     void update(long iter);
 };
 

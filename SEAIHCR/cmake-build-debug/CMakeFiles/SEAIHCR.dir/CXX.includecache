@@ -6,15 +6,23 @@
 
 #IncludeRegexTransform: 
 
-/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Compartment.h
-iostream
--
-vector
--
-memory
--
-string
--
+/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/DiscreteGammaDistribution.cpp
+prob.hpp
+/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/prob.hpp
+DiscreteGammaDistribution.h
+/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/DiscreteGammaDistribution.h
+
+/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/DiscreteGammaDistribution.h
+Distribution.h
+/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Distribution.h
+
+/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/DiscreteWeibullDistribution.cpp
+prob.hpp
+/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/prob.hpp
+DiscreteWeibullDistribution.h
+/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/DiscreteWeibullDistribution.h
+
+/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/DiscreteWeibullDistribution.h
 Distribution.h
 /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Distribution.h
 
@@ -24,35 +32,7 @@ string
 vector
 -
 
-/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/File.h
+/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/prob.hpp
 string
 -
-memory
--
-Model.h
-/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Model.h
-
-/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/FileCSV.cpp
-fstream
--
-FileCSV.h
-/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/FileCSV.h
-
-/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/FileCSV.h
-string
--
-memory
--
-File.h
-/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/File.h
-Model.h
-/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Model.h
-
-/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Model.h
-vector
--
-memory
--
-Compartment.h
-/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Compartment.h
 
