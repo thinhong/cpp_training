@@ -31,7 +31,7 @@ void FileCSV::writeFile() {
                 myFile << model->getComps()[j]->getName() << ",";
             }
         }
-        for (size_t i {}; i < 1000; ++i) {
+        for (size_t i {}; i < model->getComps()[0]->getTotal().size(); ++i) {
             for (size_t j {}; j < model->getComps().size(); ++j) {
                 if (j == model->getComps().size() - 1) {
                     myFile << model->getComps()[j]->getTotal()[i] << "\n";

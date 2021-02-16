@@ -32,6 +32,7 @@ public:
     std::vector<double> getCurrentValues() {return currentValues;};
     std::string getName() {return name;};
     std::vector<bool> getIsIn() {return isIn;};
+    std::vector<std::weak_ptr<Compartment>> getLinkedCompartment() {return linkedCompartment;};
 
     // Setters
     void setWeight(double weight);

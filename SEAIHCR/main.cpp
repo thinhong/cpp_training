@@ -62,20 +62,9 @@ int main() {
 
     // Model myModel consists of S, I and R
     Model myModel;
-    myModel.setComps(S);
-    myModel.setComps(E);
-    myModel.setComps(A);
-    myModel.setComps(A_r);
-    myModel.setComps(I);
-    myModel.setComps(H_h);
-    myModel.setComps(H_c);
-    myModel.setComps(H_d);
-    myModel.setComps(C_c);
-    myModel.setComps(C_d);
-    myModel.setComps(D);
-    myModel.setComps(R);
 
-    // Connect S -> E -> A
+    // Connect and add comps to myModel
+    // S -> E -> A
     myModel.connect(S, E);
     myModel.connect(E, A);
     // A -> A_r and I
@@ -96,19 +85,31 @@ int main() {
     myModel.connect(H_d, C_d);
     myModel.connect(C_d, D);
 
-    // Update model
-    for (size_t i {1}; i < 1000; i++) {
-        *forceInfection = (*transRate) * ((*A).getTotal()[i - 1] + (*A_r).getTotal()[i - 1] + (*I).getTotal()[i - 1]);
-        myModel.update(i);
-        std::cout << "Iteration: " << i << std::endl;
-        for (size_t j {0}; j < myModel.getComps().size(); ++j) {
-            std::cout << myModel.getComps()[j]->getName() << ": ";
-            for (auto k: myModel.getComps()[j]->getCurrentValues()) {
-                std::cout << k << " ";
-            }
-            std::cout << std::endl;
+    for (auto i: myModel.getComps()) {
+        std::cout << "Compartment " << i->getName() << std::endl;
+        for (auto j: i->getLinkedCompartment()) {
+            std::cout << j.lock()->getName() << ' ';
         }
+        std::cout << std::endl;
+        for (auto k: i->getIsIn()) {
+            std::cout << k << ' ';
+        }
+        std::cout << std::endl;
     }
+
+    // Update model
+//    for (size_t i {1}; i < myModel.getComps()[0]->getTotal().size(); i++) {
+//        *forceInfection = (*transRate) * (A->getTotal()[i - 1] + A_r->getTotal()[i - 1] + I->getTotal()[i - 1]);
+//        myModel.update(i);
+//        std::cout << "Iteration: " << i << std::endl;
+//        for (size_t j {0}; j < myModel.getComps().size(); ++j) {
+//            std::cout << myModel.getComps()[j]->getName() << ": ";
+//            for (auto k: myModel.getComps()[j]->getCurrentValues()) {
+//                std::cout << k << " ";
+//            }
+//            std::cout << std::endl;
+//        }
+//    }
 
     // File output
     Model* pModel = &myModel;
