@@ -65,42 +65,50 @@ int main() {
 
     // Connect and add comps to myModel
     // S -> E -> A
-    myModel.connect(S, E);
-    myModel.connect(E, A);
+    myModel.addCompsAndConnect(S, E);
+    myModel.addCompsAndConnect(E, A);
     // A -> A_r and I
-    myModel.connect(A, A_r);
-    myModel.connect(A, I);
+    myModel.addCompsAndConnect(A, A_r);
+    myModel.addCompsAndConnect(A, I);
     // A_r -> R
-    myModel.connect(A_r, R);
+    myModel.addCompsAndConnect(A_r, R);
     // I -> H_h, H_c and H_d
-    myModel.connect(I, H_h);
-    myModel.connect(I, H_c);
-    myModel.connect(I, H_d);
+    myModel.addCompsAndConnect(I, H_h);
+    myModel.addCompsAndConnect(I, H_c);
+    myModel.addCompsAndConnect(I, H_d);
     // H_h -> R
-    myModel.connect(H_h, R);
+    myModel.addCompsAndConnect(H_h, R);
     // H_c -> C_c -> R
-    myModel.connect(H_c, C_c);
-    myModel.connect(C_c, R);
+    myModel.addCompsAndConnect(H_c, C_c);
+    myModel.addCompsAndConnect(C_c, R);
     // H_d -> C_d -> D
-    myModel.connect(H_d, C_d);
-    myModel.connect(C_d, D);
+    myModel.addCompsAndConnect(H_d, C_d);
+    myModel.addCompsAndConnect(C_d, D);
 
-    for (auto i: myModel.getComps()) {
-        std::cout << "Compartment " << i->getName() << std::endl;
-        for (auto j: i->getLinkedCompartment()) {
-            std::cout << j.lock()->getName() << ' ';
-        }
-        std::cout << std::endl;
-        for (auto k: i->getIsIn()) {
-            std::cout << k << ' ';
-        }
-        std::cout << std::endl;
-    }
+    myModel.sortComps();
+
+//    for (auto i: myModel.getComps()) {
+//        std::cout << i->getName() << ' ';
+//    }
+
+//    for (auto i: myModel.getComps()) {
+//        std::cout << "Compartment " << i->getName() << std::endl;
+//        for (auto j: i->getLinkedCompartment()) {
+//            std::cout << j.lock()->getName() << ' ';
+//        }
+//        std::cout << std::endl;
+//        for (auto k: i->getIsIn()) {
+//            std::cout << k << ' ';
+//        }
+//        std::cout << std::endl;
+//    }
 
     // Update model
-//    for (size_t i {1}; i < myModel.getComps()[0]->getTotal().size(); i++) {
-//        *forceInfection = (*transRate) * (A->getTotal()[i - 1] + A_r->getTotal()[i - 1] + I->getTotal()[i - 1]);
-//        myModel.update(i);
+    for (size_t i {1}; i < myModel.getComps()[0]->getTotal().size(); i++) {
+        *forceInfection = (*transRate) * (A->getTotal()[i - 1] + A_r->getTotal()[i - 1] + I->getTotal()[i - 1]);
+        myModel.update(i);
+
+        // For debug
 //        std::cout << "Iteration: " << i << std::endl;
 //        for (size_t j {0}; j < myModel.getComps().size(); ++j) {
 //            std::cout << myModel.getComps()[j]->getName() << ": ";
@@ -109,7 +117,7 @@ int main() {
 //            }
 //            std::cout << std::endl;
 //        }
-//    }
+    }
 
     // File output
     Model* pModel = &myModel;

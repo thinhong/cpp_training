@@ -11,7 +11,8 @@ private:
 public:
     Model() = default;
     std::vector<std::shared_ptr<Compartment>> getComps() {return comps;};
-    void connect(std::shared_ptr<Compartment>& A, std::shared_ptr<Compartment>& B);
+    void addCompsAndConnect(std::shared_ptr<Compartment>& A, std::shared_ptr<Compartment>& B);
+    void sortComps();
     void update(long iter);
 };
 

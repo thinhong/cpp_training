@@ -16,8 +16,8 @@ private:
 public:
     DiscreteWeibullDistribution(double scale, double shape);
     void calcCumulativeProb();
-    double getCumulativeProb(size_t index);
-    size_t getMaxDay();
+    double getCumulativeProb(size_t index) override;
+    size_t getMaxDay() override;
 };
 
 

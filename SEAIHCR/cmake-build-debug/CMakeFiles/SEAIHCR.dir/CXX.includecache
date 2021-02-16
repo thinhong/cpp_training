@@ -38,6 +38,10 @@ string
 vector
 -
 
+/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/File.cpp
+File.h
+/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/File.h
+
 /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/File.h
 string
 -
@@ -45,6 +49,12 @@ memory
 -
 Model.h
 /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Model.h
+
+/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/FileCSV.cpp
+fstream
+-
+FileCSV.h
+/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/FileCSV.h
 
 /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/FileCSV.h
 string
@@ -55,6 +65,12 @@ File.h
 /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/File.h
 Model.h
 /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Model.h
+
+/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Model.cpp
+Model.h
+/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Model.h
+algorithm
+-
 
 /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Model.h
 vector
