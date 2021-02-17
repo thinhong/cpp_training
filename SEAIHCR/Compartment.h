@@ -12,13 +12,13 @@ private:
     std::string name;
     std::vector<double> total;
     std::vector<double> currentValues;
-    double outValueNextIter {0};
+    double outValue {0};
     std::shared_ptr<Distribution> dist;
     std::vector<std::weak_ptr<Compartment>> linkedCompartment;
     double weight {1};
     std::vector<bool> isIn;
 public:
-    Compartment(std::string name, size_t size, double initVal);
+    Compartment(std::string name, double initVal);
 
     Compartment() = delete;
     Compartment(const Compartment& comp) = delete;
@@ -26,7 +26,7 @@ public:
     ~Compartment() {
 //        std::cout << name << " destructor called." << std::endl;
     }
-
+    static inline double daysFollowUp;
     // Getters
     std::vector<double> getTotal() {return total;};
     std::vector<double> getCurrentValues() {return currentValues;};

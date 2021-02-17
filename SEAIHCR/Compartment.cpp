@@ -1,9 +1,9 @@
 #include "Compartment.h"
 
 // Constructor
-Compartment::Compartment(std::string name, size_t size, double initVal) {
+Compartment::Compartment(std::string name, double initVal) {
     this->name = name;
-    total.resize(size);
+    total.resize(daysFollowUp);
     total[0] = initVal;
     currentValues.push_back(initVal);
 }
@@ -32,29 +32,29 @@ void Compartment::updateValue(long iter) {
     }
     // For all compartments except S and R
     if (currentValues.size() > 1) {
-        outValueNextIter = 0;
+        outValue = 0;
         // Going backward from currentValues[n] -> currentValues[1]
         for (size_t i {currentValues.size() - 1}; i > 0; --i) {
-            outValueNextIter += currentValues[i] * dist->getCumulativeProb(i);
+            outValue += currentValues[i] * dist->getCumulativeProb(i);
             currentValues[i] = currentValues[i - 1] * (1 - dist->getCumulativeProb(i - 1));
         }
         // All of currentValues[0] will go to currentValues[1] so initialize currentValues[0] = 0
         currentValues[0] = 0;
         // Loop over all linkedCompartment, find the linkedCompartment with isIn == true
-        // Let currentValues[0] = outValueNextIter of that linkedCompartment
+        // Let currentValues[0] = outValue of that linkedCompartment
         // Multiply with weight for situations such as A -> Ar and I, I -> H_h, H_c and H_d
         for (size_t j {0}; j < linkedCompartment.size(); ++j) {
             if (isIn[j]) {
-                currentValues[0] += linkedCompartment[j].lock()->outValueNextIter * weight;
+                currentValues[0] += linkedCompartment[j].lock()->outValue * weight;
             }
         }
     } else if (currentValues.size() == 1 && sumIsIn == 0) { // For S compartment (S only has 1 value)
-        outValueNextIter = currentValues[0] * dist->getCumulativeProb(0);
-        currentValues[0] -= outValueNextIter;
+        outValue = currentValues[0] * dist->getCumulativeProb(0);
+        currentValues[0] -= outValue;
     } else if (currentValues.size() == 1 && sumIsIn > 0) { // For R compartment, only add people from its coming compartments
         for (size_t j {0}; j < linkedCompartment.size(); ++j) {
             if (isIn[j]) {
-                currentValues[0] += linkedCompartment[j].lock()->outValueNextIter * weight;
+                currentValues[0] += linkedCompartment[j].lock()->outValue * weight;
             }
         }
     }

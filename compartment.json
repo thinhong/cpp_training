@@ -1,0 +1,109 @@
+[
+    {
+        "name": "S",
+        "initialValue": 100000,
+        "transRate": 0.000004
+    },
+    {
+        "name": "E",
+        "initialValue": 0,
+        "distribution": {
+            "name": "gamma",
+            "scale": 1,
+            "shape": 2
+        }
+    },
+    {
+        "name": "A",
+        "initialValue": 0,
+        "distribution": {
+            "name": "weibull",
+            "scale": 1,
+            "shape": 1.5
+        }
+    },
+    {
+        "name": "A_r",
+        "initialValue": 0,
+        "distribution": {
+            "name": "gamma",
+            "scale": 1,
+            "shape": 2
+        },
+        "weight": 0.2
+    },
+    {
+        "name": "I",
+        "initialValue": 1,
+        "distribution": {
+            "name": "gamma",
+            "scale": 1,
+            "shape": 2
+        },
+        "weight": 0.8
+    },
+    {
+        "name": "H_h",
+        "initialValue": 0,
+        "distribution": {
+            "name": "weibull",
+            "scale": 1,
+            "shape": 1.5
+        },
+        "weight": 0.5
+    },
+    {
+        "name": "H_c",
+        "initialValue": 0,
+        "distribution": {
+            "name": "gamma",
+            "scale": 1,
+            "shape": 2
+        },
+        "weight": 0.35
+    },
+    {
+        "name": "H_d",
+        "initialValue": 0,
+        "distribution": {
+            "name": "gamma",
+            "scale": 1,
+            "shape": 2
+        },
+        "weight": 0.15
+    },
+    {
+        "name": "C_c",
+        "initialValue": 0,
+        "distribution": {
+            "name": "weibull",
+            "scale": 1,
+            "shape": 1.5
+        }
+    },
+    {
+        "name": "C_d",
+        "initialValue": 0,
+        "distribution": {
+            "name": "gamma",
+            "scale": 1,
+            "shape": 2
+        }
+    },
+    {
+        "name": "D",
+        "initialValue": 0,
+        "distribution": {
+            "name": "bernoulli",
+            "successRate": 0
+        }
+    },
+    {
+        "name": "R",
+        "initialValue": 0,
+        "distribution": {
+            "name": "bernoulli",
+            "successRate": 0
+        }
+    }
+]
