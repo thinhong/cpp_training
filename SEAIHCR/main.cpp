@@ -98,7 +98,7 @@ int main() {
     // Model myModel consists of S, I and R
     Model myModel;
 
-    // Connect and add compConfig to myModel
+    // Add and also connect all compartments into myModel
     // S -> E -> A
     myModel.addCompsAndConnect(S, E);
     myModel.addCompsAndConnect(E, A);
@@ -120,7 +120,15 @@ int main() {
     myModel.addCompsAndConnect(H_d, C_d);
     myModel.addCompsAndConnect(C_d, D);
 
+    // Test with a isCycle: A_r going back to E
+    myModel.addCompsAndConnect(A_r, E);
+    myModel.DFS();
+    std::cout << myModel.getCycle() << "\n";
     myModel.sortComps();
+
+//    myModel.DFS();
+//    std::cout << myModel.getCycle() << "\n";
+//    myModel.sortComps();
 
 //    for (auto i: myModel.getComps()) {
 //        std::cout << i->getName() << ' ';
