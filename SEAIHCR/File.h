@@ -11,6 +11,7 @@
 
 class File {
 public:
+    static inline int precision {12};
     virtual void writeFile() = 0;
 };
 

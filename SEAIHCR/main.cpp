@@ -11,7 +11,10 @@
 #include "FileCSV.h"
 
 int main() {
-    const double nDays {1000};
+    // Set precision for output file (default = 12), if not set this the program will rounded unexpectedly
+    File::precision = 16;
+
+    const double nDays {200};
 
     Compartment::daysFollowUp = nDays;
     // Set error tolerance to all distribution
@@ -47,7 +50,7 @@ int main() {
 //        comps.push_back(tmp);
 //    }
 
-    auto transRate = std::make_shared<double>(2.0 / 500000);
+    auto transRate = std::make_shared<double>(3.0 / 10000000);
     auto forceInfection = std::make_shared<double>();
     auto bernoulli = std::make_shared<BernoulliDistribution>(forceInfection);
     bernoulli->calcCumulativeProb();
@@ -56,14 +59,20 @@ int main() {
     auto bernoulli_removed = std::make_shared<BernoulliDistribution>(removed);
     bernoulli_removed->calcCumulativeProb();
 
-    auto gamma1 = std::make_shared<DiscreteGammaDistribution>(1, 2);
-    gamma1->calcCumulativeProb();
+    auto gamma_7d = std::make_shared<DiscreteGammaDistribution>(1, 1);
+    gamma_7d->calcCumulativeProb();
 
-    auto weibull1 = std::make_shared<DiscreteWeibullDistribution>(1, 1.5);
-    weibull1->calcCumulativeProb();
+    auto gamma_13d = std::make_shared<DiscreteGammaDistribution>(1, 4);
+    gamma_13d->calcCumulativeProb();
+
+    auto weil_16d = std::make_shared<DiscreteWeibullDistribution>(5, 1.5);
+    weil_16d->calcCumulativeProb();
+
+    auto weil_9d = std::make_shared<DiscreteWeibullDistribution>(4, 3);
+    weil_9d->calcCumulativeProb();
 
     // Setup compartments
-    auto S = std::make_shared<Compartment>("S", 100000);
+    auto S = std::make_shared<Compartment>("S", 3000000);
     auto E = std::make_shared<Compartment>("E", 0);
     auto A = std::make_shared<Compartment>("A", 0);
     auto A_r = std::make_shared<Compartment>("A_r", 0);
@@ -76,22 +85,22 @@ int main() {
     auto D = std::make_shared<Compartment>("D", 0);
     auto R = std::make_shared<Compartment>("R", 0);
 
-    A_r->setWeight(0.2);
-    I->setWeight(0.8);
-    H_h->setWeight(0.5);
-    H_c->setWeight(0.35);
-    H_d->setWeight(0.15);
+    A_r->setWeight(0.35);
+    I->setWeight(0.65);
+    H_h->setWeight(0.7);
+    H_c->setWeight(0.2);
+    H_d->setWeight(0.1);
 
     S->setDistribution(bernoulli);
-    E->setDistribution(gamma1);
-    A->setDistribution(weibull1);
-    A_r->setDistribution(gamma1);
-    I->setDistribution(gamma1);
-    H_h->setDistribution(weibull1);
-    H_c->setDistribution(gamma1);
-    H_d->setDistribution(gamma1);
-    C_c->setDistribution(weibull1);
-    C_d->setDistribution(gamma1);
+    E->setDistribution(weil_9d);
+    A->setDistribution(gamma_7d);
+    A_r->setDistribution(weil_16d);
+    I->setDistribution(gamma_13d);
+    H_h->setDistribution(gamma_7d);
+    H_c->setDistribution(weil_9d);
+    H_d->setDistribution(gamma_7d);
+    C_c->setDistribution(weil_16d);
+    C_d->setDistribution(gamma_13d);
     D->setDistribution(bernoulli_removed);
     R->setDistribution(bernoulli_removed);
 
@@ -121,30 +130,9 @@ int main() {
     myModel.addCompsAndConnect(C_d, D);
 
     // Test with a isCycle: A_r going back to E
-    myModel.addCompsAndConnect(A_r, E);
+//    myModel.addCompsAndConnect(A_r, E);
     myModel.DFS();
-    std::cout << myModel.getCycle() << "\n";
     myModel.sortComps();
-
-//    myModel.DFS();
-//    std::cout << myModel.getCycle() << "\n";
-//    myModel.sortComps();
-
-//    for (auto i: myModel.getComps()) {
-//        std::cout << i->getName() << ' ';
-//    }
-
-//    for (auto i: myModel.getComps()) {
-//        std::cout << "Compartment " << i->getName() << std::endl;
-//        for (auto j: i->getLinkedCompartment()) {
-//            std::cout << j.lock()->getName() << ' ';
-//        }
-//        std::cout << std::endl;
-//        for (auto k: i->getIsIn()) {
-//            std::cout << k << ' ';
-//        }
-//        std::cout << std::endl;
-//    }
 
     // Update model
     for (size_t i {1}; i < myModel.getComps()[0]->daysFollowUp; i++) {
@@ -152,20 +140,20 @@ int main() {
         myModel.update(i);
 
         // For debug
-//        std::cout << "Iteration: " << i << std::endl;
-//        for (size_t j {0}; j < myModel.getComps().size(); ++j) {
-//            std::cout << myModel.getComps()[j]->getName() << ": ";
-//            for (auto k: myModel.getComps()[j]->getCurrentValues()) {
-//                std::cout << k << " ";
-//            }
-//            std::cout << std::endl;
-//        }
+        std::cout << "Iteration: " << i << std::endl;
+        for (size_t j {0}; j < myModel.getComps().size(); ++j) {
+            std::cout << myModel.getComps()[j]->getName() << ": ";
+            for (auto k: myModel.getComps()[j]->getCurrentValues()) {
+                std::cout << k << " ";
+            }
+            std::cout << std::endl;
+        }
     }
 
     // File output
-//    Model* pModel = &myModel;
-//    FileCSV file("/home/thinh/Downloads", "test.csv");
-//    file.setModel(pModel);
-//    file.writeFile();
+    Model* pModel = &myModel;
+    FileCSV file("/home/thinh/Downloads", "test_r0_3_diffWaitingTime.csv");
+    file.setModel(pModel);
+    file.writeFile();
 
 }

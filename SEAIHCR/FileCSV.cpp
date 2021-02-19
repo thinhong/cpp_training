@@ -3,6 +3,7 @@
 //
 
 #include <fstream>
+#include <iomanip>
 #include "FileCSV.h"
 
 FileCSV::FileCSV(std::string filePath, std::string fileName) {
@@ -23,6 +24,7 @@ void FileCSV::writeFile() {
     }
 
     std::ofstream myFile(fullPath);
+    myFile << std::fixed << std::setprecision(precision);
     if (myFile.is_open()) {
         for (size_t j {}; j < model->getComps().size(); ++j) {
             if (j == model->getComps().size() - 1) {
