@@ -8,6 +8,24 @@ Compartment::Compartment(std::string name, double initVal) {
     currentValues.push_back(initVal);
 }
 
+// Define list of getters
+std::vector<double> Compartment::getTotal() {
+    return total;
+}
+std::vector<double> Compartment::getCurrentValues() {
+    return currentValues;
+}
+std::string Compartment::getName() {
+    return name;
+}
+std::vector<bool> Compartment::getIsIn() {
+    return isIn;
+}
+std::vector<std::weak_ptr<Compartment>> Compartment::getLinkedCompartment() {
+    return linkedCompartment;
+}
+
+// Setters
 void Compartment::addLinkedCompartment(std::shared_ptr<Compartment>& linkedCompartment) {
     this->linkedCompartment.push_back(linkedCompartment);
 }

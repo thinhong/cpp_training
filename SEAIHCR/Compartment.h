@@ -28,11 +28,11 @@ public:
     }
     static inline double daysFollowUp;
     // Getters
-    std::vector<double> getTotal() {return total;};
-    std::vector<double> getCurrentValues() {return currentValues;};
-    std::string getName() {return name;};
-    std::vector<bool> getIsIn() {return isIn;};
-    std::vector<std::weak_ptr<Compartment>> getLinkedCompartment() {return linkedCompartment;};
+    std::vector<double> getTotal();
+    std::vector<double> getCurrentValues();
+    std::string getName();
+    std::vector<bool> getIsIn();
+    std::vector<std::weak_ptr<Compartment>> getLinkedCompartment();
 
     // Setters
     void setWeight(double weight);

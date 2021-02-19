@@ -1,6 +1,10 @@
 #include "Model.h"
 #include <algorithm>
 
+std::vector<std::shared_ptr<Compartment>> Model::getComps() {
+    return comps;
+}
+
 // For example S -> I, after addCompsAndConnect(S, I):
 // S has: linkedCompartment = S, linkedWeight = weight_StoI, isIn = false (S-> is moving out of S)
 // I has: linkedCompartment = S, linkedWeight = weight_StoI, isIn = true (->I is moving to I)

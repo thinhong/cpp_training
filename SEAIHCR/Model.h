@@ -11,7 +11,7 @@ private:
     bool isCycle {false};
 public:
     Model() = default;
-    std::vector<std::shared_ptr<Compartment>> getComps() {return comps;};
+    std::vector<std::shared_ptr<Compartment>> getComps();
     void addCompsAndConnect(std::shared_ptr<Compartment>& A, std::shared_ptr<Compartment>& B);
 
     // Functions to detect isCycle in directed graph (depth-first-search)
