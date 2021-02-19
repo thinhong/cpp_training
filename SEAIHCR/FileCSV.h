@@ -16,8 +16,7 @@ private:
     std::string filePath;
     std::string fileName;
 public:
-    FileCSV(std::string filePath, std::string fileName);
-    void setModel(Model* model);
+    FileCSV(std::string filePath, std::string fileName, Model* model);
     void writeFile() override;
 };
 

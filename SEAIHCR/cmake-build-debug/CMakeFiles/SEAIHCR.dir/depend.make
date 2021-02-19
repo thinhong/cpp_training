@@ -35,6 +35,14 @@ CMakeFiles/SEAIHCR.dir/FileCSV.cpp.o: ../FileCSV.cpp
 CMakeFiles/SEAIHCR.dir/FileCSV.cpp.o: ../FileCSV.h
 CMakeFiles/SEAIHCR.dir/FileCSV.cpp.o: ../Model.h
 
+CMakeFiles/SEAIHCR.dir/FileJSON.cpp.o: ../Compartment.h
+CMakeFiles/SEAIHCR.dir/FileJSON.cpp.o: ../Distribution.h
+CMakeFiles/SEAIHCR.dir/FileJSON.cpp.o: ../File.h
+CMakeFiles/SEAIHCR.dir/FileJSON.cpp.o: ../FileJSON.cpp
+CMakeFiles/SEAIHCR.dir/FileJSON.cpp.o: ../FileJSON.h
+CMakeFiles/SEAIHCR.dir/FileJSON.cpp.o: ../Model.h
+CMakeFiles/SEAIHCR.dir/FileJSON.cpp.o: ../json.hpp
+
 CMakeFiles/SEAIHCR.dir/Model.cpp.o: ../Compartment.h
 CMakeFiles/SEAIHCR.dir/Model.cpp.o: ../Distribution.h
 CMakeFiles/SEAIHCR.dir/Model.cpp.o: ../Model.cpp
@@ -47,6 +55,7 @@ CMakeFiles/SEAIHCR.dir/main.cpp.o: ../DiscreteWeibullDistribution.h
 CMakeFiles/SEAIHCR.dir/main.cpp.o: ../Distribution.h
 CMakeFiles/SEAIHCR.dir/main.cpp.o: ../File.h
 CMakeFiles/SEAIHCR.dir/main.cpp.o: ../FileCSV.h
+CMakeFiles/SEAIHCR.dir/main.cpp.o: ../FileJSON.h
 CMakeFiles/SEAIHCR.dir/main.cpp.o: ../Model.h
 CMakeFiles/SEAIHCR.dir/main.cpp.o: ../json.hpp
 CMakeFiles/SEAIHCR.dir/main.cpp.o: ../main.cpp

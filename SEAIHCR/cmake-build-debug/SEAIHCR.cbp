@@ -124,6 +124,12 @@
 		<Unit filename="/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/FileCSV.h">
 			<Option target="SEAIHCR"/>
 		</Unit>
+		<Unit filename="/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/FileJSON.cpp">
+			<Option target="SEAIHCR"/>
+		</Unit>
+		<Unit filename="/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/FileJSON.h">
+			<Option target="SEAIHCR"/>
+		</Unit>
 		<Unit filename="/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Model.cpp">
 			<Option target="SEAIHCR"/>
 		</Unit>

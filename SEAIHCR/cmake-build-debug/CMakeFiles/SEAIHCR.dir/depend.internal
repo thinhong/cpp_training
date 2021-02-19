@@ -35,6 +35,14 @@ CMakeFiles/SEAIHCR.dir/FileCSV.cpp.o
  /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/FileCSV.cpp
  /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/FileCSV.h
  /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Model.h
+CMakeFiles/SEAIHCR.dir/FileJSON.cpp.o
+ /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Compartment.h
+ /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Distribution.h
+ /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/File.h
+ /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/FileJSON.cpp
+ /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/FileJSON.h
+ /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Model.h
+ /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/json.hpp
 CMakeFiles/SEAIHCR.dir/Model.cpp.o
  /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Compartment.h
  /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Distribution.h
@@ -48,6 +56,7 @@ CMakeFiles/SEAIHCR.dir/main.cpp.o
  /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Distribution.h
  /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/File.h
  /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/FileCSV.h
+ /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/FileJSON.h
  /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Model.h
  /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/json.hpp
  /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/main.cpp

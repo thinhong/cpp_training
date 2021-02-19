@@ -9,6 +9,7 @@
 #include "DiscreteGammaDistribution.h"
 #include "DiscreteWeibullDistribution.h"
 #include "FileCSV.h"
+#include "FileJSON.h"
 
 int main() {
     // Set precision for output file (default = 12), if not set this the program will rounded unexpectedly
@@ -152,8 +153,10 @@ int main() {
 
     // File output
     Model* pModel = &myModel;
-    FileCSV file("/home/thinh/Downloads", "test_r0_3_diffWaitingTime.csv");
-    file.setModel(pModel);
+    FileCSV file("/home/thinh/Downloads", "test_r0_3_diffWaitingTime.csv", pModel);
     file.writeFile();
+
+    FileJSON json("/home/thinh/Downloads", "test_r0_3_diffWaitingTime.json", pModel);
+    json.writeFile();
 
 }

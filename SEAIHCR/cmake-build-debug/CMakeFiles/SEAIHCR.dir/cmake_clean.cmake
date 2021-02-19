@@ -6,6 +6,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/SEAIHCR.dir/Distribution.cpp.o"
   "CMakeFiles/SEAIHCR.dir/File.cpp.o"
   "CMakeFiles/SEAIHCR.dir/FileCSV.cpp.o"
+  "CMakeFiles/SEAIHCR.dir/FileJSON.cpp.o"
   "CMakeFiles/SEAIHCR.dir/Model.cpp.o"
   "CMakeFiles/SEAIHCR.dir/main.cpp.o"
   "CMakeFiles/SEAIHCR.dir/prob.cpp.o"

@@ -332,6 +332,33 @@ FileCSV.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SEAIHCR.dir/build.make CMakeFiles/SEAIHCR.dir/FileCSV.cpp.s
 .PHONY : FileCSV.cpp.s
 
+FileJSON.o: FileJSON.cpp.o
+
+.PHONY : FileJSON.o
+
+# target to build an object file
+FileJSON.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SEAIHCR.dir/build.make CMakeFiles/SEAIHCR.dir/FileJSON.cpp.o
+.PHONY : FileJSON.cpp.o
+
+FileJSON.i: FileJSON.cpp.i
+
+.PHONY : FileJSON.i
+
+# target to preprocess a source file
+FileJSON.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SEAIHCR.dir/build.make CMakeFiles/SEAIHCR.dir/FileJSON.cpp.i
+.PHONY : FileJSON.cpp.i
+
+FileJSON.s: FileJSON.cpp.s
+
+.PHONY : FileJSON.s
+
+# target to generate assembly for a file
+FileJSON.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SEAIHCR.dir/build.make CMakeFiles/SEAIHCR.dir/FileJSON.cpp.s
+.PHONY : FileJSON.cpp.s
+
 Model.o: Model.cpp.o
 
 .PHONY : Model.o
@@ -443,6 +470,9 @@ help:
 	@echo "... FileCSV.o"
 	@echo "... FileCSV.i"
 	@echo "... FileCSV.s"
+	@echo "... FileJSON.o"
+	@echo "... FileJSON.i"
+	@echo "... FileJSON.s"
 	@echo "... Model.o"
 	@echo "... Model.i"
 	@echo "... Model.s"

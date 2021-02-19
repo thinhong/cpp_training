@@ -6,14 +6,11 @@
 #include <iomanip>
 #include "FileCSV.h"
 
-FileCSV::FileCSV(std::string filePath, std::string fileName) {
+FileCSV::FileCSV(std::string filePath, std::string fileName, Model* model) {
     this->filePath = filePath;
     this->fileName = fileName;
-};
-
-void FileCSV::setModel(Model* model) {
     this->model = model;
-}
+};
 
 void FileCSV::writeFile() {
     std::string fullPath;

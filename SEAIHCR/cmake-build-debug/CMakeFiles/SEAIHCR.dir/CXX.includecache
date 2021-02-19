@@ -6,12 +6,6 @@
 
 #IncludeRegexTransform: 
 
-/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/BernoulliDistribution.h
-memory
--
-Distribution.h
-/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Distribution.h
-
 /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Compartment.h
 iostream
 -
@@ -24,14 +18,6 @@ string
 Distribution.h
 /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Distribution.h
 
-/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/DiscreteGammaDistribution.h
-Distribution.h
-/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Distribution.h
-
-/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/DiscreteWeibullDistribution.h
-Distribution.h
-/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Distribution.h
-
 /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Distribution.h
 string
 -
@@ -46,15 +32,19 @@ memory
 Model.h
 /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Model.h
 
-/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/FileCSV.h
-string
+/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/FileJSON.cpp
+FileJSON.h
+/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/FileJSON.h
+fstream
 -
-memory
+iomanip
 -
+json.hpp
+/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/json.hpp
+
+/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/FileJSON.h
 File.h
 /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/File.h
-Model.h
-/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Model.h
 
 /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Model.h
 vector
@@ -397,28 +387,4 @@ vector
 -
 string_view
 -
-
-/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/main.cpp
-iostream
--
-array
--
-fstream
--
-json.hpp
-/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/json.hpp
-Compartment.h
-/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Compartment.h
-Model.h
-/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Model.h
-Distribution.h
-/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Distribution.h
-BernoulliDistribution.h
-/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/BernoulliDistribution.h
-DiscreteGammaDistribution.h
-/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/DiscreteGammaDistribution.h
-DiscreteWeibullDistribution.h
-/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/DiscreteWeibullDistribution.h
-FileCSV.h
-/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/FileCSV.h
 
