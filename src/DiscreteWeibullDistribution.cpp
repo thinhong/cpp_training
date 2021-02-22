@@ -8,6 +8,7 @@
 DiscreteWeibullDistribution::DiscreteWeibullDistribution(double scale, double shape) {
     this->scale = scale;
     this->shape = shape;
+    this->calcCumulativeProb();
 }
 
 void DiscreteWeibullDistribution::calcCumulativeProb() {

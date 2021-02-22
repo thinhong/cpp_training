@@ -14,14 +14,14 @@ private:
     double shape;
     size_t maxDay;
     std::vector<double> cumulativeProb;
+    void calcCumulativeProb();
 public:
     DiscreteWeibullDistribution(double scale, double shape);
-    void calcCumulativeProb();
+    std::string getDistName() override;
     double getCumulativeProb(size_t index) override;
     size_t getMaxDay() override;
     double getScale();
     double getShape();
-    std::string getDistName() override;
 };
 
 

@@ -8,38 +8,38 @@
 		<Option virtualFolders="CMake Files\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/cmake-build-debug"/>
+				<Option working_dir="/home/thinh/Dropbox/oucru/cpp/cpp_training/src/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j16 -f &quot;/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="/usr/bin/make -j16 -f &quot;/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j16 -f &quot;/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j16 -f &quot;/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j16 -f &quot;/home/thinh/Dropbox/oucru/cpp/cpp_training/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j16 -f &quot;/home/thinh/Dropbox/oucru/cpp/cpp_training/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j16 -f &quot;/home/thinh/Dropbox/oucru/cpp/cpp_training/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j16 -f &quot;/home/thinh/Dropbox/oucru/cpp/cpp_training/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="edit_cache">
-				<Option working_dir="/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/cmake-build-debug"/>
+				<Option working_dir="/home/thinh/Dropbox/oucru/cpp/cpp_training/src/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j16 -f &quot;/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="/usr/bin/make -j16 -f &quot;/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j16 -f &quot;/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j16 -f &quot;/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j16 -f &quot;/home/thinh/Dropbox/oucru/cpp/cpp_training/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j16 -f &quot;/home/thinh/Dropbox/oucru/cpp/cpp_training/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j16 -f &quot;/home/thinh/Dropbox/oucru/cpp/cpp_training/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j16 -f &quot;/home/thinh/Dropbox/oucru/cpp/cpp_training/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="rebuild_cache">
-				<Option working_dir="/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/cmake-build-debug"/>
+				<Option working_dir="/home/thinh/Dropbox/oucru/cpp/cpp_training/src/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j16 -f &quot;/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="/usr/bin/make -j16 -f &quot;/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j16 -f &quot;/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j16 -f &quot;/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j16 -f &quot;/home/thinh/Dropbox/oucru/cpp/cpp_training/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j16 -f &quot;/home/thinh/Dropbox/oucru/cpp/cpp_training/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j16 -f &quot;/home/thinh/Dropbox/oucru/cpp/cpp_training/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j16 -f &quot;/home/thinh/Dropbox/oucru/cpp/cpp_training/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="SEAIHCR">
-				<Option output="/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/cmake-build-debug/SEAIHCR" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/cmake-build-debug"/>
+				<Option output="/home/thinh/Dropbox/oucru/cpp/cpp_training/src/cmake-build-debug/SEAIHCR" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/thinh/Dropbox/oucru/cpp/cpp_training/src/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
@@ -53,15 +53,15 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j16 -f &quot;/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/cmake-build-debug/Makefile&quot;  VERBOSE=1 SEAIHCR"/>
-					<CompileFile command="/usr/bin/make -j16 -f &quot;/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j16 -f &quot;/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j16 -f &quot;/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j16 -f &quot;/home/thinh/Dropbox/oucru/cpp/cpp_training/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 SEAIHCR"/>
+					<CompileFile command="/usr/bin/make -j16 -f &quot;/home/thinh/Dropbox/oucru/cpp/cpp_training/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j16 -f &quot;/home/thinh/Dropbox/oucru/cpp/cpp_training/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j16 -f &quot;/home/thinh/Dropbox/oucru/cpp/cpp_training/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="SEAIHCR/fast">
-				<Option output="/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/cmake-build-debug/SEAIHCR" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/cmake-build-debug"/>
+				<Option output="/home/thinh/Dropbox/oucru/cpp/cpp_training/src/cmake-build-debug/SEAIHCR" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/thinh/Dropbox/oucru/cpp/cpp_training/src/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
@@ -75,86 +75,86 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j16 -f &quot;/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/cmake-build-debug/Makefile&quot;  VERBOSE=1 SEAIHCR/fast"/>
-					<CompileFile command="/usr/bin/make -j16 -f &quot;/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j16 -f &quot;/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j16 -f &quot;/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j16 -f &quot;/home/thinh/Dropbox/oucru/cpp/cpp_training/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 SEAIHCR/fast"/>
+					<CompileFile command="/usr/bin/make -j16 -f &quot;/home/thinh/Dropbox/oucru/cpp/cpp_training/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j16 -f &quot;/home/thinh/Dropbox/oucru/cpp/cpp_training/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j16 -f &quot;/home/thinh/Dropbox/oucru/cpp/cpp_training/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/BernoulliDistribution.cpp">
+		<Unit filename="/home/thinh/Dropbox/oucru/cpp/cpp_training/src/BernoulliDistribution.cpp">
 			<Option target="SEAIHCR"/>
 		</Unit>
-		<Unit filename="/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/BernoulliDistribution.h">
+		<Unit filename="/home/thinh/Dropbox/oucru/cpp/cpp_training/src/BernoulliDistribution.h">
 			<Option target="SEAIHCR"/>
 		</Unit>
-		<Unit filename="/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Compartment.cpp">
+		<Unit filename="/home/thinh/Dropbox/oucru/cpp/cpp_training/src/Compartment.cpp">
 			<Option target="SEAIHCR"/>
 		</Unit>
-		<Unit filename="/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Compartment.h">
+		<Unit filename="/home/thinh/Dropbox/oucru/cpp/cpp_training/src/Compartment.h">
 			<Option target="SEAIHCR"/>
 		</Unit>
-		<Unit filename="/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/DiscreteGammaDistribution.cpp">
+		<Unit filename="/home/thinh/Dropbox/oucru/cpp/cpp_training/src/DiscreteGammaDistribution.cpp">
 			<Option target="SEAIHCR"/>
 		</Unit>
-		<Unit filename="/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/DiscreteGammaDistribution.h">
+		<Unit filename="/home/thinh/Dropbox/oucru/cpp/cpp_training/src/DiscreteGammaDistribution.h">
 			<Option target="SEAIHCR"/>
 		</Unit>
-		<Unit filename="/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/DiscreteWeibullDistribution.cpp">
+		<Unit filename="/home/thinh/Dropbox/oucru/cpp/cpp_training/src/DiscreteWeibullDistribution.cpp">
 			<Option target="SEAIHCR"/>
 		</Unit>
-		<Unit filename="/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/DiscreteWeibullDistribution.h">
+		<Unit filename="/home/thinh/Dropbox/oucru/cpp/cpp_training/src/DiscreteWeibullDistribution.h">
 			<Option target="SEAIHCR"/>
 		</Unit>
-		<Unit filename="/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Distribution.cpp">
+		<Unit filename="/home/thinh/Dropbox/oucru/cpp/cpp_training/src/Distribution.cpp">
 			<Option target="SEAIHCR"/>
 		</Unit>
-		<Unit filename="/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Distribution.h">
+		<Unit filename="/home/thinh/Dropbox/oucru/cpp/cpp_training/src/Distribution.h">
 			<Option target="SEAIHCR"/>
 		</Unit>
-		<Unit filename="/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/File.cpp">
+		<Unit filename="/home/thinh/Dropbox/oucru/cpp/cpp_training/src/File.cpp">
 			<Option target="SEAIHCR"/>
 		</Unit>
-		<Unit filename="/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/File.h">
+		<Unit filename="/home/thinh/Dropbox/oucru/cpp/cpp_training/src/File.h">
 			<Option target="SEAIHCR"/>
 		</Unit>
-		<Unit filename="/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/FileCSV.cpp">
+		<Unit filename="/home/thinh/Dropbox/oucru/cpp/cpp_training/src/FileCSV.cpp">
 			<Option target="SEAIHCR"/>
 		</Unit>
-		<Unit filename="/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/FileCSV.h">
+		<Unit filename="/home/thinh/Dropbox/oucru/cpp/cpp_training/src/FileCSV.h">
 			<Option target="SEAIHCR"/>
 		</Unit>
-		<Unit filename="/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/FileJSON.cpp">
+		<Unit filename="/home/thinh/Dropbox/oucru/cpp/cpp_training/src/FileJSON.cpp">
 			<Option target="SEAIHCR"/>
 		</Unit>
-		<Unit filename="/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/FileJSON.h">
+		<Unit filename="/home/thinh/Dropbox/oucru/cpp/cpp_training/src/FileJSON.h">
 			<Option target="SEAIHCR"/>
 		</Unit>
-		<Unit filename="/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Model.cpp">
+		<Unit filename="/home/thinh/Dropbox/oucru/cpp/cpp_training/src/Model.cpp">
 			<Option target="SEAIHCR"/>
 		</Unit>
-		<Unit filename="/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Model.h">
+		<Unit filename="/home/thinh/Dropbox/oucru/cpp/cpp_training/src/Model.h">
 			<Option target="SEAIHCR"/>
 		</Unit>
-		<Unit filename="/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/ObjectJSON.cpp">
+		<Unit filename="/home/thinh/Dropbox/oucru/cpp/cpp_training/src/ObjectJSON.cpp">
 			<Option target="SEAIHCR"/>
 		</Unit>
-		<Unit filename="/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/ObjectJSON.h">
+		<Unit filename="/home/thinh/Dropbox/oucru/cpp/cpp_training/src/ObjectJSON.h">
 			<Option target="SEAIHCR"/>
 		</Unit>
-		<Unit filename="/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/json.hpp">
+		<Unit filename="/home/thinh/Dropbox/oucru/cpp/cpp_training/src/json.hpp">
 			<Option target="SEAIHCR"/>
 		</Unit>
-		<Unit filename="/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/main.cpp">
+		<Unit filename="/home/thinh/Dropbox/oucru/cpp/cpp_training/src/main.cpp">
 			<Option target="SEAIHCR"/>
 		</Unit>
-		<Unit filename="/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/prob.cpp">
+		<Unit filename="/home/thinh/Dropbox/oucru/cpp/cpp_training/src/prob.cpp">
 			<Option target="SEAIHCR"/>
 		</Unit>
-		<Unit filename="/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/prob.hpp">
+		<Unit filename="/home/thinh/Dropbox/oucru/cpp/cpp_training/src/prob.hpp">
 			<Option target="SEAIHCR"/>
 		</Unit>
-		<Unit filename="/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/CMakeLists.txt">
+		<Unit filename="/home/thinh/Dropbox/oucru/cpp/cpp_training/src/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
 	</Project>

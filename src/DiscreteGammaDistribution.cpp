@@ -8,6 +8,7 @@
 DiscreteGammaDistribution::DiscreteGammaDistribution(double scale, double shape) {
     this->scale = scale;
     this->shape = shape;
+    this->calcCumulativeProb();
 }
 
 void DiscreteGammaDistribution::calcCumulativeProb() {

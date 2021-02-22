@@ -14,10 +14,10 @@ private:
     double shape;
     size_t maxDay;
     std::vector<double> cumulativeProb;
-public:
-    std::string getDistName() override;
-    DiscreteGammaDistribution(double scale, double shape);
     void calcCumulativeProb();
+public:
+    DiscreteGammaDistribution(double scale, double shape);
+    std::string getDistName() override;
     double getCumulativeProb(size_t index) override;
     size_t getMaxDay() override;
     double getScale();

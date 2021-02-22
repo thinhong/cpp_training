@@ -4,18 +4,18 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/BernoulliDistribution.cpp" "/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/cmake-build-debug/CMakeFiles/SEAIHCR.dir/BernoulliDistribution.cpp.o"
-  "/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Compartment.cpp" "/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/cmake-build-debug/CMakeFiles/SEAIHCR.dir/Compartment.cpp.o"
-  "/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/DiscreteGammaDistribution.cpp" "/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/cmake-build-debug/CMakeFiles/SEAIHCR.dir/DiscreteGammaDistribution.cpp.o"
-  "/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/DiscreteWeibullDistribution.cpp" "/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/cmake-build-debug/CMakeFiles/SEAIHCR.dir/DiscreteWeibullDistribution.cpp.o"
-  "/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Distribution.cpp" "/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/cmake-build-debug/CMakeFiles/SEAIHCR.dir/Distribution.cpp.o"
-  "/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/File.cpp" "/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/cmake-build-debug/CMakeFiles/SEAIHCR.dir/File.cpp.o"
-  "/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/FileCSV.cpp" "/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/cmake-build-debug/CMakeFiles/SEAIHCR.dir/FileCSV.cpp.o"
-  "/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/FileJSON.cpp" "/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/cmake-build-debug/CMakeFiles/SEAIHCR.dir/FileJSON.cpp.o"
-  "/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Model.cpp" "/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/cmake-build-debug/CMakeFiles/SEAIHCR.dir/Model.cpp.o"
-  "/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/ObjectJSON.cpp" "/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/cmake-build-debug/CMakeFiles/SEAIHCR.dir/ObjectJSON.cpp.o"
-  "/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/main.cpp" "/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/cmake-build-debug/CMakeFiles/SEAIHCR.dir/main.cpp.o"
-  "/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/prob.cpp" "/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/cmake-build-debug/CMakeFiles/SEAIHCR.dir/prob.cpp.o"
+  "/home/thinh/Dropbox/oucru/cpp/cpp_training/src/BernoulliDistribution.cpp" "/home/thinh/Dropbox/oucru/cpp/cpp_training/src/cmake-build-debug/CMakeFiles/SEAIHCR.dir/BernoulliDistribution.cpp.o"
+  "/home/thinh/Dropbox/oucru/cpp/cpp_training/src/Compartment.cpp" "/home/thinh/Dropbox/oucru/cpp/cpp_training/src/cmake-build-debug/CMakeFiles/SEAIHCR.dir/Compartment.cpp.o"
+  "/home/thinh/Dropbox/oucru/cpp/cpp_training/src/DiscreteGammaDistribution.cpp" "/home/thinh/Dropbox/oucru/cpp/cpp_training/src/cmake-build-debug/CMakeFiles/SEAIHCR.dir/DiscreteGammaDistribution.cpp.o"
+  "/home/thinh/Dropbox/oucru/cpp/cpp_training/src/DiscreteWeibullDistribution.cpp" "/home/thinh/Dropbox/oucru/cpp/cpp_training/src/cmake-build-debug/CMakeFiles/SEAIHCR.dir/DiscreteWeibullDistribution.cpp.o"
+  "/home/thinh/Dropbox/oucru/cpp/cpp_training/src/Distribution.cpp" "/home/thinh/Dropbox/oucru/cpp/cpp_training/src/cmake-build-debug/CMakeFiles/SEAIHCR.dir/Distribution.cpp.o"
+  "/home/thinh/Dropbox/oucru/cpp/cpp_training/src/File.cpp" "/home/thinh/Dropbox/oucru/cpp/cpp_training/src/cmake-build-debug/CMakeFiles/SEAIHCR.dir/File.cpp.o"
+  "/home/thinh/Dropbox/oucru/cpp/cpp_training/src/FileCSV.cpp" "/home/thinh/Dropbox/oucru/cpp/cpp_training/src/cmake-build-debug/CMakeFiles/SEAIHCR.dir/FileCSV.cpp.o"
+  "/home/thinh/Dropbox/oucru/cpp/cpp_training/src/FileJSON.cpp" "/home/thinh/Dropbox/oucru/cpp/cpp_training/src/cmake-build-debug/CMakeFiles/SEAIHCR.dir/FileJSON.cpp.o"
+  "/home/thinh/Dropbox/oucru/cpp/cpp_training/src/Model.cpp" "/home/thinh/Dropbox/oucru/cpp/cpp_training/src/cmake-build-debug/CMakeFiles/SEAIHCR.dir/Model.cpp.o"
+  "/home/thinh/Dropbox/oucru/cpp/cpp_training/src/ObjectJSON.cpp" "/home/thinh/Dropbox/oucru/cpp/cpp_training/src/cmake-build-debug/CMakeFiles/SEAIHCR.dir/ObjectJSON.cpp.o"
+  "/home/thinh/Dropbox/oucru/cpp/cpp_training/src/main.cpp" "/home/thinh/Dropbox/oucru/cpp/cpp_training/src/cmake-build-debug/CMakeFiles/SEAIHCR.dir/main.cpp.o"
+  "/home/thinh/Dropbox/oucru/cpp/cpp_training/src/prob.cpp" "/home/thinh/Dropbox/oucru/cpp/cpp_training/src/cmake-build-debug/CMakeFiles/SEAIHCR.dir/prob.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

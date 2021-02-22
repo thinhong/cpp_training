@@ -63,10 +63,10 @@ RM = /snap/clion/139/bin/cmake/linux/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR
+CMAKE_SOURCE_DIR = /home/thinh/Dropbox/oucru/cpp/cpp_training/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/cmake-build-debug
+CMAKE_BINARY_DIR = /home/thinh/Dropbox/oucru/cpp/cpp_training/src/cmake-build-debug
 
 # Include any dependencies generated for this target.
 include CMakeFiles/SEAIHCR.dir/depend.make
@@ -79,159 +79,159 @@ include CMakeFiles/SEAIHCR.dir/flags.make
 
 CMakeFiles/SEAIHCR.dir/main.cpp.o: CMakeFiles/SEAIHCR.dir/flags.make
 CMakeFiles/SEAIHCR.dir/main.cpp.o: ../main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/SEAIHCR.dir/main.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/SEAIHCR.dir/main.cpp.o -c /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/thinh/Dropbox/oucru/cpp/cpp_training/src/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/SEAIHCR.dir/main.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/SEAIHCR.dir/main.cpp.o -c /home/thinh/Dropbox/oucru/cpp/cpp_training/src/main.cpp
 
 CMakeFiles/SEAIHCR.dir/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SEAIHCR.dir/main.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/main.cpp > CMakeFiles/SEAIHCR.dir/main.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thinh/Dropbox/oucru/cpp/cpp_training/src/main.cpp > CMakeFiles/SEAIHCR.dir/main.cpp.i
 
 CMakeFiles/SEAIHCR.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SEAIHCR.dir/main.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/main.cpp -o CMakeFiles/SEAIHCR.dir/main.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thinh/Dropbox/oucru/cpp/cpp_training/src/main.cpp -o CMakeFiles/SEAIHCR.dir/main.cpp.s
 
 CMakeFiles/SEAIHCR.dir/prob.cpp.o: CMakeFiles/SEAIHCR.dir/flags.make
 CMakeFiles/SEAIHCR.dir/prob.cpp.o: ../prob.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/SEAIHCR.dir/prob.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/SEAIHCR.dir/prob.cpp.o -c /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/prob.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/thinh/Dropbox/oucru/cpp/cpp_training/src/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/SEAIHCR.dir/prob.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/SEAIHCR.dir/prob.cpp.o -c /home/thinh/Dropbox/oucru/cpp/cpp_training/src/prob.cpp
 
 CMakeFiles/SEAIHCR.dir/prob.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SEAIHCR.dir/prob.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/prob.cpp > CMakeFiles/SEAIHCR.dir/prob.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thinh/Dropbox/oucru/cpp/cpp_training/src/prob.cpp > CMakeFiles/SEAIHCR.dir/prob.cpp.i
 
 CMakeFiles/SEAIHCR.dir/prob.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SEAIHCR.dir/prob.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/prob.cpp -o CMakeFiles/SEAIHCR.dir/prob.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thinh/Dropbox/oucru/cpp/cpp_training/src/prob.cpp -o CMakeFiles/SEAIHCR.dir/prob.cpp.s
 
 CMakeFiles/SEAIHCR.dir/Compartment.cpp.o: CMakeFiles/SEAIHCR.dir/flags.make
 CMakeFiles/SEAIHCR.dir/Compartment.cpp.o: ../Compartment.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/SEAIHCR.dir/Compartment.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/SEAIHCR.dir/Compartment.cpp.o -c /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Compartment.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/thinh/Dropbox/oucru/cpp/cpp_training/src/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/SEAIHCR.dir/Compartment.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/SEAIHCR.dir/Compartment.cpp.o -c /home/thinh/Dropbox/oucru/cpp/cpp_training/src/Compartment.cpp
 
 CMakeFiles/SEAIHCR.dir/Compartment.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SEAIHCR.dir/Compartment.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Compartment.cpp > CMakeFiles/SEAIHCR.dir/Compartment.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thinh/Dropbox/oucru/cpp/cpp_training/src/Compartment.cpp > CMakeFiles/SEAIHCR.dir/Compartment.cpp.i
 
 CMakeFiles/SEAIHCR.dir/Compartment.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SEAIHCR.dir/Compartment.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Compartment.cpp -o CMakeFiles/SEAIHCR.dir/Compartment.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thinh/Dropbox/oucru/cpp/cpp_training/src/Compartment.cpp -o CMakeFiles/SEAIHCR.dir/Compartment.cpp.s
 
 CMakeFiles/SEAIHCR.dir/Model.cpp.o: CMakeFiles/SEAIHCR.dir/flags.make
 CMakeFiles/SEAIHCR.dir/Model.cpp.o: ../Model.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/SEAIHCR.dir/Model.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/SEAIHCR.dir/Model.cpp.o -c /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Model.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/thinh/Dropbox/oucru/cpp/cpp_training/src/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/SEAIHCR.dir/Model.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/SEAIHCR.dir/Model.cpp.o -c /home/thinh/Dropbox/oucru/cpp/cpp_training/src/Model.cpp
 
 CMakeFiles/SEAIHCR.dir/Model.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SEAIHCR.dir/Model.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Model.cpp > CMakeFiles/SEAIHCR.dir/Model.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thinh/Dropbox/oucru/cpp/cpp_training/src/Model.cpp > CMakeFiles/SEAIHCR.dir/Model.cpp.i
 
 CMakeFiles/SEAIHCR.dir/Model.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SEAIHCR.dir/Model.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Model.cpp -o CMakeFiles/SEAIHCR.dir/Model.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thinh/Dropbox/oucru/cpp/cpp_training/src/Model.cpp -o CMakeFiles/SEAIHCR.dir/Model.cpp.s
 
 CMakeFiles/SEAIHCR.dir/Distribution.cpp.o: CMakeFiles/SEAIHCR.dir/flags.make
 CMakeFiles/SEAIHCR.dir/Distribution.cpp.o: ../Distribution.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/SEAIHCR.dir/Distribution.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/SEAIHCR.dir/Distribution.cpp.o -c /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Distribution.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/thinh/Dropbox/oucru/cpp/cpp_training/src/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/SEAIHCR.dir/Distribution.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/SEAIHCR.dir/Distribution.cpp.o -c /home/thinh/Dropbox/oucru/cpp/cpp_training/src/Distribution.cpp
 
 CMakeFiles/SEAIHCR.dir/Distribution.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SEAIHCR.dir/Distribution.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Distribution.cpp > CMakeFiles/SEAIHCR.dir/Distribution.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thinh/Dropbox/oucru/cpp/cpp_training/src/Distribution.cpp > CMakeFiles/SEAIHCR.dir/Distribution.cpp.i
 
 CMakeFiles/SEAIHCR.dir/Distribution.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SEAIHCR.dir/Distribution.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/Distribution.cpp -o CMakeFiles/SEAIHCR.dir/Distribution.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thinh/Dropbox/oucru/cpp/cpp_training/src/Distribution.cpp -o CMakeFiles/SEAIHCR.dir/Distribution.cpp.s
 
 CMakeFiles/SEAIHCR.dir/DiscreteGammaDistribution.cpp.o: CMakeFiles/SEAIHCR.dir/flags.make
 CMakeFiles/SEAIHCR.dir/DiscreteGammaDistribution.cpp.o: ../DiscreteGammaDistribution.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/SEAIHCR.dir/DiscreteGammaDistribution.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/SEAIHCR.dir/DiscreteGammaDistribution.cpp.o -c /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/DiscreteGammaDistribution.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/thinh/Dropbox/oucru/cpp/cpp_training/src/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/SEAIHCR.dir/DiscreteGammaDistribution.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/SEAIHCR.dir/DiscreteGammaDistribution.cpp.o -c /home/thinh/Dropbox/oucru/cpp/cpp_training/src/DiscreteGammaDistribution.cpp
 
 CMakeFiles/SEAIHCR.dir/DiscreteGammaDistribution.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SEAIHCR.dir/DiscreteGammaDistribution.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/DiscreteGammaDistribution.cpp > CMakeFiles/SEAIHCR.dir/DiscreteGammaDistribution.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thinh/Dropbox/oucru/cpp/cpp_training/src/DiscreteGammaDistribution.cpp > CMakeFiles/SEAIHCR.dir/DiscreteGammaDistribution.cpp.i
 
 CMakeFiles/SEAIHCR.dir/DiscreteGammaDistribution.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SEAIHCR.dir/DiscreteGammaDistribution.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/DiscreteGammaDistribution.cpp -o CMakeFiles/SEAIHCR.dir/DiscreteGammaDistribution.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thinh/Dropbox/oucru/cpp/cpp_training/src/DiscreteGammaDistribution.cpp -o CMakeFiles/SEAIHCR.dir/DiscreteGammaDistribution.cpp.s
 
 CMakeFiles/SEAIHCR.dir/DiscreteWeibullDistribution.cpp.o: CMakeFiles/SEAIHCR.dir/flags.make
 CMakeFiles/SEAIHCR.dir/DiscreteWeibullDistribution.cpp.o: ../DiscreteWeibullDistribution.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/SEAIHCR.dir/DiscreteWeibullDistribution.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/SEAIHCR.dir/DiscreteWeibullDistribution.cpp.o -c /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/DiscreteWeibullDistribution.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/thinh/Dropbox/oucru/cpp/cpp_training/src/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/SEAIHCR.dir/DiscreteWeibullDistribution.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/SEAIHCR.dir/DiscreteWeibullDistribution.cpp.o -c /home/thinh/Dropbox/oucru/cpp/cpp_training/src/DiscreteWeibullDistribution.cpp
 
 CMakeFiles/SEAIHCR.dir/DiscreteWeibullDistribution.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SEAIHCR.dir/DiscreteWeibullDistribution.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/DiscreteWeibullDistribution.cpp > CMakeFiles/SEAIHCR.dir/DiscreteWeibullDistribution.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thinh/Dropbox/oucru/cpp/cpp_training/src/DiscreteWeibullDistribution.cpp > CMakeFiles/SEAIHCR.dir/DiscreteWeibullDistribution.cpp.i
 
 CMakeFiles/SEAIHCR.dir/DiscreteWeibullDistribution.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SEAIHCR.dir/DiscreteWeibullDistribution.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/DiscreteWeibullDistribution.cpp -o CMakeFiles/SEAIHCR.dir/DiscreteWeibullDistribution.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thinh/Dropbox/oucru/cpp/cpp_training/src/DiscreteWeibullDistribution.cpp -o CMakeFiles/SEAIHCR.dir/DiscreteWeibullDistribution.cpp.s
 
 CMakeFiles/SEAIHCR.dir/BernoulliDistribution.cpp.o: CMakeFiles/SEAIHCR.dir/flags.make
 CMakeFiles/SEAIHCR.dir/BernoulliDistribution.cpp.o: ../BernoulliDistribution.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/SEAIHCR.dir/BernoulliDistribution.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/SEAIHCR.dir/BernoulliDistribution.cpp.o -c /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/BernoulliDistribution.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/thinh/Dropbox/oucru/cpp/cpp_training/src/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/SEAIHCR.dir/BernoulliDistribution.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/SEAIHCR.dir/BernoulliDistribution.cpp.o -c /home/thinh/Dropbox/oucru/cpp/cpp_training/src/BernoulliDistribution.cpp
 
 CMakeFiles/SEAIHCR.dir/BernoulliDistribution.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SEAIHCR.dir/BernoulliDistribution.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/BernoulliDistribution.cpp > CMakeFiles/SEAIHCR.dir/BernoulliDistribution.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thinh/Dropbox/oucru/cpp/cpp_training/src/BernoulliDistribution.cpp > CMakeFiles/SEAIHCR.dir/BernoulliDistribution.cpp.i
 
 CMakeFiles/SEAIHCR.dir/BernoulliDistribution.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SEAIHCR.dir/BernoulliDistribution.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/BernoulliDistribution.cpp -o CMakeFiles/SEAIHCR.dir/BernoulliDistribution.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thinh/Dropbox/oucru/cpp/cpp_training/src/BernoulliDistribution.cpp -o CMakeFiles/SEAIHCR.dir/BernoulliDistribution.cpp.s
 
 CMakeFiles/SEAIHCR.dir/File.cpp.o: CMakeFiles/SEAIHCR.dir/flags.make
 CMakeFiles/SEAIHCR.dir/File.cpp.o: ../File.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/SEAIHCR.dir/File.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/SEAIHCR.dir/File.cpp.o -c /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/File.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/thinh/Dropbox/oucru/cpp/cpp_training/src/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/SEAIHCR.dir/File.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/SEAIHCR.dir/File.cpp.o -c /home/thinh/Dropbox/oucru/cpp/cpp_training/src/File.cpp
 
 CMakeFiles/SEAIHCR.dir/File.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SEAIHCR.dir/File.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/File.cpp > CMakeFiles/SEAIHCR.dir/File.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thinh/Dropbox/oucru/cpp/cpp_training/src/File.cpp > CMakeFiles/SEAIHCR.dir/File.cpp.i
 
 CMakeFiles/SEAIHCR.dir/File.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SEAIHCR.dir/File.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/File.cpp -o CMakeFiles/SEAIHCR.dir/File.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thinh/Dropbox/oucru/cpp/cpp_training/src/File.cpp -o CMakeFiles/SEAIHCR.dir/File.cpp.s
 
 CMakeFiles/SEAIHCR.dir/FileCSV.cpp.o: CMakeFiles/SEAIHCR.dir/flags.make
 CMakeFiles/SEAIHCR.dir/FileCSV.cpp.o: ../FileCSV.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/SEAIHCR.dir/FileCSV.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/SEAIHCR.dir/FileCSV.cpp.o -c /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/FileCSV.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/thinh/Dropbox/oucru/cpp/cpp_training/src/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/SEAIHCR.dir/FileCSV.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/SEAIHCR.dir/FileCSV.cpp.o -c /home/thinh/Dropbox/oucru/cpp/cpp_training/src/FileCSV.cpp
 
 CMakeFiles/SEAIHCR.dir/FileCSV.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SEAIHCR.dir/FileCSV.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/FileCSV.cpp > CMakeFiles/SEAIHCR.dir/FileCSV.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thinh/Dropbox/oucru/cpp/cpp_training/src/FileCSV.cpp > CMakeFiles/SEAIHCR.dir/FileCSV.cpp.i
 
 CMakeFiles/SEAIHCR.dir/FileCSV.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SEAIHCR.dir/FileCSV.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/FileCSV.cpp -o CMakeFiles/SEAIHCR.dir/FileCSV.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thinh/Dropbox/oucru/cpp/cpp_training/src/FileCSV.cpp -o CMakeFiles/SEAIHCR.dir/FileCSV.cpp.s
 
 CMakeFiles/SEAIHCR.dir/FileJSON.cpp.o: CMakeFiles/SEAIHCR.dir/flags.make
 CMakeFiles/SEAIHCR.dir/FileJSON.cpp.o: ../FileJSON.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/SEAIHCR.dir/FileJSON.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/SEAIHCR.dir/FileJSON.cpp.o -c /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/FileJSON.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/thinh/Dropbox/oucru/cpp/cpp_training/src/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/SEAIHCR.dir/FileJSON.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/SEAIHCR.dir/FileJSON.cpp.o -c /home/thinh/Dropbox/oucru/cpp/cpp_training/src/FileJSON.cpp
 
 CMakeFiles/SEAIHCR.dir/FileJSON.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SEAIHCR.dir/FileJSON.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/FileJSON.cpp > CMakeFiles/SEAIHCR.dir/FileJSON.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thinh/Dropbox/oucru/cpp/cpp_training/src/FileJSON.cpp > CMakeFiles/SEAIHCR.dir/FileJSON.cpp.i
 
 CMakeFiles/SEAIHCR.dir/FileJSON.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SEAIHCR.dir/FileJSON.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/FileJSON.cpp -o CMakeFiles/SEAIHCR.dir/FileJSON.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thinh/Dropbox/oucru/cpp/cpp_training/src/FileJSON.cpp -o CMakeFiles/SEAIHCR.dir/FileJSON.cpp.s
 
 CMakeFiles/SEAIHCR.dir/ObjectJSON.cpp.o: CMakeFiles/SEAIHCR.dir/flags.make
 CMakeFiles/SEAIHCR.dir/ObjectJSON.cpp.o: ../ObjectJSON.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/SEAIHCR.dir/ObjectJSON.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/SEAIHCR.dir/ObjectJSON.cpp.o -c /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/ObjectJSON.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/thinh/Dropbox/oucru/cpp/cpp_training/src/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/SEAIHCR.dir/ObjectJSON.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/SEAIHCR.dir/ObjectJSON.cpp.o -c /home/thinh/Dropbox/oucru/cpp/cpp_training/src/ObjectJSON.cpp
 
 CMakeFiles/SEAIHCR.dir/ObjectJSON.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SEAIHCR.dir/ObjectJSON.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/ObjectJSON.cpp > CMakeFiles/SEAIHCR.dir/ObjectJSON.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thinh/Dropbox/oucru/cpp/cpp_training/src/ObjectJSON.cpp > CMakeFiles/SEAIHCR.dir/ObjectJSON.cpp.i
 
 CMakeFiles/SEAIHCR.dir/ObjectJSON.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SEAIHCR.dir/ObjectJSON.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/ObjectJSON.cpp -o CMakeFiles/SEAIHCR.dir/ObjectJSON.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thinh/Dropbox/oucru/cpp/cpp_training/src/ObjectJSON.cpp -o CMakeFiles/SEAIHCR.dir/ObjectJSON.cpp.s
 
 # Object files for target SEAIHCR
 SEAIHCR_OBJECTS = \
@@ -265,7 +265,7 @@ SEAIHCR: CMakeFiles/SEAIHCR.dir/FileJSON.cpp.o
 SEAIHCR: CMakeFiles/SEAIHCR.dir/ObjectJSON.cpp.o
 SEAIHCR: CMakeFiles/SEAIHCR.dir/build.make
 SEAIHCR: CMakeFiles/SEAIHCR.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Linking CXX executable SEAIHCR"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/thinh/Dropbox/oucru/cpp/cpp_training/src/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Linking CXX executable SEAIHCR"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/SEAIHCR.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -278,6 +278,6 @@ CMakeFiles/SEAIHCR.dir/clean:
 .PHONY : CMakeFiles/SEAIHCR.dir/clean
 
 CMakeFiles/SEAIHCR.dir/depend:
-	cd /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/cmake-build-debug /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/cmake-build-debug /home/thinh/Dropbox/oucru/cpp/cpp_training/SEAIHCR/cmake-build-debug/CMakeFiles/SEAIHCR.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/thinh/Dropbox/oucru/cpp/cpp_training/src/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/thinh/Dropbox/oucru/cpp/cpp_training/src /home/thinh/Dropbox/oucru/cpp/cpp_training/src /home/thinh/Dropbox/oucru/cpp/cpp_training/src/cmake-build-debug /home/thinh/Dropbox/oucru/cpp/cpp_training/src/cmake-build-debug /home/thinh/Dropbox/oucru/cpp/cpp_training/src/cmake-build-debug/CMakeFiles/SEAIHCR.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/SEAIHCR.dir/depend
 

@@ -61,16 +61,9 @@ int main() {
     bernoulli_removed->calcCumulativeProb();
 
     auto gamma_7d = std::make_shared<DiscreteGammaDistribution>(1, 1);
-    gamma_7d->calcCumulativeProb();
-
     auto gamma_13d = std::make_shared<DiscreteGammaDistribution>(1, 4);
-    gamma_13d->calcCumulativeProb();
-
     auto weil_16d = std::make_shared<DiscreteWeibullDistribution>(5, 1.5);
-    weil_16d->calcCumulativeProb();
-
     auto weil_9d = std::make_shared<DiscreteWeibullDistribution>(4, 3);
-    weil_9d->calcCumulativeProb();
 
     // Setup compartments
     auto S = std::make_shared<Compartment>("S", 3000000);
@@ -141,37 +134,37 @@ int main() {
         myModel.update(i);
 
         // For debug
-//        std::cout << "Iteration: " << i << std::endl;
-//        for (size_t j {0}; j < myModel.getComps().size(); ++j) {
-//            std::cout << myModel.getComps()[j]->getName() << ": ";
-//            for (auto k: myModel.getComps()[j]->getCurrentValues()) {
-//                std::cout << k << " ";
-//            }
-//            std::cout << std::endl;
-//        }
+        std::cout << "Iteration: " << i << std::endl;
+        for (size_t j {0}; j < myModel.getComps().size(); ++j) {
+            std::cout << myModel.getComps()[j]->getName() << ": ";
+            for (auto k: myModel.getComps()[j]->getCurrentValues()) {
+                std::cout << k << " ";
+            }
+            std::cout << std::endl;
+        }
     }
 
-    nlohmann::json jsonArray;
-    jsonArray += {{"daysFollowUp", Compartment::daysFollowUp}};
-    jsonArray += {{"errorTolerance", Distribution::errorTolerance}};
-    jsonArray += {{"populationSize", populationSize}};
-    jsonArray += {{"transRate", transRate}};
-    for (auto i: myModel.getComps()) {
-        ObjectJSON jsonNode;
-        jsonNode.toJSON(i);
-        jsonArray += jsonNode.getJsonNode();
-    }
-    std::cout << jsonArray;
-
-    std::ofstream myFile("/home/thinh/Downloads/config.json");
-
-    if (myFile.is_open()) {
-        myFile << jsonArray;
-        myFile.close();
-        std::cout << "Successfully written into file: /home/thinh/Downloads/config.json" << std::endl;
-    } else {
-        std::cout << "Unable to open file" << std::endl;
-    }
+//    nlohmann::json jsonArray;
+//    jsonArray += {{"daysFollowUp", Compartment::daysFollowUp}};
+//    jsonArray += {{"errorTolerance", Distribution::errorTolerance}};
+//    jsonArray += {{"populationSize", populationSize}};
+//    jsonArray += {{"transRate", transRate}};
+//    for (auto i: myModel.getComps()) {
+//        ObjectJSON jsonNode;
+//        jsonNode.toJSON(i);
+//        jsonArray += jsonNode.getJsonNode();
+//    }
+//    std::cout << jsonArray;
+//
+//    std::ofstream myFile("/home/thinh/Downloads/config.json");
+//
+//    if (myFile.is_open()) {
+//        myFile << jsonArray;
+//        myFile.close();
+//        std::cout << "Successfully written into file: /home/thinh/Downloads/config.json" << std::endl;
+//    } else {
+//        std::cout << "Unable to open file" << std::endl;
+//    }
 
     // File output
 //    Model* pModel = &myModel;
