@@ -2,7 +2,9 @@
     {
         "name": "S",
         "initialValue": 100000,
-        "transRate": 0.000004
+        "transRate": 0.000004,
+        "linkedCompartment": ["E"],
+        "isIn": [0]
     },
     {
         "name": "E",
@@ -11,7 +13,9 @@
             "name": "gamma",
             "scale": 1,
             "shape": 2
-        }
+        },
+        "linkedCompartment": ["S", "A"],
+        "isIn": [1, 0]
     },
     {
         "name": "A",
@@ -20,7 +24,9 @@
             "name": "weibull",
             "scale": 1,
             "shape": 1.5
-        }
+        },
+        "linkedCompartment": ["E", "A_r", "I"],
+        "isIn": [1, 0, 0]
     },
     {
         "name": "A_r",
@@ -30,6 +36,8 @@
             "scale": 1,
             "shape": 2
         },
+        "linkedCompartment": ["A", "R"],
+        "isIn": [1, 0],
         "weight": 0.2
     },
     {
@@ -40,6 +48,8 @@
             "scale": 1,
             "shape": 2
         },
+        "linkedCompartment": ["A", "H_h", "H_c", "H_d"],
+        "isIn": [1, 0, 0, 0],
         "weight": 0.8
     },
     {
@@ -50,6 +60,8 @@
             "scale": 1,
             "shape": 1.5
         },
+        "linkedCompartment": ["I", "R"],
+        "isIn": [1, 0],
         "weight": 0.5
     },
     {
@@ -60,6 +72,8 @@
             "scale": 1,
             "shape": 2
         },
+        "linkedCompartment": ["I", "C_c"],
+        "isIn": [1, 0],
         "weight": 0.35
     },
     {
@@ -70,6 +84,8 @@
             "scale": 1,
             "shape": 2
         },
+        "linkedCompartment": ["I", "C_d"],
+        "isIn": [1, 0],
         "weight": 0.15
     },
     {
@@ -79,7 +95,9 @@
             "name": "weibull",
             "scale": 1,
             "shape": 1.5
-        }
+        },
+        "linkedCompartment": ["H_c", "R"],
+        "isIn": [1, 0]
     },
     {
         "name": "C_d",
@@ -88,7 +106,9 @@
             "name": "gamma",
             "scale": 1,
             "shape": 2
-        }
+        },
+        "linkedCompartment": ["S", "A"],
+        "isIn": [1, 0]
     },
     {
         "name": "D",
@@ -96,7 +116,9 @@
         "distribution": {
             "name": "bernoulli",
             "successRate": 0
-        }
+        },
+        "linkedCompartment": ["S", "A"],
+        "isIn": [1, 0]
     },
     {
         "name": "R",
@@ -104,6 +126,8 @@
         "distribution": {
             "name": "bernoulli",
             "successRate": 0
-        }
+        },
+        "linkedCompartment": ["S", "A"],
+        "isIn": [1, 0]
     }
 ]

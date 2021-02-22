@@ -1,3 +1,0 @@
-/home/thinh/Dropbox/oucru/cpp/cpp_training/test/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/thinh/Dropbox/oucru/cpp/cpp_training/test/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/thinh/Dropbox/oucru/cpp/cpp_training/test/cmake-build-debug/CMakeFiles/test.dir
