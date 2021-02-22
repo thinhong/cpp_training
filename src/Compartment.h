@@ -39,7 +39,6 @@ public:
 
     // Setters
     void setWeight(double weight);
-    void setDistribution(std::shared_ptr<Distribution> dist);
     void addLinkedCompartment(std::shared_ptr<Compartment>& linkedCompartment);
     void addIsIn(bool isIn);
 

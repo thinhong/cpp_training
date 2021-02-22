@@ -49,11 +49,6 @@ void Compartment::addIsIn(bool isIn) {
     this->isIn.push_back(isIn);
 }
 
-void Compartment::setDistribution(std::shared_ptr<Distribution> dist) {
-    this->dist = dist;
-    subCompartmentValues.resize(this->dist->getMaxDay());
-}
-
 void Compartment::updateValue(long iter) {
     int sumIsIn {0};
     for (auto value: isIn) {
@@ -88,7 +83,7 @@ void Compartment::updateValue(long iter) {
         }
     }
 
-    // Finally sum up the current values of this iteration to total
+    // Finally sum up subCompartmentValues of this iteration to obtain total value
     for (auto value: subCompartmentValues) {
         total[iter] += value;
     }
