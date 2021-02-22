@@ -1,8 +1,9 @@
 #include "Compartment.h"
 
 // Constructor
-Compartment::Compartment(std::string name, double initVal) {
+Compartment::Compartment(std::string name, double initVal, std::shared_ptr<Distribution> dist) {
     this->name = name;
+    this->dist = dist;
     total.resize(daysFollowUp);
     total[0] = initVal;
     subCompartmentValues.push_back(initVal);
@@ -46,11 +47,6 @@ void Compartment::addIsIn(bool isIn) {
     this->isIn.push_back(isIn);
 }
 
-void Compartment::setDistribution(std::shared_ptr<Distribution> dist) {
-    this->dist = dist;
-    subCompartmentValues.resize(this->dist->getMaxDay());
-}
-
 void Compartment::updateValue(long iter) {
     int sumIsIn {0};
     for (auto value: isIn) {
@@ -85,7 +81,7 @@ void Compartment::updateValue(long iter) {
         }
     }
 
-    // Finally sum up the current values of this iteration to total
+    // Finally sum up subCompartmentValues of this iteration to obtain total value
     for (auto value: subCompartmentValues) {
         total[iter] += value;
     }

@@ -66,37 +66,24 @@ int main() {
     auto weil_9d = std::make_shared<DiscreteWeibullDistribution>(4, 3);
 
     // Setup compartments
-    auto S = std::make_shared<Compartment>("S", 3000000);
-    auto E = std::make_shared<Compartment>("E", 0);
-    auto A = std::make_shared<Compartment>("A", 0);
-    auto A_r = std::make_shared<Compartment>("A_r", 0);
-    auto I = std::make_shared<Compartment>("I", 1);
-    auto H_h = std::make_shared<Compartment>("H_h", 0);
-    auto H_c = std::make_shared<Compartment>("H_c", 0);
-    auto H_d = std::make_shared<Compartment>("H_d", 0);
-    auto C_c = std::make_shared<Compartment>("C_c", 0);
-    auto C_d = std::make_shared<Compartment>("C_d", 0);
-    auto D = std::make_shared<Compartment>("D", 0);
-    auto R = std::make_shared<Compartment>("R", 0);
+    auto S = std::make_shared<Compartment>("S", 3000000, bernoulli);
+    auto E = std::make_shared<Compartment>("E", 0, weil_9d);
+    auto A = std::make_shared<Compartment>("A", 0, gamma_7d);
+    auto A_r = std::make_shared<Compartment>("A_r", 0, weil_16d);
+    auto I = std::make_shared<Compartment>("I", 1, gamma_13d);
+    auto H_h = std::make_shared<Compartment>("H_h", 0, gamma_7d);
+    auto H_c = std::make_shared<Compartment>("H_c", 0, weil_9d);
+    auto H_d = std::make_shared<Compartment>("H_d", 0, gamma_7d);
+    auto C_c = std::make_shared<Compartment>("C_c", 0, weil_16d);
+    auto C_d = std::make_shared<Compartment>("C_d", 0, gamma_13d);
+    auto D = std::make_shared<Compartment>("D", 0, bernoulli_removed);
+    auto R = std::make_shared<Compartment>("R", 0, bernoulli_removed);
 
     A_r->setWeight(0.35);
     I->setWeight(0.65);
     H_h->setWeight(0.7);
     H_c->setWeight(0.2);
     H_d->setWeight(0.1);
-
-    S->setDistribution(bernoulli);
-    E->setDistribution(weil_9d);
-    A->setDistribution(gamma_7d);
-    A_r->setDistribution(weil_16d);
-    I->setDistribution(gamma_13d);
-    H_h->setDistribution(gamma_7d);
-    H_c->setDistribution(weil_9d);
-    H_d->setDistribution(gamma_7d);
-    C_c->setDistribution(weil_16d);
-    C_d->setDistribution(bernoulli_removed);
-    D->setDistribution(bernoulli_removed);
-    R->setDistribution(bernoulli_removed);
 
     // Model myModel consists of S, I and R
     Model myModel;

@@ -19,7 +19,7 @@ private:
     std::vector<double> subCompartmentValues;
     double outValue {0};
 public:
-    Compartment(std::string name, double initVal);
+    Compartment(std::string name, double initVal, std::shared_ptr<Distribution> dist);
 
     Compartment() = delete;
     Compartment(const Compartment& comp) = delete;
@@ -39,7 +39,6 @@ public:
 
     // Setters
     void setWeight(double weight);
-    void setDistribution(std::shared_ptr<Distribution> dist);
     void addLinkedCompartment(std::shared_ptr<Compartment>& linkedCompartment);
     void addIsIn(bool isIn);
 
