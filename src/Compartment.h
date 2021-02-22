@@ -19,7 +19,7 @@ private:
     std::vector<double> subCompartmentValues;
     double outValue {0};
 public:
-    Compartment(std::string name, double initVal);
+    Compartment(std::string name, double initVal, std::shared_ptr<Distribution> dist);
 
     Compartment() = delete;
     Compartment(const Compartment& comp) = delete;
