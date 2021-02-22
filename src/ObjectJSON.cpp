@@ -8,10 +8,10 @@ nlohmann::json ObjectJSON::toJSON(std::shared_ptr<Compartment> &comp) {
     jsonNode["name"] = comp->getName();
     jsonNode["initialValue"] = comp->getTotal()[0];
     if (comp->getDist()->getDistName() == "gamma") {
-        auto castedDist = std::static_pointer_cast<DiscreteGammaDistribution>(comp->getDist());
+        auto castedDist = std::dynamic_pointer_cast<DiscreteGammaDistribution>(comp->getDist());
         jsonNode["distribution"] = {{"name", comp->getDist()->getDistName()}, {"scale", castedDist->getScale()}, {"shape", castedDist->getShape()}};
     } else if (comp->getDist()->getDistName() == "weibull") {
-        auto castedDist = std::static_pointer_cast<DiscreteWeibullDistribution>(comp->getDist());
+        auto castedDist = std::dynamic_pointer_cast<DiscreteWeibullDistribution>(comp->getDist());
         jsonNode["distribution"] = {{"name", comp->getDist()->getDistName()}, {"scale", castedDist->getScale()}, {"shape", castedDist->getShape()}};
     } else {
         jsonNode["distribution"] = {{"name", comp->getDist()->getDistName()}};

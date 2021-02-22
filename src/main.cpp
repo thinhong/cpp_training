@@ -94,7 +94,7 @@ int main() {
     H_c->setDistribution(weil_9d);
     H_d->setDistribution(gamma_7d);
     C_c->setDistribution(weil_16d);
-    C_d->setDistribution(gamma_13d);
+    C_d->setDistribution(bernoulli_removed);
     D->setDistribution(bernoulli_removed);
     R->setDistribution(bernoulli_removed);
 
@@ -137,7 +137,7 @@ int main() {
         std::cout << "Iteration: " << i << std::endl;
         for (size_t j {0}; j < myModel.getComps().size(); ++j) {
             std::cout << myModel.getComps()[j]->getName() << ": ";
-            for (auto k: myModel.getComps()[j]->getCurrentValues()) {
+            for (auto k: myModel.getComps()[j]->getSubCompartmentValues()) {
                 std::cout << k << " ";
             }
             std::cout << std::endl;
@@ -167,9 +167,9 @@ int main() {
 //    }
 
     // File output
-//    Model* pModel = &myModel;
-//    FileCSV file("/home/thinh/Downloads", "test_r0_3_diffWaitingTime.csv", pModel);
-//    file.writeFile();
+    Model* pModel = &myModel;
+    FileCSV file("/home/thinh/Downloads", "test_r0_3_diffWaitingTime_death0.csv", pModel);
+    file.writeFile();
 //
 //    FileJSON json("/home/thinh/Downloads", "test_r0_3_diffWaitingTime.json", pModel);
 //    json.writeFile();

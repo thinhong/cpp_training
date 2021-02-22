@@ -16,7 +16,7 @@ private:
     std::vector<bool> isIn;
     // Variables for computational analyses
     std::vector<double> total;
-    std::vector<double> currentValues;
+    std::vector<double> subCompartmentValues;
     double outValue {0};
 public:
     Compartment(std::string name, double initVal);
@@ -30,7 +30,7 @@ public:
     static inline double daysFollowUp;
     // Getters
     std::vector<double> getTotal();
-    std::vector<double> getCurrentValues();
+    std::vector<double> getSubCompartmentValues();
     std::string getName();
     std::vector<bool> getIsIn();
     std::vector<std::weak_ptr<Compartment>> getLinkedCompartment();

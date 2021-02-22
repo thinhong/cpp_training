@@ -24,21 +24,9 @@ string
 Distribution.h
 /home/thinh/Dropbox/oucru/cpp/cpp_training/src/Distribution.h
 
-/home/thinh/Dropbox/oucru/cpp/cpp_training/src/DiscreteGammaDistribution.cpp
-prob.hpp
-/home/thinh/Dropbox/oucru/cpp/cpp_training/src/prob.hpp
-DiscreteGammaDistribution.h
-/home/thinh/Dropbox/oucru/cpp/cpp_training/src/DiscreteGammaDistribution.h
-
 /home/thinh/Dropbox/oucru/cpp/cpp_training/src/DiscreteGammaDistribution.h
 Distribution.h
 /home/thinh/Dropbox/oucru/cpp/cpp_training/src/Distribution.h
-
-/home/thinh/Dropbox/oucru/cpp/cpp_training/src/DiscreteWeibullDistribution.cpp
-prob.hpp
-/home/thinh/Dropbox/oucru/cpp/cpp_training/src/prob.hpp
-DiscreteWeibullDistribution.h
-/home/thinh/Dropbox/oucru/cpp/cpp_training/src/DiscreteWeibullDistribution.h
 
 /home/thinh/Dropbox/oucru/cpp/cpp_training/src/DiscreteWeibullDistribution.h
 Distribution.h
@@ -79,10 +67,6 @@ memory
 -
 Compartment.h
 /home/thinh/Dropbox/oucru/cpp/cpp_training/src/Compartment.h
-
-/home/thinh/Dropbox/oucru/cpp/cpp_training/src/ObjectJSON.cpp
-ObjectJSON.h
-/home/thinh/Dropbox/oucru/cpp/cpp_training/src/ObjectJSON.h
 
 /home/thinh/Dropbox/oucru/cpp/cpp_training/src/ObjectJSON.h
 json.hpp
@@ -457,8 +441,4 @@ FileJSON.h
 /home/thinh/Dropbox/oucru/cpp/cpp_training/src/FileJSON.h
 ObjectJSON.h
 /home/thinh/Dropbox/oucru/cpp/cpp_training/src/ObjectJSON.h
-
-/home/thinh/Dropbox/oucru/cpp/cpp_training/src/prob.hpp
-string
--
 
