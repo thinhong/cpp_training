@@ -13,10 +13,9 @@
 #include "ObjectJSON.h"
 
 int main() {
-    // Set precision for output file (default = 12), if not set this the program will rounded unexpectedly
-    File::precision = 16;
-
     Compartment::daysFollowUp = 200;
+    const double populationSize {10000000};
+    double transRate {3.0};
     // Set error tolerance to all distribution
     Distribution::errorTolerance = 0.01;
 
@@ -50,8 +49,6 @@ int main() {
 //        comps.push_back(tmp);
 //    }
 
-    const double populationSize {10000000};
-    auto transRate {3.0};
     auto forceInfection = std::make_shared<double>();
     auto bernoulli = std::make_shared<BernoulliDistribution>(forceInfection);
     bernoulli->calcCumulativeProb();
