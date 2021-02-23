@@ -11,6 +11,7 @@
 
 class File {
 public:
+    // Set precision so that the compiler won't round up numeric values unexpectedly
     static inline int precision {15};
     virtual void writeFile() = 0;
 };

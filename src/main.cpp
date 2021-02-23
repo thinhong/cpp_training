@@ -154,14 +154,14 @@ int main() {
 //    myModel.addCompsAndConnect(C_d, D);
 //
 //    // Test with a isCycle: A_r going back to E
-////    myModel.addCompsAndConnect(A_r, E);
+//    // myModel.addCompsAndConnect(A_r, E);
 //    myModel.DFS();
 //    myModel.sortComps();
 
     // ========================== End manual code ==============================
 
     // Update model
-    for (size_t i {1}; i < myModel.getComps()[0]->daysFollowUp; i++) {
+    for (size_t i {1}; i < Compartment::daysFollowUp; i++) {
         double totalInfectious {0};
         for (auto& comp: myModel.getComps()) {
             for (std::string& iComp: infectiousComps) {
@@ -208,9 +208,9 @@ int main() {
 //    }
 
     // File output
-//    Model* pModel = &myModel;
-//    FileCSV file("/home/thinh/Downloads", "test_r0_3_diffWaitingTime_20200223.csv", pModel);
-//    file.writeFile();
+    Model* pModel = &myModel;
+    FileCSV file("/home/thinh/Downloads", "test_r0_3_diffWaitingTime_20200223_2.csv", pModel);
+    file.writeFile();
 //
 //    FileJSON json("/home/thinh/Downloads", "test_r0_3_diffWaitingTime.json", pModel);
 //    json.writeFile();
