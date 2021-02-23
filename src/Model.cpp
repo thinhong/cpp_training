@@ -5,10 +5,14 @@ std::vector<std::shared_ptr<Compartment>> Model::getComps() {
     return comps;
 }
 
+void Model::addFromConfig(std::vector<std::shared_ptr<Compartment>> &comps) {
+    this->comps = comps;
+}
+
 // For example S -> I, after addCompsAndConnect(S, I):
 // S has: linkedCompartment = S, linkedWeight = weight_StoI, isIn = false (S-> is moving out of S)
 // I has: linkedCompartment = S, linkedWeight = weight_StoI, isIn = true (->I is moving to I)
-void Model::addCompsAndConnect(std::shared_ptr<Compartment> &A, std::shared_ptr<Compartment> &B, double weight) {
+void Model::addCompsAndConnect(std::shared_ptr<Compartment>& A, std::shared_ptr<Compartment>& B, double weight) {
     std::vector<std::string> compName;
     if (!comps.empty()) {
         for (auto& comp: comps) {

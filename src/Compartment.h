@@ -39,7 +39,7 @@ public:
 
     // Setters
     void addLinkedWeight(double weight);
-    void addLinkedCompartment(std::shared_ptr<Compartment>& linkedCompartment);
+    void addLinkedCompartment(std::weak_ptr<Compartment> linkedCompartment);
     void addIsIn(bool isIn);
 
     // Method for update total in each iteration

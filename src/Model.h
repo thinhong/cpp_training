@@ -12,6 +12,8 @@ private:
 public:
     Model() = default;
     std::vector<std::shared_ptr<Compartment>> getComps();
+    // Add compartment to model when using JSON config file
+    void addFromConfig(std::vector<std::shared_ptr<Compartment>>& comps);
     // When add and connect compartment, define weight if weight != 1, otherwise use default weight = 1
     void addCompsAndConnect(std::shared_ptr<Compartment>& A, std::shared_ptr<Compartment>& B, double weight = 1);
 

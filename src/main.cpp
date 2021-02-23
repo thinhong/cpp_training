@@ -13,62 +13,95 @@
 #include "ObjectJSON.h"
 
 int main() {
+    // ========================== Using JSON config ==============================
+
     // Read a JSON config file to setup all compartments
     std::ifstream configFile("/home/thinh/Downloads/config2.json");
     nlohmann::json config;
     configFile >> config;
 
-    // Initialize model parameters
+    // Initialize parameters
     Compartment::daysFollowUp = config["daysFollowUp"];
     const double populationSize = config["populationSize"];
-    double transRate = config["transRate"];
+    const double transRate = config["transRate"];
     // Set error tolerance to all distribution
     Distribution::errorTolerance = config["errorTolerance"];
     auto forceInfection = std::make_shared<double>();
+    // Define a vector contains the name of infectious compartments
+    std::vector<std::string> infectiousComps {"A", "A_r", "I"};
 
     // Automatically generate all compartments from config file
     std::vector<std::shared_ptr<Compartment>> allCompartments;
-    for (auto& comp: config["compartments"]) {
+    for (auto& compConfig: config["compartments"]) {
         std::shared_ptr<Compartment> tmpComp;
-        if (comp["distribution"]["name"] == "bernoulli") {
+        if (compConfig["distribution"]["name"] == "bernoulli") {
             size_t sumIsIn {0};
-            for (bool isIn: comp["isIn"]) {
+            for (bool isIn: compConfig["isIn"]) {
                 sumIsIn += isIn;
             }
             if (sumIsIn == 0) {
                 auto bernoulli = std::make_shared<BernoulliDistribution>(forceInfection);
-                tmpComp = std::make_shared<Compartment>(comp["name"], comp["initialValue"], bernoulli);
+                bernoulli->calcCumulativeProb();
+                tmpComp = std::make_shared<Compartment>(compConfig["name"], compConfig["initialValue"], bernoulli);
             } else {
                 auto bernoulli = std::make_shared<BernoulliDistribution>(std::make_shared<double>(0.0));
-                tmpComp = std::make_shared<Compartment>(comp["name"], comp["initialValue"], bernoulli);
+                tmpComp = std::make_shared<Compartment>(compConfig["name"], compConfig["initialValue"], bernoulli);
             }
-        } else if (comp["distribution"]["name"] == "gamma") {
-            auto gamma = std::make_shared<DiscreteGammaDistribution>(comp["distribution"]["scale"], comp["distribution"]["shape"]);
-            tmpComp = std::make_shared<Compartment>(comp["name"], comp["initialValue"], gamma);
-        } else if (comp["distribution"]["name"] == "weibull") {
-            auto weibull = std::make_shared<DiscreteWeibullDistribution>(comp["distribution"]["scale"], comp["distribution"]["shape"]);
-            tmpComp = std::make_shared<Compartment>(comp["name"], comp["initialValue"], weibull);
+        } else if (compConfig["distribution"]["name"] == "gamma") {
+            auto gamma = std::make_shared<DiscreteGammaDistribution>(compConfig["distribution"]["scale"], compConfig["distribution"]["shape"]);
+            tmpComp = std::make_shared<Compartment>(compConfig["name"], compConfig["initialValue"], gamma);
+        } else if (compConfig["distribution"]["name"] == "weibull") {
+            auto weibull = std::make_shared<DiscreteWeibullDistribution>(compConfig["distribution"]["scale"], compConfig["distribution"]["shape"]);
+            tmpComp = std::make_shared<Compartment>(compConfig["name"], compConfig["initialValue"], weibull);
+        }
+        // Also add linkedWeight and isIn to the compartment since they are all numeric values
+        for (double weight: compConfig["linkedWeight"]) {
+            tmpComp->addLinkedWeight(weight);
+        }
+        for (bool isIn: compConfig["isIn"]) {
+            tmpComp->addIsIn(isIn);
         }
         allCompartments.push_back(tmpComp);
     }
 
-    for (auto i: allCompartments) {
-        std::cout << i->getName() << ' ';
+    // Add linkedCompartment needs to be done as a separated step because we need all compartments created before connecting them
+    for (auto& compConfig: config["compartments"]) {
+        std::weak_ptr<Compartment> baseComp;
+        for (auto& comp: allCompartments) {
+            if (comp->getName() == compConfig["name"]) {
+                baseComp = comp;
+            }
+        }
+        for (auto& linkedConfig: compConfig["linkedCompartment"]) {
+            std::weak_ptr<Compartment> linkedComp;
+            for (auto& comp: allCompartments) {
+                if (comp->getName() == linkedConfig) {
+                    linkedComp = comp;
+                    baseComp.lock()->addLinkedCompartment(linkedComp);
+                }
+            }
+        }
     }
-    for (auto i: allCompartments) {
-        std::cout << i->getDist()->getDistName() << ' ';
-    }
-    std::cout << "\n";
 
-    std::vector<bool> bool_vector;
-    for (auto i: config["compartments"]) {
-        bool_vector.push_back(i["isIn"][0]);
-    }
+    Model myModel;
+    myModel.addFromConfig(allCompartments);
+    myModel.DFS();
+    myModel.sortComps();
 
-    for (auto i: bool_vector) {
-        std::cout << i << ' ';
-    }
+    // ======================== End JSON config ==============================
 
+    // ========================== Manual code ==============================
+
+//    // Initialize parameters
+//    Compartment::daysFollowUp = 200;
+//    const double populationSize = 10000000;
+//    const double transRate = 3.0;
+//    // Set error tolerance to all distribution
+//    Distribution::errorTolerance = 0.01;
+//    auto forceInfection = std::make_shared<double>();
+//    // Define a vector contains the name of infectious compartments
+//    std::vector<std::string> infectiousComps {"A", "A_r", "I"};
+//
 //    auto bernoulli = std::make_shared<BernoulliDistribution>(forceInfection);
 //    bernoulli->calcCumulativeProb();
 //
@@ -124,22 +157,32 @@ int main() {
 ////    myModel.addCompsAndConnect(A_r, E);
 //    myModel.DFS();
 //    myModel.sortComps();
-//
-//    // Update model
-//    for (size_t i {1}; i < myModel.getComps()[0]->daysFollowUp; i++) {
-//        *forceInfection = transRate / populationSize * (A->getTotal()[i - 1] + A_r->getTotal()[i - 1] + I->getTotal()[i - 1]);
-//        myModel.update(i);
+
+    // ========================== End manual code ==============================
+
+    // Update model
+    for (size_t i {1}; i < myModel.getComps()[0]->daysFollowUp; i++) {
+        double totalInfectious {0};
+        for (auto& comp: myModel.getComps()) {
+            for (std::string& iComp: infectiousComps) {
+                if (comp->getName() == iComp) {
+                    totalInfectious += comp->getTotal()[i - 1];
+                }
+            }
+        }
+        *forceInfection = transRate / populationSize * totalInfectious;
+        myModel.update(i);
 
         // For debug
-//        std::cout << "Iteration: " << i << std::endl;
-//        for (size_t j {0}; j < myModel.getComps().size(); ++j) {
-//            std::cout << myModel.getComps()[j]->getName() << ": ";
-//            for (auto k: myModel.getComps()[j]->getSubCompartmentValues()) {
-//                std::cout << k << " ";
-//            }
-//            std::cout << std::endl;
-//        }
-//    }
+        std::cout << "Iteration: " << i << std::endl;
+        for (size_t j {0}; j < myModel.getComps().size(); ++j) {
+            std::cout << myModel.getComps()[j]->getName() << ": ";
+            for (auto k: myModel.getComps()[j]->getSubCompartmentValues()) {
+                std::cout << k << " ";
+            }
+            std::cout << std::endl;
+        }
+    }
 
 //    nlohmann::json jsonArray;
 //    jsonArray["daysFollowUp"] = Compartment::daysFollowUp;

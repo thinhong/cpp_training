@@ -37,7 +37,7 @@ std::vector<double> Compartment::getLinkedWeight() {
 }
 
 // Setters
-void Compartment::addLinkedCompartment(std::shared_ptr<Compartment>& linkedCompartment) {
+void Compartment::addLinkedCompartment(std::weak_ptr<Compartment> linkedCompartment) {
     this->linkedCompartment.push_back(linkedCompartment);
 }
 
