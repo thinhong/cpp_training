@@ -13,8 +13,8 @@ nlohmann::json ObjectJSON::toJSON(std::shared_ptr<Compartment> &comp) {
     } else if (comp->getDist()->getDistName() == "weibull") {
         auto castedDist = std::dynamic_pointer_cast<DiscreteWeibullDistribution>(comp->getDist());
         jsonNode["distribution"] = {{"name", comp->getDist()->getDistName()}, {"scale", castedDist->getScale()}, {"shape", castedDist->getShape()}};
-    } else {
-        jsonNode["distribution"] = {{"name", comp->getDist()->getDistName()}};
+    } else if (comp->getDist()->getDistName() == "bernoulli") {
+        jsonNode["distribution"] = {{"name", comp->getDist()->getDistName()}, {"successRate", comp->getDist()->getCumulativeProb(0)}};
     }
     jsonNode["linkedCompartment"] = {};
     for (auto i: comp->getLinkedCompartment()) {

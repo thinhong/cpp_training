@@ -27,7 +27,7 @@ public:
     ~Compartment() {
 //        std::cout << name << " destructor called." << std::endl;
     }
-    static inline double daysFollowUp;
+    static inline size_t daysFollowUp;
     // Getters
     std::vector<double> getTotal();
     std::vector<double> getSubCompartmentValues();

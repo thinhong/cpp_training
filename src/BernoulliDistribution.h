@@ -12,13 +12,10 @@ class BernoulliDistribution: public Distribution {
 private:
     std::string distName {"bernoulli"};
     std::shared_ptr<double> successRate;
-    size_t maxDay;
-    std::vector<std::shared_ptr<double>> cumulativeProb;
 public:
     explicit BernoulliDistribution(std::shared_ptr<double> successRate);
-    void calcCumulativeProb();
-    double getCumulativeProb(size_t index);
-    size_t getMaxDay();
+    double getCumulativeProb(size_t index) override;
+    size_t getMaxDay() override;
     std::string getDistName() override;
 };
 

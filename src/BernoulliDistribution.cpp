@@ -6,23 +6,14 @@
 
 BernoulliDistribution::BernoulliDistribution(std::shared_ptr<double> successRate) {
     this->successRate = successRate;
-    maxDay = 1;
-}
-
-void BernoulliDistribution::calcCumulativeProb() {
-    cumulativeProb.push_back(successRate);
 }
 
 double BernoulliDistribution::getCumulativeProb(size_t index) {
-    if (index > cumulativeProb.size()) {
-        return 1;
-    } else {
-        return *cumulativeProb[index];
-    }
+    return *successRate;
 }
 
 size_t BernoulliDistribution::getMaxDay() {
-    return maxDay;
+    return 1;
 }
 
 std::string BernoulliDistribution::getDistName() {

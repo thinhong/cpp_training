@@ -41,7 +41,6 @@ int main() {
             }
             if (sumIsIn == 0) {
                 auto bernoulli = std::make_shared<BernoulliDistribution>(forceInfection);
-                bernoulli->calcCumulativeProb();
                 tmpComp = std::make_shared<Compartment>(compConfig["name"], compConfig["initialValue"], bernoulli);
             } else {
                 auto bernoulli = std::make_shared<BernoulliDistribution>(std::make_shared<double>(0.0));
@@ -184,28 +183,28 @@ int main() {
         }
     }
 
-//    nlohmann::json jsonArray;
-//    jsonArray["daysFollowUp"] = Compartment::daysFollowUp;
-//    jsonArray["errorTolerance"] = Distribution::errorTolerance;
-//    jsonArray["populationSize"] = populationSize;
-//    jsonArray["transRate"] = transRate;
-//    jsonArray["infectiousComps"] = infectiousComps;
-//    for (auto i: myModel.getComps()) {
-//        ObjectJSON jsonNode;
-//        jsonNode.toJSON(i);
-//        jsonArray["compartments"].push_back(jsonNode.getJsonNode());
-//    }
-//    std::cout << jsonArray;
-//
-//    std::ofstream myFile("/home/thinh/Downloads/config3.json");
-//
-//    if (myFile.is_open()) {
-//        myFile << jsonArray;
-//        myFile.close();
-//        std::cout << "Successfully written into file: /home/thinh/Downloads/config3.json" << std::endl;
-//    } else {
-//        std::cout << "Unable to open file" << std::endl;
-//    }
+    nlohmann::json jsonArray;
+    jsonArray["daysFollowUp"] = Compartment::daysFollowUp;
+    jsonArray["errorTolerance"] = Distribution::errorTolerance;
+    jsonArray["populationSize"] = populationSize;
+    jsonArray["transRate"] = transRate;
+    jsonArray["infectiousComps"] = infectiousComps;
+    for (auto i: myModel.getComps()) {
+        ObjectJSON jsonNode;
+        jsonNode.toJSON(i);
+        jsonArray["compartments"].push_back(jsonNode.getJsonNode());
+    }
+    std::cout << jsonArray;
+
+    std::ofstream myFile("/home/thinh/Downloads/config2.json");
+
+    if (myFile.is_open()) {
+        myFile << jsonArray;
+        myFile.close();
+        std::cout << "Successfully written into file: /home/thinh/Downloads/config2.json" << std::endl;
+    } else {
+        std::cout << "Unable to open file" << std::endl;
+    }
 
     // File output
     Model* pModel = &myModel;
