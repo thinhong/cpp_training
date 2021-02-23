@@ -16,7 +16,7 @@ int main() {
     // ========================== Using JSON config ==============================
 
     // Read a JSON config file to setup all compartments
-    std::ifstream configFile("/home/thinh/Downloads/config2.json");
+    std::ifstream configFile("/home/thinh/Downloads/config3.json");
     nlohmann::json config;
     configFile >> config;
 
@@ -28,7 +28,7 @@ int main() {
     Distribution::errorTolerance = config["errorTolerance"];
     auto forceInfection = std::make_shared<double>();
     // Define a vector contains the name of infectious compartments
-    std::vector<std::string> infectiousComps {"A", "A_r", "I"};
+    std::vector<std::string> infectiousComps = config["infectiousComps"];
 
     // Automatically generate all compartments from config file
     std::vector<std::shared_ptr<Compartment>> allCompartments;
@@ -189,19 +189,20 @@ int main() {
 //    jsonArray["errorTolerance"] = Distribution::errorTolerance;
 //    jsonArray["populationSize"] = populationSize;
 //    jsonArray["transRate"] = transRate;
+//    jsonArray["infectiousComps"] = infectiousComps;
 //    for (auto i: myModel.getComps()) {
 //        ObjectJSON jsonNode;
 //        jsonNode.toJSON(i);
 //        jsonArray["compartments"].push_back(jsonNode.getJsonNode());
 //    }
 //    std::cout << jsonArray;
-
-//    std::ofstream myFile("/home/thinh/Downloads/config2.json");
+//
+//    std::ofstream myFile("/home/thinh/Downloads/config3.json");
 //
 //    if (myFile.is_open()) {
 //        myFile << jsonArray;
 //        myFile.close();
-//        std::cout << "Successfully written into file: /home/thinh/Downloads/config2.json" << std::endl;
+//        std::cout << "Successfully written into file: /home/thinh/Downloads/config3.json" << std::endl;
 //    } else {
 //        std::cout << "Unable to open file" << std::endl;
 //    }
