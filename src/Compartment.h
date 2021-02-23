@@ -39,7 +39,6 @@ public:
 
     // Setters
     void addLinkedWeight(double weight);
-    void setLinkedWeight(size_t index, double weight);
     void addLinkedCompartment(std::shared_ptr<Compartment>& linkedCompartment);
     void addIsIn(bool isIn);
 

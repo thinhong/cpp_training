@@ -12,6 +12,10 @@ memory
 Distribution.h
 /home/thinh/Dropbox/oucru/cpp/cpp_training/src/Distribution.h
 
+/home/thinh/Dropbox/oucru/cpp/cpp_training/src/Compartment.cpp
+Compartment.h
+/home/thinh/Dropbox/oucru/cpp/cpp_training/src/Compartment.h
+
 /home/thinh/Dropbox/oucru/cpp/cpp_training/src/Compartment.h
 iostream
 -
@@ -95,6 +99,10 @@ memory
 -
 Compartment.h
 /home/thinh/Dropbox/oucru/cpp/cpp_training/src/Compartment.h
+
+/home/thinh/Dropbox/oucru/cpp/cpp_training/src/ObjectJSON.cpp
+ObjectJSON.h
+/home/thinh/Dropbox/oucru/cpp/cpp_training/src/ObjectJSON.h
 
 /home/thinh/Dropbox/oucru/cpp/cpp_training/src/ObjectJSON.h
 json.hpp

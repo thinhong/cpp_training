@@ -45,10 +45,6 @@ void Compartment::addLinkedWeight(double weight) {
     linkedWeight.push_back(weight);
 }
 
-void Compartment::setLinkedWeight(size_t index, double weight) {
-    linkedWeight[index] = weight;
-}
-
 void Compartment::addIsIn(bool isIn) {
     this->isIn.push_back(isIn);
 }
