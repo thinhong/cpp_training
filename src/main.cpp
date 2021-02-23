@@ -43,8 +43,8 @@ int main() {
 //            weibull->calcCumulativeProb();
 //            tmp->setDistribution(weibull);
 //        }
-//        if (!comp["weight"].empty()) {
-//            tmp->setWeight(comp["weight"]);
+//        if (!comp["linkedWeight"].empty()) {
+//            tmp->addLinkedWeight(comp["linkedWeight"]);
 //        }
 //        comps.push_back(tmp);
 //    }
@@ -76,12 +76,6 @@ int main() {
     auto D = std::make_shared<Compartment>("D", 0, bernoulli_removed);
     auto R = std::make_shared<Compartment>("R", 0, bernoulli_removed);
 
-    A_r->setWeight(0.35);
-    I->setWeight(0.65);
-    H_h->setWeight(0.7);
-    H_c->setWeight(0.2);
-    H_d->setWeight(0.1);
-
     // Model myModel consists of S, I and R
     Model myModel;
 
@@ -90,14 +84,14 @@ int main() {
     myModel.addCompsAndConnect(S, E);
     myModel.addCompsAndConnect(E, A);
     // A -> A_r and I
-    myModel.addCompsAndConnect(A, A_r);
-    myModel.addCompsAndConnect(A, I);
+    myModel.addCompsAndConnect(A, A_r, 0.35);
+    myModel.addCompsAndConnect(A, I, 0.65);
     // A_r -> R
     myModel.addCompsAndConnect(A_r, R);
     // I -> H_h, H_c and H_d
-    myModel.addCompsAndConnect(I, H_h);
-    myModel.addCompsAndConnect(I, H_c);
-    myModel.addCompsAndConnect(I, H_d);
+    myModel.addCompsAndConnect(I, H_h, 0.7);
+    myModel.addCompsAndConnect(I, H_c, 0.2);
+    myModel.addCompsAndConnect(I, H_d, 0.1);
     // H_h -> R
     myModel.addCompsAndConnect(H_h, R);
     // H_c -> C_c -> R
@@ -128,31 +122,31 @@ int main() {
         }
     }
 
-//    nlohmann::json jsonArray;
-//    jsonArray += {{"daysFollowUp", Compartment::daysFollowUp}};
-//    jsonArray += {{"errorTolerance", Distribution::errorTolerance}};
-//    jsonArray += {{"populationSize", populationSize}};
-//    jsonArray += {{"transRate", transRate}};
-//    for (auto i: myModel.getComps()) {
-//        ObjectJSON jsonNode;
-//        jsonNode.toJSON(i);
-//        jsonArray += jsonNode.getJsonNode();
-//    }
-//    std::cout << jsonArray;
-//
-//    std::ofstream myFile("/home/thinh/Downloads/config.json");
-//
-//    if (myFile.is_open()) {
-//        myFile << jsonArray;
-//        myFile.close();
-//        std::cout << "Successfully written into file: /home/thinh/Downloads/config.json" << std::endl;
-//    } else {
-//        std::cout << "Unable to open file" << std::endl;
-//    }
+    nlohmann::json jsonArray;
+    jsonArray += {{"daysFollowUp", Compartment::daysFollowUp}};
+    jsonArray += {{"errorTolerance", Distribution::errorTolerance}};
+    jsonArray += {{"populationSize", populationSize}};
+    jsonArray += {{"transRate", transRate}};
+    for (auto i: myModel.getComps()) {
+        ObjectJSON jsonNode;
+        jsonNode.toJSON(i);
+        jsonArray += jsonNode.getJsonNode();
+    }
+    std::cout << jsonArray;
+
+    std::ofstream myFile("/home/thinh/Downloads/config.json");
+
+    if (myFile.is_open()) {
+        myFile << jsonArray;
+        myFile.close();
+        std::cout << "Successfully written into file: /home/thinh/Downloads/config.json" << std::endl;
+    } else {
+        std::cout << "Unable to open file" << std::endl;
+    }
 
     // File output
     Model* pModel = &myModel;
-    FileCSV file("/home/thinh/Downloads", "test_r0_3_diffWaitingTime_death0.csv", pModel);
+    FileCSV file("/home/thinh/Downloads", "test_r0_3_diffWaitingTime_20200223.csv", pModel);
     file.writeFile();
 //
 //    FileJSON json("/home/thinh/Downloads", "test_r0_3_diffWaitingTime.json", pModel);

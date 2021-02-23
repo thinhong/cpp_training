@@ -8,7 +8,7 @@ std::vector<std::shared_ptr<Compartment>> Model::getComps() {
 // For example S -> I, after addCompsAndConnect(S, I):
 // S has: linkedCompartment = S, linkedWeight = weight_StoI, isIn = false (S-> is moving out of S)
 // I has: linkedCompartment = S, linkedWeight = weight_StoI, isIn = true (->I is moving to I)
-void Model::addCompsAndConnect(std::shared_ptr<Compartment> &A, std::shared_ptr<Compartment> &B) {
+void Model::addCompsAndConnect(std::shared_ptr<Compartment> &A, std::shared_ptr<Compartment> &B, double weight) {
     std::vector<std::string> compName;
     if (!comps.empty()) {
         for (auto& comp: comps) {
@@ -25,6 +25,8 @@ void Model::addCompsAndConnect(std::shared_ptr<Compartment> &A, std::shared_ptr<
     B->addLinkedCompartment(A);
     A->addIsIn(false);
     B->addIsIn(true);
+    A->addLinkedWeight(1);
+    B->addLinkedWeight(weight);
 }
 
 int Model::getIndex(std::shared_ptr<Compartment>&& comp) {

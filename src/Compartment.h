@@ -12,7 +12,7 @@ private:
     std::string name;
     std::shared_ptr<Distribution> dist;
     std::vector<std::weak_ptr<Compartment>> linkedCompartment;
-    double weight {1};
+    std::vector<double> linkedWeight;
     std::vector<bool> isIn;
     // Variables for computational analyses
     std::vector<double> total;
@@ -35,10 +35,11 @@ public:
     std::vector<bool> getIsIn();
     std::vector<std::weak_ptr<Compartment>> getLinkedCompartment();
     std::shared_ptr<Distribution> getDist();
-    double getWeight();
+    std::vector<double> getLinkedWeight();
 
     // Setters
-    void setWeight(double weight);
+    void addLinkedWeight(double weight);
+    void setLinkedWeight(size_t index, double weight);
     void addLinkedCompartment(std::shared_ptr<Compartment>& linkedCompartment);
     void addIsIn(bool isIn);
 

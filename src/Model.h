@@ -12,7 +12,8 @@ private:
 public:
     Model() = default;
     std::vector<std::shared_ptr<Compartment>> getComps();
-    void addCompsAndConnect(std::shared_ptr<Compartment>& A, std::shared_ptr<Compartment>& B);
+    // When add and connect compartment, define weight if weight != 1, otherwise use default weight = 1
+    void addCompsAndConnect(std::shared_ptr<Compartment>& A, std::shared_ptr<Compartment>& B, double weight = 1);
 
     // Functions to detect isCycle in directed graph (depth-first-search)
     // Source: https://www.geeksforgeeks.org/detect-cycle-in-a-graph/

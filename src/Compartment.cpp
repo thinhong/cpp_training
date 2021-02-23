@@ -32,8 +32,8 @@ std::shared_ptr<Distribution> Compartment::getDist() {
     return dist;
 }
 
-double Compartment::getWeight() {
-    return weight;
+std::vector<double> Compartment::getLinkedWeight() {
+    return linkedWeight;
 }
 
 // Setters
@@ -41,8 +41,12 @@ void Compartment::addLinkedCompartment(std::shared_ptr<Compartment>& linkedCompa
     this->linkedCompartment.push_back(linkedCompartment);
 }
 
-void Compartment::setWeight(double weight) {
-    this->weight = weight;
+void Compartment::addLinkedWeight(double weight) {
+    linkedWeight.push_back(weight);
+}
+
+void Compartment::setLinkedWeight(size_t index, double weight) {
+    linkedWeight[index] = weight;
 }
 
 void Compartment::addIsIn(bool isIn) {
@@ -66,10 +70,10 @@ void Compartment::updateValue(long iter) {
         subCompartmentValues[0] = 0;
         // Loop over all linkedCompartment, find the linkedCompartment with isIn == true
         // Let subCompartmentValues[0] = outValue of that linkedCompartment
-        // Multiply with weight for situations such as A -> Ar and I, I -> H_h, H_c and H_d
+        // Multiply with linkedWeight for situations such as A -> Ar and I, I -> H_h, H_c and H_d
         for (size_t j {0}; j < linkedCompartment.size(); ++j) {
             if (isIn[j]) {
-                subCompartmentValues[0] += linkedCompartment[j].lock()->outValue * weight;
+                subCompartmentValues[0] += linkedCompartment[j].lock()->outValue * linkedWeight[j];
             }
         }
     } else if (subCompartmentValues.size() == 1 && sumIsIn == 0) { // For S compartment (S only has 1 value)
@@ -78,7 +82,7 @@ void Compartment::updateValue(long iter) {
     } else if (subCompartmentValues.size() == 1 && sumIsIn > 0) { // For R compartment, only add people from its coming compartments
         for (size_t j {0}; j < linkedCompartment.size(); ++j) {
             if (isIn[j]) {
-                subCompartmentValues[0] += linkedCompartment[j].lock()->outValue * weight;
+                subCompartmentValues[0] += linkedCompartment[j].lock()->outValue * linkedWeight[j];
             }
         }
     }

@@ -38,6 +38,10 @@ string
 vector
 -
 
+/home/thinh/Dropbox/oucru/cpp/cpp_training/src/File.cpp
+File.h
+/home/thinh/Dropbox/oucru/cpp/cpp_training/src/File.h
+
 /home/thinh/Dropbox/oucru/cpp/cpp_training/src/File.h
 string
 -
@@ -45,6 +49,14 @@ memory
 -
 Model.h
 /home/thinh/Dropbox/oucru/cpp/cpp_training/src/Model.h
+
+/home/thinh/Dropbox/oucru/cpp/cpp_training/src/FileCSV.cpp
+fstream
+-
+iomanip
+-
+FileCSV.h
+/home/thinh/Dropbox/oucru/cpp/cpp_training/src/FileCSV.h
 
 /home/thinh/Dropbox/oucru/cpp/cpp_training/src/FileCSV.h
 string
@@ -56,9 +68,25 @@ File.h
 Model.h
 /home/thinh/Dropbox/oucru/cpp/cpp_training/src/Model.h
 
+/home/thinh/Dropbox/oucru/cpp/cpp_training/src/FileJSON.cpp
+FileJSON.h
+/home/thinh/Dropbox/oucru/cpp/cpp_training/src/FileJSON.h
+fstream
+-
+iomanip
+-
+json.hpp
+/home/thinh/Dropbox/oucru/cpp/cpp_training/src/json.hpp
+
 /home/thinh/Dropbox/oucru/cpp/cpp_training/src/FileJSON.h
 File.h
 /home/thinh/Dropbox/oucru/cpp/cpp_training/src/File.h
+
+/home/thinh/Dropbox/oucru/cpp/cpp_training/src/Model.cpp
+Model.h
+/home/thinh/Dropbox/oucru/cpp/cpp_training/src/Model.h
+algorithm
+-
 
 /home/thinh/Dropbox/oucru/cpp/cpp_training/src/Model.h
 vector

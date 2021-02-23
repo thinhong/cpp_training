@@ -21,6 +21,6 @@ nlohmann::json ObjectJSON::toJSON(std::shared_ptr<Compartment> &comp) {
         jsonNode["linkedCompartment"] += i.lock()->getName();
     }
     jsonNode["isIn"] = comp->getIsIn();
-    jsonNode["weight"] = comp->getWeight();
+    jsonNode["linkedWeight"] = comp->getLinkedWeight();
     return jsonNode;
 }
