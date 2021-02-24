@@ -16,7 +16,7 @@ int main() {
     // ========================== Using JSON config ==============================
 
     // Read a JSON config file to setup all compartments
-    std::ifstream configFile("/home/thinh/Downloads/config3.json");
+    std::ifstream configFile("/home/thinh/Downloads/config.json");
     nlohmann::json config;
     configFile >> config;
 
@@ -43,7 +43,7 @@ int main() {
                 auto bernoulli = std::make_shared<BernoulliDistribution>(forceInfection);
                 tmpComp = std::make_shared<Compartment>(compConfig["name"], compConfig["initialValue"], bernoulli);
             } else {
-                auto bernoulli = std::make_shared<BernoulliDistribution>(std::make_shared<double>(0.0));
+                auto bernoulli = std::make_shared<BernoulliDistribution>(std::make_shared<double>(compConfig["distribution"]["successRate"]));
                 tmpComp = std::make_shared<Compartment>(compConfig["name"], compConfig["initialValue"], bernoulli);
             }
         } else if (compConfig["distribution"]["name"] == "gamma") {
@@ -84,7 +84,7 @@ int main() {
 
     Model myModel;
     myModel.addFromConfig(allCompartments);
-    myModel.DFS();
+    myModel.checkCycle();
     myModel.sortComps();
 
     // ======================== End JSON config ==============================
@@ -102,11 +102,9 @@ int main() {
 //    std::vector<std::string> infectiousComps {"A", "A_r", "I"};
 //
 //    auto bernoulli = std::make_shared<BernoulliDistribution>(forceInfection);
-//    bernoulli->calcCumulativeProb();
 //
 //    auto removed = std::make_shared<double>(0.0);
 //    auto bernoulli_removed = std::make_shared<BernoulliDistribution>(removed);
-//    bernoulli_removed->calcCumulativeProb();
 //
 //    auto gamma_7d = std::make_shared<DiscreteGammaDistribution>(1, 1);
 //    auto gamma_13d = std::make_shared<DiscreteGammaDistribution>(1, 4);
@@ -154,14 +152,14 @@ int main() {
 //
 //    // Test with a isCycle: A_r going back to E
 //    // myModel.addCompsAndConnect(A_r, E);
-//    myModel.DFS();
+//    myModel.checkCycle();
 //    myModel.sortComps();
 
     // ========================== End manual code ==============================
 
     // Update model
     for (size_t i {1}; i < Compartment::daysFollowUp; i++) {
-        double totalInfectious {0};
+        double totalInfectious {0.0};
         for (auto& comp: myModel.getComps()) {
             for (std::string& iComp: infectiousComps) {
                 if (comp->getName() == iComp) {
@@ -183,32 +181,36 @@ int main() {
         }
     }
 
-    nlohmann::json jsonArray;
-    jsonArray["daysFollowUp"] = Compartment::daysFollowUp;
-    jsonArray["errorTolerance"] = Distribution::errorTolerance;
-    jsonArray["populationSize"] = populationSize;
-    jsonArray["transRate"] = transRate;
-    jsonArray["infectiousComps"] = infectiousComps;
-    for (auto i: myModel.getComps()) {
-        ObjectJSON jsonNode;
-        jsonNode.toJSON(i);
-        jsonArray["compartments"].push_back(jsonNode.getJsonNode());
-    }
-    std::cout << jsonArray;
-
-    std::ofstream myFile("/home/thinh/Downloads/config2.json");
-
-    if (myFile.is_open()) {
-        myFile << jsonArray;
-        myFile.close();
-        std::cout << "Successfully written into file: /home/thinh/Downloads/config2.json" << std::endl;
-    } else {
-        std::cout << "Unable to open file" << std::endl;
-    }
+//    nlohmann::json jsonArray;
+//    jsonArray["daysFollowUp"] = Compartment::daysFollowUp;
+//    jsonArray["errorTolerance"] = Distribution::errorTolerance;
+//    jsonArray["populationSize"] = populationSize;
+//    jsonArray["transRate"] = transRate;
+//    jsonArray["infectiousComps"] = infectiousComps;
+//    for (auto i: myModel.getComps()) {
+//        ObjectJSON jsonNode;
+//        jsonNode.toJSON(i);
+//        jsonArray["compartments"].push_back(jsonNode.getJsonNode());
+//    }
+//    std::cout << jsonArray;
+//
+//    std::ofstream myFile("/home/thinh/Downloads/config2.json");
+//
+//    if (myFile.is_open()) {
+//        myFile << jsonArray;
+//        myFile.close();
+//        std::cout << "Successfully written into file: /home/thinh/Downloads/config2.json" << std::endl;
+//    } else {
+//        std::cout << "Unable to open file" << std::endl;
+//    }
 
     // File output
+//    Model* pModel = &myModel;
+//    FileCSV file(config["filePath"], config["fileName"], pModel);
+//    file.writeFile();
+
     Model* pModel = &myModel;
-    FileCSV file("/home/thinh/Downloads", "test_r0_3_diffWaitingTime_20200223_2.csv", pModel);
+    FileCSV file("/home/thinh/Downloads", "manual_2.csv", pModel);
     file.writeFile();
 //
 //    FileJSON json("/home/thinh/Downloads", "test_r0_3_diffWaitingTime.json", pModel);

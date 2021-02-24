@@ -1,5 +1,6 @@
 #include "Model.h"
 #include <algorithm>
+#include <stack>
 
 std::vector<std::shared_ptr<Compartment>> Model::getComps() {
     return comps;
@@ -42,13 +43,13 @@ int Model::getIndex(std::shared_ptr<Compartment>&& comp) {
     return index;
 }
 
-bool Model::DFS_helper(size_t i, std::vector<bool> &visited, std::vector<bool> &recursiveStack) {
+bool Model::checkCycleHelper(size_t i, std::vector<bool> &visited, std::vector<bool> &recursiveStack) {
     if (!visited[i]) {
         visited[i] = true;
         recursiveStack[i] = true;
         for (size_t j {0}; j < comps[i]->getLinkedCompartment().size(); ++j) {
             int index = getIndex(comps[i]->getLinkedCompartment()[j].lock());
-            if (!comps[i]->getIsIn()[j] && !visited[index] && DFS_helper(index, visited, recursiveStack)) {
+            if (!comps[i]->getIsIn()[j] && !visited[index] && checkCycleHelper(index, visited, recursiveStack)) {
                 return true;
             }
             else if (!comps[i]->getIsIn()[j] && recursiveStack[index]) {
@@ -60,62 +61,92 @@ bool Model::DFS_helper(size_t i, std::vector<bool> &visited, std::vector<bool> &
     return false;
 }
 
-void Model::DFS() {
+void Model::checkCycle() {
     std::vector<bool> visited;
     visited.resize(comps.size(), false);
     std::vector<bool> recursiveStack;
     recursiveStack.resize(comps.size(), false);
     for (size_t i {0}; i < comps.size(); ++i) {
-        if (DFS_helper(i, visited, recursiveStack)) {
+        if (checkCycleHelper(i, visited, recursiveStack)) {
             isCycle = true;
         }
     }
 }
 
-void Model::sortComps() {
-    if (isCycle) {
-        std::cout << "A cycle exists in your model, please reconstruct it." << "\n";
-    } else {
-        // Find S and R
-        for (size_t i {0}; i < comps.size(); ++i) {
-            int sumIsIn {0};
-            for (auto j: comps[i]->getIsIn()) {
-                sumIsIn += j;
-            }
-
-            // Find S and shift S to the first position
-            if (sumIsIn == 0) {
-                auto tmp = comps[0];
-                comps[0] = comps[i];
-                comps[i] = tmp;
-            }
-
-            // Find R and shift R to the last position
-            if (sumIsIn > 1) {
-                auto tmp = comps[comps.size() - 1];
-                comps[comps.size() - 1] = comps[i];
-                comps[i] = tmp;
-            }
-        }
-
-        // Sort the compartments between S and R
-        // Start from the first compartment (S)
-        for (size_t i {0}; i < comps.size() - 1; ++i) {
-            // Get its linked compartment
-            for (auto& linked: comps[i]->getLinkedCompartment()) {
-                // Search from the next compartment, if there is a compartment with the same name
-                // as linkedCompartment, switch it next to the current (i.e i + 1)
-                for (size_t j {i + 1}; j < comps.size() - 1; ++j) {
-                    if (comps[j]->getName() == linked.lock()->getName()) {
-                        auto tmp = comps[i + 1];
-                        comps[i + 1] = comps[j];
-                        comps[j] = tmp;
-                    }
-                }
+void Model::sortCompsHelper(size_t i, std::vector<bool> &visited, std::stack<std::shared_ptr<Compartment>> &stack) {
+    visited[i] = true;
+    for (size_t j {0}; j < comps[i]->getLinkedCompartment().size(); ++j) {
+        if (!comps[i]->getIsIn()[j]) {
+            int index = getIndex(comps[i]->getLinkedCompartment()[j].lock());
+            if (!visited[index]) {
+                sortCompsHelper(index, visited, stack);
             }
         }
     }
+    stack.push(comps[i]);
 }
+
+void Model::sortComps() {
+    std::stack<std::shared_ptr<Compartment>> stack;
+    std::vector<std::shared_ptr<Compartment>> sortedComps;
+    std::vector<bool> visited;
+    visited.resize(comps.size(), false);
+    for (size_t i {0}; i < comps.size(); ++i) {
+        if (!visited[i]) {
+            sortCompsHelper(i, visited, stack);
+        }
+    }
+    while (!stack.empty()) {
+        sortedComps.push_back(stack.top());
+        stack.pop();
+    }
+    comps = sortedComps;
+}
+
+//void Model::sortComps() {
+//    if (isCycle) {
+//        std::cout << "A cycle exists in your model, please reconstruct it." << "\n";
+//    } else {
+//        // Find S and R
+//        for (size_t i {0}; i < comps.size(); ++i) {
+//            int sumIsIn {0};
+//            for (auto j: comps[i]->getIsIn()) {
+//                sumIsIn += j;
+//            }
+//
+//            // Find S and shift S to the first position
+//            if (sumIsIn == 0) {
+//                auto tmp = comps[0];
+//                comps[0] = comps[i];
+//                comps[i] = tmp;
+//            }
+//
+//            // Find R and shift R to the last position
+//            if (sumIsIn > 1) {
+//                auto tmp = comps[comps.size() - 1];
+//                comps[comps.size() - 1] = comps[i];
+//                comps[i] = tmp;
+//            }
+//        }
+//
+//        // Sort the compartments between S and R
+//        // Start from the first compartment (S)
+//        for (size_t i {0}; i < comps.size() - 1; ++i) {
+//            // Get its linked compartment
+//            for (auto& linked: comps[i]->getLinkedCompartment()) {
+//                // Search from the next compartment, if there is a compartment with the same name
+//                // as linkedCompartment, switch it next to the current (i.e i + 1)
+//                for (size_t j {i + 1}; j < comps.size() - 1; ++j) {
+//                    if (comps[j]->getName() == linked.lock()->getName()) {
+//                        auto tmp = comps[i + 1];
+//                        comps[i + 1] = comps[j];
+//                        comps[j] = tmp;
+//                    }
+//                }
+//            }
+//        }
+//    }
+//}
 
 void Model::update(long iter) {
     for (auto& comp: comps) {
