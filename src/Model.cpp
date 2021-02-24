@@ -103,51 +103,6 @@ void Model::sortComps() {
     comps = sortedComps;
 }
 
-//void Model::sortComps() {
-//    if (isCycle) {
-//        std::cout << "A cycle exists in your model, please reconstruct it." << "\n";
-//    } else {
-//        // Find S and R
-//        for (size_t i {0}; i < comps.size(); ++i) {
-//            int sumIsIn {0};
-//            for (auto j: comps[i]->getIsIn()) {
-//                sumIsIn += j;
-//            }
-//
-//            // Find S and shift S to the first position
-//            if (sumIsIn == 0) {
-//                auto tmp = comps[0];
-//                comps[0] = comps[i];
-//                comps[i] = tmp;
-//            }
-//
-//            // Find R and shift R to the last position
-//            if (sumIsIn > 1) {
-//                auto tmp = comps[comps.size() - 1];
-//                comps[comps.size() - 1] = comps[i];
-//                comps[i] = tmp;
-//            }
-//        }
-//
-//        // Sort the compartments between S and R
-//        // Start from the first compartment (S)
-//        for (size_t i {0}; i < comps.size() - 1; ++i) {
-//            // Get its linked compartment
-//            for (auto& linked: comps[i]->getLinkedCompartment()) {
-//                // Search from the next compartment, if there is a compartment with the same name
-//                // as linkedCompartment, switch it next to the current (i.e i + 1)
-//                for (size_t j {i + 1}; j < comps.size() - 1; ++j) {
-//                    if (comps[j]->getName() == linked.lock()->getName()) {
-//                        auto tmp = comps[i + 1];
-//                        comps[i + 1] = comps[j];
-//                        comps[j] = tmp;
-//                    }
-//                }
-//            }
-//        }
-//    }
-//}
-
 void Model::update(long iter) {
     for (auto& comp: comps) {
         comp->updateValue(iter);
