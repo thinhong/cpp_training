@@ -34,7 +34,7 @@ void Model::addCompsAndConnect(std::shared_ptr<Compartment>& A, std::shared_ptr<
     B->addLinkedWeight(weight);
 }
 
-int Model::getIndex(std::shared_ptr<Compartment>&& comp) {
+int Model::getIndex(std::shared_ptr<Compartment> comp) {
     auto it = find(comps.begin(), comps.end(), comp);
     int index {-1};
     if (it != comps.end()) {

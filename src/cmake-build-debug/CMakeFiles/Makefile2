@@ -74,18 +74,100 @@ CMAKE_BINARY_DIR = /home/thinh/Dropbox/oucru/cpp/cpp_training/src/cmake-build-de
 
 # The main recursive "all" target.
 all: CMakeFiles/SEAIHCR.dir/all
+all: tests/all
 
 .PHONY : all
 
 # The main recursive "preinstall" target.
-preinstall:
+preinstall: tests/preinstall
 
 .PHONY : preinstall
 
 # The main recursive "clean" target.
 clean: CMakeFiles/SEAIHCR.dir/clean
+clean: tests/clean
 
 .PHONY : clean
+
+#=============================================================================
+# Directory level rules for directory tests
+
+# Recursive "all" directory target.
+tests/all: tests/CMakeFiles/Google_Tests_run.dir/all
+tests/all: tests/lib/all
+
+.PHONY : tests/all
+
+# Recursive "preinstall" directory target.
+tests/preinstall: tests/lib/preinstall
+
+.PHONY : tests/preinstall
+
+# Recursive "clean" directory target.
+tests/clean: tests/CMakeFiles/Google_Tests_run.dir/clean
+tests/clean: tests/lib/clean
+
+.PHONY : tests/clean
+
+#=============================================================================
+# Directory level rules for directory tests/lib
+
+# Recursive "all" directory target.
+tests/lib/all: tests/lib/googlemock/all
+
+.PHONY : tests/lib/all
+
+# Recursive "preinstall" directory target.
+tests/lib/preinstall: tests/lib/googlemock/preinstall
+
+.PHONY : tests/lib/preinstall
+
+# Recursive "clean" directory target.
+tests/lib/clean: tests/lib/googlemock/clean
+
+.PHONY : tests/lib/clean
+
+#=============================================================================
+# Directory level rules for directory tests/lib/googlemock
+
+# Recursive "all" directory target.
+tests/lib/googlemock/all: tests/lib/googlemock/CMakeFiles/gmock_main.dir/all
+tests/lib/googlemock/all: tests/lib/googlemock/CMakeFiles/gmock.dir/all
+tests/lib/googlemock/all: tests/lib/googletest/all
+
+.PHONY : tests/lib/googlemock/all
+
+# Recursive "preinstall" directory target.
+tests/lib/googlemock/preinstall: tests/lib/googletest/preinstall
+
+.PHONY : tests/lib/googlemock/preinstall
+
+# Recursive "clean" directory target.
+tests/lib/googlemock/clean: tests/lib/googlemock/CMakeFiles/gmock_main.dir/clean
+tests/lib/googlemock/clean: tests/lib/googlemock/CMakeFiles/gmock.dir/clean
+tests/lib/googlemock/clean: tests/lib/googletest/clean
+
+.PHONY : tests/lib/googlemock/clean
+
+#=============================================================================
+# Directory level rules for directory tests/lib/googletest
+
+# Recursive "all" directory target.
+tests/lib/googletest/all: tests/lib/googletest/CMakeFiles/gtest_main.dir/all
+tests/lib/googletest/all: tests/lib/googletest/CMakeFiles/gtest.dir/all
+
+.PHONY : tests/lib/googletest/all
+
+# Recursive "preinstall" directory target.
+tests/lib/googletest/preinstall:
+
+.PHONY : tests/lib/googletest/preinstall
+
+# Recursive "clean" directory target.
+tests/lib/googletest/clean: tests/lib/googletest/CMakeFiles/gtest_main.dir/clean
+tests/lib/googletest/clean: tests/lib/googletest/CMakeFiles/gtest.dir/clean
+
+.PHONY : tests/lib/googletest/clean
 
 #=============================================================================
 # Target rules for target CMakeFiles/SEAIHCR.dir
@@ -94,7 +176,7 @@ clean: CMakeFiles/SEAIHCR.dir/clean
 CMakeFiles/SEAIHCR.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SEAIHCR.dir/build.make CMakeFiles/SEAIHCR.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SEAIHCR.dir/build.make CMakeFiles/SEAIHCR.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/thinh/Dropbox/oucru/cpp/cpp_training/src/cmake-build-debug/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13 "Built target SEAIHCR"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/thinh/Dropbox/oucru/cpp/cpp_training/src/cmake-build-debug/CMakeFiles --progress-num=3,4,5,6,7,8,9,10,11,12,13,14,15 "Built target SEAIHCR"
 .PHONY : CMakeFiles/SEAIHCR.dir/all
 
 # Build rule for subdir invocation for target.
@@ -113,6 +195,143 @@ SEAIHCR: CMakeFiles/SEAIHCR.dir/rule
 CMakeFiles/SEAIHCR.dir/clean:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SEAIHCR.dir/build.make CMakeFiles/SEAIHCR.dir/clean
 .PHONY : CMakeFiles/SEAIHCR.dir/clean
+
+#=============================================================================
+# Target rules for target tests/CMakeFiles/Google_Tests_run.dir
+
+# All Build rule for target.
+tests/CMakeFiles/Google_Tests_run.dir/all: tests/lib/googletest/CMakeFiles/gtest_main.dir/all
+tests/CMakeFiles/Google_Tests_run.dir/all: tests/lib/googletest/CMakeFiles/gtest.dir/all
+	$(MAKE) $(MAKESILENT) -f tests/CMakeFiles/Google_Tests_run.dir/build.make tests/CMakeFiles/Google_Tests_run.dir/depend
+	$(MAKE) $(MAKESILENT) -f tests/CMakeFiles/Google_Tests_run.dir/build.make tests/CMakeFiles/Google_Tests_run.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/thinh/Dropbox/oucru/cpp/cpp_training/src/cmake-build-debug/CMakeFiles --progress-num=1,2 "Built target Google_Tests_run"
+.PHONY : tests/CMakeFiles/Google_Tests_run.dir/all
+
+# Build rule for subdir invocation for target.
+tests/CMakeFiles/Google_Tests_run.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/thinh/Dropbox/oucru/cpp/cpp_training/src/cmake-build-debug/CMakeFiles 6
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tests/CMakeFiles/Google_Tests_run.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/thinh/Dropbox/oucru/cpp/cpp_training/src/cmake-build-debug/CMakeFiles 0
+.PHONY : tests/CMakeFiles/Google_Tests_run.dir/rule
+
+# Convenience name for target.
+Google_Tests_run: tests/CMakeFiles/Google_Tests_run.dir/rule
+
+.PHONY : Google_Tests_run
+
+# clean rule for target.
+tests/CMakeFiles/Google_Tests_run.dir/clean:
+	$(MAKE) $(MAKESILENT) -f tests/CMakeFiles/Google_Tests_run.dir/build.make tests/CMakeFiles/Google_Tests_run.dir/clean
+.PHONY : tests/CMakeFiles/Google_Tests_run.dir/clean
+
+#=============================================================================
+# Target rules for target tests/lib/googlemock/CMakeFiles/gmock_main.dir
+
+# All Build rule for target.
+tests/lib/googlemock/CMakeFiles/gmock_main.dir/all: tests/lib/googlemock/CMakeFiles/gmock.dir/all
+tests/lib/googlemock/CMakeFiles/gmock_main.dir/all: tests/lib/googletest/CMakeFiles/gtest.dir/all
+	$(MAKE) $(MAKESILENT) -f tests/lib/googlemock/CMakeFiles/gmock_main.dir/build.make tests/lib/googlemock/CMakeFiles/gmock_main.dir/depend
+	$(MAKE) $(MAKESILENT) -f tests/lib/googlemock/CMakeFiles/gmock_main.dir/build.make tests/lib/googlemock/CMakeFiles/gmock_main.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/thinh/Dropbox/oucru/cpp/cpp_training/src/cmake-build-debug/CMakeFiles --progress-num=18,19 "Built target gmock_main"
+.PHONY : tests/lib/googlemock/CMakeFiles/gmock_main.dir/all
+
+# Build rule for subdir invocation for target.
+tests/lib/googlemock/CMakeFiles/gmock_main.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/thinh/Dropbox/oucru/cpp/cpp_training/src/cmake-build-debug/CMakeFiles 6
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tests/lib/googlemock/CMakeFiles/gmock_main.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/thinh/Dropbox/oucru/cpp/cpp_training/src/cmake-build-debug/CMakeFiles 0
+.PHONY : tests/lib/googlemock/CMakeFiles/gmock_main.dir/rule
+
+# Convenience name for target.
+gmock_main: tests/lib/googlemock/CMakeFiles/gmock_main.dir/rule
+
+.PHONY : gmock_main
+
+# clean rule for target.
+tests/lib/googlemock/CMakeFiles/gmock_main.dir/clean:
+	$(MAKE) $(MAKESILENT) -f tests/lib/googlemock/CMakeFiles/gmock_main.dir/build.make tests/lib/googlemock/CMakeFiles/gmock_main.dir/clean
+.PHONY : tests/lib/googlemock/CMakeFiles/gmock_main.dir/clean
+
+#=============================================================================
+# Target rules for target tests/lib/googlemock/CMakeFiles/gmock.dir
+
+# All Build rule for target.
+tests/lib/googlemock/CMakeFiles/gmock.dir/all: tests/lib/googletest/CMakeFiles/gtest.dir/all
+	$(MAKE) $(MAKESILENT) -f tests/lib/googlemock/CMakeFiles/gmock.dir/build.make tests/lib/googlemock/CMakeFiles/gmock.dir/depend
+	$(MAKE) $(MAKESILENT) -f tests/lib/googlemock/CMakeFiles/gmock.dir/build.make tests/lib/googlemock/CMakeFiles/gmock.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/thinh/Dropbox/oucru/cpp/cpp_training/src/cmake-build-debug/CMakeFiles --progress-num=16,17 "Built target gmock"
+.PHONY : tests/lib/googlemock/CMakeFiles/gmock.dir/all
+
+# Build rule for subdir invocation for target.
+tests/lib/googlemock/CMakeFiles/gmock.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/thinh/Dropbox/oucru/cpp/cpp_training/src/cmake-build-debug/CMakeFiles 4
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tests/lib/googlemock/CMakeFiles/gmock.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/thinh/Dropbox/oucru/cpp/cpp_training/src/cmake-build-debug/CMakeFiles 0
+.PHONY : tests/lib/googlemock/CMakeFiles/gmock.dir/rule
+
+# Convenience name for target.
+gmock: tests/lib/googlemock/CMakeFiles/gmock.dir/rule
+
+.PHONY : gmock
+
+# clean rule for target.
+tests/lib/googlemock/CMakeFiles/gmock.dir/clean:
+	$(MAKE) $(MAKESILENT) -f tests/lib/googlemock/CMakeFiles/gmock.dir/build.make tests/lib/googlemock/CMakeFiles/gmock.dir/clean
+.PHONY : tests/lib/googlemock/CMakeFiles/gmock.dir/clean
+
+#=============================================================================
+# Target rules for target tests/lib/googletest/CMakeFiles/gtest_main.dir
+
+# All Build rule for target.
+tests/lib/googletest/CMakeFiles/gtest_main.dir/all: tests/lib/googletest/CMakeFiles/gtest.dir/all
+	$(MAKE) $(MAKESILENT) -f tests/lib/googletest/CMakeFiles/gtest_main.dir/build.make tests/lib/googletest/CMakeFiles/gtest_main.dir/depend
+	$(MAKE) $(MAKESILENT) -f tests/lib/googletest/CMakeFiles/gtest_main.dir/build.make tests/lib/googletest/CMakeFiles/gtest_main.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/thinh/Dropbox/oucru/cpp/cpp_training/src/cmake-build-debug/CMakeFiles --progress-num=22,23 "Built target gtest_main"
+.PHONY : tests/lib/googletest/CMakeFiles/gtest_main.dir/all
+
+# Build rule for subdir invocation for target.
+tests/lib/googletest/CMakeFiles/gtest_main.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/thinh/Dropbox/oucru/cpp/cpp_training/src/cmake-build-debug/CMakeFiles 4
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tests/lib/googletest/CMakeFiles/gtest_main.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/thinh/Dropbox/oucru/cpp/cpp_training/src/cmake-build-debug/CMakeFiles 0
+.PHONY : tests/lib/googletest/CMakeFiles/gtest_main.dir/rule
+
+# Convenience name for target.
+gtest_main: tests/lib/googletest/CMakeFiles/gtest_main.dir/rule
+
+.PHONY : gtest_main
+
+# clean rule for target.
+tests/lib/googletest/CMakeFiles/gtest_main.dir/clean:
+	$(MAKE) $(MAKESILENT) -f tests/lib/googletest/CMakeFiles/gtest_main.dir/build.make tests/lib/googletest/CMakeFiles/gtest_main.dir/clean
+.PHONY : tests/lib/googletest/CMakeFiles/gtest_main.dir/clean
+
+#=============================================================================
+# Target rules for target tests/lib/googletest/CMakeFiles/gtest.dir
+
+# All Build rule for target.
+tests/lib/googletest/CMakeFiles/gtest.dir/all:
+	$(MAKE) $(MAKESILENT) -f tests/lib/googletest/CMakeFiles/gtest.dir/build.make tests/lib/googletest/CMakeFiles/gtest.dir/depend
+	$(MAKE) $(MAKESILENT) -f tests/lib/googletest/CMakeFiles/gtest.dir/build.make tests/lib/googletest/CMakeFiles/gtest.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/thinh/Dropbox/oucru/cpp/cpp_training/src/cmake-build-debug/CMakeFiles --progress-num=20,21 "Built target gtest"
+.PHONY : tests/lib/googletest/CMakeFiles/gtest.dir/all
+
+# Build rule for subdir invocation for target.
+tests/lib/googletest/CMakeFiles/gtest.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/thinh/Dropbox/oucru/cpp/cpp_training/src/cmake-build-debug/CMakeFiles 2
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tests/lib/googletest/CMakeFiles/gtest.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/thinh/Dropbox/oucru/cpp/cpp_training/src/cmake-build-debug/CMakeFiles 0
+.PHONY : tests/lib/googletest/CMakeFiles/gtest.dir/rule
+
+# Convenience name for target.
+gtest: tests/lib/googletest/CMakeFiles/gtest.dir/rule
+
+.PHONY : gtest
+
+# clean rule for target.
+tests/lib/googletest/CMakeFiles/gtest.dir/clean:
+	$(MAKE) $(MAKESILENT) -f tests/lib/googletest/CMakeFiles/gtest.dir/build.make tests/lib/googletest/CMakeFiles/gtest.dir/clean
+.PHONY : tests/lib/googletest/CMakeFiles/gtest.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

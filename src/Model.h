@@ -19,7 +19,7 @@ public:
     void addCompsAndConnect(std::shared_ptr<Compartment>& A, std::shared_ptr<Compartment>& B, double weight = 1);
 
     // Use depth-first-search algorithm to detect cycle https://www.geeksforgeeks.org/detect-cycle-in-a-graph/
-    int getIndex(std::shared_ptr<Compartment>&& comp);
+    int getIndex(std::shared_ptr<Compartment> comp);
     bool checkCycleHelper(size_t i, std::vector<bool>& visited, std::vector<bool>& recursiveStack);
     void checkCycle();
     // Only for debugging

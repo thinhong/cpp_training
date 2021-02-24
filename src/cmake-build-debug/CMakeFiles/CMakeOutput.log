@@ -459,3 +459,31 @@ Parsed CXX implicit link information from above output:
   implicit fwks: []
 
 
+Determining if the include file pthread.h exists passed with the following output:
+Change Dir: /home/thinh/Dropbox/oucru/cpp/cpp_training/src/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_beba4/fast && /usr/bin/make  -f CMakeFiles/cmTC_beba4.dir/build.make CMakeFiles/cmTC_beba4.dir/build
+make[1]: Entering directory '/home/thinh/Dropbox/oucru/cpp/cpp_training/src/cmake-build-debug/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_beba4.dir/CheckIncludeFile.c.o
+/usr/bin/cc    -o CMakeFiles/cmTC_beba4.dir/CheckIncludeFile.c.o   -c /home/thinh/Dropbox/oucru/cpp/cpp_training/src/cmake-build-debug/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTC_beba4
+/snap/clion/139/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_beba4.dir/link.txt --verbose=1
+/usr/bin/cc      -rdynamic CMakeFiles/cmTC_beba4.dir/CheckIncludeFile.c.o  -o cmTC_beba4 
+make[1]: Leaving directory '/home/thinh/Dropbox/oucru/cpp/cpp_training/src/cmake-build-debug/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the function pthread_create exists in the pthread passed with the following output:
+Change Dir: /home/thinh/Dropbox/oucru/cpp/cpp_training/src/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_4fbdb/fast && /usr/bin/make  -f CMakeFiles/cmTC_4fbdb.dir/build.make CMakeFiles/cmTC_4fbdb.dir/build
+make[1]: Entering directory '/home/thinh/Dropbox/oucru/cpp/cpp_training/src/cmake-build-debug/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_4fbdb.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_4fbdb.dir/CheckFunctionExists.c.o   -c /snap/clion/139/bin/cmake/linux/share/cmake-3.17/Modules/CheckFunctionExists.c
+Linking C executable cmTC_4fbdb
+/snap/clion/139/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_4fbdb.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create    -rdynamic CMakeFiles/cmTC_4fbdb.dir/CheckFunctionExists.c.o  -o cmTC_4fbdb  -lpthread 
+make[1]: Leaving directory '/home/thinh/Dropbox/oucru/cpp/cpp_training/src/cmake-build-debug/CMakeFiles/CMakeTmp'
+
+
+
