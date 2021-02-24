@@ -10,7 +10,7 @@
 
 class Distribution {
 public:
-    static inline double errorTolerance;
+    static inline double errorTolerance {0.01};
     virtual std::string getDistName() = 0;
     virtual size_t getMaxDay() = 0;
     virtual double getCumulativeProb(size_t index) = 0;
