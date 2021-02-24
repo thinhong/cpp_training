@@ -87,20 +87,25 @@ void Model::sortCompsHelper(size_t i, std::vector<bool> &visited, std::stack<std
 }
 
 void Model::sortComps() {
-    std::stack<std::shared_ptr<Compartment>> stack;
-    std::vector<std::shared_ptr<Compartment>> sortedComps;
-    std::vector<bool> visited;
-    visited.resize(comps.size(), false);
-    for (size_t i {0}; i < comps.size(); ++i) {
-        if (!visited[i]) {
-            sortCompsHelper(i, visited, stack);
+    checkCycle();
+    if (isCycle) {
+        std::cout << "A cycle exists in your model." << "\n";
+    } else {
+        std::stack<std::shared_ptr<Compartment>> stack;
+        std::vector<std::shared_ptr<Compartment>> sortedComps;
+        std::vector<bool> visited;
+        visited.resize(comps.size(), false);
+        for (size_t i{0}; i < comps.size(); ++i) {
+            if (!visited[i]) {
+                sortCompsHelper(i, visited, stack);
+            }
         }
+        while (!stack.empty()) {
+            sortedComps.push_back(stack.top());
+            stack.pop();
+        }
+        comps = sortedComps;
     }
-    while (!stack.empty()) {
-        sortedComps.push_back(stack.top());
-        stack.pop();
-    }
-    comps = sortedComps;
 }
 
 void Model::update(long iter) {

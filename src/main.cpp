@@ -84,7 +84,6 @@ int main() {
 
     Model myModel;
     myModel.addFromConfig(allCompartments);
-    myModel.checkCycle();
     myModel.sortComps();
 
     // ======================== End JSON config ==============================
@@ -152,7 +151,6 @@ int main() {
 //
 //    // Test with a isCycle: A_r going back to E
 //    // myModel.addCompsAndConnect(A_r, E);
-//    myModel.checkCycle();
 //    myModel.sortComps();
 
     // ========================== End manual code ==============================
@@ -209,9 +207,9 @@ int main() {
 //    FileCSV file(config["filePath"], config["fileName"], pModel);
 //    file.writeFile();
 
-    Model* pModel = &myModel;
-    FileCSV file("/home/thinh/Downloads", "manual_2.csv", pModel);
-    file.writeFile();
+//    Model* pModel = &myModel;
+//    FileCSV file("/home/thinh/Downloads", "manual_2.csv", pModel);
+//    file.writeFile();
 //
 //    FileJSON json("/home/thinh/Downloads", "test_r0_3_diffWaitingTime.json", pModel);
 //    json.writeFile();
