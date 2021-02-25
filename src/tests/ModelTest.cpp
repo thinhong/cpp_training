@@ -151,6 +151,125 @@ TEST(ModelTest, sortComp) {
     EXPECT_TRUE(std::is_sorted(indexFlow4.begin(), indexFlow4.end()));
 }
 
+class SimpleCompartment {
+public:
+    std::string name;
+    std::vector<double> dist;
+    std::vector<std::weak_ptr<SimpleCompartment>> linkedCompartment;
+    std::vector<double> linkedWeight;
+    std::vector<bool> isIn;
+    // Variables for computational analyses
+    std::vector<double> total;
+    std::vector<double> subCompartmentValues;
+    double outValue {0};
+
+    void updateValue(long iter);
+};
+
+void SimpleCompartment::updateValue(long iter) {
+    int sumIsIn {0};
+    for (bool value: isIn) {
+        sumIsIn += value;
+    }
+    // For all compartments except S and R
+    if (subCompartmentValues.size() > 1) {
+        outValue = 0;
+        // Going backward from subCompartmentValues[n] -> subCompartmentValues[1]
+        for (size_t i {subCompartmentValues.size() - 1}; i > 0; --i) {
+            outValue += subCompartmentValues[i] * dist[i];
+            subCompartmentValues[i] = subCompartmentValues[i - 1] * (1 - dist[i - 1]);
+        }
+        // All of subCompartmentValues[0] will go to subCompartmentValues[1] so initialize subCompartmentValues[0] = 0
+        subCompartmentValues[0] = 0;
+        // Loop over all linkedCompartment, find the linkedCompartment with isIn == true
+        // Let subCompartmentValues[0] = outValue of that linkedCompartment
+        // Multiply with linkedWeight for situations such as A -> Ar and I, I -> H_h, H_c and H_d
+        for (size_t j {0}; j < linkedCompartment.size(); ++j) {
+            if (isIn[j]) {
+                subCompartmentValues[0] += linkedCompartment[j].lock()->outValue * linkedWeight[j];
+            }
+        }
+    } else if (subCompartmentValues.size() == 1 && sumIsIn == 0) { // For S compartment (S only has 1 value)
+        outValue = subCompartmentValues[0] * dist[0];
+        subCompartmentValues[0] -= outValue;
+    } else if (subCompartmentValues.size() == 1 && sumIsIn > 0) { // For R compartment, only add people from its coming compartments
+        for (size_t j {0}; j < linkedCompartment.size(); ++j) {
+            if (isIn[j]) {
+                subCompartmentValues[0] += linkedCompartment[j].lock()->outValue * linkedWeight[j];
+            }
+        }
+    }
+
+    // Finally sum up subCompartmentValues of this iteration to obtain total value
+    for (auto value: subCompartmentValues) {
+        total[iter] += value;
+    }
+}
+
+TEST(CompartmentTest, update) {
+    auto S = std::make_shared<SimpleCompartment>();
+    auto E = std::make_shared<SimpleCompartment>();
+    auto A = std::make_shared<SimpleCompartment>();
+    auto A_r = std::make_shared<SimpleCompartment>();
+    auto I = std::make_shared<SimpleCompartment>();
+    auto R = std::make_shared<SimpleCompartment>();
+
+    S->name = "S";
+    S->subCompartmentValues = {10000};
+    S->total.resize(100, 0);
+    S->dist = {0.2};
+    S->linkedCompartment = {E};
+    S->isIn = {false};
+    S->linkedWeight = {1.0};
+
+    E->name = "E";
+    E->subCompartmentValues = {500, 600, 700};
+    E->total.resize(100, 0);
+    E->dist = {0, 0.8, 1};
+    E->linkedCompartment = {S, A};
+    E->isIn = {true, false};
+    E->linkedWeight = {1.0, 1.0};
+
+    A->name = "A";
+    A->subCompartmentValues = {5, 6, 7, 8};
+    A->total.resize(100, 0);
+    A->dist = {0, 0.3, 0.7, 1};
+    A->linkedCompartment = {E, A_r, I};
+    A->isIn = {true, false, false};
+    A->linkedWeight = {1.0, 1.0, 1.0};
+
+    A_r->name = "A_r";
+    A_r->subCompartmentValues = {0, 0, 0};
+    A_r->total.resize(100, 0);
+    A_r->dist = {0, 0.4, 1};
+    A_r->linkedCompartment = {A, R};
+    A_r->isIn = {true, false};
+    A_r->linkedWeight = {0.3, 1.0};
+
+    I->name = "I";
+    I->subCompartmentValues = {1, 0, 0};
+    I->total.resize(100, 0);
+    I->dist = {0, 0.5, 1};
+    I->linkedCompartment = {A, R};
+    I->isIn = {true, false};
+    I->linkedWeight = {0.7, 1.0};
+
+    R->name = "R";
+    R->subCompartmentValues = {0};
+    R->total.resize(100, 0);
+    R->dist = {0};
+    R->linkedCompartment = {A_r, I};
+    R->isIn = {true, true};
+    R->linkedWeight = {1.0, 1.0};
+
+    std::vector<std::shared_ptr<SimpleCompartment>> model = {S, E, A, A_r, I, R};
+    for(auto& comp: model) {
+        comp->updateValue(1);
+    }
+
+    EXPECT_TRUE(true);
+}
+
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();

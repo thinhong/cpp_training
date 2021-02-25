@@ -49,12 +49,20 @@ void Compartment::addIsIn(bool isIn) {
     this->isIn.push_back(isIn);
 }
 
-void Compartment::updateValue(long iter) {
-    int sumIsIn {0};
-    for (auto value: isIn) {
+void Compartment::calcSumIsIn() {
+    for (bool value: isIn) {
         sumIsIn += value;
     }
-    // For all compartments except S and R
+}
+
+void Compartment::calcSumIsOut() {
+    sumIsOut = isIn.size() - sumIsIn;
+}
+
+void Compartment::updateValue(long iter) {
+    // Note: the first (S) and last (R, D) compartments must be defined with bernoulli distribution
+    // Other compartments must not be defined with bernoulli distribution
+    // For all compartments except the first and last compartments
     if (subCompartmentValues.size() > 1) {
         outValue = 0;
         // Going backward from subCompartmentValues[n] -> subCompartmentValues[1]
@@ -72,13 +80,21 @@ void Compartment::updateValue(long iter) {
                 subCompartmentValues[0] += linkedCompartment[j].lock()->outValue * linkedWeight[j];
             }
         }
-    } else if (subCompartmentValues.size() == 1 && sumIsIn == 0) { // For S compartment (S only has 1 value)
-        outValue = subCompartmentValues[0] * dist->getCumulativeProb(0);
-        subCompartmentValues[0] -= outValue;
-    } else if (subCompartmentValues.size() == 1 && sumIsIn > 0) { // For R compartment, only add people from its coming compartments
-        for (size_t j {0}; j < linkedCompartment.size(); ++j) {
-            if (isIn[j]) {
-                subCompartmentValues[0] += linkedCompartment[j].lock()->outValue * linkedWeight[j];
+    }
+    // For compartments with with bernoulli distribution
+    else if (subCompartmentValues.size() == 1) {
+        // First, check if it is the first compartment (S)
+        if (sumIsIn == 0) {
+            outValue = subCompartmentValues[0] * dist->getCumulativeProb(0);
+            subCompartmentValues[0] -= outValue;
+        }
+        // Then check if it is the last compartment (R or D)
+        else if (sumIsOut == 0) {
+            // No need to compute outValue here, but it is possible to have multiple input compartments
+            for (size_t j {0}; j < linkedCompartment.size(); ++j) {
+                if (isIn[j]) {
+                    subCompartmentValues[0] += linkedCompartment[j].lock()->outValue * linkedWeight[j];
+                }
             }
         }
     }

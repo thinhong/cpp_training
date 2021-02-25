@@ -14,12 +14,12 @@ public:
     Model() = default;
     std::vector<std::shared_ptr<Compartment>> getComps();
     // Add compartment to model when using JSON config file
-    void addFromConfig(std::vector<std::shared_ptr<Compartment>>& comps);
+    void addCompsFromConfig(std::vector<std::shared_ptr<Compartment>>& comps);
     // When add and connect compartment, define weight if weight != 1, otherwise use default weight = 1
     void addCompsAndConnect(std::shared_ptr<Compartment>& A, std::shared_ptr<Compartment>& B, double weight = 1);
+    int getIndex(std::shared_ptr<Compartment> comp);
 
     // Use depth-first-search algorithm to detect cycle https://www.geeksforgeeks.org/detect-cycle-in-a-graph/
-    int getIndex(std::shared_ptr<Compartment> comp);
     bool checkCycleHelper(size_t i, std::vector<bool>& visited, std::vector<bool>& recursiveStack);
     void checkCycle();
     // Only for debugging
@@ -29,6 +29,7 @@ public:
     // Use topological sorting algorithm to sort https://www.geeksforgeeks.org/topological-sorting/
     void sortCompsHelper(size_t i, std::vector<bool>& visited, std::stack<std::shared_ptr<Compartment>>& stack);
     void sortComps();
+
     void update(long iter);
 };
 

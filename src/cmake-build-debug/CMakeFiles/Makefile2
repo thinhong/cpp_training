@@ -200,8 +200,6 @@ CMakeFiles/SEAIHCR.dir/clean:
 # Target rules for target tests/CMakeFiles/Google_Tests_run.dir
 
 # All Build rule for target.
-tests/CMakeFiles/Google_Tests_run.dir/all: tests/lib/googlemock/CMakeFiles/gmock_main.dir/all
-tests/CMakeFiles/Google_Tests_run.dir/all: tests/lib/googlemock/CMakeFiles/gmock.dir/all
 tests/CMakeFiles/Google_Tests_run.dir/all: tests/lib/googletest/CMakeFiles/gtest_main.dir/all
 tests/CMakeFiles/Google_Tests_run.dir/all: tests/lib/googletest/CMakeFiles/gtest.dir/all
 	$(MAKE) $(MAKESILENT) -f tests/CMakeFiles/Google_Tests_run.dir/build.make tests/CMakeFiles/Google_Tests_run.dir/depend
@@ -211,7 +209,7 @@ tests/CMakeFiles/Google_Tests_run.dir/all: tests/lib/googletest/CMakeFiles/gtest
 
 # Build rule for subdir invocation for target.
 tests/CMakeFiles/Google_Tests_run.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/thinh/Dropbox/oucru/cpp/cpp_training/src/cmake-build-debug/CMakeFiles 10
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/thinh/Dropbox/oucru/cpp/cpp_training/src/cmake-build-debug/CMakeFiles 6
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tests/CMakeFiles/Google_Tests_run.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/thinh/Dropbox/oucru/cpp/cpp_training/src/cmake-build-debug/CMakeFiles 0
 .PHONY : tests/CMakeFiles/Google_Tests_run.dir/rule

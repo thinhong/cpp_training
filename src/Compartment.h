@@ -14,11 +14,15 @@ private:
     std::vector<std::weak_ptr<Compartment>> linkedCompartment;
     std::vector<double> linkedWeight;
     std::vector<bool> isIn;
+    // Save sumIsIn and sumIsOut as member variables instead of computing each time running updateValue to save computational cost
+    size_t sumIsIn;
+    size_t sumIsOut;
     // Variables for computational analyses
     std::vector<double> total;
     std::vector<double> subCompartmentValues;
     double outValue {0};
 public:
+    static inline size_t daysFollowUp {200};
     Compartment(std::string name, double initVal, std::shared_ptr<Distribution> dist);
 
     Compartment() = delete;
@@ -27,7 +31,6 @@ public:
     ~Compartment() {
 //        std::cout << name << " destructor called." << std::endl;
     }
-    static inline size_t daysFollowUp {200};
     // Getters
     std::vector<double> getTotal();
     std::vector<double> getSubCompartmentValues();
@@ -42,9 +45,12 @@ public:
     void addLinkedCompartment(std::weak_ptr<Compartment> linkedCompartment);
     void addIsIn(bool isIn);
 
+    // Helper functions to calculate sumIsIn and sumIsOut
+    void calcSumIsIn();
+    void calcSumIsOut();
+
     // Method for update total in each iteration
     void updateValue(long iter);
-
 };
 
 

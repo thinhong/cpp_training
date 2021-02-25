@@ -6,7 +6,7 @@ std::vector<std::shared_ptr<Compartment>> Model::getComps() {
     return comps;
 }
 
-void Model::addFromConfig(std::vector<std::shared_ptr<Compartment>> &comps) {
+void Model::addCompsFromConfig(std::vector<std::shared_ptr<Compartment>> &comps) {
     this->comps = comps;
 }
 
@@ -105,6 +105,12 @@ void Model::sortComps() {
             stack.pop();
         }
         comps = sortedComps;
+    }
+    // Now we can assure that the model has been constructed well, calculate sumIsIn and sumIsOut here
+    for (auto& comp: comps) {
+        // We have to call calcSumIsIn before calling calcSumIsOut because calcSumIsOut = isIn.size() - sumIsIn
+        comp->calcSumIsIn();
+        comp->calcSumIsOut();
     }
 }
 

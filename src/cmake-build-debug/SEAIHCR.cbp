@@ -130,8 +130,6 @@
 				<Compiler>
 					<Add directory="/home/thinh/Dropbox/oucru/cpp/cpp_training/src/tests/lib/googletest/include"/>
 					<Add directory="/home/thinh/Dropbox/oucru/cpp/cpp_training/src/tests/lib/googletest"/>
-					<Add directory="/home/thinh/Dropbox/oucru/cpp/cpp_training/src/tests/lib/googlemock/include"/>
-					<Add directory="/home/thinh/Dropbox/oucru/cpp/cpp_training/src/tests/lib/googlemock"/>
 					<Add directory="/usr/include/c++/9"/>
 					<Add directory="/usr/include/x86_64-linux-gnu/c++/9"/>
 					<Add directory="/usr/include/c++/9/backward"/>
@@ -156,8 +154,6 @@
 				<Compiler>
 					<Add directory="/home/thinh/Dropbox/oucru/cpp/cpp_training/src/tests/lib/googletest/include"/>
 					<Add directory="/home/thinh/Dropbox/oucru/cpp/cpp_training/src/tests/lib/googletest"/>
-					<Add directory="/home/thinh/Dropbox/oucru/cpp/cpp_training/src/tests/lib/googlemock/include"/>
-					<Add directory="/home/thinh/Dropbox/oucru/cpp/cpp_training/src/tests/lib/googlemock"/>
 					<Add directory="/usr/include/c++/9"/>
 					<Add directory="/usr/include/x86_64-linux-gnu/c++/9"/>
 					<Add directory="/usr/include/c++/9/backward"/>
@@ -446,7 +442,7 @@
 		<Unit filename="/home/thinh/Dropbox/oucru/cpp/cpp_training/src/prob.hpp">
 			<Option target="SEAIHCR"/>
 		</Unit>
-		<Unit filename="/home/thinh/Dropbox/oucru/cpp/cpp_training/src/tests/Test1.cpp">
+		<Unit filename="/home/thinh/Dropbox/oucru/cpp/cpp_training/src/tests/ModelTest.cpp">
 			<Option target="Google_Tests_run"/>
 		</Unit>
 		<Unit filename="/home/thinh/Dropbox/oucru/cpp/cpp_training/src/tests/lib/googlemock/src/gmock-all.cc">
