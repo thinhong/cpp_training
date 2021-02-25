@@ -41,32 +41,68 @@ TEST(ModelTest, sortComp) {
     Model myModel;
 
     // Add and also connect all compartments into myModel
-    // S -> E -> A
-    myModel.addCompsAndConnect(S, E);
-    myModel.addCompsAndConnect(E, A);
-    // A -> A_r and I
-    myModel.addCompsAndConnect(A, A_r, 0.35);
-    myModel.addCompsAndConnect(A, I, 0.65);
-    // A_r -> R
-    myModel.addCompsAndConnect(A_r, R);
-    // I -> H_h, H_c and H_d
-    myModel.addCompsAndConnect(I, H_h, 0.7);
-    myModel.addCompsAndConnect(I, H_c, 0.2);
-    myModel.addCompsAndConnect(I, H_d, 0.1);
-    // H_h -> R
-    myModel.addCompsAndConnect(H_h, R);
-    // H_c -> C_c -> R
-    myModel.addCompsAndConnect(H_c, C_c);
     myModel.addCompsAndConnect(C_c, R);
-    // H_d -> C_d -> D
-    myModel.addCompsAndConnect(H_d, C_d);
+    myModel.addCompsAndConnect(H_c, C_c);
+    myModel.addCompsAndConnect(A_r, R);
+    myModel.addCompsAndConnect(S, E);
+    myModel.addCompsAndConnect(A, I, 0.65);
+    myModel.addCompsAndConnect(E, A);
     myModel.addCompsAndConnect(C_d, D);
+    myModel.addCompsAndConnect(A, A_r, 0.35);
+    myModel.addCompsAndConnect(I, H_c, 0.2);
+    myModel.addCompsAndConnect(H_h, R);
+    myModel.addCompsAndConnect(I, H_h, 0.7);
+    myModel.addCompsAndConnect(I, H_d, 0.1);
+    myModel.addCompsAndConnect(H_d, C_d);
 
     // Test with a isCycle: A_r going back to E
+    std::cout << "Before sorting: ";
+    for (auto& comp: myModel.getComps()) {
+        std::cout << comp->getName() << ' ';
+    }
+    std::cout << "\n";
     // myModel.addCompsAndConnect(A_r, E);
     myModel.sortComps();
+    std::cout << "After sorting: ";
+    for (auto& comp: myModel.getComps()) {
+        std::cout << comp->getName() << ' ';
+    }
+    std::cout << "\n";
 
-    EXPECT_TRUE(myModel.getIndex(S) < myModel.getIndex(D));
+    // Test for each flow
+    // S -> E -> A -> A_r -> R
+    std::vector<std::shared_ptr<Compartment>> flow1 {S, E, A, A_r, R};
+    std::vector<size_t> indexFlow1;
+    indexFlow1.reserve(flow1.size());
+    for (auto& i: flow1) {
+        indexFlow1.push_back(myModel.getIndex(i));
+    }
+    // S -> E -> A -> I -> H_h -> R
+    std::vector<std::shared_ptr<Compartment>> flow2 {S, E, A, I, H_h, R};
+    std::vector<size_t> indexFlow2;
+    indexFlow2.reserve(flow2.size());
+    for (auto& i: flow2) {
+        indexFlow2.push_back(myModel.getIndex(i));
+    }
+    // S -> E -> A -> I -> H_c -> C_c -> R
+    std::vector<std::shared_ptr<Compartment>> flow3 {S, E, A, I, H_c, C_c, R};
+    std::vector<size_t> indexFlow3;
+    indexFlow3.reserve(flow3.size());
+    for (auto& i: flow3) {
+        indexFlow3.push_back(myModel.getIndex(i));
+    }
+    // // S -> E -> A -> I -> H_d -> C_d -> D
+    std::vector<std::shared_ptr<Compartment>> flow4 {S, E, A, I, H_d, C_d, D};
+    std::vector<size_t> indexFlow4;
+    indexFlow4.reserve(flow4.size());
+    for (auto& i: flow4) {
+        indexFlow4.push_back(myModel.getIndex(i));
+    }
+
+    ASSERT_TRUE(std::is_sorted(indexFlow1.begin(), indexFlow1.end()));
+    ASSERT_TRUE(std::is_sorted(indexFlow2.begin(), indexFlow2.end()));
+    ASSERT_TRUE(std::is_sorted(indexFlow3.begin(), indexFlow3.end()));
+    ASSERT_TRUE(std::is_sorted(indexFlow4.begin(), indexFlow4.end()));
 }
 
 int main(int argc, char **argv) {
