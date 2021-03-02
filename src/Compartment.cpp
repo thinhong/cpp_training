@@ -57,6 +57,7 @@ void Compartment::addIsIn(bool isIn) {
 void Compartment::updateValue(long iter) {
     // Note: the first (S) and last (R, D) compartments must be defined with bernoulli distribution
     // Other compartments must not be defined with bernoulli distribution
+
     // For all compartments except the first and last compartments
     if (subCompartmentValues.size() > 1) {
         outValue = 0;

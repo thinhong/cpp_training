@@ -25,6 +25,10 @@ public:
     void sortCompsHelper(size_t i, std::vector<bool>& visited, std::stack<std::shared_ptr<Compartment>>& stack);
     void sortComps();
 
+    /**
+     * Update subCompartmentValues and total for each compartments in the model
+     * @param iter
+     */
     void update(long iter);
 };
 

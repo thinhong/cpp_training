@@ -45,7 +45,10 @@ public:
     void addLinkedCompartment(std::weak_ptr<Compartment> linkedCompartment);
     void addIsIn(bool isIn);
 
-    // Method for update total in each iteration
+    /**
+     * Update subCompartmentValues and total at each iteration
+     * @param iter
+     */
     void updateValue(long iter);
 };
 
