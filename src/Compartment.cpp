@@ -36,10 +36,6 @@ std::vector<double> Compartment::getLinkedWeight() {
     return linkedWeight;
 }
 
-size_t Compartment::getNInNodes() {
-    return nInNodes;
-}
-
 // Setters
 void Compartment::addLinkedCompartment(std::weak_ptr<Compartment> linkedCompartment) {
     this->linkedCompartment.push_back(linkedCompartment);

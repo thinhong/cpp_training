@@ -10,7 +10,7 @@ FileCSV::FileCSV(std::string filePath, std::string fileName, Model* model) {
     this->filePath = filePath;
     this->fileName = fileName;
     this->model = model;
-};
+}
 
 void FileCSV::writeFile() {
     std::string fullPath;
