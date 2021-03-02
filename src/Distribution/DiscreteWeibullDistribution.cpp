@@ -1,25 +1,25 @@
 //
-// Created by thinh on 05/02/2021.
+// Created by thinh on 08/02/2021.
 //
 
-#include "prob.hpp"
-#include "DiscreteGammaDistribution.h"
+#include "../prob.hpp"
+#include "DiscreteWeibullDistribution.h"
 
-DiscreteGammaDistribution::DiscreteGammaDistribution(double scale, double shape) {
+DiscreteWeibullDistribution::DiscreteWeibullDistribution(double scale, double shape) {
     this->scale = scale;
     this->shape = shape;
     this->calcCumulativeProb();
 }
 
-void DiscreteGammaDistribution::calcCumulativeProb() {
+void DiscreteWeibullDistribution::calcCumulativeProb() {
     double tempProb {0};
     size_t i {0};
-    while (tempProb <= (1 - Distribution::errorTolerance)) {
+    while (tempProb < (1 - Distribution::errorTolerance)) {
         // https://people.sc.fsu.edu/~jburkardt/cpp_src/prob/prob.cpp
         // A controls the location of the peak;  A is often chosen to be 0.0.
         // B is the "scale" parameter; 0.0 < B, and is often 1.0.
         // C is the "shape" parameter; 0.0 < C, and is often 1.0.
-        tempProb = gamma_cdf(i, 0, scale, shape);
+        tempProb = weibull_cdf(i, 0, scale, shape);
         cumulativeProb.push_back(tempProb);
         ++i;
     }
@@ -27,7 +27,7 @@ void DiscreteGammaDistribution::calcCumulativeProb() {
     maxDay = cumulativeProb.size();
 }
 
-double DiscreteGammaDistribution::getCumulativeProb(size_t index) {
+double DiscreteWeibullDistribution::getCumulativeProb(size_t index) {
     if (index > cumulativeProb.size()) {
         return 1;
     } else {
@@ -35,18 +35,18 @@ double DiscreteGammaDistribution::getCumulativeProb(size_t index) {
     }
 }
 
-size_t DiscreteGammaDistribution::getMaxDay() {
+size_t DiscreteWeibullDistribution::getMaxDay() {
     return maxDay;
 }
 
-std::string DiscreteGammaDistribution::getDistName() {
-    return distName;
-}
-
-double DiscreteGammaDistribution::getScale() {
+double DiscreteWeibullDistribution::getScale() {
     return scale;
 }
 
-double DiscreteGammaDistribution::getShape() {
+double DiscreteWeibullDistribution::getShape() {
     return shape;
+}
+
+std::string DiscreteWeibullDistribution::getDistName() {
+    return distName;
 }

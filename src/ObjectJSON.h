@@ -8,8 +8,8 @@
 #include "json.hpp"
 #include <memory>
 #include "Compartment.h"
-#include "DiscreteGammaDistribution.h"
-#include "DiscreteWeibullDistribution.h"
+#include "Distribution/DiscreteGammaDistribution.h"
+#include "Distribution/DiscreteWeibullDistribution.h"
 
 class ObjectJSON {
     nlohmann::json jsonNode;

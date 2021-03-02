@@ -5,7 +5,7 @@
 #include <vector>
 #include <memory>
 #include <string>
-#include "Distribution.h"
+#include "Distribution/Distribution.h"
 
 class Compartment {
 private:
