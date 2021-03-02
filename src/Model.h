@@ -9,7 +9,6 @@
 class Model {
 private:
     std::vector<std::shared_ptr<Compartment>> comps;
-    bool isCycle {false};
 public:
     Model() = default;
     std::vector<std::shared_ptr<Compartment>> getComps();
@@ -20,8 +19,6 @@ public:
     // Use depth-first-search algorithm to detect cycle https://www.geeksforgeeks.org/detect-cycle-in-a-graph/
     bool checkCycleHelper(size_t i, std::vector<bool>& visited, std::vector<bool>& recursiveStack);
     void checkCycle();
-    // Only for debugging
-    bool getCycle() {return isCycle;};
 
     // Only sort compartments after ensuring that no isCycle exists
     // Use topological sorting algorithm to sort https://www.geeksforgeeks.org/topological-sorting/

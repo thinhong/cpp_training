@@ -102,14 +102,14 @@ int main() {
         myModel.update(i);
 
         // For debug
-        std::cout << "Iteration: " << i << std::endl;
-        for (size_t j {0}; j < myModel.getComps().size(); ++j) {
-            std::cout << myModel.getComps()[j]->getName() << ": ";
-            for (auto k: myModel.getComps()[j]->getSubCompartmentValues()) {
-                std::cout << k << " ";
-            }
-            std::cout << std::endl;
-        }
+//        std::cout << "Iteration: " << i << std::endl;
+//        for (size_t j {0}; j < myModel.getComps().size(); ++j) {
+//            std::cout << myModel.getComps()[j]->getName() << ": ";
+//            for (auto k: myModel.getComps()[j]->getSubCompartmentValues()) {
+//                std::cout << k << " ";
+//            }
+//            std::cout << std::endl;
+//        }
     }
 
 //    nlohmann::json jsonArray;

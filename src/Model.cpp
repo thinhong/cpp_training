@@ -43,8 +43,14 @@ void Model::checkCycle() {
     std::vector<bool> recursiveStack;
     recursiveStack.resize(comps.size(), false);
     for (size_t i {0}; i < comps.size(); ++i) {
-        if (checkCycleHelper(i, visited, recursiveStack)) {
-            isCycle = true;
+        try {
+            if (checkCycleHelper(i, visited, recursiveStack)) {
+                throw i;
+            }
+        }
+        catch (size_t i) {
+            std::cout << "A cycle in your model, please check." << "\n";
+            std::terminate();
         }
     }
 }
@@ -64,24 +70,20 @@ void Model::sortCompsHelper(size_t i, std::vector<bool> &visited, std::stack<std
 
 void Model::sortComps() {
     checkCycle();
-    if (isCycle) {
-        std::cout << "A cycle exists in your model." << "\n";
-    } else {
-        std::stack<std::shared_ptr<Compartment>> stack;
-        std::vector<std::shared_ptr<Compartment>> sortedComps;
-        std::vector<bool> visited;
-        visited.resize(comps.size(), false);
-        for (size_t i{0}; i < comps.size(); ++i) {
-            if (!visited[i]) {
-                sortCompsHelper(i, visited, stack);
-            }
+    std::stack<std::shared_ptr<Compartment>> stack;
+    std::vector<std::shared_ptr<Compartment>> sortedComps;
+    std::vector<bool> visited;
+    visited.resize(comps.size(), false);
+    for (size_t i{0}; i < comps.size(); ++i) {
+        if (!visited[i]) {
+            sortCompsHelper(i, visited, stack);
         }
-        while (!stack.empty()) {
-            sortedComps.push_back(stack.top());
-            stack.pop();
-        }
-        comps = sortedComps;
     }
+    while (!stack.empty()) {
+        sortedComps.push_back(stack.top());
+        stack.pop();
+    }
+    comps = sortedComps;
 }
 
 void Model::update(long iter) {
