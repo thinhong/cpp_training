@@ -36,6 +36,10 @@ std::vector<double> Compartment::getLinkedWeight() {
     return linkedWeight;
 }
 
+size_t Compartment::getNInNodes() {
+    return nInNodes;
+}
+
 // Setters
 void Compartment::addLinkedCompartment(std::weak_ptr<Compartment> linkedCompartment) {
     this->linkedCompartment.push_back(linkedCompartment);
@@ -47,16 +51,11 @@ void Compartment::addLinkedWeight(double weight) {
 
 void Compartment::addIsIn(bool isIn) {
     this->isIn.push_back(isIn);
-}
-
-void Compartment::calcSumIsIn() {
-    for (bool value: isIn) {
-        sumIsIn += value;
+    if (isIn) {
+        nInNodes += 1;
+    } else {
+        nOutNodes += 1;
     }
-}
-
-void Compartment::calcSumIsOut() {
-    sumIsOut = isIn.size() - sumIsIn;
 }
 
 void Compartment::updateValue(long iter) {
@@ -84,12 +83,12 @@ void Compartment::updateValue(long iter) {
     // For compartments with with bernoulli distribution
     else if (subCompartmentValues.size() == 1) {
         // First, check if it is the first compartment (S)
-        if (sumIsIn == 0) {
+        if (nInNodes == 0) {
             outValue = subCompartmentValues[0] * dist->getCumulativeProb(0);
             subCompartmentValues[0] -= outValue;
         }
         // Then check if it is the last compartment (R or D)
-        else if (sumIsOut == 0) {
+        else if (nOutNodes == 0) {
             // No need to compute outValue here, but it is possible to have multiple input compartments
             for (size_t j {0}; j < linkedCompartment.size(); ++j) {
                 if (isIn[j]) {

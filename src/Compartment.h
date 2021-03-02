@@ -14,9 +14,9 @@ private:
     std::vector<std::weak_ptr<Compartment>> linkedCompartment;
     std::vector<double> linkedWeight;
     std::vector<bool> isIn;
-    // Save sumIsIn and sumIsOut as member variables instead of computing each time running updateValue to save computational cost
-    size_t sumIsIn;
-    size_t sumIsOut;
+    // Save nInNodes and nOutNodes as member variables instead of computing each time running updateValue to save computational cost
+    size_t nInNodes;
+    size_t nOutNodes;
     // Variables for computational analyses
     std::vector<double> total;
     std::vector<double> subCompartmentValues;
@@ -44,10 +44,6 @@ public:
     void addLinkedWeight(double weight);
     void addLinkedCompartment(std::weak_ptr<Compartment> linkedCompartment);
     void addIsIn(bool isIn);
-
-    // Helper functions to calculate sumIsIn and sumIsOut
-    void calcSumIsIn();
-    void calcSumIsOut();
 
     // Method for update total in each iteration
     void updateValue(long iter);

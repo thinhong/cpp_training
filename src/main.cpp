@@ -16,157 +16,77 @@ int main() {
     // ========================== Using JSON config ==============================
 
     // Read a JSON config file to setup all compartments
-//    std::ifstream configFile("/home/thinh/Downloads/config.json");
-//    nlohmann::json config;
-//    configFile >> config;
-//
-//    // Initialize parameters
-//    Compartment::daysFollowUp = config["daysFollowUp"];
-//    const double populationSize = config["populationSize"];
-//    const double transRate = config["transRate"];
-//    // Set error tolerance to all distribution
-//    Distribution::errorTolerance = config["errorTolerance"];
-//    auto forceInfection = std::make_shared<double>();
-//    // Define a vector contains the name of infectious compartments
-//    std::vector<std::string> infectiousComps = config["infectiousComps"];
-//
-//    // Automatically generate all compartments from config file
-//    std::vector<std::shared_ptr<Compartment>> allCompartments;
-//    for (auto& compConfig: config["compartments"]) {
-//        std::shared_ptr<Compartment> tmpComp;
-//        if (compConfig["distribution"]["name"] == "bernoulli") {
-//            size_t sumIsIn {0};
-//            for (bool isIn: compConfig["isIn"]) {
-//                sumIsIn += isIn;
-//            }
-//            if (sumIsIn == 0) {
-//                auto bernoulli = std::make_shared<BernoulliDistribution>(forceInfection);
-//                tmpComp = std::make_shared<Compartment>(compConfig["name"], compConfig["initialValue"], bernoulli);
-//            } else {
-//                auto bernoulli = std::make_shared<BernoulliDistribution>(std::make_shared<double>(compConfig["distribution"]["successRate"]));
-//                tmpComp = std::make_shared<Compartment>(compConfig["name"], compConfig["initialValue"], bernoulli);
-//            }
-//        } else if (compConfig["distribution"]["name"] == "gamma") {
-//            auto gamma = std::make_shared<DiscreteGammaDistribution>(compConfig["distribution"]["scale"], compConfig["distribution"]["shape"]);
-//            tmpComp = std::make_shared<Compartment>(compConfig["name"], compConfig["initialValue"], gamma);
-//        } else if (compConfig["distribution"]["name"] == "weibull") {
-//            auto weibull = std::make_shared<DiscreteWeibullDistribution>(compConfig["distribution"]["scale"], compConfig["distribution"]["shape"]);
-//            tmpComp = std::make_shared<Compartment>(compConfig["name"], compConfig["initialValue"], weibull);
-//        }
-//        // Also add linkedWeight and isIn to the compartment since they are all numeric values
-//        for (double weight: compConfig["linkedWeight"]) {
-//            tmpComp->addLinkedWeight(weight);
-//        }
-//        for (bool isIn: compConfig["isIn"]) {
-//            tmpComp->addIsIn(isIn);
-//        }
-//        allCompartments.push_back(tmpComp);
-//    }
-//
-//    // Add linkedCompartment needs to be done as a separated step because we need all compartments created before connecting them
-//    for (auto& compConfig: config["compartments"]) {
-//        std::weak_ptr<Compartment> baseComp;
-//        for (auto& comp: allCompartments) {
-//            if (comp->getName() == compConfig["name"]) {
-//                baseComp = comp;
-//            }
-//        }
-//        for (auto& linkedConfig: compConfig["linkedCompartment"]) {
-//            std::weak_ptr<Compartment> linkedComp;
-//            for (auto& comp: allCompartments) {
-//                if (comp->getName() == linkedConfig) {
-//                    linkedComp = comp;
-//                    baseComp.lock()->addLinkedCompartment(linkedComp);
-//                }
-//            }
-//        }
-//    }
-//
-//    Model myModel;
-//    myModel.addCompsFromConfig(allCompartments);
-//    myModel.sortComps();
-
-    // ======================== End JSON config ==============================
-
-    // ========================== Manual code ==============================
+    std::ifstream configFile("/home/thinh/Downloads/config.json");
+    nlohmann::json config;
+    configFile >> config;
 
     // Initialize parameters
-    Compartment::daysFollowUp = 200;
-    const double populationSize = 10000000;
-    const double transRate = 3.0;
+    Compartment::daysFollowUp = config["daysFollowUp"];
+    const double populationSize = config["populationSize"];
+    const double transRate = config["transRate"];
     // Set error tolerance to all distribution
-    Distribution::errorTolerance = 0.01;
+    Distribution::errorTolerance = config["errorTolerance"];
     auto forceInfection = std::make_shared<double>();
     // Define a vector contains the name of infectious compartments
-    std::vector<std::string> infectiousComps {"A", "A_r", "I"};
+    std::vector<std::string> infectiousComps = config["infectiousComps"];
 
-    auto bernoulli = std::make_shared<BernoulliDistribution>(forceInfection);
-    auto bernoulli_removed = std::make_shared<BernoulliDistribution>(std::make_shared<double>(0.0));
+    // Automatically generate all compartments from config file
+    std::vector<std::shared_ptr<Compartment>> allCompartments;
+    for (auto& compConfig: config["compartments"]) {
+        std::shared_ptr<Compartment> tmpComp;
+        if (compConfig["distribution"]["name"] == "bernoulli") {
+            size_t sumIsIn {0};
+            for (bool isIn: compConfig["isIn"]) {
+                sumIsIn += isIn;
+            }
+            if (sumIsIn == 0) {
+                auto bernoulli = std::make_shared<BernoulliDistribution>(forceInfection);
+                tmpComp = std::make_shared<Compartment>(compConfig["name"], compConfig["initialValue"], bernoulli);
+            } else {
+                auto bernoulli = std::make_shared<BernoulliDistribution>(std::make_shared<double>(compConfig["distribution"]["successRate"]));
+                tmpComp = std::make_shared<Compartment>(compConfig["name"], compConfig["initialValue"], bernoulli);
+            }
+        } else if (compConfig["distribution"]["name"] == "gamma") {
+            auto gamma = std::make_shared<DiscreteGammaDistribution>(compConfig["distribution"]["scale"], compConfig["distribution"]["shape"]);
+            tmpComp = std::make_shared<Compartment>(compConfig["name"], compConfig["initialValue"], gamma);
+        } else if (compConfig["distribution"]["name"] == "weibull") {
+            auto weibull = std::make_shared<DiscreteWeibullDistribution>(compConfig["distribution"]["scale"], compConfig["distribution"]["shape"]);
+            tmpComp = std::make_shared<Compartment>(compConfig["name"], compConfig["initialValue"], weibull);
+        }
+        // Also add linkedWeight and isIn to the compartment since they are all numeric values
+        for (double weight: compConfig["linkedWeight"]) {
+            tmpComp->addLinkedWeight(weight);
+        }
+        for (bool isIn: compConfig["isIn"]) {
+            tmpComp->addIsIn(isIn);
+        }
+        allCompartments.push_back(tmpComp);
+    }
 
-    auto gamma_7d = std::make_shared<DiscreteGammaDistribution>(1, 1);
-    auto gamma_13d = std::make_shared<DiscreteGammaDistribution>(1, 4);
-    auto weil_16d = std::make_shared<DiscreteWeibullDistribution>(5, 1.5);
-    auto weil_9d = std::make_shared<DiscreteWeibullDistribution>(4, 3);
-    auto weil_2d = std::make_shared<DiscreteWeibullDistribution>(0.5, 5);
+    // Add linkedCompartment needs to be done as a separated step because we need all compartments created before connecting them
+    for (auto& compConfig: config["compartments"]) {
+        std::weak_ptr<Compartment> baseComp;
+        for (auto& comp: allCompartments) {
+            if (comp->getName() == compConfig["name"]) {
+                baseComp = comp;
+            }
+        }
+        for (auto& linkedConfig: compConfig["linkedCompartment"]) {
+            std::weak_ptr<Compartment> linkedComp;
+            for (auto& comp: allCompartments) {
+                if (comp->getName() == linkedConfig) {
+                    linkedComp = comp;
+                    baseComp.lock()->addLinkedCompartment(linkedComp);
+                }
+            }
+        }
+    }
 
-    // Setup compartments
-    auto S = std::make_shared<Compartment>("S", 3000000, bernoulli);
-    auto E = std::make_shared<Compartment>("E", 0, weil_9d);
-    auto A = std::make_shared<Compartment>("A", 0, gamma_7d);
-    auto A_r = std::make_shared<Compartment>("A_r", 0, weil_16d);
-    auto I = std::make_shared<Compartment>("I", 1, weil_2d);
-    auto H_h = std::make_shared<Compartment>("H_h", 0, gamma_7d);
-    auto H_c = std::make_shared<Compartment>("H_c", 0, weil_9d);
-    auto H_d = std::make_shared<Compartment>("H_d", 0, gamma_7d);
-    auto C_c = std::make_shared<Compartment>("C_c", 0, weil_16d);
-    auto C_d = std::make_shared<Compartment>("C_d", 0, gamma_13d);
-    auto D = std::make_shared<Compartment>("D", 0, bernoulli_removed);
-    auto R = std::make_shared<Compartment>("R", 0, bernoulli_removed);
-
-    // Model myModel consists of S, I and R
     Model myModel;
-
-    // Add and also connect all compartments into myModel
-    // S -> E -> A
-    myModel.addCompsAndConnect(S, E);
-    myModel.addCompsAndConnect(E, A);
-    // A -> A_r and I
-    myModel.addCompsAndConnect(A, A_r, 0.35);
-    myModel.addCompsAndConnect(A, I, 0.65);
-    // A_r -> R
-    myModel.addCompsAndConnect(A_r, R);
-    // I -> H_h, H_c and H_d
-    myModel.addCompsAndConnect(I, H_h, 0.7);
-    myModel.addCompsAndConnect(I, H_c, 0.2);
-    myModel.addCompsAndConnect(I, H_d, 0.1);
-    // H_h -> R
-    myModel.addCompsAndConnect(H_h, R);
-    // H_c -> C_c -> R
-    myModel.addCompsAndConnect(H_c, C_c);
-    myModel.addCompsAndConnect(C_c, R);
-    // H_d -> C_d -> D
-    myModel.addCompsAndConnect(H_d, C_d);
-    myModel.addCompsAndConnect(C_d, D);
-
-    // Test with a isCycle: A_r going back to E
-    // myModel.addCompsAndConnect(A_r, E);
+    myModel.addCompsFromConfig(allCompartments);
     myModel.sortComps();
 
-    // ========================== End manual code ==============================
-
-//    for (auto& comp: myModel.getComps()) {
-//        std::cout << comp->getName() << "\n";
-//        for (auto& i: comp->getLinkedCompartment()) {
-//            std::cout << i.lock()->getName() << ' ';
-//        }
-//        std::cout << "\n";
-//        for (auto i: comp->getIsIn()) {
-//            std::cout << i << ' ';
-//        }
-//        std::cout << "\n";
-//        std::cout << "sumIsIn: " << comp->getSumIsIn() << "\n";
-//        std::cout << "sumIsOut: " << comp->getSumIsOut() << "\n";
-//    }
+    // ======================== End JSON config ==============================
 
     // Update model
     for (size_t i {1}; i < Compartment::daysFollowUp; i++) {
@@ -221,10 +141,7 @@ int main() {
 //    file.writeFile();
 
     Model* pModel = &myModel;
-    FileCSV file("/home/thinh/Downloads", "manual_20200226_weil2d.csv", pModel);
+    FileCSV file("/home/thinh/Downloads", "manual_20210301_weil2d.csv", pModel);
     file.writeFile();
-//
-//    FileJSON json("/home/thinh/Downloads", "test_r0_3_diffWaitingTime.json", pModel);
-//    json.writeFile();
 
 }
