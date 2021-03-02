@@ -14,6 +14,7 @@ public:
     std::vector<std::shared_ptr<Compartment>> getComps();
     // Add compartment to model when using JSON config file
     void addCompsFromConfig(std::vector<std::shared_ptr<Compartment>>& comps);
+    void addCompsAndConnect(std::shared_ptr<Compartment>& A, std::shared_ptr<Compartment>& B, double weight);
     int getIndex(std::shared_ptr<Compartment> comp);
 
     // Use depth-first-search algorithm to detect cycle https://www.geeksforgeeks.org/detect-cycle-in-a-graph/

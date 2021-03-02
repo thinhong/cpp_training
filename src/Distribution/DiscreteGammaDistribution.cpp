@@ -11,6 +11,11 @@ DiscreteGammaDistribution::DiscreteGammaDistribution(double scale, double shape)
     this->calcCumulativeProb();
 }
 
+DiscreteGammaDistribution::DiscreteGammaDistribution(std::vector<double> &cumulativeProb, size_t maxDay) {
+    this->cumulativeProb = cumulativeProb;
+    this->maxDay = maxDay;
+}
+
 void DiscreteGammaDistribution::calcCumulativeProb() {
     double tempProb {0};
     size_t i {0};

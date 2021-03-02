@@ -10,6 +10,27 @@ void Model::addCompsFromConfig(std::vector<std::shared_ptr<Compartment>> &comps)
     this->comps = comps;
 }
 
+void Model::addCompsAndConnect(std::shared_ptr<Compartment>& A, std::shared_ptr<Compartment>& B, double weight) {
+    std::vector<std::string> compName;
+    if (!comps.empty()) {
+        for (auto& comp: comps) {
+            compName.push_back(comp->getName());
+        }
+    }
+    if (!(std::find(compName.begin(), compName.end(), A->getName()) != compName.end())) {
+        comps.push_back(A);
+    }
+    if (!(std::find(compName.begin(), compName.end(), B->getName()) != compName.end())) {
+        comps.push_back(B);
+    }
+    A->addLinkedCompartment(B);
+    B->addLinkedCompartment(A);
+    A->addIsIn(false);
+    B->addIsIn(true);
+    A->addLinkedWeight(1);
+    B->addLinkedWeight(weight);
+}
+
 int Model::getIndex(std::shared_ptr<Compartment> comp) {
     auto it = find(comps.begin(), comps.end(), comp);
     int index {-1};
