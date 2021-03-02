@@ -2,7 +2,7 @@
 // Created by thinh on 08/02/2021.
 //
 
-#include "../prob.hpp"
+#include "../prob.h"
 #include "DiscreteWeibullDistribution.h"
 
 DiscreteWeibullDistribution::DiscreteWeibullDistribution(double scale, double shape) {

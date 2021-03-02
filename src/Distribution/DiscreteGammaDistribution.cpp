@@ -2,7 +2,7 @@
 // Created by thinh on 05/02/2021.
 //
 
-#include "../prob.hpp"
+#include "../prob.h"
 #include "DiscreteGammaDistribution.h"
 
 DiscreteGammaDistribution::DiscreteGammaDistribution(double scale, double shape) {

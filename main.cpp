@@ -1,7 +1,7 @@
 #include <iostream>
 #include <array>
 #include <fstream>
-#include "src/json.hpp"
+#include "src/json.h"
 #include "src/Compartment.h"
 #include "src/Model.h"
 #include "src/Distribution/Distribution.h"

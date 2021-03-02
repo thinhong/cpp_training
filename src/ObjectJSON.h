@@ -5,7 +5,7 @@
 #ifndef MAIN_CPP_OBJECTJSON_H
 #define MAIN_CPP_OBJECTJSON_H
 
-#include "json.hpp"
+#include "json.h"
 #include <memory>
 #include "Compartment.h"
 #include "Distribution/DiscreteGammaDistribution.h"

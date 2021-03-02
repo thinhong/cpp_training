@@ -5,7 +5,7 @@
 #include "FileJSON.h"
 #include <fstream>
 #include <iomanip>
-#include "json.hpp"
+#include "json.h"
 
 FileJSON::FileJSON(std::string filePath, std::string fileName, Model *model) {
     this->filePath = filePath;

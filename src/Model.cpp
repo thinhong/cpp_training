@@ -45,11 +45,10 @@ void Model::checkCycle() {
     for (size_t i {0}; i < comps.size(); ++i) {
         try {
             if (checkCycleHelper(i, visited, recursiveStack)) {
-                throw i;
+                throw std::logic_error("A cycle exists in your model");
             }
         }
-        catch (size_t i) {
-            std::cout << "A cycle in your model, please check." << "\n";
+        catch (std::logic_error& e) {
             std::terminate();
         }
     }
