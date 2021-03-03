@@ -26,7 +26,6 @@ int main() {
     const double transRate = config["transRate"];
     // Set error tolerance to all distribution
     Distribution::errorTolerance = config["errorTolerance"];
-    auto forceInfection = std::make_shared<double>();
     // Define a vector contains the name of infectious compartments
     std::vector<std::string> infectiousComps = config["infectiousComps"];
 
@@ -35,17 +34,8 @@ int main() {
     for (auto& compConfig: config["compartments"]) {
         std::shared_ptr<Compartment> tmpComp;
         if (compConfig["distribution"]["name"] == "bernoulli") {
-            size_t sumIsIn {0};
-            for (bool isIn: compConfig["isIn"]) {
-                sumIsIn += isIn;
-            }
-            if (sumIsIn == 0) {
-                auto bernoulli = std::make_shared<BernoulliDistribution>(forceInfection);
-                tmpComp = std::make_shared<Compartment>(compConfig["name"], compConfig["initialValue"], bernoulli);
-            } else {
-                auto bernoulli = std::make_shared<BernoulliDistribution>(std::make_shared<double>(compConfig["distribution"]["successRate"]));
-                tmpComp = std::make_shared<Compartment>(compConfig["name"], compConfig["initialValue"], bernoulli);
-            }
+            auto bernoulli = std::make_shared<BernoulliDistribution>(std::make_shared<double>(compConfig["distribution"]["successRate"]));
+            tmpComp = std::make_shared<Compartment>(compConfig["name"], compConfig["initialValue"], bernoulli);
         } else if (compConfig["distribution"]["name"] == "gamma") {
             auto gamma = std::make_shared<DiscreteGammaDistribution>(compConfig["distribution"]["scale"], compConfig["distribution"]["shape"]);
             tmpComp = std::make_shared<Compartment>(compConfig["name"], compConfig["initialValue"], gamma);
@@ -98,7 +88,13 @@ int main() {
                 }
             }
         }
-        *forceInfection = transRate / populationSize * totalInfectious;
+        for (auto& comp: myModel.getComps()) {
+            if (comp->getNInNodes() == 0) {
+                std::dynamic_pointer_cast<BernoulliDistribution>(comp->getDist())->setForceInfection(transRate,
+                                                                                                     populationSize,
+                                                                                                     totalInfectious);
+            }
+        }
         myModel.update(i);
 
         // For debug
@@ -141,7 +137,7 @@ int main() {
 //    file.writeFile();
 
     Model* pModel = &myModel;
-    FileCSV file("/home/thinh/Downloads", "manual_20210301_weil2d.csv", pModel);
+    FileCSV file("/home/thinh/Downloads", "manual_20210302_weil2d.csv", pModel);
     file.writeFile();
 
 }

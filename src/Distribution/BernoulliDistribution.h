@@ -17,6 +17,7 @@ public:
     double getCumulativeProb(size_t index) override;
     size_t getMaxDay() override;
     std::string getDistName() override;
+    void setForceInfection(double transRate, double popSize, double totalInfectious);
 };
 
 

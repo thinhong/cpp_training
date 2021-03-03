@@ -39,6 +39,7 @@ public:
     std::vector<std::weak_ptr<Compartment>> getLinkedCompartment();
     std::shared_ptr<Distribution> getDist();
     std::vector<double> getLinkedWeight();
+    size_t getNInNodes();
 
     // Setters
     void addLinkedWeight(double weight);
