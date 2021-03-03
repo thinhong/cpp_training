@@ -18,6 +18,7 @@ private:
 public:
     CompartmentJSON() = default;
     explicit CompartmentJSON(nlohmann::json& jsonNode);
+    // Convert compartment to JSON and vice versa
     std::shared_ptr<Compartment> compFromJSON();
     nlohmann::json compToJSON(std::shared_ptr<Compartment>& comp);
     nlohmann::json getJsonNode() {return jsonNode;};
