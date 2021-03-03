@@ -10,13 +10,12 @@
 #include "src/Distribution/DiscreteWeibullDistribution.h"
 #include "src/FileCSV.h"
 #include "src/FileJSON.h"
-#include "src/ObjectJSON.h"
+#include "src/CompartmentJSON.h"
 
 int main() {
     // ========================== Using JSON config ==============================
-
     // Read a JSON config file to setup all compartments
-    std::ifstream configFile("/home/thinh/Downloads/config.json");
+    std::ifstream configFile("../config/config.json");
     nlohmann::json config;
     configFile >> config;
 
@@ -32,25 +31,8 @@ int main() {
     // Automatically generate all compartments from config file
     std::vector<std::shared_ptr<Compartment>> allCompartments;
     for (auto& compConfig: config["compartments"]) {
-        std::shared_ptr<Compartment> tmpComp;
-        if (compConfig["distribution"]["name"] == "bernoulli") {
-            auto bernoulli = std::make_shared<BernoulliDistribution>(std::make_shared<double>(compConfig["distribution"]["successRate"]));
-            tmpComp = std::make_shared<Compartment>(compConfig["name"], compConfig["initialValue"], bernoulli);
-        } else if (compConfig["distribution"]["name"] == "gamma") {
-            auto gamma = std::make_shared<DiscreteGammaDistribution>(compConfig["distribution"]["scale"], compConfig["distribution"]["shape"]);
-            tmpComp = std::make_shared<Compartment>(compConfig["name"], compConfig["initialValue"], gamma);
-        } else if (compConfig["distribution"]["name"] == "weibull") {
-            auto weibull = std::make_shared<DiscreteWeibullDistribution>(compConfig["distribution"]["scale"], compConfig["distribution"]["shape"]);
-            tmpComp = std::make_shared<Compartment>(compConfig["name"], compConfig["initialValue"], weibull);
-        }
-        // Also add linkedWeight and isIn to the compartment since they are all numeric values
-        for (double weight: compConfig["linkedWeight"]) {
-            tmpComp->addLinkedWeight(weight);
-        }
-        for (bool isIn: compConfig["isIn"]) {
-            tmpComp->addIsIn(isIn);
-        }
-        allCompartments.push_back(tmpComp);
+        CompartmentJSON compJson(compConfig);
+        allCompartments.push_back(compJson.compFromJSON());
     }
 
     // Add linkedCompartment needs to be done as a separated step because we need all compartments created before connecting them
@@ -71,14 +53,15 @@ int main() {
             }
         }
     }
+    // ======================== End JSON config ==============================
 
+    // ==================== Construct and run model ==========================
+    // Construct model
     Model myModel;
     myModel.addCompsFromConfig(allCompartments);
     myModel.sortComps();
 
-    // ======================== End JSON config ==============================
-
-    // Update model
+    // Run model
     for (size_t i {1}; i < Compartment::daysFollowUp; i++) {
         double totalInfectious {0.0};
         for (auto& comp: myModel.getComps()) {
@@ -90,9 +73,7 @@ int main() {
         }
         for (auto& comp: myModel.getComps()) {
             if (comp->getNInNodes() == 0) {
-                std::dynamic_pointer_cast<BernoulliDistribution>(comp->getDist())->setForceInfection(transRate,
-                                                                                                     populationSize,
-                                                                                                     totalInfectious);
+                std::dynamic_pointer_cast<BernoulliDistribution>(comp->getDist())->setForceInfection(transRate, populationSize, totalInfectious);
             }
         }
         myModel.update(i);
@@ -107,26 +88,29 @@ int main() {
 //            std::cout << std::endl;
 //        }
     }
+    // ================== End construct and run model ========================
 
-//    nlohmann::json jsonArray;
-//    jsonArray["daysFollowUp"] = Compartment::daysFollowUp;
-//    jsonArray["errorTolerance"] = Distribution::errorTolerance;
-//    jsonArray["populationSize"] = populationSize;
-//    jsonArray["transRate"] = transRate;
-//    jsonArray["infectiousComps"] = infectiousComps;
+    // ========================= Write output ================================
+    // Create json object for config file
+//    nlohmann::json writeConfig;
+//    writeConfig["daysFollowUp"] = Compartment::daysFollowUp;
+//    writeConfig["errorTolerance"] = Distribution::errorTolerance;
+//    writeConfig["populationSize"] = populationSize;
+//    writeConfig["transRate"] = transRate;
+//    writeConfig["infectiousComps"] = infectiousComps;
 //    for (auto i: myModel.getComps()) {
-//        ObjectJSON jsonNode;
-//        jsonNode.toJSON(i);
-//        jsonArray["compartments"].push_back(jsonNode.getJsonNode());
+//        CompartmentJSON jsonNode;
+//        jsonNode.compToJSON(i);
+//        writeConfig["compartments"].push_back(jsonNode.getJsonNode());
 //    }
-//    std::cout << jsonArray;
 //
+//    // Write config file
 //    std::ofstream myFile("/home/thinh/Downloads/config2.json");
-//
 //    if (myFile.is_open()) {
-//        myFile << jsonArray;
+//        myFile << writeConfig;
 //        myFile.close();
-//        std::cout << "Successfully written into file: /home/thinh/Downloads/config2.json" << std::endl;
+//        std::cout << "Successfully written config information into file: /home/thinh/Downloads/config2.json" <<
+//        std::endl;
 //    } else {
 //        std::cout << "Unable to open file" << std::endl;
 //    }
@@ -137,7 +121,7 @@ int main() {
 //    file.writeFile();
 
     Model* pModel = &myModel;
-    FileCSV file("/home/thinh/Downloads", "manual_20210302_weil2d.csv", pModel);
+    FileCSV file(config["outputDir"], config["outputFileName"], pModel);
     file.writeFile();
 
 }
