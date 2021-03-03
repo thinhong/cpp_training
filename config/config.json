@@ -4,7 +4,7 @@
     "infectiousComps":["A","A_r","I"],
     "populationSize":10000000.0,
     "transRate":1.5,
-    "outputDir":"/home/thinh/Downloads",
+    "outputFolder":"/home/thinh/Downloads",
     "outputFileName":"test_20210303.csv",
     "compartments":[
         

@@ -115,13 +115,9 @@ int main() {
 //        std::cout << "Unable to open file" << std::endl;
 //    }
 
-    // File output
-//    Model* pModel = &myModel;
-//    FileCSV file(config["filePath"], config["fileName"], pModel);
-//    file.writeFile();
-
+    // Write output to CSV file
     Model* pModel = &myModel;
-    FileCSV file(config["outputDir"], config["outputFileName"], pModel);
+    FileCSV file(config["outputFolder"], config["outputFileName"], pModel);
     file.writeFile();
 
 }
