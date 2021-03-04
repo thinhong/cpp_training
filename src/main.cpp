@@ -18,7 +18,7 @@ int main() {
     // ========================== Using JSON input ==============================
     // Read a JSON input file to provide parameters
     std::string inputPath;
-    std::cout << "Enter path to input file: ";
+    std::cout << "Enter full path to input file (ex: /home/Documents/config.json): ";
     std::cin >> inputPath;
     std::ifstream inputFile(inputPath);
     nlohmann::json input;
@@ -138,9 +138,9 @@ int main() {
     Model* pModel = &myModel;
     std::string outputFolder;
     std::string outputFileName;
-    std::cout << "Set path to save your output file (ex: /home/Documents): ";
+    std::cout << "Set path to the folder you want to save output file (ex: /home/Documents): ";
     std::cin >> outputFolder;
-    std::cout << "Set path to save your output file (ex: results.csv): ";
+    std::cout << "Set your output file name (ex: results.csv): ";
     std::cin >> outputFileName;
     FileCSV file(outputFolder, outputFileName, pModel);
     file.writeFile();
