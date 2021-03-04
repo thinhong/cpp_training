@@ -42,6 +42,6 @@ void FileCSV::writeFile() {
         myFile.close();
         std::cout << "Successfully write simulation output into file: " << fullPath << std::endl;
     } else {
-        std::cerr << "Unable to write file: " << std::endl;
+        std::cerr << "Unable to write file: " << fullPath << std::endl;
     }
 }
