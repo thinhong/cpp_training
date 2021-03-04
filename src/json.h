@@ -15178,7 +15178,7 @@ inline void grisu2_round(char* buf, int len, std::uint64_t dist, std::uint64_t d
     // stored in buf.
     // Decrement buf by ten_k while this takes buf closer to w.
 
-    // The tests are written in this order to avoid overflow in unsigned
+    // The test are written in this order to avoid overflow in unsigned
     // integer arithmetic.
 
     while (rest < dist

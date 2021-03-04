@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.17)
 project(SEAIHCR)
 
 set(CMAKE_CXX_STANDARD 17)
-add_subdirectory(tests)
+add_subdirectory(test)
 
 add_executable(SEAIHCR main.cpp
         src/prob.cpp src/prob.h src/json.h
