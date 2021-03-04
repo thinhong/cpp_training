@@ -5,6 +5,8 @@
 #include "../src/Distribution/BernoulliDistribution.cpp"
 #include "../src/Distribution/DiscreteGammaDistribution.h"
 #include "../src/Distribution/DiscreteGammaDistribution.cpp"
+#include "../src/Distribution/CustomDistribution.h"
+#include "../src/Distribution/CustomDistribution.cpp"
 #include "../src/Compartment.h"
 #include "../src/Compartment.cpp"
 #include "../src/prob.h"
@@ -14,7 +16,7 @@
 
 TEST(GammaTest, getCumulativeProb) {
     std::vector<double> cumProb = {0.5, 0.6, 0.7};
-    DiscreteGammaDistribution dist(cumProb, 3);
+    DiscreteGammaDistribution dist(cumProb);
     EXPECT_EQ(0.5, dist.getCumulativeProb(0));
 }
 
@@ -25,13 +27,19 @@ TEST(GammaTest, calcCumulativeProb) {
     EXPECT_NEAR(0.9502129, dist.getCumulativeProb(3), 0.00001);
 }
 
+TEST(CustomDistributionTest, getCumulativeProb) {
+    std::vector<double> cumProb = {0.5, 0.6, 0.7};
+    CustomDistribution dist(cumProb);
+    EXPECT_TRUE(true);
+}
+
 TEST(ModelTest, test) {
     const double populationSize = 1000000;
     const double transRate = 2.0;
     auto forceInfection = std::make_shared<double>();
     std::vector<double> cumProb = {0.0, 0.3, 1};
     auto S = make_shared<Compartment>("S", 10000, make_shared<BernoulliDistribution>(forceInfection));
-    auto I = make_shared<Compartment>("I", 500, make_shared<DiscreteGammaDistribution>(cumProb, 3));
+    auto I = make_shared<Compartment>("I", 500, make_shared<DiscreteGammaDistribution>(cumProb));
     auto R = make_shared<Compartment>("R", 0, make_shared<BernoulliDistribution>(make_shared<double>(0.0)));
     auto D = make_shared<Compartment>("D", 0, make_shared<BernoulliDistribution>(make_shared<double>(0.0)));
 
