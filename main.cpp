@@ -16,7 +16,7 @@
 int main() {
     // ========================== Using JSON config ==============================
     // Read a JSON config file to setup all compartments
-    std::ifstream configFile("../config/config.json");
+    std::ifstream configFile("../config/config_SIR.json");
     nlohmann::json config;
     configFile >> config;
 
