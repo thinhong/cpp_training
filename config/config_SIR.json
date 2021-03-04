@@ -3,7 +3,7 @@
     "errorTolerance":0.001,
     "infectiousComps":["I"],
     "populationSize":1000.0,
-    "transRate":2,
+    "transRate":4,
     "compartments":[
 
         {
