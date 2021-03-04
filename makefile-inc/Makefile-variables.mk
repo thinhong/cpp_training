@@ -9,7 +9,7 @@ include makefile-inc/Project-variables.mk
 ## Set basic flags for the compiler (you rarely need to change this file).
 ################################################################################
 ## Compiler standard
-CXXSTANDARD := c++11
+CXXSTANDARD := c++17
 
 ## CC Compiler Flags
 CCFLAGS          :=

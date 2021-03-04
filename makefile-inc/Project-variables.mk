@@ -1,8 +1,8 @@
 ## Project Name
-PRJ_NAME := PrjName
+PRJ_NAME := DiscreteTimeModel
 
 ## The folder that contains all the source files
-PRJ_SOURCEROOT := source
+PRJ_SOURCEROOT := src
 
 ## The folder that will contain the final built files
 PRJ_EXEDIR := .
@@ -15,7 +15,7 @@ PRJ_SHLIBNAME :=lib${PRJ_NAME}.so
 
 ## Include directories
 ## Example:  PRJ_INCLUDE:= -I./include -I/usr/share/include
-PRJ_INCLUDE := -I./source
+PRJ_INCLUDE := -I./src
 
 ## Link library folders
 ## Example:  PRJ_LIBDIR:= -L./lib

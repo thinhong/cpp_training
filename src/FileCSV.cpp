@@ -42,6 +42,6 @@ void FileCSV::writeFile() {
         myFile.close();
         std::cout << "Successfully written into file: " << fullPath << std::endl;
     } else {
-        std::cout << "Unable to open file" << std::endl;
+        std::cerr << "Unable to write file: " << std::endl;
     }
 }

@@ -4,7 +4,7 @@ project(SEAIHCR)
 set(CMAKE_CXX_STANDARD 17)
 add_subdirectory(test)
 
-add_executable(SEAIHCR main.cpp
+add_executable(SEAIHCR src/main.cpp
         src/prob.cpp src/prob.h src/json.h
         src/Compartment.cpp src/Compartment.h src/Model.cpp src/Model.h
         src/Distribution/Distribution.cpp src/Distribution/Distribution.h

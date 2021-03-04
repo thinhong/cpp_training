@@ -1,32 +1,36 @@
 #include <iostream>
+#include <string>
 #include <array>
 #include <fstream>
 #include <stdexcept>
-#include "src/json.h"
-#include "src/Compartment.h"
-#include "src/Model.h"
-#include "src/Distribution/Distribution.h"
-#include "src/Distribution/BernoulliDistribution.h"
-#include "src/Distribution/DiscreteGammaDistribution.h"
-#include "src/Distribution/DiscreteWeibullDistribution.h"
-#include "src/FileCSV.h"
-#include "src/FileJSON.h"
-#include "src/CompartmentJSON.h"
+#include "json.h"
+#include "Compartment.h"
+#include "Model.h"
+#include "Distribution/Distribution.h"
+#include "Distribution/BernoulliDistribution.h"
+#include "Distribution/DiscreteGammaDistribution.h"
+#include "Distribution/DiscreteWeibullDistribution.h"
+#include "FileCSV.h"
+#include "FileJSON.h"
+#include "CompartmentJSON.h"
 
 int main() {
-    // ========================== Using JSON config ==============================
-    // Read a JSON config file to setup all compartments
-    std::ifstream configFile("../config/config_SIR.json");
-    nlohmann::json config;
-    configFile >> config;
+    // ========================== Using JSON input ==============================
+    // Read a JSON input file to provide parameters
+    std::string inputPath;
+    std::cout << "Enter path to input file: ";
+    std::cin >> inputPath;
+    std::ifstream inputFile(inputPath);
+    nlohmann::json input;
+    inputFile >> input;
 
     // Check populationSize = sum of initial values of all compartments
     double sumAllComps {0};
-    for (auto& compConfig: config["compartments"]) {
-        sumAllComps += static_cast<double>(compConfig["initialValue"]);
+    for (auto& compInput: input["compartments"]) {
+        sumAllComps += static_cast<double>(compInput["initialValue"]);
     }
     try {
-        if (static_cast<double>(config["populationSize"]) != sumAllComps) {
+        if (static_cast<double>(input["populationSize"]) != sumAllComps) {
             throw std::logic_error("Population size is not equal to sum of all initial values of compartments");
         }
     }
@@ -35,23 +39,23 @@ int main() {
     }
 
     // Initialize parameters
-    Compartment::daysFollowUp = config["daysFollowUp"];
-    const double populationSize = config["populationSize"];
-    const double transRate = config["transRate"];
+    Compartment::daysFollowUp = input["daysFollowUp"];
+    const double populationSize = input["populationSize"];
+    const double transRate = input["transRate"];
     // Set error tolerance to all distribution
-    Distribution::errorTolerance = config["errorTolerance"];
+    Distribution::errorTolerance = input["errorTolerance"];
     // Define a vector contains the name of infectious compartments
-    std::vector<std::string> infectiousComps = config["infectiousComps"];
+    std::vector<std::string> infectiousComps = input["infectiousComps"];
 
-    // Automatically generate all compartments from config file
+    // Automatically generate all compartments from input file
     std::vector<std::shared_ptr<Compartment>> allCompartments;
-    for (auto& compConfig: config["compartments"]) {
+    for (auto& compConfig: input["compartments"]) {
         CompartmentJSON compJson(compConfig);
         allCompartments.push_back(compJson.compFromJSON());
     }
 
     // Add linkedCompartment needs to be done as a separated step because we need all compartments created before connecting them
-    for (auto& compConfig: config["compartments"]) {
+    for (auto& compConfig: input["compartments"]) {
         std::weak_ptr<Compartment> baseComp;
         for (auto& comp: allCompartments) {
             if (comp->getName() == compConfig["name"]) {
@@ -68,7 +72,7 @@ int main() {
             }
         }
     }
-    // ======================== End JSON config ==============================
+    // ======================== End JSON input ==============================
 
     // ==================== Construct and run model ==========================
     // Construct model
@@ -106,7 +110,7 @@ int main() {
     // ================== End construct and run model ========================
 
     // ========================= Write output ================================
-    // Create json object for config file
+    // Create json object to store all input parameters
 //    nlohmann::json writeConfig;
 //    writeConfig["daysFollowUp"] = Compartment::daysFollowUp;
 //    writeConfig["errorTolerance"] = Distribution::errorTolerance;
@@ -119,20 +123,26 @@ int main() {
 //        writeConfig["compartments"].push_back(jsonNode.getJsonNode());
 //    }
 //
-//    // Write config file
+//    // Write input parameters into a file
 //    std::ofstream myFile("/home/thinh/Downloads/config2.json");
 //    if (myFile.is_open()) {
 //        myFile << writeConfig;
 //        myFile.close();
-//        std::cout << "Successfully written config information into file: /home/thinh/Downloads/config2.json" <<
+//        std::cout << "Successfully written input information into file: /home/thinh/Downloads/config2.json" <<
 //        std::endl;
 //    } else {
-//        std::cout << "Unable to open file" << std::endl;
+//        std::cout << "Unable to write file" << std::endl;
 //    }
 
     // Write output to CSV file
     Model* pModel = &myModel;
-    FileCSV file(config["outputFolder"], config["outputFileName"], pModel);
+    std::string outputFolder;
+    std::string outputFileName;
+    std::cout << "Set path to save your output file (ex: /home/Documents): ";
+    std::cin >> outputFolder;
+    std::cout << "Set path to save your output file (ex: results.csv): ";
+    std::cin >> outputFileName;
+    FileCSV file(outputFolder, outputFileName, pModel);
     file.writeFile();
 
 }
