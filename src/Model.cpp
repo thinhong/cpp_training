@@ -1,6 +1,7 @@
 #include "Model.h"
 #include <algorithm>
 #include <stack>
+#include <stdexcept>
 
 std::vector<std::shared_ptr<Compartment>> Model::getComps() {
     return comps;

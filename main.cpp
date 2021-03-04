@@ -1,6 +1,7 @@
 #include <iostream>
 #include <array>
 #include <fstream>
+#include <stdexcept>
 #include "src/json.h"
 #include "src/Compartment.h"
 #include "src/Model.h"
@@ -18,6 +19,20 @@ int main() {
     std::ifstream configFile("../config/config.json");
     nlohmann::json config;
     configFile >> config;
+
+    // Check populationSize = sum of initial values of all compartments
+    double sumAllComps {0};
+    for (auto& compConfig: config["compartments"]) {
+        sumAllComps += static_cast<double>(compConfig["initialValue"]);
+    }
+    try {
+        if (static_cast<double>(config["populationSize"]) != sumAllComps) {
+            throw std::logic_error("Population size is not equal to sum of all initial values of compartments");
+        }
+    }
+    catch (std::logic_error& oor) {
+        std::terminate();
+    }
 
     // Initialize parameters
     Compartment::daysFollowUp = config["daysFollowUp"];
