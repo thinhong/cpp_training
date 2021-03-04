@@ -1,0 +1,18 @@
+In most case, you do not need to modify anything except the following two files:
+    Project-variables.mk          stores project-specific variables.
+    Project-preprocessors.mk      stores project-specific macro that
+                                  will be passed to the compiler.
+
+Compiler options are defined in:
+    Makefile-variables.mk
+
+The makefile usage is implemented in:
+    Makefile-help.mk
+
+Do NOT modify the following files:
+    Makefile.mk
+    Makefile-impl.mk
+
+
+Adding variables is acceptable.
+Changing variables' names is very error prone.
