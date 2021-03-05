@@ -3,7 +3,7 @@
     "errorTolerance":0.001,
     "infectiousComps":["I"],
     "populationSize":1000.0,
-    "transRate":4,
+    "transRate":0.096,
     "compartments":[
 
         {
@@ -16,7 +16,7 @@
         },
         {
             "name":"I",
-            "distribution":{"name":"gamma","scale":2.0,"shape":1.0},
+            "distribution":{"name":"gamma","scale":0.08333333,"shape":1.0},
             "initialValue":1.0,
             "linkedCompartment":["S","R"],
             "isIn":[true,false],
