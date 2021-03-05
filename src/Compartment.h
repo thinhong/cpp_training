@@ -15,8 +15,8 @@ private:
     std::vector<double> linkedWeight;
     std::vector<bool> isIn;
     // Save nInNodes and nOutNodes as member variables instead of computing each time running updateValue to save computational cost
-    size_t nInNodes;
-    size_t nOutNodes;
+    size_t nInNodes {0};
+    size_t nOutNodes {0};
     // Variables for computational analyses
     std::vector<double> total;
     std::vector<double> subCompartmentValues;
