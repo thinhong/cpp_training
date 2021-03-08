@@ -1,23 +1,23 @@
 {
-    "daysFollowUp":100,
+    "daysFollowUp":10,
     "errorTolerance":0.01,
     "infectiousComps":["I"],
-    "populationSize":1000,
-    "transRate":4,
+    "populationSize":10000,
+    "transRate":2,
     "compartments":[
 
         {
             "name":"S",
             "distribution":{"name":"bernoulli","successRate":0.0},
-            "initialValue":999,
+            "initialValue":6000,
             "linkedCompartment":["I"],
             "isIn":[false],
             "linkedWeight":[1.0]
         },
         {
             "name":"I",
-            "distribution":{"name":"exponential","rate":0.5},
-            "initialValue":1,
+            "distribution":{"name":"custom","prob":[0.333333]},
+            "initialValue":10,
             "linkedCompartment":["S","R"],
             "isIn":[true,false],
             "linkedWeight":[1.0,1.0]
@@ -25,7 +25,7 @@
         {
             "name":"R",
             "distribution":{"name":"bernoulli","successRate":0.0},
-            "initialValue":0,
+            "initialValue":5,
             "linkedCompartment":["I"],
             "isIn":[true],
             "linkedWeight":[1.0]

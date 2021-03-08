@@ -19,6 +19,14 @@ std::shared_ptr<Compartment> CompartmentJSON::compFromJSON() {
     } else if (jsonNode["distribution"]["name"] == "weibull") {
         auto weibull = std::make_shared<DiscreteWeibullDistribution>(jsonNode["distribution"]["scale"], jsonNode["distribution"]["shape"]);
         comp = std::make_shared<Compartment>(jsonNode["name"], jsonNode["initialValue"], weibull);
+    } else if (jsonNode["distribution"]["name"] == "exponential") {
+        auto exponential = std::make_shared<DiscreteExponentialDistribution>(jsonNode["distribution"]["rate"]);
+        comp = std::make_shared<Compartment>(jsonNode["name"], jsonNode["initialValue"], exponential);
+    }
+    else if (jsonNode["distribution"]["name"] == "custom") {
+        std::vector<double> prob = jsonNode["distribution"]["prob"];
+        auto custom = std::make_shared<CustomDistribution>(prob);
+        comp = std::make_shared<Compartment>(jsonNode["name"], jsonNode["initialValue"], custom);
     }
     // Also add linkedWeight and isIn to the compartment since they are all numeric values
     for (double weight: jsonNode["linkedWeight"]) {
@@ -40,6 +48,12 @@ nlohmann::json CompartmentJSON::compToJSON(std::shared_ptr<Compartment> &comp) {
         auto castedDist = std::dynamic_pointer_cast<DiscreteWeibullDistribution>(comp->getDist());
         jsonNode["distribution"] = {{"name", comp->getDist()->getDistName()}, {"scale", castedDist->getScale()}, {"shape", castedDist->getShape()}};
     } else if (comp->getDist()->getDistName() == "bernoulli") {
+        jsonNode["distribution"] = {{"name", comp->getDist()->getDistName()}, {"successRate", comp->getDist()->getCumulativeProb(0)}};
+    } else if (comp->getDist()->getDistName() == "exponential") {
+        auto castedDist = std::dynamic_pointer_cast<DiscreteExponentialDistribution>(comp->getDist());
+        jsonNode["distribution"] = {{"name", comp->getDist()->getDistName()}, {"rate", castedDist->getRate()}};
+    }
+    else if (comp->getDist()->getDistName() == "custom") {
         jsonNode["distribution"] = {{"name", comp->getDist()->getDistName()}, {"successRate", comp->getDist()->getCumulativeProb(0)}};
     }
     jsonNode["linkedCompartment"] = {};

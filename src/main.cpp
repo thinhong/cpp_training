@@ -25,18 +25,18 @@ int main() {
     inputFile >> input;
 
     // Check populationSize = sum of initial values of all compartments
-    double sumAllComps {0};
-    for (auto& compInput: input["compartments"]) {
-        sumAllComps += static_cast<double>(compInput["initialValue"]);
-    }
-    try {
-        if (static_cast<double>(input["populationSize"]) != sumAllComps) {
-            throw std::logic_error("Population size is not equal to sum of all initial values of compartments");
-        }
-    }
-    catch (std::logic_error& oor) {
-        std::terminate();
-    }
+//    double sumAllComps {0};
+//    for (auto& compInput: input["compartments"]) {
+//        sumAllComps += static_cast<double>(compInput["initialValue"]);
+//    }
+//    try {
+//        if (static_cast<double>(input["populationSize"]) != sumAllComps) {
+//            throw std::logic_error("Population size is not equal to sum of all initial values of compartments");
+//        }
+//    }
+//    catch (std::logic_error& oor) {
+//        std::terminate();
+//    }
 
     // Initialize parameters
     Compartment::daysFollowUp = input["daysFollowUp"];
@@ -145,4 +145,7 @@ int main() {
     FileCSV file(outputFolder, outputFileName, pModel);
     file.writeFile();
 
+//    Model* pModel = &myModel;
+//    FileCSV file("/home/thinh/Downloads", "testSIR.csv", pModel);
+//    file.writeFile();
 }

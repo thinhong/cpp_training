@@ -7,8 +7,8 @@ Compartment::Compartment(std::string name, double initVal, std::shared_ptr<Distr
     total.resize(daysFollowUp);
     total[0] = initVal;
     // Each total value is binned into many subCompartmentValues, subCompartmentValues[0] is the initVal
-    subCompartmentValues.push_back(initVal);
     subCompartmentValues.resize(this->dist->getMaxDay(), 0);
+    subCompartmentValues[0] = initVal;
 }
 
 // Define list of getters
@@ -61,7 +61,6 @@ void Compartment::addIsIn(bool isIn) {
 void Compartment::updateValue(long iter) {
     // Note: the first (S) and last (R, D) compartments must be defined with bernoulli distribution
     // Other compartments must not be defined with bernoulli distribution
-
     // For all compartments except the first and last compartments
     if (subCompartmentValues.size() > 1) {
         outValue = 0;
@@ -71,6 +70,7 @@ void Compartment::updateValue(long iter) {
             subCompartmentValues[i] = subCompartmentValues[i - 1] * (1 - dist->getCumulativeProb(i - 1));
         }
         // All of subCompartmentValues[0] will go to subCompartmentValues[1] so initialize subCompartmentValues[0] = 0
+        outValue += subCompartmentValues[0] * dist->getCumulativeProb(0);
         subCompartmentValues[0] = 0;
         // Loop over all linkedCompartment, find the linkedCompartment with isIn == true
         // Let subCompartmentValues[0] = outValue of that linkedCompartment
@@ -89,13 +89,14 @@ void Compartment::updateValue(long iter) {
             subCompartmentValues[0] -= outValue;
         }
         // Then check if it is the last compartment (R or D)
-        else if (nOutNodes == 0) {
-            // No need to compute outValue here, but it is possible to have multiple input compartments
+        else {
+            outValue = subCompartmentValues[0] * dist->getCumulativeProb(0);
             for (size_t j {0}; j < linkedCompartment.size(); ++j) {
                 if (isIn[j]) {
                     subCompartmentValues[0] += linkedCompartment[j].lock()->outValue * linkedWeight[j];
                 }
             }
+            subCompartmentValues[0] -= outValue;
         }
     }
 

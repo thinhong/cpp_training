@@ -11,6 +11,8 @@
 #include "Distribution/BernoulliDistribution.h"
 #include "Distribution/DiscreteGammaDistribution.h"
 #include "Distribution/DiscreteWeibullDistribution.h"
+#include "Distribution/DiscreteExponentialDistribution.h"
+#include "Distribution/CustomDistribution.h"
 
 class CompartmentJSON {
 private:

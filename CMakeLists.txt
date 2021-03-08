@@ -11,4 +11,6 @@ add_executable(SEAIHCR src/main.cpp
         src/Distribution/DiscreteGammaDistribution.cpp src/Distribution/DiscreteGammaDistribution.h
         src/Distribution/DiscreteWeibullDistribution.cpp src/Distribution/DiscreteWeibullDistribution.h
         src/Distribution/BernoulliDistribution.cpp src/Distribution/BernoulliDistribution.h
-        src/File.cpp src/File.h src/FileCSV.cpp src/FileCSV.h src/FileJSON.cpp src/FileJSON.h src/CompartmentJSON.cpp src/CompartmentJSON.h src/Distribution/CustomDistribution.cpp src/Distribution/CustomDistribution.h)
+        src/Distribution/DiscreteExponentialDistribution.cpp src/Distribution/DiscreteExponentialDistribution.h
+        src/Distribution/CustomDistribution.cpp src/Distribution/CustomDistribution.h
+        src/File.cpp src/File.h src/FileCSV.cpp src/FileCSV.h src/FileJSON.cpp src/FileJSON.h src/CompartmentJSON.cpp src/CompartmentJSON.h)
