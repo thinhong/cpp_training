@@ -26,10 +26,6 @@ void DiscreteExponentialDistribution::calcCumulativeProb() {
     cumulativeProb.erase(cumulativeProb.begin());
     cumulativeProb.push_back(1);
     maxDay = cumulativeProb.size();
-    for (auto i: cumulativeProb) {
-        std::cout << i <<  ' ';
-    }
-    std::cout << "\n";
 }
 
 std::string DiscreteExponentialDistribution::getDistName() {
