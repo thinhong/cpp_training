@@ -12,8 +12,8 @@ private:
     std::string distName {"exponential"};
     double rate;
     size_t maxDay;
-    std::vector<double> cumulativeProb;
-    void calcCumulativeProb();
+    std::vector<double> transProb;
+    void calcTransProb();
 public:
     explicit DiscreteExponentialDistribution(double rate);
     std::string getDistName() override;

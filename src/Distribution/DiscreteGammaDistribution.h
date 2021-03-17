@@ -13,8 +13,8 @@ private:
     double scale;
     double shape;
     size_t maxDay;
-    std::vector<double> cumulativeProb;
-    void calcCumulativeProb();
+    std::vector<double> transProb;
+    void calcTransProb();
 public:
     DiscreteGammaDistribution(double scale, double shape);
     explicit DiscreteGammaDistribution(std::vector<double>& cumulativeProb);

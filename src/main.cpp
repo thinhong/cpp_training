@@ -13,6 +13,7 @@
 #include "FileCSV.h"
 #include "FileJSON.h"
 #include "CompartmentJSON.h"
+#include <filesystem>
 
 int main() {
     // ========================== Using JSON input ==============================
@@ -81,6 +82,15 @@ int main() {
     myModel.sortComps();
 
     // Run model
+    std::ofstream iterFile("../output/iteration.txt");
+    iterFile << "Iteration: " << "0" << std::endl;
+    for (size_t j {0}; j < myModel.getComps().size(); ++j) {
+        iterFile << myModel.getComps()[j]->getName() << ": ";
+        for (auto k: myModel.getComps()[j]->getSubCompartmentValues()) {
+            iterFile << k << " ";
+        }
+        iterFile << std::endl;
+    }
     for (size_t i {1}; i < Compartment::daysFollowUp; i++) {
         double totalInfectious {0.0};
         for (auto& comp: myModel.getComps()) {
@@ -98,14 +108,14 @@ int main() {
         myModel.update(i);
 
         // For debug
-//        std::cout << "Iteration: " << i << std::endl;
-//        for (size_t j {0}; j < myModel.getComps().size(); ++j) {
-//            std::cout << myModel.getComps()[j]->getName() << ": ";
-//            for (auto k: myModel.getComps()[j]->getSubCompartmentValues()) {
-//                std::cout << k << " ";
-//            }
-//            std::cout << std::endl;
-//        }
+        iterFile << "Iteration: " << i << std::endl;
+        for (size_t j {0}; j < myModel.getComps().size(); ++j) {
+            iterFile << myModel.getComps()[j]->getName() << ": ";
+            for (auto k: myModel.getComps()[j]->getSubCompartmentValues()) {
+                iterFile << k << " ";
+            }
+            iterFile << std::endl;
+        }
     }
     // ================== End construct and run model ========================
 
@@ -135,17 +145,17 @@ int main() {
 //    }
 
     // Write output to CSV file
-    Model* pModel = &myModel;
-    std::string outputFolder;
-    std::string outputFileName;
-    std::cout << "Set path to the folder you want to save output file (ex: /home/Documents): ";
-    std::cin >> outputFolder;
-    std::cout << "Set your output file name (ex: results.csv): ";
-    std::cin >> outputFileName;
-    FileCSV file(outputFolder, outputFileName, pModel);
-    file.writeFile();
-
 //    Model* pModel = &myModel;
-//    FileCSV file("/home/thinh/Downloads", "testSIR.csv", pModel);
+//    std::string outputFolder;
+//    std::string outputFileName;
+//    std::cout << "Set path to the folder you want to save output file (ex: /home/Documents): ";
+//    std::cin >> outputFolder;
+//    std::cout << "Set your output file name (ex: results.csv): ";
+//    std::cin >> outputFileName;
+//    FileCSV file(outputFolder, outputFileName, pModel);
 //    file.writeFile();
+
+    Model* pModel = &myModel;
+    FileCSV file("../output/", "testSIR.csv", pModel);
+    file.writeFile();
 }

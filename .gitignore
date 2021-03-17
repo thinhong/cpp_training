@@ -1,3 +1,6 @@
 /.idea/
 /cmake-build-*
 /build-*
+/compare_DE/
+/output/
+/test/

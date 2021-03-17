@@ -24,7 +24,7 @@ std::shared_ptr<Compartment> CompartmentJSON::compFromJSON() {
         comp = std::make_shared<Compartment>(jsonNode["name"], jsonNode["initialValue"], exponential);
     }
     else if (jsonNode["distribution"]["name"] == "custom") {
-        std::vector<double> prob = jsonNode["distribution"]["prob"];
+        std::vector<double> prob = jsonNode["distribution"]["transProb"];
         auto custom = std::make_shared<CustomDistribution>(prob);
         comp = std::make_shared<Compartment>(jsonNode["name"], jsonNode["initialValue"], custom);
     }
@@ -54,7 +54,7 @@ nlohmann::json CompartmentJSON::compToJSON(std::shared_ptr<Compartment> &comp) {
         jsonNode["distribution"] = {{"name", comp->getDist()->getDistName()}, {"rate", castedDist->getRate()}};
     }
     else if (comp->getDist()->getDistName() == "custom") {
-        jsonNode["distribution"] = {{"name", comp->getDist()->getDistName()}, {"successRate", comp->getDist()->getCumulativeProb(0)}};
+        jsonNode["distribution"] = {{"name", comp->getDist()->getDistName()}, {"transProb", comp->getDist()->getCumulativeProb(0)}};
     }
     jsonNode["linkedCompartment"] = {};
     for (auto i: comp->getLinkedCompartment()) {

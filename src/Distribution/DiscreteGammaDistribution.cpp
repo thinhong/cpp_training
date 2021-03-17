@@ -4,20 +4,12 @@
 
 #include "../prob.h"
 #include "DiscreteGammaDistribution.h"
+#include <iostream>
 
-DiscreteGammaDistribution::DiscreteGammaDistribution(double scale, double shape) {
-    this->scale = scale;
-    this->shape = shape;
-    this->calcCumulativeProb();
-}
-
-DiscreteGammaDistribution::DiscreteGammaDistribution(std::vector<double> &cumulativeProb) {
-    this->cumulativeProb = cumulativeProb;
-    this->maxDay = cumulativeProb.size();
-}
-
-void DiscreteGammaDistribution::calcCumulativeProb() {
+void DiscreteGammaDistribution::calcTransProb() {
+    // First, generate cumulative probability
     double tempProb {0};
+    std::vector<double> cumulativeProb;
     size_t i {0};
     while (tempProb <= (1 - Distribution::errorTolerance)) {
         // https://people.sc.fsu.edu/~jburkardt/cpp_src/prob/prob.cpp
@@ -28,16 +20,45 @@ void DiscreteGammaDistribution::calcCumulativeProb() {
         cumulativeProb.push_back(tempProb);
         ++i;
     }
-    cumulativeProb.erase(cumulativeProb.begin());
     cumulativeProb.push_back(1);
-    maxDay = cumulativeProb.size();
+
+    // Then compute P(0 < waiting time <= 1) by cdf(1) - cdf(0)
+    std::vector<double> waitingTime;
+    for (size_t j {0}; j < (cumulativeProb.size() - 1); ++j) {
+        tempProb = cumulativeProb[j + 1] - cumulativeProb[j];
+        waitingTime.push_back(tempProb);
+    }
+
+    // Finally, compute transProb using waiting time
+    for (size_t k {0}; k < waitingTime.size(); ++k) {
+        transProb.push_back(calcProbHelper(waitingTime, k));
+    }
+
+    for (auto b: transProb) {
+        std::cout << b << "\n";
+    }
+
+    // Remember to calculate max day
+    maxDay = transProb.size();
+    std::cout << maxDay << "\n";
+}
+
+DiscreteGammaDistribution::DiscreteGammaDistribution(double scale, double shape) {
+    this->scale = scale;
+    this->shape = shape;
+    this->calcTransProb();
+}
+
+DiscreteGammaDistribution::DiscreteGammaDistribution(std::vector<double> &cumulativeProb) {
+    this->transProb = cumulativeProb;
+    this->maxDay = cumulativeProb.size();
 }
 
 double DiscreteGammaDistribution::getCumulativeProb(size_t index) {
-    if (index > cumulativeProb.size()) {
+    if (index > transProb.size()) {
         return 1;
     } else {
-        return cumulativeProb[index];
+        return transProb[index];
     }
 }
 
