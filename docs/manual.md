@@ -1,3 +1,10 @@
+## All parameters
+daysFollowUp
+populationSize
+transRate
+errorTolerance
+infectiousComps
+
 ## Compartment
 
 Each compartment should be constructed inside a couple of braces `{}` with 6 parameters:

@@ -10,25 +10,35 @@ CompartmentJSON::CompartmentJSON(nlohmann::json& jsonNode) {
 
 std::shared_ptr<Compartment> CompartmentJSON::compFromJSON() {
     std::shared_ptr<Compartment> comp;
+
+    // Bernoulli distribution: parameter is "successRate"
     if (jsonNode["distribution"]["name"] == "bernoulli") {
         auto bernoulli = std::make_shared<BernoulliDistribution>(std::make_shared<double>(jsonNode["distribution"]["successRate"]));
         comp = std::make_shared<Compartment>(jsonNode["name"], jsonNode["initialValue"], bernoulli);
-    } else if (jsonNode["distribution"]["name"] == "gamma") {
+    }
+    // Gamma distribution: parameters are "scale" and "shape"
+    else if (jsonNode["distribution"]["name"] == "gamma") {
         auto gamma = std::make_shared<DiscreteGammaDistribution>(jsonNode["distribution"]["scale"], jsonNode["distribution"]["shape"]);
         comp = std::make_shared<Compartment>(jsonNode["name"], jsonNode["initialValue"], gamma);
-    } else if (jsonNode["distribution"]["name"] == "weibull") {
+    }
+    // Weibull distribution: parameters are "scale" and "shape"
+    else if (jsonNode["distribution"]["name"] == "weibull") {
         auto weibull = std::make_shared<DiscreteWeibullDistribution>(jsonNode["distribution"]["scale"], jsonNode["distribution"]["shape"]);
         comp = std::make_shared<Compartment>(jsonNode["name"], jsonNode["initialValue"], weibull);
-    } else if (jsonNode["distribution"]["name"] == "exponential") {
+    }
+    // Exponential distribution: parameter is "rate"
+    else if (jsonNode["distribution"]["name"] == "exponential") {
         auto exponential = std::make_shared<DiscreteExponentialDistribution>(jsonNode["distribution"]["rate"]);
         comp = std::make_shared<Compartment>(jsonNode["name"], jsonNode["initialValue"], exponential);
     }
+    // Custom distribution: parameter is a vector "waitingTime"
     else if (jsonNode["distribution"]["name"] == "custom") {
         std::vector<double> waitingTime = jsonNode["distribution"]["waitingTime"];
         auto custom = std::make_shared<CustomDistribution>(waitingTime);
         comp = std::make_shared<Compartment>(jsonNode["name"], jsonNode["initialValue"], custom);
     }
-    // Also add linkedWeight and isIn to the compartment since they are all numeric values
+
+    // Also add linkedWeight and isIn to the compartment
     for (double weight: jsonNode["linkedWeight"]) {
         comp->addLinkedWeight(weight);
     }
@@ -41,25 +51,27 @@ std::shared_ptr<Compartment> CompartmentJSON::compFromJSON() {
 nlohmann::json CompartmentJSON::compToJSON(std::shared_ptr<Compartment> &comp) {
     jsonNode["name"] = comp->getName();
     jsonNode["initialValue"] = comp->getTotal()[0];
-    if (comp->getDist()->getDistName() == "gamma") {
+    if (comp->getDist()->getDistName() == "bernoulli") {
+        jsonNode["distribution"] = {{"name", comp->getDist()->getDistName()}, {"successRate", comp->getDist()->getTransProb(0)}};
+    }
+    else if (comp->getDist()->getDistName() == "gamma") {
         auto castedDist = std::dynamic_pointer_cast<DiscreteGammaDistribution>(comp->getDist());
-        jsonNode["distribution"] = {{"name", comp->getDist()->getDistName()}, {"scale", castedDist->getScale()}, {"shape", castedDist->getShape()}};
-    } else if (comp->getDist()->getDistName() == "weibull") {
+        jsonNode["distribution"] = {{"name", castedDist->getDistName()}, {"scale", castedDist->getScale()}, {"shape", castedDist->getShape()}};
+    }
+    else if (comp->getDist()->getDistName() == "weibull") {
         auto castedDist = std::dynamic_pointer_cast<DiscreteWeibullDistribution>(comp->getDist());
-        jsonNode["distribution"] = {{"name", comp->getDist()->getDistName()}, {"scale", castedDist->getScale()}, {"shape", castedDist->getShape()}};
-    } else if (comp->getDist()->getDistName() == "bernoulli") {
-        jsonNode["distribution"] = {{"name", comp->getDist()->getDistName()}, {"successRate", comp->getDist()
-                                                                                                  ->getTransProb(0)}};
-    } else if (comp->getDist()->getDistName() == "exponential") {
+        jsonNode["distribution"] = {{"name", castedDist->getDistName()}, {"scale", castedDist->getScale()}, {"shape", castedDist->getShape()}};
+    }
+    else if (comp->getDist()->getDistName() == "exponential") {
         auto castedDist = std::dynamic_pointer_cast<DiscreteExponentialDistribution>(comp->getDist());
-        jsonNode["distribution"] = {{"name", comp->getDist()->getDistName()}, {"rate", castedDist->getRate()}};
+        jsonNode["distribution"] = {{"name", castedDist->getDistName()}, {"rate", castedDist->getRate()}};
     }
     else if (comp->getDist()->getDistName() == "custom") {
-        jsonNode["distribution"] = {{"name", comp->getDist()->getDistName()}, {"transProb", comp->getDist()
-                                                                                                ->getTransProb(0)}};
+        auto castedDist = std::dynamic_pointer_cast<CustomDistribution>(comp->getDist());
+        jsonNode["distribution"] = {{"name", castedDist->getDistName()}, {"waitingTime", castedDist->getWaitingTime()}};
     }
     jsonNode["linkedCompartment"] = {};
-    for (auto i: comp->getLinkedCompartment()) {
+    for (auto& i: comp->getLinkedCompartment()) {
         jsonNode["linkedCompartment"] += i.lock()->getName();
     }
     jsonNode["isIn"] = comp->getIsIn();

@@ -18,9 +18,10 @@ private:
     void calcTransProb();
 public:
     explicit CustomDistribution(std::vector<double> waitingTime);
-    std::string getDistName() override;
     double getTransProb(size_t index) override;
+    std::string getDistName() override;
     size_t getMaxDay() override;
+    std::vector<double> getWaitingTime();
 };
 
 

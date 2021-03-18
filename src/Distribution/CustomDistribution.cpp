@@ -52,3 +52,7 @@ double CustomDistribution::getTransProb(size_t index) {
 size_t CustomDistribution::getMaxDay() {
     return maxDay;
 }
+
+std::vector<double> CustomDistribution::getWaitingTime() {
+    return waitingTime;
+}

@@ -91,7 +91,10 @@ int main() {
         }
         iterFile << std::endl;
     }
+
     for (size_t i {1}; i < Compartment::daysFollowUp; i++) {
+        // Force of infectious: lambda = beta * Y / N, of which Y is the total infectious would change in each iteration
+        // Calculate total number of infectious
         double totalInfectious {0.0};
         for (auto& comp: myModel.getComps()) {
             for (std::string& iComp: infectiousComps) {
@@ -100,11 +103,13 @@ int main() {
                 }
             }
         }
+        // Then we can calculate force of infectious
         for (auto& comp: myModel.getComps()) {
             if (comp->getNInNodes() == 0) {
                 std::dynamic_pointer_cast<BernoulliDistribution>(comp->getDist())->setForceInfection(transRate, populationSize, totalInfectious);
             }
         }
+        // Then we can update the model
         myModel.update(i);
 
         // For debug
@@ -121,28 +126,28 @@ int main() {
 
     // ========================= Write output ================================
     // Create json object to store all input parameters
-//    nlohmann::json writeConfig;
-//    writeConfig["daysFollowUp"] = Compartment::daysFollowUp;
-//    writeConfig["errorTolerance"] = Distribution::errorTolerance;
-//    writeConfig["populationSize"] = populationSize;
-//    writeConfig["transRate"] = transRate;
-//    writeConfig["infectiousComps"] = infectiousComps;
-//    for (auto i: myModel.getComps()) {
-//        CompartmentJSON jsonNode;
-//        jsonNode.compToJSON(i);
-//        writeConfig["compartments"].push_back(jsonNode.getJsonNode());
-//    }
-//
-//    // Write input parameters into a file
-//    std::ofstream myFile("/home/thinh/Downloads/config2.json");
-//    if (myFile.is_open()) {
-//        myFile << writeConfig;
-//        myFile.close();
-//        std::cout << "Successfully written input information into file: /home/thinh/Downloads/config2.json" <<
-//        std::endl;
-//    } else {
-//        std::cout << "Unable to write file" << std::endl;
-//    }
+    nlohmann::json writeConfig;
+    writeConfig["daysFollowUp"] = Compartment::daysFollowUp;
+    writeConfig["errorTolerance"] = Distribution::errorTolerance;
+    writeConfig["populationSize"] = populationSize;
+    writeConfig["transRate"] = transRate;
+    writeConfig["infectiousComps"] = infectiousComps;
+    for (auto i: myModel.getComps()) {
+        CompartmentJSON jsonNode;
+        jsonNode.compToJSON(i);
+        writeConfig["compartments"].push_back(jsonNode.getJsonNode());
+    }
+
+    // Write input parameters into a file
+    std::ofstream myFile("/home/thinh/Downloads/config2.json");
+    if (myFile.is_open()) {
+        myFile << writeConfig;
+        myFile.close();
+        std::cout << "Successfully written input information into file: /home/thinh/Downloads/config2.json" <<
+        std::endl;
+    } else {
+        std::cout << "Unable to write file" << std::endl;
+    }
 
     // Write output to CSV file
 //    Model* pModel = &myModel;
