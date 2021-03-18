@@ -2,17 +2,14 @@
 // Created by thinh on 08/02/2021.
 //
 
+#include <iostream>
 #include "../prob.h"
 #include "DiscreteWeibullDistribution.h"
 
-DiscreteWeibullDistribution::DiscreteWeibullDistribution(double scale, double shape) {
-    this->scale = scale;
-    this->shape = shape;
-    this->calcCumulativeProb();
-}
-
-void DiscreteWeibullDistribution::calcCumulativeProb() {
+void DiscreteWeibullDistribution::calcTransProb() {
+    // First, generate cumulative probability
     double tempProb {0};
+    std::vector<double> cumulativeProb;
     size_t i {0};
     while (tempProb < (1 - Distribution::errorTolerance)) {
         // https://people.sc.fsu.edu/~jburkardt/cpp_src/prob/prob.cpp
@@ -23,16 +20,40 @@ void DiscreteWeibullDistribution::calcCumulativeProb() {
         cumulativeProb.push_back(tempProb);
         ++i;
     }
-    cumulativeProb.erase(cumulativeProb.begin());
     cumulativeProb.push_back(1);
-    maxDay = cumulativeProb.size();
+
+    // Then compute P(0 < waiting time <= 1) by cdf(1) - cdf(0)
+    std::vector<double> waitingTime;
+    for (size_t j {0}; j < (cumulativeProb.size() - 1); ++j) {
+        tempProb = cumulativeProb[j + 1] - cumulativeProb[j];
+        waitingTime.push_back(tempProb);
+    }
+
+    // Finally, compute transProb using waiting time
+    for (size_t k {0}; k < waitingTime.size(); ++k) {
+        transProb.push_back(calcTransProbHelper(waitingTime, k));
+    }
+
+    for (auto b: transProb) {
+        std::cout << b << "\n";
+    }
+
+    // Remember to calculate max day
+    maxDay = transProb.size();
+    std::cout << maxDay << "\n";
+}
+
+DiscreteWeibullDistribution::DiscreteWeibullDistribution(double scale, double shape) {
+    this->scale = scale;
+    this->shape = shape;
+    this->calcTransProb();
 }
 
 double DiscreteWeibullDistribution::getTransProb(size_t index) {
-    if (index > cumulativeProb.size()) {
+    if (index > transProb.size()) {
         return 1;
     } else {
-        return cumulativeProb[index];
+        return transProb[index];
     }
 }
 

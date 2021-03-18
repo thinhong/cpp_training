@@ -10,11 +10,11 @@
 class DiscreteWeibullDistribution: public Distribution {
 private:
     std::string distName {"weibull"};
-    double scale;
-    double shape;
-    size_t maxDay;
-    std::vector<double> cumulativeProb;
-    void calcCumulativeProb();
+    double scale {0};
+    double shape {0};
+    size_t maxDay {0};
+    std::vector<double> transProb;
+    void calcTransProb();
 public:
     DiscreteWeibullDistribution(double scale, double shape);
     std::string getDistName() override;

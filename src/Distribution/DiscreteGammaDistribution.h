@@ -10,9 +10,9 @@
 class DiscreteGammaDistribution: public Distribution {
 private:
     std::string distName {"gamma"};
-    double scale;
-    double shape;
-    size_t maxDay;
+    double scale {0};
+    double shape {0};
+    size_t maxDay {0};
     std::vector<double> transProb;
     void calcTransProb();
 public:
