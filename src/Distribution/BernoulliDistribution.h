@@ -14,7 +14,7 @@ private:
     std::shared_ptr<double> successRate;
 public:
     explicit BernoulliDistribution(std::shared_ptr<double> successRate);
-    double getCumulativeProb(size_t index) override;
+    double getTransProb(size_t index) override;
     size_t getMaxDay() override;
     std::string getDistName() override;
     void setForceInfection(double transRate, double popSize, double totalInfectious);

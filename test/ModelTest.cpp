@@ -17,14 +17,14 @@
 TEST(GammaTest, getCumulativeProb) {
     std::vector<double> cumProb = {0.5, 0.6, 0.7};
     DiscreteGammaDistribution dist(cumProb);
-    EXPECT_EQ(0.5, dist.getCumulativeProb(0));
+    EXPECT_EQ(0.5, dist.getTransProb(0));
 }
 
 TEST(GammaTest, calcCumulativeProb) {
     DiscreteGammaDistribution dist(1, 1);
-    EXPECT_NEAR(0.6321206, dist.getCumulativeProb(1), 0.00001);
-    EXPECT_NEAR(0.8646647, dist.getCumulativeProb(2), 0.00001);
-    EXPECT_NEAR(0.9502129, dist.getCumulativeProb(3), 0.00001);
+    EXPECT_NEAR(0.6321206, dist.getTransProb(1), 0.00001);
+    EXPECT_NEAR(0.8646647, dist.getTransProb(2), 0.00001);
+    EXPECT_NEAR(0.9502129, dist.getTransProb(3), 0.00001);
 }
 
 TEST(CustomDistributionTest, getCumulativeProb) {

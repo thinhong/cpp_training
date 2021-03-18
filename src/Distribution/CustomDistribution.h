@@ -12,12 +12,14 @@
 class CustomDistribution: public Distribution {
 private:
     std::string distName {"custom"};
+    std::vector<double> waitingTime;
     size_t maxDay;
-    std::vector<double> cumulativeProb;
+    std::vector<double> transProb;
+    void calcTransProb();
 public:
-    explicit CustomDistribution(std::vector<double>& cumulativeProb);
+    explicit CustomDistribution(std::vector<double> waitingTime);
     std::string getDistName() override;
-    double getCumulativeProb(size_t index) override;
+    double getTransProb(size_t index) override;
     size_t getMaxDay() override;
 };
 

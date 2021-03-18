@@ -28,7 +28,7 @@ void DiscreteWeibullDistribution::calcCumulativeProb() {
     maxDay = cumulativeProb.size();
 }
 
-double DiscreteWeibullDistribution::getCumulativeProb(size_t index) {
+double DiscreteWeibullDistribution::getTransProb(size_t index) {
     if (index > cumulativeProb.size()) {
         return 1;
     } else {

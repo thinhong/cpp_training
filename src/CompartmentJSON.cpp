@@ -24,8 +24,8 @@ std::shared_ptr<Compartment> CompartmentJSON::compFromJSON() {
         comp = std::make_shared<Compartment>(jsonNode["name"], jsonNode["initialValue"], exponential);
     }
     else if (jsonNode["distribution"]["name"] == "custom") {
-        std::vector<double> prob = jsonNode["distribution"]["transProb"];
-        auto custom = std::make_shared<CustomDistribution>(prob);
+        std::vector<double> waitingTime = jsonNode["distribution"]["waitingTime"];
+        auto custom = std::make_shared<CustomDistribution>(waitingTime);
         comp = std::make_shared<Compartment>(jsonNode["name"], jsonNode["initialValue"], custom);
     }
     // Also add linkedWeight and isIn to the compartment since they are all numeric values
@@ -48,13 +48,15 @@ nlohmann::json CompartmentJSON::compToJSON(std::shared_ptr<Compartment> &comp) {
         auto castedDist = std::dynamic_pointer_cast<DiscreteWeibullDistribution>(comp->getDist());
         jsonNode["distribution"] = {{"name", comp->getDist()->getDistName()}, {"scale", castedDist->getScale()}, {"shape", castedDist->getShape()}};
     } else if (comp->getDist()->getDistName() == "bernoulli") {
-        jsonNode["distribution"] = {{"name", comp->getDist()->getDistName()}, {"successRate", comp->getDist()->getCumulativeProb(0)}};
+        jsonNode["distribution"] = {{"name", comp->getDist()->getDistName()}, {"successRate", comp->getDist()
+                                                                                                  ->getTransProb(0)}};
     } else if (comp->getDist()->getDistName() == "exponential") {
         auto castedDist = std::dynamic_pointer_cast<DiscreteExponentialDistribution>(comp->getDist());
         jsonNode["distribution"] = {{"name", comp->getDist()->getDistName()}, {"rate", castedDist->getRate()}};
     }
     else if (comp->getDist()->getDistName() == "custom") {
-        jsonNode["distribution"] = {{"name", comp->getDist()->getDistName()}, {"transProb", comp->getDist()->getCumulativeProb(0)}};
+        jsonNode["distribution"] = {{"name", comp->getDist()->getDistName()}, {"transProb", comp->getDist()
+                                                                                                ->getTransProb(0)}};
     }
     jsonNode["linkedCompartment"] = {};
     for (auto i: comp->getLinkedCompartment()) {

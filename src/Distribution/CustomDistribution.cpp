@@ -7,45 +7,45 @@
 #include <stdexcept>
 #include "CustomDistribution.h"
 
-CustomDistribution::CustomDistribution(std::vector<double> &cumulativeProb) {
-//    // First, check if this can be considered as a vector of cumulative probability
-//    try {
-//        if (!std::is_sorted(transProb.begin(), transProb.end())) {
-//            throw std::invalid_argument("Your input is not ascending");
-//        }
-//        else if (transProb[transProb.size() - 1] != 1) {
-//            throw std::domain_error("WARNING: Your input custom probability is ascending but not a cumulative "
-//                                    "distribution (the last value is not 1). Scaling it...");
-//        }
-//    }
-//    catch (std::invalid_argument& l) {
-//        std::terminate();
-//    }
-//    catch (std::domain_error& d) {
-//        std::vector<double> transProb;
-//        for (auto i: transProb) {
-//            transProb.push_back(i / transProb[transProb.size() - 1]);
-//        }
-//        std::cerr << d.what() << "\n";
-//        std::cerr << "Cumulative probability will be: ";
-//        for (auto j: transProb) {
-//            std::cerr << j << ' ';
-//        }
-//        this->transProb = transProb;
-//    }
-    this->cumulativeProb = cumulativeProb;
-    this->maxDay = cumulativeProb.size();
+void CustomDistribution::calcTransProb() {
+    // Compute transProb using waiting time
+    for (size_t k {0}; k < waitingTime.size(); ++k) {
+        transProb.push_back(calcTransProbHelper(waitingTime, k));
+    }
+
+    for (auto b: transProb) {
+        std::cout << b << "\n";
+    }
+
+    // Remember to calculate max day
+    maxDay = transProb.size();
+    std::cout << maxDay << "\n";
+}
+
+CustomDistribution::CustomDistribution(std::vector<double> waitingTime) {
+    // Make sure that waiting time distribution is a probability distribution (sum = 1)
+    double sumWaitingTime {0};
+    for (auto& wt: waitingTime) {
+        sumWaitingTime += wt;
+    }
+    if (sumWaitingTime != 1) {
+        for (size_t i {0}; i < waitingTime.size(); ++i) {
+            waitingTime[i] /= sumWaitingTime;
+        }
+    }
+    this->waitingTime = waitingTime;
+    this->calcTransProb();
 }
 
 std::string CustomDistribution::getDistName() {
     return distName;
 }
 
-double CustomDistribution::getCumulativeProb(size_t index) {
-    if (index > cumulativeProb.size()) {
+double CustomDistribution::getTransProb(size_t index) {
+    if (index > transProb.size()) {
         return 1;
     } else {
-        return cumulativeProb[index];
+        return transProb[index];
     }
 }
 

@@ -17,7 +17,7 @@ private:
 public:
     explicit DiscreteExponentialDistribution(double rate);
     std::string getDistName() override;
-    double getCumulativeProb(size_t index) override;
+    double getTransProb(size_t index) override;
     size_t getMaxDay() override;
     double getRate();
 };

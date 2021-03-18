@@ -31,7 +31,7 @@ void DiscreteGammaDistribution::calcTransProb() {
 
     // Finally, compute transProb using waiting time
     for (size_t k {0}; k < waitingTime.size(); ++k) {
-        transProb.push_back(calcProbHelper(waitingTime, k));
+        transProb.push_back(calcTransProbHelper(waitingTime, k));
     }
 
     for (auto b: transProb) {
@@ -54,7 +54,7 @@ DiscreteGammaDistribution::DiscreteGammaDistribution(std::vector<double> &cumula
     this->maxDay = cumulativeProb.size();
 }
 
-double DiscreteGammaDistribution::getCumulativeProb(size_t index) {
+double DiscreteGammaDistribution::getTransProb(size_t index) {
     if (index > transProb.size()) {
         return 1;
     } else {

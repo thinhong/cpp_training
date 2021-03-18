@@ -18,7 +18,7 @@ private:
 public:
     DiscreteWeibullDistribution(double scale, double shape);
     std::string getDistName() override;
-    double getCumulativeProb(size_t index) override;
+    double getTransProb(size_t index) override;
     size_t getMaxDay() override;
     double getScale();
     double getShape();

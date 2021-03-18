@@ -8,7 +8,7 @@ BernoulliDistribution::BernoulliDistribution(std::shared_ptr<double> successRate
     this->successRate = successRate;
 }
 
-double BernoulliDistribution::getCumulativeProb(size_t index) {
+double BernoulliDistribution::getTransProb(size_t index) {
     return *successRate;
 }
 
