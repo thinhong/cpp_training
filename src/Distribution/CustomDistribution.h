@@ -14,11 +14,11 @@ private:
     std::string distName {"custom"};
     std::vector<double> waitingTime;
     size_t maxDay;
-    std::vector<double> transProb;
-    void calcTransProb();
+    std::vector<double> transitionProb;
+    void calcTransitionProb();
 public:
     explicit CustomDistribution(std::vector<double> waitingTime);
-    double getTransProb(size_t index) override;
+    double getTransitionProb(size_t index) override;
     std::string getDistName() override;
     size_t getMaxDay() override;
     std::vector<double> getWaitingTime();

@@ -8,7 +8,7 @@ BernoulliDistribution::BernoulliDistribution(std::shared_ptr<double> successRate
     this->successRate = successRate;
 }
 
-double BernoulliDistribution::getTransProb(size_t index) {
+double BernoulliDistribution::getTransitionProb(size_t index) {
     return *successRate;
 }
 
@@ -20,6 +20,6 @@ std::string BernoulliDistribution::getDistName() {
     return distName;
 }
 
-void BernoulliDistribution::setForceInfection(double transRate, double popSize, double totalInfectious) {
-    *successRate = transRate / popSize * totalInfectious;
+void BernoulliDistribution::setForceInfection(double transmissionRate, double popSize, double totalInfectious) {
+    *successRate = transmissionRate / popSize * totalInfectious;
 }

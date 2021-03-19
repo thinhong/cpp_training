@@ -10750,8 +10750,8 @@ bool dirichlet_mix_check ( int comp_num, int elem_num, double a[],
 //    for element ELEM_NUM in component COMP_NUM.
 //    Each A[I,J] should be positive.
 //
-//    Input, double COMP_WEIGHT[COMP_NUM], the mixture transProb of the densities.
-//    These do not need to be normalized.  The transProb of a given component is
+//    Input, double COMP_WEIGHT[COMP_NUM], the mixture transitionProb of the densities.
+//    These do not need to be normalized.  The transitionProb of a given component is
 //    the relative probability that that component will be used to generate
 //    the sample.
 //
@@ -10802,7 +10802,7 @@ bool dirichlet_mix_check ( int comp_num, int elem_num, double a[],
   {
     cerr << " \n";
     cerr << "DIRICHLET_MIX_CHECK - Warning!\n";
-    cerr << "  All component transProb are zero.\n";
+    cerr << "  All component transitionProb are zero.\n";
     return false;
   }
 
@@ -10843,8 +10843,8 @@ double *dirichlet_mix_mean ( int comp_num, int elem_num, double a[],
 //    element ELEM_NUM in component COMP_NUM.
 //    Each A[I,J] should be positive.
 //
-//    Input, double COMP_WEIGHT[COMP_NUM], the mixture transProb of the densities.
-//    These do not need to be normalized.  The transProb of a given component is
+//    Input, double COMP_WEIGHT[COMP_NUM], the mixture transitionProb of the densities.
+//    These do not need to be normalized.  The transitionProb of a given component is
 //    the relative probability that that component will be used to generate
 //    the sample.
 //
@@ -10909,7 +10909,7 @@ double dirichlet_mix_pdf ( double x[], int comp_num, int elem_num, double a[],
 //  Discussion:
 //
 //    The PDF is a weighted sum of Dirichlet PDF's.  Each PDF is a
-//    "component", with an associated transProb.
+//    "component", with an associated transitionProb.
 //
 //  Licensing:
 //
@@ -10937,8 +10937,8 @@ double dirichlet_mix_pdf ( double x[], int comp_num, int elem_num, double a[],
 //    element ELEM_NUM in component COMP_NUM.
 //    Each A[I,J] should be positive.
 //
-//    Input, double COMP_WEIGHT[COMP_NUM], the mixture transProb of the densities.
-//    These do not need to be normalized.  The transProb of a given component is
+//    Input, double COMP_WEIGHT[COMP_NUM], the mixture transitionProb of the densities.
+//    These do not need to be normalized.  The transitionProb of a given component is
 //    the relative probability that that component will be used to generate
 //    the sample.
 //
@@ -11011,8 +11011,8 @@ double *dirichlet_mix_sample ( int comp_num, int elem_num, double a[],
 //    element ELEM_NUM in component COMP_NUM.
 //    Each A[I,J] should be positive.
 //
-//    Input, double COMP_WEIGHT[COMP_NUM], the mixture transProb of the densities.
-//    These do not need to be normalized.  The transProb of a given component is
+//    Input, double COMP_WEIGHT[COMP_NUM], the mixture transitionProb of the densities.
+//    These do not need to be normalized.  The transitionProb of a given component is
 //    the relative probability that that component will be used to generate
 //    the sample.
 //
@@ -11692,7 +11692,7 @@ double empirical_discrete_cdf ( double x, int a, double b[], double c[] )
 //    Input, int A, the number of values.
 //    0 < A.
 //
-//    Input, double B[A], the transProb of each total.
+//    Input, double B[A], the transitionProb of each total.
 //    0 <= B(1:A) and at least one total is nonzero.
 //
 //    Input, double C[A], the values.
@@ -11750,7 +11750,7 @@ double empirical_discrete_cdf_inv ( double cdf, int a, double b[], double c[] )
 //    Input, int A, the number of values.
 //    0 < A.
 //
-//    Input, double B(A), the transProb of each total.
+//    Input, double B(A), the transitionProb of each total.
 //    0 <= B(1:A) and at least one total is nonzero.
 //
 //    Input, double C(A), the values.
@@ -11818,7 +11818,7 @@ bool empirical_discrete_check ( int a, double b[], double c[] )
 //    Input, int A, the number of values.
 //    0 < A.
 //
-//    Input, double B[A], the transProb of each total.
+//    Input, double B[A], the transitionProb of each total.
 //    0 <= B(1:A) and at least one total is nonzero.
 //
 //    Input, double C[A], the values.
@@ -11838,7 +11838,7 @@ bool empirical_discrete_check ( int a, double b[], double c[] )
     cerr << "EMPIRICAL_DISCRETE_CHECK - Warning!\n";
     cerr << "  A must be positive.\n";
     cerr << "  Input A = " << a << "\n";
-    cerr << "  A is the number of transProb.\n";
+    cerr << "  A is the number of transitionProb.\n";
     return false;
   }
 
@@ -11928,7 +11928,7 @@ double empirical_discrete_mean ( int a, double b[], double c[] )
 //    Input, int A, the number of values.
 //    0 < A.
 //
-//    Input, double B(A), the transProb of each total.
+//    Input, double B(A), the transitionProb of each total.
 //    0 <= B(1:A) and at least one total is nonzero.
 //
 //    Input, double C(A), the values.
@@ -11961,9 +11961,9 @@ double empirical_discrete_pdf ( double x, int a, double b[], double c[] )
 //
 //  Discussion:
 //
-//    A set of A values C(1:A) are assigned nonnegative transProb B(1:A),
+//    A set of A values C(1:A) are assigned nonnegative transitionProb B(1:A),
 //    with at least one B nonzero.  The probability of C(I) is the
-//    total of B(I) divided by the sum of the transProb.
+//    total of B(I) divided by the sum of the transitionProb.
 //
 //    The C's must be distinct, and given in ascending order.
 //
@@ -11986,7 +11986,7 @@ double empirical_discrete_pdf ( double x, int a, double b[], double c[] )
 //    Input, int A, the number of values.
 //    0 < A.
 //
-//    Input, double B(A), the transProb of each total.
+//    Input, double B(A), the transitionProb of each total.
 //    0 <= B(1:A) and at least one total is nonzero.
 //
 //    Input, double C(A), the values.
@@ -12038,7 +12038,7 @@ double empirical_discrete_sample ( int a, double b[], double c[], int &seed )
 //    Input, int A, the number of values.
 //    0 < A.
 //
-//    Input, double B(A), the transProb of each total.
+//    Input, double B(A), the transitionProb of each total.
 //    0 <= B(1:A) and at least one total is nonzero.
 //
 //    Input, double C(A), the values.
@@ -12085,7 +12085,7 @@ double empirical_discrete_variance ( int a, double b[], double c[] )
 //    Input, int A, the number of values.
 //    0 < A.
 //
-//    Input, double B(A), the transProb of each total.
+//    Input, double B(A), the transitionProb of each total.
 //    0 <= B(1:A) and at least one total is nonzero.
 //
 //    Input, double C(A), the values.

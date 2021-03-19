@@ -75,7 +75,7 @@ This option allows user to set one value of probability (the simulation process 
 
 **Parameters**
 ```
-"name":"custom","transProb":[0.005]
+"name":"custom","transitionProb":[0.005]
 ```
 
 #### 5.2. Cumulative probabilites
@@ -83,5 +83,5 @@ This option reads a vector of probabilities and treats them as cumulative probab
 
 **Parameters**
 ```
-"name":"custom","transProb":[0.005,0.05,0.5,1.0]
+"name":"custom","transitionProb":[0.005,0.05,0.5,1.0]
 ```

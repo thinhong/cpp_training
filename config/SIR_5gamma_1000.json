@@ -2,8 +2,7 @@
     "daysFollowUp":10002,
     "errorTolerance":0.01,
     "infectiousComps":["I"],
-    "populationSize":1000,
-    "transRate":0.004,
+    "transmissionRate":0.004,
     "compartments":[
 
         {

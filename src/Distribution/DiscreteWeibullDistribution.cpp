@@ -6,7 +6,7 @@
 #include "../prob.h"
 #include "DiscreteWeibullDistribution.h"
 
-void DiscreteWeibullDistribution::calcTransProb() {
+void DiscreteWeibullDistribution::calcTransitionProb() {
     // First, generate cumulative probability
     double tempProb {0};
     std::vector<double> cumulativeProb;
@@ -29,27 +29,27 @@ void DiscreteWeibullDistribution::calcTransProb() {
         waitingTime.push_back(tempProb);
     }
 
-    // Finally, compute transProb using waiting time
+    // Finally, compute transitionProb using waiting time
     for (size_t k {0}; k < waitingTime.size(); ++k) {
-        transProb.push_back(calcTransProbHelper(waitingTime, k));
+        transitionProb.push_back(calcTransitionProbHelper(waitingTime, k));
     }
 
     // Remember to calculate max day
-    maxDay = transProb.size();
+    maxDay = transitionProb.size();
     std::cout << maxDay << "\n";
 }
 
 DiscreteWeibullDistribution::DiscreteWeibullDistribution(double scale, double shape) {
     this->scale = scale;
     this->shape = shape;
-    this->calcTransProb();
+    this->calcTransitionProb();
 }
 
-double DiscreteWeibullDistribution::getTransProb(size_t index) {
-    if (index > transProb.size()) {
+double DiscreteWeibullDistribution::getTransitionProb(size_t index) {
+    if (index > transitionProb.size()) {
         return 1;
     } else {
-        return transProb[index];
+        return transitionProb[index];
     }
 }
 

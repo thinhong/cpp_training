@@ -66,11 +66,11 @@ void Compartment::updateValue(long iter) {
         outValue = 0;
         // Going backward from subCompartmentValues[n] -> subCompartmentValues[1]
         for (size_t i {subCompartmentValues.size() - 1}; i > 0; --i) {
-            outValue += subCompartmentValues[i] * dist->getTransProb(i);
-            subCompartmentValues[i] = subCompartmentValues[i - 1] * (1 - dist->getTransProb(i - 1));
+            outValue += subCompartmentValues[i] * dist->getTransitionProb(i);
+            subCompartmentValues[i] = subCompartmentValues[i - 1] * (1 - dist->getTransitionProb(i - 1));
         }
         // All of subCompartmentValues[0] will go to subCompartmentValues[1] so initialize subCompartmentValues[0] = 0
-        outValue += subCompartmentValues[0] * dist->getTransProb(0);
+        outValue += subCompartmentValues[0] * dist->getTransitionProb(0);
         subCompartmentValues[0] = 0;
         // Loop over all linkedCompartment, find the linkedCompartment with isIn == true
         // Let subCompartmentValues[0] = outValue of that linkedCompartment
@@ -85,12 +85,12 @@ void Compartment::updateValue(long iter) {
     else if (subCompartmentValues.size() == 1) {
         // First, check if it is the first compartment (S)
         if (nInNodes == 0) {
-            outValue = subCompartmentValues[0] * dist->getTransProb(0);
+            outValue = subCompartmentValues[0] * dist->getTransitionProb(0);
             subCompartmentValues[0] -= outValue;
         }
         // Then check if it is the last compartment (R or D)
         else {
-            outValue = subCompartmentValues[0] * dist->getTransProb(0);
+            outValue = subCompartmentValues[0] * dist->getTransitionProb(0);
             for (size_t j {0}; j < linkedCompartment.size(); ++j) {
                 if (isIn[j]) {
                     subCompartmentValues[0] += linkedCompartment[j].lock()->outValue * linkedWeight[j];

@@ -52,7 +52,8 @@ nlohmann::json CompartmentJSON::compToJSON(std::shared_ptr<Compartment> &comp) {
     jsonNode["name"] = comp->getName();
     jsonNode["initialValue"] = comp->getTotal()[0];
     if (comp->getDist()->getDistName() == "bernoulli") {
-        jsonNode["distribution"] = {{"name", comp->getDist()->getDistName()}, {"successRate", comp->getDist()->getTransProb(0)}};
+        jsonNode["distribution"] = {{"name", comp->getDist()->getDistName()}, {"successRate", comp->getDist()
+                                                                                                  ->getTransitionProb(0)}};
     }
     else if (comp->getDist()->getDistName() == "gamma") {
         auto castedDist = std::dynamic_pointer_cast<DiscreteGammaDistribution>(comp->getDist());

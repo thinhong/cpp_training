@@ -13,12 +13,12 @@ private:
     double scale {0};
     double shape {0};
     size_t maxDay {0};
-    std::vector<double> transProb;
-    void calcTransProb();
+    std::vector<double> transitionProb;
+    void calcTransitionProb();
 public:
     DiscreteWeibullDistribution(double scale, double shape);
     std::string getDistName() override;
-    double getTransProb(size_t index) override;
+    double getTransitionProb(size_t index) override;
     size_t getMaxDay() override;
     double getScale();
     double getShape();

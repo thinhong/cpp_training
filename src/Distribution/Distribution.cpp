@@ -4,7 +4,7 @@
 
 #include "Distribution.h"
 
-double Distribution::calcTransProbHelper(std::vector<double> waitingTime, size_t i) {
+double Distribution::calcTransitionProbHelper(std::vector<double> waitingTime, size_t i) {
     double prob_i {0};
     // Remember that C++ use 0-based indexing
     // x0 = p0

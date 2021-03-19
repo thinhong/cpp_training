@@ -6,7 +6,7 @@
 #include "DiscreteExponentialDistribution.h"
 #include "../prob.h"
 
-void DiscreteExponentialDistribution::calcTransProb() {
+void DiscreteExponentialDistribution::calcTransitionProb() {
     // First, generate cumulative probability
     double tempProb {0};
     std::vector<double> cumulativeProb;
@@ -26,30 +26,30 @@ void DiscreteExponentialDistribution::calcTransProb() {
         waitingTime.push_back(tempProb);
     }
 
-    // Finally, compute transProb using waiting time
+    // Finally, compute transitionProb using waiting time
     for (size_t k {0}; k < waitingTime.size(); ++k) {
-        transProb.push_back(calcTransProbHelper(waitingTime, k));
+        transitionProb.push_back(calcTransitionProbHelper(waitingTime, k));
     }
 
     // Remember to calculate max day
-    maxDay = transProb.size();
+    maxDay = transitionProb.size();
     std::cout << maxDay << "\n";
 }
 
 DiscreteExponentialDistribution::DiscreteExponentialDistribution(double rate) {
     this->rate = rate;
-    this->calcTransProb();
+    this->calcTransitionProb();
 }
 
 std::string DiscreteExponentialDistribution::getDistName() {
     return distName;
 }
 
-double DiscreteExponentialDistribution::getTransProb(size_t index) {
-    if (index > transProb.size()) {
+double DiscreteExponentialDistribution::getTransitionProb(size_t index) {
+    if (index > transitionProb.size()) {
         return 1;
     } else {
-        return transProb[index];
+        return transitionProb[index];
     }
 }
 

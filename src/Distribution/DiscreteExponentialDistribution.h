@@ -12,12 +12,12 @@ private:
     std::string distName {"exponential"};
     double rate;
     size_t maxDay;
-    std::vector<double> transProb;
-    void calcTransProb();
+    std::vector<double> transitionProb;
+    void calcTransitionProb();
 public:
     explicit DiscreteExponentialDistribution(double rate);
     std::string getDistName() override;
-    double getTransProb(size_t index) override;
+    double getTransitionProb(size_t index) override;
     size_t getMaxDay() override;
     double getRate();
 };

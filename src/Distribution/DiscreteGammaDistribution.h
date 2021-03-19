@@ -13,14 +13,14 @@ private:
     double scale {0};
     double shape {0};
     size_t maxDay {0};
-    std::vector<double> transProb;
-    void calcTransProb();
+    std::vector<double> transitionProb;
+    void calcTransitionProb();
 public:
     DiscreteGammaDistribution(double scale, double shape);
     explicit DiscreteGammaDistribution(std::vector<double>& cumulativeProb);
     DiscreteGammaDistribution() = default;
     std::string getDistName() override;
-    double getTransProb(size_t index) override;
+    double getTransitionProb(size_t index) override;
     size_t getMaxDay() override;
     double getScale();
     double getShape();

@@ -6,7 +6,7 @@
 #include "DiscreteGammaDistribution.h"
 #include <iostream>
 
-void DiscreteGammaDistribution::calcTransProb() {
+void DiscreteGammaDistribution::calcTransitionProb() {
     // First, generate cumulative probability
     double tempProb {0};
     std::vector<double> cumulativeProb;
@@ -29,32 +29,32 @@ void DiscreteGammaDistribution::calcTransProb() {
         waitingTime.push_back(tempProb);
     }
 
-    // Finally, compute transProb using waiting time
+    // Finally, compute transitionProb using waiting time
     for (size_t k {0}; k < waitingTime.size(); ++k) {
-        transProb.push_back(calcTransProbHelper(waitingTime, k));
+        transitionProb.push_back(calcTransitionProbHelper(waitingTime, k));
     }
 
     // Remember to calculate max day
-    maxDay = transProb.size();
+    maxDay = transitionProb.size();
     std::cout << maxDay << "\n";
 }
 
 DiscreteGammaDistribution::DiscreteGammaDistribution(double scale, double shape) {
     this->scale = scale;
     this->shape = shape;
-    this->calcTransProb();
+    this->calcTransitionProb();
 }
 
 DiscreteGammaDistribution::DiscreteGammaDistribution(std::vector<double> &cumulativeProb) {
-    this->transProb = cumulativeProb;
+    this->transitionProb = cumulativeProb;
     this->maxDay = cumulativeProb.size();
 }
 
-double DiscreteGammaDistribution::getTransProb(size_t index) {
-    if (index > transProb.size()) {
+double DiscreteGammaDistribution::getTransitionProb(size_t index) {
+    if (index > transitionProb.size()) {
         return 1;
     } else {
-        return transProb[index];
+        return transitionProb[index];
     }
 }
 

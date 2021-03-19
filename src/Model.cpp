@@ -7,6 +7,10 @@ std::vector<std::shared_ptr<Compartment>> Model::getComps() {
     return comps;
 }
 
+double Model::getPopulationSize() {
+    return populationSize;
+}
+
 void Model::addCompsFromConfig(std::vector<std::shared_ptr<Compartment>> &comps) {
     this->comps = comps;
 }
@@ -105,6 +109,12 @@ void Model::sortComps() {
         stack.pop();
     }
     comps = sortedComps;
+}
+
+void Model::calcPopulationSize() {
+    for (auto& comp: comps) {
+        populationSize += comp->getTotal()[0];
+    }
 }
 
 void Model::update(long iter) {

@@ -7,14 +7,14 @@
 #include <stdexcept>
 #include "CustomDistribution.h"
 
-void CustomDistribution::calcTransProb() {
-    // Compute transProb using waiting time
+void CustomDistribution::calcTransitionProb() {
+    // Compute transitionProb using waiting time
     for (size_t k {0}; k < waitingTime.size(); ++k) {
-        transProb.push_back(calcTransProbHelper(waitingTime, k));
+        transitionProb.push_back(calcTransitionProbHelper(waitingTime, k));
     }
 
     // Remember to calculate max day
-    maxDay = transProb.size();
+    maxDay = transitionProb.size();
     std::cout << maxDay << "\n";
 }
 
@@ -30,18 +30,18 @@ CustomDistribution::CustomDistribution(std::vector<double> waitingTime) {
         }
     }
     this->waitingTime = waitingTime;
-    this->calcTransProb();
+    this->calcTransitionProb();
 }
 
 std::string CustomDistribution::getDistName() {
     return distName;
 }
 
-double CustomDistribution::getTransProb(size_t index) {
-    if (index > transProb.size()) {
+double CustomDistribution::getTransitionProb(size_t index) {
+    if (index > transitionProb.size()) {
         return 1;
     } else {
-        return transProb[index];
+        return transitionProb[index];
     }
 }
 

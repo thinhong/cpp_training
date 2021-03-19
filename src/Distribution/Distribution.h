@@ -13,7 +13,7 @@ public:
     static inline double errorTolerance {0.01};
     virtual std::string getDistName() = 0;
     virtual size_t getMaxDay() = 0;
-    virtual double getTransProb(size_t index) = 0;
+    virtual double getTransitionProb(size_t index) = 0;
     /**
      * Helper function to calculate probability (x0, x1, x2...) from waiting time distribution (proportion p0, p1, p2
      * ...)
@@ -21,7 +21,7 @@ public:
      * @param i index of the probability (e.g x0 is index 0, x1 is index 1...)
      * @return
      */
-    double calcTransProbHelper(std::vector<double> waitingTime, size_t i);
+    double calcTransitionProbHelper(std::vector<double> waitingTime, size_t i);
 };
 
 #endif //MAIN_CPP_DISTRIBUTION_H
