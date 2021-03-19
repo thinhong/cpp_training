@@ -31,10 +31,6 @@ void DiscreteExponentialDistribution::calcTransProb() {
         transProb.push_back(calcTransProbHelper(waitingTime, k));
     }
 
-    for (auto b: transProb) {
-        std::cout << b << "\n";
-    }
-
     // Remember to calculate max day
     maxDay = transProb.size();
     std::cout << maxDay << "\n";

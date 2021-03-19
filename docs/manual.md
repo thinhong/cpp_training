@@ -1,9 +1,9 @@
 ## All parameters
-daysFollowUp
-populationSize
-transRate
-errorTolerance
-infectiousComps
+1. `daysFollowUp`: number of days follow-up = length of the total vector (sum of all subCompartmentValues)
+2. `populationSize`: sum of S, I, R, 
+3. `transRate`: 
+4. `errorTolerance`: 
+5. `infectiousComps`: 
 
 ## Compartment
 

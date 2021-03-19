@@ -82,15 +82,15 @@ int main() {
     myModel.sortComps();
 
     // Run model
-    std::ofstream iterFile("../output/iteration.txt");
-    iterFile << "Iteration: " << "0" << std::endl;
-    for (size_t j {0}; j < myModel.getComps().size(); ++j) {
-        iterFile << myModel.getComps()[j]->getName() << ": ";
-        for (auto k: myModel.getComps()[j]->getSubCompartmentValues()) {
-            iterFile << k << " ";
-        }
-        iterFile << std::endl;
-    }
+//    std::ofstream iterFile("../output/iteration.txt");
+//    iterFile << "Iteration: " << "0" << std::endl;
+//    for (size_t j {0}; j < myModel.getComps().size(); ++j) {
+//        iterFile << myModel.getComps()[j]->getName() << ": ";
+//        for (auto k: myModel.getComps()[j]->getSubCompartmentValues()) {
+//            iterFile << k << " ";
+//        }
+//        iterFile << std::endl;
+//    }
 
     for (size_t i {1}; i < Compartment::daysFollowUp; i++) {
         // Force of infectious: lambda = beta * Y / N, of which Y is the total infectious would change in each iteration
@@ -113,41 +113,41 @@ int main() {
         myModel.update(i);
 
         // For debug
-        iterFile << "Iteration: " << i << std::endl;
-        for (size_t j {0}; j < myModel.getComps().size(); ++j) {
-            iterFile << myModel.getComps()[j]->getName() << ": ";
-            for (auto k: myModel.getComps()[j]->getSubCompartmentValues()) {
-                iterFile << k << " ";
-            }
-            iterFile << std::endl;
-        }
+//        iterFile << "Iteration: " << i << std::endl;
+//        for (size_t j {0}; j < myModel.getComps().size(); ++j) {
+//            iterFile << myModel.getComps()[j]->getName() << ": ";
+//            for (auto k: myModel.getComps()[j]->getSubCompartmentValues()) {
+//                iterFile << k << " ";
+//            }
+//            iterFile << std::endl;
+//        }
     }
     // ================== End construct and run model ========================
 
     // ========================= Write output ================================
     // Create json object to store all input parameters
-    nlohmann::json writeConfig;
-    writeConfig["daysFollowUp"] = Compartment::daysFollowUp;
-    writeConfig["errorTolerance"] = Distribution::errorTolerance;
-    writeConfig["populationSize"] = populationSize;
-    writeConfig["transRate"] = transRate;
-    writeConfig["infectiousComps"] = infectiousComps;
-    for (auto i: myModel.getComps()) {
-        CompartmentJSON jsonNode;
-        jsonNode.compToJSON(i);
-        writeConfig["compartments"].push_back(jsonNode.getJsonNode());
-    }
+//    nlohmann::json writeConfig;
+//    writeConfig["daysFollowUp"] = Compartment::daysFollowUp;
+//    writeConfig["errorTolerance"] = Distribution::errorTolerance;
+//    writeConfig["populationSize"] = populationSize;
+//    writeConfig["transRate"] = transRate;
+//    writeConfig["infectiousComps"] = infectiousComps;
+//    for (auto i: myModel.getComps()) {
+//        CompartmentJSON jsonNode;
+//        jsonNode.compToJSON(i);
+//        writeConfig["compartments"].push_back(jsonNode.getJsonNode());
+//    }
 
     // Write input parameters into a file
-    std::ofstream myFile("/home/thinh/Downloads/config2.json");
-    if (myFile.is_open()) {
-        myFile << writeConfig;
-        myFile.close();
-        std::cout << "Successfully written input information into file: /home/thinh/Downloads/config2.json" <<
-        std::endl;
-    } else {
-        std::cout << "Unable to write file" << std::endl;
-    }
+//    std::ofstream myFile("/home/thinh/Downloads/config2.json");
+//    if (myFile.is_open()) {
+//        myFile << writeConfig;
+//        myFile.close();
+//        std::cout << "Successfully written input information into file: /home/thinh/Downloads/config2.json" <<
+//        std::endl;
+//    } else {
+//        std::cout << "Unable to write file" << std::endl;
+//    }
 
     // Write output to CSV file
 //    Model* pModel = &myModel;
