@@ -1,5 +1,5 @@
 {
-    "daysFollowUp":10002,
+    "daysFollowUp":1000,
     "errorTolerance":0.01,
     "locations":[
         {
@@ -18,6 +18,37 @@
                 {
                     "name":"I",
                     "distribution":{"name":"gamma","shape":5,"scale":2000},
+                    "initialValue":1,
+                    "linkedCompartment":["S","R"],
+                    "isIn":[true,false],
+                    "linkedWeight":[1.0,1.0]
+                },
+                {
+                    "name":"R",
+                    "distribution":{"name":"bernoulli","successRate":0.0},
+                    "initialValue":0,
+                    "linkedCompartment":["I"],
+                    "isIn":[true],
+                    "linkedWeight":[1.0]
+                }
+            ]
+        },
+        {
+            "name":"HN",
+            "transmissionRate":0.003,
+            "infectiousComps":["I"],
+            "compartments":[
+                {
+                    "name":"S",
+                    "distribution":{"name":"bernoulli","successRate":0.0},
+                    "initialValue":699,
+                    "linkedCompartment":["I"],
+                    "isIn":[false],
+                    "linkedWeight":[1.0]
+                },
+                {
+                    "name":"I",
+                    "distribution":{"name":"gamma","shape":5,"scale":400},
                     "initialValue":1,
                     "linkedCompartment":["S","R"],
                     "isIn":[true,false],

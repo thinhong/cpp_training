@@ -13,6 +13,8 @@ FileCSV::FileCSV(std::string filePath, std::string fileName, Model* model) {
 }
 
 void FileCSV::writeFile() {
+
+    // Make sure that the path is valid
     std::string fullPath;
     if (filePath.back() == '/') {
         fullPath = filePath + fileName;
@@ -25,9 +27,9 @@ void FileCSV::writeFile() {
     if (myFile.is_open()) {
         for (size_t j {}; j < model->getComps().size(); ++j) {
             if (j == model->getComps().size() - 1) {
-                myFile << model->getComps()[j]->getName() << "\n";
+                myFile << model->getComps()[j]->getName() << "_" << model->getName() << "\n";
             } else {
-                myFile << model->getComps()[j]->getName() << ",";
+                myFile << model->getComps()[j]->getName() << "_" << model->getName() << ",";
             }
         }
         for (size_t i {}; i < model->getComps()[0]->getTotal().size(); ++i) {

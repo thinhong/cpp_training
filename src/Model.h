@@ -8,13 +8,20 @@
 
 class Model {
 private:
+    std::string name;
+    std::vector<std::string> infectiousComps;
+    double transmissionRate {0};
     std::vector<std::shared_ptr<Compartment>> comps;
+    // Population size is computed after sortComps in main()
     double populationSize {0};
 public:
-    Model() = default;
+    explicit Model(std::string name, double transmissionRate, std::vector<std::string> infectiousComps);
+    std::string getName();
     std::vector<std::shared_ptr<Compartment>> getComps();
     void calcPopulationSize();
     double getPopulationSize();
+    std::vector<std::string> getInfectiousComps();
+    double getTransmissionRate();
 
     // Add compartment to model using JSON config file
     void addCompsFromConfig(std::vector<std::shared_ptr<Compartment>>& comps);

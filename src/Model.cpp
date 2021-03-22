@@ -3,12 +3,30 @@
 #include <stack>
 #include <stdexcept>
 
+Model::Model(std::string name, double transmissionRate, std::vector<std::string> infectiousComps) {
+    this->name = name;
+    this->transmissionRate = transmissionRate;
+    this->infectiousComps = infectiousComps;
+}
+
+std::string Model::getName() {
+    return name;
+}
+
 std::vector<std::shared_ptr<Compartment>> Model::getComps() {
     return comps;
 }
 
 double Model::getPopulationSize() {
     return populationSize;
+}
+
+std::vector<std::string> Model::getInfectiousComps() {
+    return infectiousComps;
+}
+
+double Model::getTransmissionRate() {
+    return transmissionRate;
 }
 
 void Model::addCompsFromConfig(std::vector<std::shared_ptr<Compartment>> &comps) {
