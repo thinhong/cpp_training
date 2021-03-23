@@ -4,7 +4,7 @@
     "locations":[
         {
             "name":"HCM",
-            "transmissionRate":0.15,
+            "transmissionRate":1.5,
             "infectiousComps":["I"],
             "linkedLocations":["HN"],
             "locationInteraction":[0.1],
@@ -19,7 +19,7 @@
                 },
                 {
                     "name":"I",
-                    "distribution":{"name":"exponential","rate":0.05},
+                    "distribution":{"name":"bernoulli","successRate":0.5},
                     "initialValue":1,
                     "linkedCompartment":["S","R"],
                     "isIn":[true,false],
@@ -37,7 +37,7 @@
         },
         {
             "name":"HN",
-            "transmissionRate":0.12,
+            "transmissionRate":1.2,
             "infectiousComps":["I"],
             "linkedLocations":["HCM"],
             "locationInteraction":[0.1],
@@ -52,7 +52,7 @@
                 },
                 {
                     "name":"I",
-                    "distribution":{"name":"exponential","rate":0.03},
+                    "distribution":{"name":"bernoulli","successRate":0.3},
                     "initialValue":0,
                     "linkedCompartment":["S","R"],
                     "isIn":[true,false],

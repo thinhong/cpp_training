@@ -159,6 +159,7 @@ void Model::calcPopulationSize() {
     for (auto& comp: comps) {
         populationSize += comp->getTotal()[0];
     }
+    std::cout << populationSize << "\n";
 }
 
 double Model::calcForceInfection(size_t iter) {
@@ -174,10 +175,10 @@ double Model::calcForceInfection(size_t iter) {
             }
         }
     }
-    double forceInfectionWithin = transmissionRate * totalInfectiousWithin / populationSize;
+    double infectiousWithin = totalInfectiousWithin / populationSize;
 
     // Between locations
-    double forceInfectionBetween {0};
+    double infectiousBetween {0};
     if (!linkedLocations.empty()) {
         // Start from the first linked location, perform the same process as within location
         for (size_t i {0}; i < linkedLocations.size(); ++i) {
@@ -190,19 +191,16 @@ double Model::calcForceInfection(size_t iter) {
                 }
             }
             // Remember to multiply the locationInteraction
-            forceInfectionBetween += transmissionRate * locationInteraction[i] * totalInfectiousBetween / linkedLocations[i].lock()->getPopulationSize() ;
+            infectiousBetween += locationInteraction[i] * totalInfectiousBetween / linkedLocations[i].lock()->getPopulationSize() ;
         }
     }
-    double forceInfection = forceInfectionWithin + forceInfectionBetween;
+    double forceInfection = transmissionRate * (infectiousWithin + infectiousBetween);
     return forceInfection;
 }
 
 void Model::update(long iter) {
+    double forceInfection = calcForceInfection(iter);
     for (auto& comp: comps) {
-        double forceInfection {0};
-        if (comp->getNInNodes() == 0) {
-            forceInfection = calcForceInfection(iter);
-        }
         comp->updateValue(iter, forceInfection);
     }
 }

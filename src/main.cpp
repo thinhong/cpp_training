@@ -95,36 +95,37 @@ int main() {
     // ==================== Construct and run model ==========================
 
     // Run model
-//    std::ofstream iterFile("../output/iteration.txt");
-//    iterFile << "Iteration: " << "0" << std::endl;
-//    for (size_t j {0}; j < myModel.getComps().size(); ++j) {
-//        iterFile << myModel.getComps()[j]->getName() << ": ";
-//        for (auto k: myModel.getComps()[j]->getSubCompartmentValues()) {
-//            iterFile << k << " ";
-//        }
-//        iterFile << std::endl;
-//    }
-
-    for (auto& myModel: allModels) {
-        for (size_t i {1}; i < Compartment::daysFollowUp; i++) {
-            // Force of infection: lambda = beta * Y / N, of which Y is the total infectious would change in each iteration
-            // Calculate total number of infectious
-
-            // Then we can update the model
-            myModel->update(i);
-        }
-    }
-
-        // For debug
-//        iterFile << "Iteration: " << i << std::endl;
-//        for (size_t j {0}; j < myModel.getComps().size(); ++j) {
-//            iterFile << myModel.getComps()[j]->getName() << ": ";
-//            for (auto k: myModel.getComps()[j]->getSubCompartmentValues()) {
+    // BE CAUTIOUS: The order of the following two for loop is extremely important, at each iteration we want to
+    // update location 1, then location 2, then move on to the next iteration. We never want to update a location
+    // from iter 1 to iter 100 then continue to update the next location. So the "iter" for loop comes first, then
+    // the "location" for loop
+    for (size_t i {1}; i < Compartment::daysFollowUp; i++) {
+        for (auto& myModel: allModels) {
+//        std::ofstream iterFile("../output/iteration.txt");
+//        iterFile << "Iteration: " << "0" << std::endl;
+//        for (size_t j {0}; j < myModel->getComps().size(); ++j) {
+//            iterFile << myModel->getComps()[j]->getName() << ": ";
+//            for (auto k: myModel->getComps()[j]->getSubCompartmentValues()) {
 //                iterFile << k << " ";
 //            }
 //            iterFile << std::endl;
 //        }
-//    }
+            myModel->update(i);
+
+//            iterFile << "Iteration: " << i << std::endl;
+//            for (size_t j {0}; j < myModel->getComps().size(); ++j) {
+//                iterFile << myModel->getComps()[j]->getName() << ": ";
+//                for (auto k: myModel->getComps()[j]->getSubCompartmentValues()) {
+//                    iterFile << k << " ";
+//                }
+//                iterFile << std::endl;
+//            }
+        }
+    }
+
+        // For debug
+
+
     // ================== End construct and run model ========================
 
     // ========================= Write output ================================
