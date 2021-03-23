@@ -33,7 +33,11 @@ void DiscreteExponentialDistribution::calcTransitionProb() {
 
     // Remember to calculate max day
     maxDay = transitionProb.size();
-    std::cout << maxDay << "\n";
+//    std::cout << maxDay << "\n";
+    for (auto i: transitionProb) {
+        std::cout << i << ' ';
+    }
+    std::cout << "\n";
 }
 
 DiscreteExponentialDistribution::DiscreteExponentialDistribution(double rate) {

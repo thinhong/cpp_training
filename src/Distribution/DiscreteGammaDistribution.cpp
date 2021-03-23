@@ -36,7 +36,7 @@ void DiscreteGammaDistribution::calcTransitionProb() {
 
     // Remember to calculate max day
     maxDay = transitionProb.size();
-    std::cout << maxDay << "\n";
+//    std::cout << maxDay << "\n";
 }
 
 DiscreteGammaDistribution::DiscreteGammaDistribution(double scale, double shape) {

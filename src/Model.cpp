@@ -29,6 +29,32 @@ double Model::getTransmissionRate() {
     return transmissionRate;
 }
 
+std::vector<std::weak_ptr<Model>> Model::getLinkedLocation() {
+    return linkedLocations;
+}
+
+std::vector<double> Model::getLocationInteraction() {
+    return locationInteraction;
+}
+
+double Model::getSelfInteraction() {
+    return selfInteraction;
+}
+
+void Model::addLocationInteraction(std::vector<double> locationInteraction) {
+    this->locationInteraction = locationInteraction;
+    // Calculate selfInteraction = 1 - sum(locationInteraction)
+    double totalInteraction {0};
+    for (auto& i: this->locationInteraction) {
+        totalInteraction += i;
+    }
+    this->selfInteraction = 1 - totalInteraction;
+}
+
+void Model::addLinkedLocation(std::weak_ptr<Model> linkedLocation) {
+    this->linkedLocations.push_back(linkedLocation);
+}
+
 void Model::addCompsFromConfig(std::vector<std::shared_ptr<Compartment>> &comps) {
     this->comps = comps;
 }
@@ -135,8 +161,48 @@ void Model::calcPopulationSize() {
     }
 }
 
+double Model::calcForceInfection(size_t iter) {
+    // Force of infection: lambda = beta * totalInfectious / N
+
+    // Within this location
+    double totalInfectiousWithin {0};
+    // Scan through all compartments, find compartments have the same name as in the infectiousComps vector
+    for (auto& comp: comps) {
+        for (std::string &infectiousComp: infectiousComps) {
+            if (comp->getName() == infectiousComp) {
+                totalInfectiousWithin += comp->getTotal()[iter - 1];
+            }
+        }
+    }
+    double forceInfectionWithin = transmissionRate * totalInfectiousWithin / populationSize;
+
+    // Between locations
+    double forceInfectionBetween {0};
+    if (!linkedLocations.empty()) {
+        // Start from the first linked location, perform the same process as within location
+        for (size_t i {0}; i < linkedLocations.size(); ++i) {
+            double totalInfectiousBetween {0};
+            for (auto& linkedLocationComp: linkedLocations[i].lock()->getComps()) {
+                for (std::string& infectiousComp: linkedLocations[i].lock()->getInfectiousComps()) {
+                    if (linkedLocationComp->getName() == infectiousComp) {
+                        totalInfectiousBetween += linkedLocationComp->getTotal()[iter - 1];
+                    }
+                }
+            }
+            // Remember to multiply the locationInteraction
+            forceInfectionBetween += transmissionRate * locationInteraction[i] * totalInfectiousBetween / linkedLocations[i].lock()->getPopulationSize() ;
+        }
+    }
+    double forceInfection = forceInfectionWithin + forceInfectionBetween;
+    return forceInfection;
+}
+
 void Model::update(long iter) {
     for (auto& comp: comps) {
-        comp->updateValue(iter);
+        double forceInfection {0};
+        if (comp->getNInNodes() == 0) {
+            forceInfection = calcForceInfection(iter);
+        }
+        comp->updateValue(iter, forceInfection);
     }
 }

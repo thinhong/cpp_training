@@ -58,7 +58,7 @@ void Compartment::addIsIn(bool isIn) {
     }
 }
 
-void Compartment::updateValue(long iter) {
+void Compartment::updateValue(long iter, double forceInfection) {
     // Note: the first (S) and last (R, D) compartments must be defined with bernoulli distribution
     // Other compartments must not be defined with bernoulli distribution
     // For all compartments except the first and last compartments
@@ -69,7 +69,6 @@ void Compartment::updateValue(long iter) {
             outValue += subCompartmentValues[i] * dist->getTransitionProb(i);
             subCompartmentValues[i] = subCompartmentValues[i - 1] * (1 - dist->getTransitionProb(i - 1));
         }
-        // All of subCompartmentValues[0] will go to subCompartmentValues[1] so initialize subCompartmentValues[0] = 0
         outValue += subCompartmentValues[0] * dist->getTransitionProb(0);
         subCompartmentValues[0] = 0;
         // Loop over all linkedCompartment, find the linkedCompartment with isIn == true
@@ -85,7 +84,7 @@ void Compartment::updateValue(long iter) {
     else if (subCompartmentValues.size() == 1) {
         // First, check if it is the first compartment (S)
         if (nInNodes == 0) {
-            outValue = subCompartmentValues[0] * dist->getTransitionProb(0);
+            outValue = subCompartmentValues[0] * forceInfection;
             subCompartmentValues[0] -= outValue;
         }
         // Then check if it is the last compartment (R or D)

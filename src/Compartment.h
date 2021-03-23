@@ -50,7 +50,7 @@ public:
      * Update subCompartmentValues and total at each iteration
      * @param iter
      */
-    void updateValue(long iter);
+    void updateValue(long iter, double forceInfection);
 };
 
 

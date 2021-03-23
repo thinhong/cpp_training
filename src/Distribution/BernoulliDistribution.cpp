@@ -19,7 +19,3 @@ size_t BernoulliDistribution::getMaxDay() {
 std::string BernoulliDistribution::getDistName() {
     return distName;
 }
-
-void BernoulliDistribution::setForceInfection(double transmissionRate, double popSize, double totalInfectious) {
-    *successRate = transmissionRate / popSize * totalInfectious;
-}

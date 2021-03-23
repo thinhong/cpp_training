@@ -30,9 +30,13 @@ int main() {
     Distribution::errorTolerance = input["errorTolerance"];
 
     // Generate models
-    std::vector<Model> allModels;
+    std::vector<std::shared_ptr<Model>> allModels;
     for (auto& locationConfig: input["locations"]) {
-        Model myModel(locationConfig["name"], locationConfig["transmissionRate"], locationConfig["infectiousComps"]);
+        auto myModel = std::make_shared<Model>(locationConfig["name"], locationConfig["transmissionRate"], locationConfig["infectiousComps"]);
+
+        if (!locationConfig["locationInteraction"].is_null()) {
+            myModel->addLocationInteraction(locationConfig["locationInteraction"]);
+        }
 
         // Generate all compartments from input file
         std::vector<std::shared_ptr<Compartment>> allCompartments;
@@ -59,13 +63,32 @@ int main() {
                 }
             }
         }
-        myModel.addCompsFromConfig(allCompartments);
-        myModel.sortComps();
-        myModel.calcPopulationSize();
+        myModel->addCompsFromConfig(allCompartments);
+        myModel->sortComps();
+        myModel->calcPopulationSize();
 
         allModels.push_back(myModel);
     }
 
+    for (auto& locationConfig: input["locations"]) {
+        if (!locationConfig["linkedLocations"].is_null()) {
+            std::weak_ptr<Model> baseModel;
+            for (auto& model: allModels) {
+                if (model->getName() == locationConfig["name"]) {
+                    baseModel = model;
+                }
+            }
+            for (auto& linkedConfig: locationConfig["linkedLocations"]) {
+                std::weak_ptr<Model> linkedModel;
+                for (auto& model: allModels) {
+                    if (model->getName() == linkedConfig) {
+                        linkedModel = model;
+                        baseModel.lock()->addLinkedLocation(linkedModel);
+                    }
+                }
+            }
+        }
+    }
 
     // ======================== End JSON input ==============================
 
@@ -84,25 +107,11 @@ int main() {
 
     for (auto& myModel: allModels) {
         for (size_t i {1}; i < Compartment::daysFollowUp; i++) {
-            // Force of infectious: lambda = beta * Y / N, of which Y is the total infectious would change in each iteration
+            // Force of infection: lambda = beta * Y / N, of which Y is the total infectious would change in each iteration
             // Calculate total number of infectious
-            double totalInfectious{0.0};
-            for (auto &comp: myModel.getComps()) {
-                for (std::string &iComp: myModel.getInfectiousComps()) {
-                    if (comp->getName() == iComp) {
-                        totalInfectious += comp->getTotal()[i - 1];
-                    }
-                }
-            }
-            // Then we can calculate force of infectious
-            for (auto &comp: myModel.getComps()) {
-                if (comp->getNInNodes() == 0) {
-                    std::dynamic_pointer_cast<BernoulliDistribution>(comp->getDist())->setForceInfection(
-                            myModel.getTransmissionRate(), myModel.getPopulationSize(), totalInfectious);
-                }
-            }
+
             // Then we can update the model
-            myModel.update(i);
+            myModel->update(i);
         }
     }
 
@@ -152,7 +161,11 @@ int main() {
 //    FileCSV file(outputFolder, outputFileName, pModel);
 //    file.writeFile();
 
-    Model* pModel = &(allModels[1]);
-    FileCSV file("../output/", "testSIR.csv", pModel);
-    file.writeFile();
+    for (auto& model: allModels) {
+        Model* pModel = &(*model);
+        std::string fileName = "testSIR_" + model->getName() + ".csv";
+        FileCSV file("../output/", fileName, pModel);
+        file.writeFile();
+    }
+
 }
