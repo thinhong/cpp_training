@@ -152,20 +152,13 @@ int main() {
 //    }
 
     // Write output to CSV file
-//    Model* pModel = &myModel;
-//    std::string outputFolder;
-//    std::string outputFileName;
-//    std::cout << "Set path to the folder you want to save output file (ex: /home/Documents): ";
-//    std::cin >> outputFolder;
-//    std::cout << "Set your output file name (ex: results.csv): ";
-//    std::cin >> outputFileName;
-//    FileCSV file(outputFolder, outputFileName, pModel);
-//    file.writeFile();
-
+    std::string outputFolder;
+    std::cout << "Set path to the folder you want to save output file (ex: /home/Documents): ";
+    std::cin >> outputFolder;
     for (auto& model: allModels) {
         Model* pModel = &(*model);
-        std::string fileName = "testSIR_" + model->getName() + ".csv";
-        FileCSV file("../output/", fileName, pModel);
+        std::string outputFileName = model->getName() + ".csv";
+        FileCSV file(outputFolder, outputFileName, pModel);
         file.writeFile();
     }
 

@@ -159,7 +159,6 @@ void Model::calcPopulationSize() {
     for (auto& comp: comps) {
         populationSize += comp->getTotal()[0];
     }
-    std::cout << populationSize << "\n";
 }
 
 double Model::calcForceInfection(size_t iter) {
