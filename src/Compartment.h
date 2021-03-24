@@ -29,7 +29,7 @@ public:
     Compartment(const Compartment& comp) = delete;
 
     ~Compartment() {
-//        std::cout << name << " destructor called." << std::endl;
+//        std::cout << name << " compartment destructor called." << std::endl;
     }
     // Getters
     std::vector<double> getTotal();

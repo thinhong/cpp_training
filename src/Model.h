@@ -20,6 +20,9 @@ private:
     std::vector<std::shared_ptr<Compartment>> comps;
 public:
     explicit Model(std::string name, double transmissionRate, std::vector<std::string> infectiousComps);
+    ~Model() {
+//        std::cout << name << " model destructor called." << std::endl;
+    }
     std::string getName();
     std::vector<std::shared_ptr<Compartment>> getComps();
     void calcPopulationSize();
