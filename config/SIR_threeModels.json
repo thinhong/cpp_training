@@ -11,7 +11,7 @@
             "compartments":[
                 {
                     "name":"S",
-                    "distribution":{"name":"bernoulli","successRate":0.0},
+                    "distribution":{"name":"transitionProb","transitionProb":0.0},
                     "initialValue":999,
                     "linkedCompartment":["I"],
                     "isIn":[false],
@@ -19,7 +19,7 @@
                 },
                 {
                     "name":"I",
-                    "distribution":{"name":"exponential","rate":0.5},
+                    "distribution":{"name":"transitionProb","transitionProb":0.5},
                     "initialValue":1,
                     "linkedCompartment":["S","R"],
                     "isIn":[true,false],
@@ -27,7 +27,7 @@
                 },
                 {
                     "name":"R",
-                    "distribution":{"name":"bernoulli","successRate":0.0},
+                    "distribution":{"name":"transitionProb","transitionProb":0.0},
                     "initialValue":0,
                     "linkedCompartment":["I"],
                     "isIn":[true],
@@ -44,7 +44,7 @@
             "compartments":[
                 {
                     "name":"S",
-                    "distribution":{"name":"bernoulli","successRate":0.0},
+                    "distribution":{"name":"transitionProb","transitionProb":0.0},
                     "initialValue":699,
                     "linkedCompartment":["I"],
                     "isIn":[false],
@@ -52,7 +52,7 @@
                 },
                 {
                     "name":"I",
-                    "distribution":{"name":"exponential","rate":0.3},
+                    "distribution":{"name":"transitionProb","transitionProb":0.3},
                     "initialValue":0,
                     "linkedCompartment":["S","R"],
                     "isIn":[true,false],
@@ -60,7 +60,7 @@
                 },
                 {
                     "name":"R",
-                    "distribution":{"name":"bernoulli","successRate":0.0},
+                    "distribution":{"name":"transitionProb","transitionProb":0.0},
                     "initialValue":0,
                     "linkedCompartment":["I"],
                     "isIn":[true],
@@ -77,7 +77,7 @@
             "compartments":[
                 {
                     "name":"S",
-                    "distribution":{"name":"bernoulli","successRate":0.0},
+                    "distribution":{"name":"transitionProb","transitionProb":0.0},
                     "initialValue":899,
                     "linkedCompartment":["I"],
                     "isIn":[false],
@@ -85,7 +85,7 @@
                 },
                 {
                     "name":"I",
-                    "distribution":{"name":"exponential","rate":0.4},
+                    "distribution":{"name":"transitionProb","transitionProb":0.4},
                     "initialValue":0,
                     "linkedCompartment":["S","R"],
                     "isIn":[true,false],
@@ -93,7 +93,7 @@
                 },
                 {
                     "name":"R",
-                    "distribution":{"name":"bernoulli","successRate":0.0},
+                    "distribution":{"name":"transitionProb","transitionProb":0.0},
                     "initialValue":0,
                     "linkedCompartment":["I"],
                     "isIn":[true],

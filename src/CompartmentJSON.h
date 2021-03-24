@@ -8,7 +8,7 @@
 #include "json.h"
 #include <memory>
 #include "Compartment.h"
-#include "Distribution/BernoulliDistribution.h"
+#include "Distribution/TransitionProb.h"
 #include "Distribution/DiscreteGammaDistribution.h"
 #include "Distribution/DiscreteWeibullDistribution.h"
 #include "Distribution/DiscreteExponentialDistribution.h"

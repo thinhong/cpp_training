@@ -9,7 +9,7 @@
             "compartments":[
                 {
                     "name":"S",
-                    "distribution":{"name":"bernoulli","successRate":0.0},
+                    "distribution":{"name":"transitionProb","transitionProb":0.0},
                     "initialValue":999,
                     "linkedCompartment":["I"],
                     "isIn":[false],
@@ -25,7 +25,7 @@
                 },
                 {
                     "name":"R",
-                    "distribution":{"name":"bernoulli","successRate":0.0},
+                    "distribution":{"name":"transitionProb","transitionProb":0.0},
                     "initialValue":0,
                     "linkedCompartment":["I"],
                     "isIn":[true],

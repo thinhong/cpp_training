@@ -11,10 +11,10 @@ CompartmentJSON::CompartmentJSON(nlohmann::json& jsonNode) {
 std::shared_ptr<Compartment> CompartmentJSON::compFromJSON() {
     std::shared_ptr<Compartment> comp;
 
-    // Bernoulli distribution: parameter is "successRate"
-    if (jsonNode["distribution"]["name"] == "bernoulli") {
-        auto bernoulli = std::make_shared<BernoulliDistribution>(std::make_shared<double>(jsonNode["distribution"]["successRate"]));
-        comp = std::make_shared<Compartment>(jsonNode["name"], jsonNode["initialValue"], bernoulli);
+    // Directly add transition probability: parameter is "transitionProb"
+    if (jsonNode["distribution"]["name"] == "transitionProb") {
+        auto transitionProb = std::make_shared<TransitionProb>(jsonNode["distribution"]["transitionProb"]);
+        comp = std::make_shared<Compartment>(jsonNode["name"], jsonNode["initialValue"], transitionProb);
     }
     // Gamma distribution: parameters are "scale" and "shape"
     else if (jsonNode["distribution"]["name"] == "gamma") {
@@ -51,8 +51,8 @@ std::shared_ptr<Compartment> CompartmentJSON::compFromJSON() {
 nlohmann::json CompartmentJSON::compToJSON(std::shared_ptr<Compartment> &comp) {
     jsonNode["name"] = comp->getName();
     jsonNode["initialValue"] = comp->getTotal()[0];
-    if (comp->getDist()->getDistName() == "bernoulli") {
-        jsonNode["distribution"] = {{"name", comp->getDist()->getDistName()}, {"successRate", comp->getDist()
+    if (comp->getDist()->getDistName() == "transitionProb") {
+        jsonNode["distribution"] = {{"name", comp->getDist()->getDistName()}, {"transitionProb", comp->getDist()
                                                                                                   ->getTransitionProb(0)}};
     }
     else if (comp->getDist()->getDistName() == "gamma") {

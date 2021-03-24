@@ -45,7 +45,7 @@ The first and last compartments must be set with Bernoulli distribution.
 
 **Parameters**
 ```
-"name":"bernoulli","successRate":0.0
+"name":"bernoulli","transitionProb":0.0
 ```
 
 ### 2. Gamma distribution 

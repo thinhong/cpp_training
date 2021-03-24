@@ -7,7 +7,7 @@
 #include "Compartment.h"
 #include "Model.h"
 #include "Distribution/Distribution.h"
-#include "Distribution/BernoulliDistribution.h"
+#include "Distribution/TransitionProb.h"
 #include "Distribution/DiscreteGammaDistribution.h"
 #include "Distribution/DiscreteWeibullDistribution.h"
 #include "FileCSV.h"
@@ -101,15 +101,16 @@ int main() {
     // the "location" for loop
     for (size_t i {1}; i < Compartment::daysFollowUp; i++) {
         for (auto& myModel: allModels) {
-//        std::ofstream iterFile("../output/iteration.txt");
-//        iterFile << "Iteration: " << "0" << std::endl;
-//        for (size_t j {0}; j < myModel->getComps().size(); ++j) {
-//            iterFile << myModel->getComps()[j]->getName() << ": ";
-//            for (auto k: myModel->getComps()[j]->getSubCompartmentValues()) {
-//                iterFile << k << " ";
+//            std::ofstream iterFile("../output/iteration.txt");
+//            iterFile << "Iteration: " << "0" << std::endl;
+//            for (size_t j {0}; j < myModel->getComps().size(); ++j) {
+//                iterFile << myModel->getComps()[j]->getName() << ": ";
+//                for (auto k: myModel->getComps()[j]->getSubCompartmentValues()) {
+//                    iterFile << k << " ";
+//                }
+//                iterFile << std::endl;
 //            }
-//            iterFile << std::endl;
-//        }
+
             myModel->update(i);
 
 //            iterFile << "Iteration: " << i << std::endl;

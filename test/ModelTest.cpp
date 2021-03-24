@@ -1,8 +1,8 @@
 #include <gtest/gtest.h>
 #include "../src/Distribution/Distribution.h"
 #include "../src/Distribution/Distribution.cpp"
-#include "../src/Distribution/BernoulliDistribution.h"
-#include "../src/Distribution/BernoulliDistribution.cpp"
+#include "../src/Distribution/TransitionProb.h"
+#include "../src/Distribution/TransitionProb.cpp"
 #include "../src/Distribution/DiscreteGammaDistribution.h"
 #include "../src/Distribution/DiscreteGammaDistribution.cpp"
 #include "../src/Distribution/CustomDistribution.h"
@@ -38,10 +38,10 @@ TEST(ModelTest, test) {
     const double transRate = 2.0;
     auto forceInfection = std::make_shared<double>();
     std::vector<double> cumProb = {0.0, 0.3, 1};
-    auto S = make_shared<Compartment>("S", 10000, make_shared<BernoulliDistribution>(forceInfection));
+    auto S = make_shared<Compartment>("S", 10000, make_shared<TransitionProb>(forceInfection));
     auto I = make_shared<Compartment>("I", 500, make_shared<DiscreteGammaDistribution>(cumProb));
-    auto R = make_shared<Compartment>("R", 0, make_shared<BernoulliDistribution>(make_shared<double>(0.0)));
-    auto D = make_shared<Compartment>("D", 0, make_shared<BernoulliDistribution>(make_shared<double>(0.0)));
+    auto R = make_shared<Compartment>("R", 0, make_shared<TransitionProb>(make_shared<double>(0.0)));
+    auto D = make_shared<Compartment>("D", 0, make_shared<TransitionProb>(make_shared<double>(0.0)));
 
     Model myModel;
     myModel.addCompsAndConnect(S, I, 1);

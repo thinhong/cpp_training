@@ -59,8 +59,7 @@ void Compartment::addIsIn(bool isIn) {
 }
 
 void Compartment::updateValue(long iter, double forceInfection) {
-    // Note: the first (S) and last (R, D) compartments must be defined with bernoulli distribution
-    // Other compartments must not be defined with bernoulli distribution
+    // Note: the first (S) and last (R, D) compartments must be defined using direct transition prob
     // For all compartments except the first and last compartments
     if (subCompartmentValues.size() > 1) {
         outValue = 0;
@@ -80,7 +79,7 @@ void Compartment::updateValue(long iter, double forceInfection) {
             }
         }
     }
-    // For compartments with with bernoulli distribution
+    // For compartments using direct transition prob
     else if (subCompartmentValues.size() == 1) {
         // First, check if it is the first compartment (S)
         if (nInNodes == 0) {
