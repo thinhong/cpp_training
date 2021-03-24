@@ -4,6 +4,7 @@
 
 #include <fstream>
 #include <iomanip>
+#include <filesystem>
 #include "FileCSV.h"
 
 FileCSV::FileCSV(std::string filePath, std::string fileName, Model* model) {
@@ -22,18 +23,25 @@ void FileCSV::writeFile() {
         fullPath = filePath + "/" + fileName;
     }
 
+    if(!std::filesystem::is_directory(filePath) || !std::filesystem::exists(filePath)) {
+        std::cout << "Create directory " << filePath << " to store output..." << "\n";
+        std::filesystem::create_directories(filePath);
+    }
+
     std::ofstream myFile(fullPath);
     myFile << std::fixed << std::setprecision(precision);
     if (myFile.is_open()) {
-        for (size_t j {}; j < model->getComps().size(); ++j) {
+        myFile << "Time,";
+        for (size_t j {0}; j < model->getComps().size(); ++j) {
             if (j == model->getComps().size() - 1) {
                 myFile << model->getComps()[j]->getName() << "_" << model->getName() << "\n";
             } else {
                 myFile << model->getComps()[j]->getName() << "_" << model->getName() << ",";
             }
         }
-        for (size_t i {}; i < model->getComps()[0]->getTotal().size(); ++i) {
-            for (size_t j {}; j < model->getComps().size(); ++j) {
+        for (size_t i {0}; i < model->getComps()[0]->getTotal().size(); ++i) {
+            myFile << i << ",";
+            for (size_t j {0}; j < model->getComps().size(); ++j) {
                 if (j == model->getComps().size() - 1) {
                     myFile << model->getComps()[j]->getTotal()[i] << "\n";
                 } else {
