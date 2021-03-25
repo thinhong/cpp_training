@@ -3,10 +3,11 @@
 #include <stack>
 #include <stdexcept>
 
-Model::Model(std::string name, double transmissionRate, std::vector<std::string> infectiousComps) {
+Model::Model(std::string name, double transmissionRate, std::vector<std::string> infectiousComps, std::vector<std::string> transitionFlow) {
     this->name = name;
     this->transmissionRate = transmissionRate;
     this->infectiousComps = infectiousComps;
+    this->transitionFlow = transitionFlow;
 }
 
 std::string Model::getName() {
@@ -41,6 +42,10 @@ double Model::getSelfInteraction() {
     return selfInteraction;
 }
 
+std::vector<std::string> Model::getTransitionFlow() {
+    return transitionFlow;
+}
+
 void Model::addLocationInteraction(std::vector<double> locationInteraction) {
     this->locationInteraction = locationInteraction;
     // Calculate selfInteraction = 1 - sum(locationInteraction)
@@ -57,6 +62,16 @@ void Model::addLinkedLocation(std::weak_ptr<Model> linkedLocation) {
 
 void Model::addCompsFromConfig(std::vector<std::shared_ptr<Compartment>> &comps) {
     this->comps = comps;
+}
+
+std::weak_ptr<Compartment> Model::getAddressFromName(std::string compName) {
+    std::weak_ptr<Compartment> compAddress;
+    for (auto& comp: comps) {
+        if (comp->getName() == compName) {
+            compAddress = comp;
+        }
+    }
+    return compAddress;
 }
 
 void Model::addCompsAndConnect(std::shared_ptr<Compartment>& A, std::shared_ptr<Compartment>& B, double weight) {
@@ -78,6 +93,40 @@ void Model::addCompsAndConnect(std::shared_ptr<Compartment>& A, std::shared_ptr<
     B->addIsIn(true);
     A->addLinkedWeight(1);
     B->addLinkedWeight(weight);
+}
+
+void Model::connectComp(std::string transitionSymbol, std::string weightSymbol) {
+    for (std::string flow: transitionFlow) {
+        // Remove whitespace
+        flow.erase(remove(flow.begin(), flow.end(), ' '), flow.end());
+
+        int transitionSymbol_pos = flow.find(transitionSymbol);
+        // Check whether there is a ":" symbol in this flow
+        int probSymbol_pos = flow.find(weightSymbol);
+
+        // [inComp] [->] [outComp] [:] [prob]
+        // inComp start from position 0 and spread from 0 -> transitionSymbol_pos => length = transitionSymbol_pos - 0 = transitionSymbol_pos
+        std::string inCompName = flow.substr(0, transitionSymbol_pos);
+        // outComp start from transitionSymbol_pos + 2 (transitionSymbol_pos is "->" therefore occupies 2 positions), and
+        // spread from transitionSymbol_pos + 2 to probSymbol_pos => length = probSymbol_pos - (transitionSymbol_pos + 2)
+        std::string outCompName = flow.substr(transitionSymbol_pos + 2, probSymbol_pos - (transitionSymbol_pos + 2));
+        // prob start from probSymbol_pos + 1 and spread to the end of the string
+        double weight;
+        if (probSymbol_pos != -1) {
+            weight = std::stod(flow.substr(probSymbol_pos + 1));
+        } else {
+            weight = 1;
+        }
+        std::weak_ptr<Compartment> inComp = this->getAddressFromName(inCompName);
+        std::weak_ptr<Compartment> outComp = this->getAddressFromName(outCompName);
+        inComp.lock()->addLinkedCompartment(outComp);
+        outComp.lock()->addLinkedCompartment(inComp);
+        inComp.lock()->addIsIn(false);
+        outComp.lock()->addIsIn(true);
+        inComp.lock()->addLinkedWeight(weight);
+        outComp.lock()->addLinkedWeight(weight);
+    }
+
 }
 
 int Model::getIndex(std::shared_ptr<Compartment> comp) {

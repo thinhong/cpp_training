@@ -6,30 +6,22 @@
             "name":"HCM",
             "transmissionRate":0.004,
             "infectiousComps":["I"],
+            "transitionFlow":["S -> I", "I -> R"],
             "compartments":[
                 {
                     "name":"S",
                     "distribution":{"name":"transitionProb","transitionProb":0.0},
-                    "initialValue":999,
-                    "linkedCompartment":["I"],
-                    "isIn":[false],
-                    "linkedWeight":[1.0]
+                    "initialValue":999
                 },
                 {
                     "name":"I",
                     "distribution":{"name":"exponential","rate":0.0005},
-                    "initialValue":1,
-                    "linkedCompartment":["S","R"],
-                    "isIn":[true,false],
-                    "linkedWeight":[1.0,1.0]
+                    "initialValue":1
                 },
                 {
                     "name":"R",
                     "distribution":{"name":"transitionProb","transitionProb":0.0},
-                    "initialValue":0,
-                    "linkedCompartment":["I"],
-                    "isIn":[true],
-                    "linkedWeight":[1.0]
+                    "initialValue":0
                 }
             ]
         }

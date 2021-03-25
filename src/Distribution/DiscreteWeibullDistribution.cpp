@@ -36,7 +36,7 @@ void DiscreteWeibullDistribution::calcTransitionProb() {
 
     // Remember to calculate max day
     maxDay = transitionProb.size();
-    std::cout << maxDay << "\n";
+//    std::cout << maxDay << "\n";
 }
 
 DiscreteWeibullDistribution::DiscreteWeibullDistribution(double scale, double shape) {

@@ -10,6 +10,7 @@ class Model {
 private:
     std::string name;
     std::vector<std::string> infectiousComps;
+    std::vector<std::string> transitionFlow;
     double transmissionRate {0};
     // Population size is computed after sortComps in main()
     double populationSize {0};
@@ -19,7 +20,7 @@ private:
 
     std::vector<std::shared_ptr<Compartment>> comps;
 public:
-    explicit Model(std::string name, double transmissionRate, std::vector<std::string> infectiousComps);
+    explicit Model(std::string name, double transmissionRate, std::vector<std::string> infectiousComps, std::vector<std::string> transitionFlow);
     ~Model() {
 //        std::cout << name << " model destructor called." << std::endl;
     }
@@ -32,6 +33,8 @@ public:
     std::vector<std::weak_ptr<Model>> getLinkedLocation();
     std::vector<double> getLocationInteraction();
     double getSelfInteraction();
+    std::vector<std::string> getTransitionFlow();
+    std::weak_ptr<Compartment> getAddressFromName(std::string compName);
 
     // Interaction among locations
     void addLinkedLocation(std::weak_ptr<Model> linkedLocation);
@@ -39,6 +42,7 @@ public:
 
     // Add compartment to model using JSON config file
     void addCompsFromConfig(std::vector<std::shared_ptr<Compartment>>& comps);
+    void connectComp(std::string transitionSymbol, std::string weightSymbol);
     void addCompsAndConnect(std::shared_ptr<Compartment>& A, std::shared_ptr<Compartment>& B, double weight);
     int getIndex(std::shared_ptr<Compartment> comp);
 

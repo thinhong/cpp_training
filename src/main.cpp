@@ -32,38 +32,26 @@ int main() {
     // Generate models
     std::vector<std::shared_ptr<Model>> allModels;
     for (auto& locationConfig: input["locations"]) {
-        auto myModel = std::make_shared<Model>(locationConfig["name"], locationConfig["transmissionRate"], locationConfig["infectiousComps"]);
-
-        if (!locationConfig["locationInteraction"].is_null()) {
-            myModel->addLocationInteraction(locationConfig["locationInteraction"]);
-        }
 
         // Generate all compartments from input file
         std::vector<std::shared_ptr<Compartment>> allCompartments;
         for (auto& compConfig: locationConfig["compartments"]) {
             CompartmentJSON compJson(compConfig);
-            allCompartments.push_back(compJson.compFromJSON());
+            allCompartments.push_back(compJson.getComp());
         }
 
-        // Add linkedCompartment needs to be done as a separated step because we need all compartments created before connecting them
-        for (auto& compConfig: locationConfig["compartments"]) {
-            std::weak_ptr<Compartment> baseComp;
-            for (auto& comp: allCompartments) {
-                if (comp->getName() == compConfig["name"]) {
-                    baseComp = comp;
-                }
-            }
-            for (auto& linkedConfig: compConfig["linkedCompartment"]) {
-                std::weak_ptr<Compartment> linkedComp;
-                for (auto& comp: allCompartments) {
-                    if (comp->getName() == linkedConfig) {
-                        linkedComp = comp;
-                        baseComp.lock()->addLinkedCompartment(linkedComp);
-                    }
-                }
-            }
+        auto myModel = std::make_shared<Model>(locationConfig["name"], locationConfig["transmissionRate"],
+                                               locationConfig["infectiousComps"], locationConfig["transitionFlow"]);
+
+        if (!locationConfig["locationInteraction"].is_null()) {
+            myModel->addLocationInteraction(locationConfig["locationInteraction"]);
         }
+
+        // Add all compartments
         myModel->addCompsFromConfig(allCompartments);
+        // Connect the compartments (only can be done after adding all compartments)
+        myModel->connectComp("->", ":");
+
         myModel->sortComps();
         myModel->calcPopulationSize();
 

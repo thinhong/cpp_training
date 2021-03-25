@@ -1,0 +1,78 @@
+{
+    "daysFollowUp":200,
+    "errorTolerance":0.01,
+    "locations":[
+        {
+            "name":"HCM_full",
+            "transmissionRate":1.5,
+            "infectiousComps":["A","A_r","I"],
+            "transitionFlow":["S -> E", "E -> A", "A -> A_r: 0.35", "A -> I: 0.65", "A_r -> R", "I -> H_h: 0.7", "I -> H_c: 0.2", "I -> H_d: 0.1", 
+                "H_h -> R", "H_c -> C_c", "C_c -> R", "H_d -> C_d", "C_d -> D"],
+            "compartments":[
+                {
+                    "name":"E",
+                    "distribution":{"name":"weibull","scale":4.0,"shape":3.0},
+                    "initialValue":0.0
+                },
+                {
+                    "name":"A",
+                    "distribution":{"name":"gamma","scale":1.0,"shape":1.0},
+                    "initialValue":0.0
+                },
+                {
+                    "name":"I",
+                    "distribution":{"name":"gamma","scale":1.0,"shape":4.0},
+                    "initialValue":1.0
+                },
+                {
+                    "name":"H_d",
+                    "distribution":{"name":"gamma","scale":1.0,"shape":1.0},
+                    "initialValue":0.0
+                },
+                {
+                    "name":"S",
+                    "distribution":{"name":"transitionProb","transitionProb":0.0},
+                    "initialValue":3000000.0
+                },
+                {
+                    "name":"C_d",
+                    "distribution":{"name":"gamma","scale":1.0,"shape":4.0},
+                    "initialValue":0.0
+                },
+                {
+                    "name":"D",
+                    "distribution":{"name":"transitionProb","transitionProb":0.0},
+                    "initialValue":0.0
+                },
+                {
+                    "name":"C_c",
+                    "distribution":{"name":"weibull","scale":5.0,"shape":1.5},
+                    "initialValue":0.0
+                },
+                {
+                    "name":"H_c",
+                    "distribution":{"name":"weibull","scale":4.0,"shape":3.0},
+                    "initialValue":0.0
+                },
+                {
+                    "name":"H_h",
+                    "distribution":{"name":"gamma","scale":1.0,"shape":1.0},
+                    "initialValue":0.0
+                },
+                {
+                    "name":"A_r",
+                    "distribution":{"name":"weibull","scale":5.0,"shape":1.5},
+                    "initialValue":0.0
+                    
+                },
+                {
+                    "name":"R",
+                    "distribution":{"name":"transitionProb","transitionProb":0.0},
+                    "initialValue":0.0
+                }
+            ]
+        }
+    ]
+    
+    
+}

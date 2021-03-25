@@ -8,30 +8,22 @@
             "infectiousComps":["I"],
             "linkedLocations":["HN"],
             "locationInteraction":[0.1],
+            "transitionFlow":["S -> I", "I -> R"],
             "compartments":[
                 {
                     "name":"S",
                     "distribution":{"name":"transitionProb","transitionProb":0.0},
-                    "initialValue":999,
-                    "linkedCompartment":["I"],
-                    "isIn":[false],
-                    "linkedWeight":[1.0]
+                    "initialValue":999
                 },
                 {
                     "name":"I",
                     "distribution":{"name":"transitionProb","transitionProb":0.5},
-                    "initialValue":1,
-                    "linkedCompartment":["S","R"],
-                    "isIn":[true,false],
-                    "linkedWeight":[1.0,1.0]
+                    "initialValue":1
                 },
                 {
                     "name":"R",
                     "distribution":{"name":"transitionProb","transitionProb":0.0},
-                    "initialValue":0,
-                    "linkedCompartment":["I"],
-                    "isIn":[true],
-                    "linkedWeight":[1.0]
+                    "initialValue":0
                 }
             ]
         },
@@ -41,30 +33,22 @@
             "infectiousComps":["I"],
             "linkedLocations":["HCM"],
             "locationInteraction":[0.1],
+            "transitionFlow":["S -> I", "I -> R"],
             "compartments":[
                 {
                     "name":"S",
                     "distribution":{"name":"transitionProb","transitionProb":0.0},
-                    "initialValue":699,
-                    "linkedCompartment":["I"],
-                    "isIn":[false],
-                    "linkedWeight":[1.0]
+                    "initialValue":699
                 },
                 {
                     "name":"I",
                     "distribution":{"name":"transitionProb","transitionProb":0.3},
-                    "initialValue":0,
-                    "linkedCompartment":["S","R"],
-                    "isIn":[true,false],
-                    "linkedWeight":[1.0,1.0]
+                    "initialValue":0
                 },
                 {
                     "name":"R",
                     "distribution":{"name":"transitionProb","transitionProb":0.0},
-                    "initialValue":0,
-                    "linkedCompartment":["I"],
-                    "isIn":[true],
-                    "linkedWeight":[1.0]
+                    "initialValue":0
                 }
             ]
         }

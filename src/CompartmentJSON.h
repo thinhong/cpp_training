@@ -16,14 +16,11 @@
 
 class CompartmentJSON {
 private:
-    nlohmann::json jsonNode;
+    std::shared_ptr<Compartment> comp;
 public:
-    CompartmentJSON() = default;
     explicit CompartmentJSON(nlohmann::json& jsonNode);
-    // Convert compartment to JSON and vice versa
-    std::shared_ptr<Compartment> compFromJSON();
-    nlohmann::json compToJSON(std::shared_ptr<Compartment>& comp);
-    nlohmann::json getJsonNode() {return jsonNode;};
+    std::shared_ptr<Compartment> getComp();
+    nlohmann::json compToJSON();
 };
 
 

@@ -5,33 +5,27 @@
 #include "CompartmentJSON.h"
 
 CompartmentJSON::CompartmentJSON(nlohmann::json& jsonNode) {
-    this->jsonNode = jsonNode;
-}
-
-std::shared_ptr<Compartment> CompartmentJSON::compFromJSON() {
-    std::shared_ptr<Compartment> comp;
-
     // Directly add transition probability: parameter is "transitionProb"
     if (jsonNode["distribution"]["name"] == "transitionProb") {
         auto transitionProb = std::make_shared<TransitionProb>(jsonNode["distribution"]["transitionProb"]);
         comp = std::make_shared<Compartment>(jsonNode["name"], jsonNode["initialValue"], transitionProb);
     }
-    // Gamma distribution: parameters are "scale" and "shape"
+        // Gamma distribution: parameters are "scale" and "shape"
     else if (jsonNode["distribution"]["name"] == "gamma") {
         auto gamma = std::make_shared<DiscreteGammaDistribution>(jsonNode["distribution"]["scale"], jsonNode["distribution"]["shape"]);
         comp = std::make_shared<Compartment>(jsonNode["name"], jsonNode["initialValue"], gamma);
     }
-    // Weibull distribution: parameters are "scale" and "shape"
+        // Weibull distribution: parameters are "scale" and "shape"
     else if (jsonNode["distribution"]["name"] == "weibull") {
         auto weibull = std::make_shared<DiscreteWeibullDistribution>(jsonNode["distribution"]["scale"], jsonNode["distribution"]["shape"]);
         comp = std::make_shared<Compartment>(jsonNode["name"], jsonNode["initialValue"], weibull);
     }
-    // Exponential distribution: parameter is "rate"
+        // Exponential distribution: parameter is "rate"
     else if (jsonNode["distribution"]["name"] == "exponential") {
         auto exponential = std::make_shared<DiscreteExponentialDistribution>(jsonNode["distribution"]["rate"]);
         comp = std::make_shared<Compartment>(jsonNode["name"], jsonNode["initialValue"], exponential);
     }
-    // Custom distribution: parameter is a vector "waitingTime"
+        // Custom distribution: parameter is a vector "waitingTime"
     else if (jsonNode["distribution"]["name"] == "custom") {
         std::vector<double> waitingTime = jsonNode["distribution"]["waitingTime"];
         auto custom = std::make_shared<CustomDistribution>(waitingTime);
@@ -45,10 +39,14 @@ std::shared_ptr<Compartment> CompartmentJSON::compFromJSON() {
     for (bool isIn: jsonNode["isIn"]) {
         comp->addIsIn(isIn);
     }
+}
+
+std::shared_ptr<Compartment> CompartmentJSON::getComp() {
     return comp;
 }
 
-nlohmann::json CompartmentJSON::compToJSON(std::shared_ptr<Compartment> &comp) {
+nlohmann::json CompartmentJSON::compToJSON() {
+    nlohmann::json jsonNode;
     jsonNode["name"] = comp->getName();
     jsonNode["initialValue"] = comp->getTotal()[0];
     if (comp->getDist()->getDistName() == "transitionProb") {
