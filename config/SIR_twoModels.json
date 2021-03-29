@@ -1,13 +1,12 @@
 {
     "daysFollowUp":100,
     "errorTolerance":0.01,
+    "locationContacts":["HCM <-> HCM: 0.85", "HCM <-> HN: 0.1", "HN <-> HN: 0.95"],
     "locations":[
         {
             "name":"HCM",
             "transmissionRate":1.5,
             "infectiousComps":["I"],
-            "linkedLocations":["HN"],
-            "locationInteraction":[0.1],
             "transitionFlow":["S -> I", "I -> R"],
             "compartments":[
                 {
@@ -31,8 +30,6 @@
             "name":"HN",
             "transmissionRate":1.2,
             "infectiousComps":["I"],
-            "linkedLocations":["HCM"],
-            "locationInteraction":[0.1],
             "transitionFlow":["S -> I", "I -> R"],
             "compartments":[
                 {

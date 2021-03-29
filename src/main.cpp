@@ -6,6 +6,7 @@
 #include "json.h"
 #include "Compartment.h"
 #include "Model.h"
+#include "FullModel.h"
 #include "Distribution/Distribution.h"
 #include "Distribution/TransitionProb.h"
 #include "Distribution/DiscreteGammaDistribution.h"
@@ -17,6 +18,7 @@
 
 int main() {
     // ========================== Using JSON input ==============================
+
     // Read a JSON input file to provide parameters
     std::string inputPath;
     std::cout << "Enter full path to input file (ex: /home/Documents/config.json): ";
@@ -29,54 +31,35 @@ int main() {
     Compartment::daysFollowUp = input["daysFollowUp"];
     Distribution::errorTolerance = input["errorTolerance"];
 
-    // Generate models
-    std::vector<std::shared_ptr<Model>> allModels;
+    // Initialize the full model with relationship between locations
+    FullModel allModels(input["locationContacts"]);
+
+    // For each location:
     for (auto& locationConfig: input["locations"]) {
 
-        // Generate all compartments from input file
+        // Generate all compartments in this location
         std::vector<std::shared_ptr<Compartment>> allCompartments;
         for (auto& compConfig: locationConfig["compartments"]) {
             CompartmentJSON compJson(compConfig);
             allCompartments.push_back(compJson.getComp());
         }
 
+        // Make model for this location
         auto myModel = std::make_shared<Model>(locationConfig["name"], locationConfig["transmissionRate"],
                                                locationConfig["infectiousComps"], locationConfig["transitionFlow"]);
-
-        if (!locationConfig["locationInteraction"].is_null()) {
-            myModel->addLocationInteraction(locationConfig["locationInteraction"]);
-        }
-
-        // Add all compartments
         myModel->addCompsFromConfig(allCompartments);
-        // Connect the compartments (only can be done after adding all compartments)
+
+        // Because all compartments had been created, we can connect the compartments now
         myModel->connectComp("->", ":");
 
         myModel->sortComps();
         myModel->calcPopulationSize();
 
-        allModels.push_back(myModel);
+        // Finally, add this newly created model to the full model
+        allModels.addModel(myModel);
     }
 
-    for (auto& locationConfig: input["locations"]) {
-        if (!locationConfig["linkedLocations"].is_null()) {
-            std::weak_ptr<Model> baseModel;
-            for (auto& model: allModels) {
-                if (model->getName() == locationConfig["name"]) {
-                    baseModel = model;
-                }
-            }
-            for (auto& linkedConfig: locationConfig["linkedLocations"]) {
-                std::weak_ptr<Model> linkedModel;
-                for (auto& model: allModels) {
-                    if (model->getName() == linkedConfig) {
-                        linkedModel = model;
-                        baseModel.lock()->addLinkedLocation(linkedModel);
-                    }
-                }
-            }
-        }
-    }
+    allModels.connectLocations("<->", ":");
 
     // ======================== End JSON input ==============================
 
@@ -88,32 +71,10 @@ int main() {
     // from iter 1 to iter 100 then continue to update the next location. So the "iter" for loop comes first, then
     // the "location" for loop
     for (size_t i {1}; i < Compartment::daysFollowUp; i++) {
-        for (auto& myModel: allModels) {
-//            std::ofstream iterFile("../output/iteration.txt");
-//            iterFile << "Iteration: " << "0" << std::endl;
-//            for (size_t j {0}; j < myModel->getComps().size(); ++j) {
-//                iterFile << myModel->getComps()[j]->getName() << ": ";
-//                for (auto k: myModel->getComps()[j]->getSubCompartmentValues()) {
-//                    iterFile << k << " ";
-//                }
-//                iterFile << std::endl;
-//            }
-
+        for (auto& myModel: allModels.getModels()) {
             myModel->update(i);
-
-//            iterFile << "Iteration: " << i << std::endl;
-//            for (size_t j {0}; j < myModel->getComps().size(); ++j) {
-//                iterFile << myModel->getComps()[j]->getName() << ": ";
-//                for (auto k: myModel->getComps()[j]->getSubCompartmentValues()) {
-//                    iterFile << k << " ";
-//                }
-//                iterFile << std::endl;
-//            }
         }
     }
-
-        // For debug
-
 
     // ================== End construct and run model ========================
 
@@ -144,7 +105,7 @@ int main() {
     std::string outputFolder;
     std::cout << "Set path to the folder you want to save output file (ex: /home/Documents): ";
     std::cin >> outputFolder;
-    for (auto& model: allModels) {
+    for (auto& model: allModels.getModels()) {
         Model* pModel = &(*model);
         std::string outputFileName = model->getName() + ".csv";
         FileCSV file(outputFolder, outputFileName, pModel);

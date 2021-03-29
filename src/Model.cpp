@@ -35,25 +35,23 @@ std::vector<std::weak_ptr<Model>> Model::getLinkedLocation() {
 }
 
 std::vector<double> Model::getLocationInteraction() {
-    return locationInteraction;
-}
-
-double Model::getSelfInteraction() {
-    return selfInteraction;
+    return linkedContactProb;
 }
 
 std::vector<std::string> Model::getTransitionFlow() {
     return transitionFlow;
 }
 
-void Model::addLocationInteraction(std::vector<double> locationInteraction) {
-    this->locationInteraction = locationInteraction;
-    // Calculate selfInteraction = 1 - sum(locationInteraction)
-    double totalInteraction {0};
-    for (auto& i: this->locationInteraction) {
-        totalInteraction += i;
-    }
-    this->selfInteraction = 1 - totalInteraction;
+void Model::setSelfContactProb(double selfContactProb) {
+    this->selfContactProb = selfContactProb;
+}
+
+void Model::addLinkedContactProb(double linkedContactProb) {
+    this->linkedContactProb.push_back(linkedContactProb);
+}
+
+void Model::addLocationInteraction(std::vector<double> linkedContactProb) {
+    this->linkedContactProb = linkedContactProb;
 }
 
 void Model::addLinkedLocation(std::weak_ptr<Model> linkedLocation) {
@@ -211,7 +209,7 @@ void Model::calcPopulationSize() {
 }
 
 double Model::calcForceInfection(size_t iter) {
-    // Force of infection: lambda = beta * totalInfectious / N
+    // Force of infection: lambda = transmissionRate * contactProb * totalInfectious / N
 
     // Within this location
     double totalInfectiousWithin {0};
@@ -223,7 +221,7 @@ double Model::calcForceInfection(size_t iter) {
             }
         }
     }
-    double infectiousWithin = totalInfectiousWithin / populationSize;
+    double infectiousWithin = selfContactProb * totalInfectiousWithin / populationSize;
 
     // Between locations
     double infectiousBetween {0};
@@ -238,8 +236,8 @@ double Model::calcForceInfection(size_t iter) {
                     }
                 }
             }
-            // Remember to multiply the locationInteraction
-            infectiousBetween += locationInteraction[i] * totalInfectiousBetween / linkedLocations[i].lock()->getPopulationSize() ;
+            // Remember to multiply the linkedContactProb
+            infectiousBetween += linkedContactProb[i] * totalInfectiousBetween / linkedLocations[i].lock()->getPopulationSize() ;
         }
     }
     double forceInfection = transmissionRate * (infectiousWithin + infectiousBetween);
