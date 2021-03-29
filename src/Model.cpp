@@ -50,10 +50,6 @@ void Model::addLinkedContactProb(double linkedContactProb) {
     this->linkedContactProb.push_back(linkedContactProb);
 }
 
-void Model::addLocationInteraction(std::vector<double> linkedContactProb) {
-    this->linkedContactProb = linkedContactProb;
-}
-
 void Model::addLinkedLocation(std::weak_ptr<Model> linkedLocation) {
     this->linkedLocations.push_back(linkedLocation);
 }
