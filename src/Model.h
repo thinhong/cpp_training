@@ -29,9 +29,6 @@ public:
     void calcPopulationSize();
     double getPopulationSize();
     std::vector<std::string> getInfectiousComps();
-    double getTransmissionRate();
-    std::vector<std::weak_ptr<Model>> getLinkedLocation();
-    std::vector<double> getLocationInteraction();
     std::vector<std::string> getTransitionFlow();
     /**
      * Compartments of a Model object are stored as pointer in vector <b>comps</b>, but we normally identify compartment
@@ -58,11 +55,17 @@ public:
      */
     int getIndex(std::shared_ptr<Compartment> comp);
 
+    // Functions used to
     // Use depth-first-search algorithm to detect cycle https://www.geeksforgeeks.org/detect-cycle-in-a-graph/
     bool checkCycleHelper(size_t i, std::vector<bool>& visited, std::vector<bool>& recursiveStack);
     void checkCycle();
     // Then we sort the compartments using topological sorting algorithm https://www.geeksforgeeks.org/topological-sorting/
     void sortCompsHelper(size_t i, std::vector<bool>& visited, std::stack<std::shared_ptr<Compartment>>& stack);
+    /**
+     * <b>sortComps()</b> comprises of many helper functions (<b>checkCycleHelper()</b>, <b>checkCycle()</b> and
+     * <b>sortCompsHelper()</b>), it will first make sure that there is no cycle in the model, then perform topological
+     * sorting algorithm
+     */
     void sortComps();
 
     double calcForceInfection(size_t iter);

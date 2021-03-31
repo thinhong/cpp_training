@@ -1,6 +1,7 @@
 {
-    "daysFollowUp":100,
+    "daysFollowUp":50002,
     "errorTolerance":0.01,
+    "timeStep":0.01,
     "locationContacts":["HCM <-> HCM: 0.85", "HCM <-> HN: 0.1", "HN <-> HN: 0.95"],
     "locations":[
         {
@@ -16,7 +17,7 @@
                 },
                 {
                     "name":"I",
-                    "distribution":{"name":"transitionProb","transitionProb":0.5},
+                    "distribution":{"name":"exponential","rate":0.5},
                     "initialValue":1
                 },
                 {
@@ -39,7 +40,7 @@
                 },
                 {
                     "name":"I",
-                    "distribution":{"name":"transitionProb","transitionProb":0.3},
+                    "distribution":{"name":"exponential","rate":0.3},
                     "initialValue":0
                 },
                 {

@@ -30,8 +30,12 @@ int main() {
     // Initialize parameters
     Compartment::daysFollowUp = input["daysFollowUp"];
     Distribution::errorTolerance = input["errorTolerance"];
+    // Default timeStep is 1 day
+    if (!input["timeStep"].is_null()) {
+        Distribution::timeStep = input["timeStep"];
+    }
 
-    // Initialize the full model with relationship between locations
+    // ====== Initialize the full model with relationship between locations ======
     FullModel allModels(input["locationContacts"]);
 
     // For each location:
@@ -52,10 +56,11 @@ int main() {
         // Because all compartments had been created, we can connect the compartments now
         myModel->connectComp("->", ":");
 
+        // Check cycle, sort and calculate population size
         myModel->sortComps();
         myModel->calcPopulationSize();
 
-        // Finally, add this newly created model to the full model
+        // Finally, add this model to the full model
         allModels.addModel(myModel);
     }
 
@@ -65,7 +70,6 @@ int main() {
 
     // ==================== Construct and run model ==========================
 
-    // Run model
     // BE CAUTIOUS: The order of the following two for loop is extremely important, at each iteration we want to
     // update location 1, then location 2, then move on to the next iteration. We never want to update a location
     // from iter 1 to iter 100 then continue to update the next location. So the "iter" for loop comes first, then

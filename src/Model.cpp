@@ -1,11 +1,12 @@
 #include "Model.h"
+#include "Distribution/Distribution.h"
 #include <algorithm>
 #include <stack>
 #include <stdexcept>
 
 Model::Model(std::string name, double transmissionRate, std::vector<std::string> infectiousComps, std::vector<std::string> transitionFlow) {
     this->name = name;
-    this->transmissionRate = transmissionRate;
+    this->transmissionRate = transmissionRate * Distribution::timeStep;
     this->infectiousComps = infectiousComps;
     this->transitionFlow = transitionFlow;
 }
@@ -24,18 +25,6 @@ double Model::getPopulationSize() {
 
 std::vector<std::string> Model::getInfectiousComps() {
     return infectiousComps;
-}
-
-double Model::getTransmissionRate() {
-    return transmissionRate;
-}
-
-std::vector<std::weak_ptr<Model>> Model::getLinkedLocation() {
-    return linkedLocations;
-}
-
-std::vector<double> Model::getLocationInteraction() {
-    return linkedContactProb;
 }
 
 std::vector<std::string> Model::getTransitionFlow() {
