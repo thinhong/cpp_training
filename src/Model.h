@@ -9,8 +9,7 @@
 class Model {
 private:
     std::string name;
-    std::vector<std::string> infectiousComps;
-    std::vector<std::string> transitionFlow;
+    std::string group;
     double transmissionRate {0};
     // Population size is computed after sortComps in main()
     double populationSize {0};
@@ -20,7 +19,10 @@ private:
 
     std::vector<std::shared_ptr<Compartment>> comps;
 public:
-    explicit Model(std::string name, double transmissionRate, std::vector<std::string> infectiousComps, std::vector<std::string> transitionFlow);
+    // Model structure and infectious compartment are the same for all models for a disease
+    static inline std::vector<std::string> modelStructure;
+    static inline std::vector<std::string> infectiousComps;
+    explicit Model(std::string name, double transmissionRate);
     ~Model() {
 //        std::cout << name << " model destructor called." << std::endl;
     }
@@ -28,8 +30,6 @@ public:
     std::vector<std::shared_ptr<Compartment>> getComps();
     void calcPopulationSize();
     double getPopulationSize();
-    std::vector<std::string> getInfectiousComps();
-    std::vector<std::string> getTransitionFlow();
     /**
      * Compartments of a Model object are stored as pointer in vector <b>comps</b>, but we normally identify compartment
      * by name, this function take the compartment name as input and return the address of that compartment pointer

@@ -30,9 +30,14 @@ int main() {
     // Initialize parameters
     Compartment::daysFollowUp = input["daysFollowUp"];
     Distribution::errorTolerance = input["errorTolerance"];
-    // Default timeStep is 1 day
     if (!input["timeStep"].is_null()) {
         Distribution::timeStep = input["timeStep"];
+    }
+    for (std::string structure: input["modelStructure"]) {
+        Model::modelStructure.push_back(structure);
+    }
+    for (std::string infComp: input["infectiousComps"]) {
+        Model::infectiousComps.push_back(infComp);
     }
 
     // ====== Initialize the full model with relationship between locations ======
@@ -49,8 +54,7 @@ int main() {
         }
 
         // Make model for this location
-        auto myModel = std::make_shared<Model>(locationConfig["name"], locationConfig["transmissionRate"],
-                                               locationConfig["infectiousComps"], locationConfig["transitionFlow"]);
+        auto myModel = std::make_shared<Model>(locationConfig["name"], locationConfig["transmissionRate"]);
         myModel->addCompsFromConfig(allCompartments);
 
         // Because all compartments had been created, we can connect the compartments now

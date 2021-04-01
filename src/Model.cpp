@@ -4,11 +4,9 @@
 #include <stack>
 #include <stdexcept>
 
-Model::Model(std::string name, double transmissionRate, std::vector<std::string> infectiousComps, std::vector<std::string> transitionFlow) {
+Model::Model(std::string name, double transmissionRate) {
     this->name = name;
     this->transmissionRate = transmissionRate * Distribution::timeStep;
-    this->infectiousComps = infectiousComps;
-    this->transitionFlow = transitionFlow;
 }
 
 std::string Model::getName() {
@@ -21,14 +19,6 @@ std::vector<std::shared_ptr<Compartment>> Model::getComps() {
 
 double Model::getPopulationSize() {
     return populationSize;
-}
-
-std::vector<std::string> Model::getInfectiousComps() {
-    return infectiousComps;
-}
-
-std::vector<std::string> Model::getTransitionFlow() {
-    return transitionFlow;
 }
 
 void Model::setSelfContactProb(double selfContactProb) {
@@ -79,7 +69,7 @@ void Model::addCompsAndConnect(std::shared_ptr<Compartment>& A, std::shared_ptr<
 }
 
 void Model::connectComp(std::string transitionSymbol, std::string weightSymbol) {
-    for (std::string flow: transitionFlow) {
+    for (std::string flow: modelStructure) {
         // Remove whitespace
         flow.erase(remove(flow.begin(), flow.end(), ' '), flow.end());
 
@@ -215,7 +205,7 @@ double Model::calcForceInfection(size_t iter) {
         for (size_t i {0}; i < linkedLocations.size(); ++i) {
             double totalInfectiousBetween {0};
             for (auto& linkedLocationComp: linkedLocations[i].lock()->getComps()) {
-                for (std::string& infectiousComp: linkedLocations[i].lock()->getInfectiousComps()) {
+                for (std::string& infectiousComp: infectiousComps) {
                     if (linkedLocationComp->getName() == infectiousComp) {
                         totalInfectiousBetween += linkedLocationComp->getTotal()[iter - 1];
                     }

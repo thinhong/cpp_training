@@ -2,13 +2,13 @@
     "daysFollowUp":50002,
     "errorTolerance":0.01,
     "timeStep":0.01,
+    "modelStructure": ["S -> I", "I -> R"],
+    "infectiousComps":["I"],
     "locationContacts":["HCM <-> HCM: 0.85", "HCM <-> HN: 0.1", "HN <-> HN: 0.95"],
     "locations":[
         {
             "name":"HCM",
             "transmissionRate":1.5,
-            "infectiousComps":["I"],
-            "transitionFlow":["S -> I", "I -> R"],
             "compartments":[
                 {
                     "name":"S",
@@ -30,8 +30,6 @@
         {
             "name":"HN",
             "transmissionRate":1.2,
-            "infectiousComps":["I"],
-            "transitionFlow":["S -> I", "I -> R"],
             "compartments":[
                 {
                     "name":"S",

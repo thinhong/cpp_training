@@ -1,0 +1,142 @@
+{
+    "daysFollowUp": 100,
+    "errorTolerance": 0.01,
+    "timeStep": 0.01,
+    "modelStructure": ["S -> I", "I -> R"],
+    "infectiousComps": ["I"],
+    "transmissionRate": 1.5,
+    "variables": [
+        {
+            "varName": "age",
+            "values": ["0-14", "15-64", ">=65"],
+            "contactProb": ["0-14 <-> 0-14: 0.5", "0-14 <-> 15-64: 0.6", "0-14 <-> >=65: 0.7", "15-64 <-> 15-64: 0.4", "15-64 <-> >=65: 0.3", ">=65 <-> >=65: 0.8"]
+        },
+        {
+            "varName": "location",
+            "values": ["HCM", "HN"],
+            "contactProb": ["HCM <-> HCM: 0.85", "HCM <-> HN: 0.1", "HN <-> HN: 0.95"]
+        }
+    ],
+    "models":[
+        {
+            "group": ["0-14", "HCM"],
+            "compartments":[
+                {
+                    "name":"S",
+                    "distribution":{"name":"transitionProb","transitionProb":0.0},
+                    "initialValue":999
+                },
+                {
+                    "name":"I",
+                    "distribution":{"name":"exponential","rate":0.5},
+                    "initialValue":1
+                },
+                {
+                    "name":"R",
+                    "distribution":{"name":"transitionProb","transitionProb":0.0},
+                    "initialValue":0
+                }
+            ]
+        },
+        {
+            "group": ["15-64", "HCM"],
+            "compartments":[
+                {
+                    "name":"S",
+                    "distribution":{"name":"transitionProb","transitionProb":0.0},
+                    "initialValue":999
+                },
+                {
+                    "name":"I",
+                    "distribution":{"name":"exponential","rate":0.5},
+                    "initialValue":1
+                },
+                {
+                    "name":"R",
+                    "distribution":{"name":"transitionProb","transitionProb":0.0},
+                    "initialValue":0
+                }
+            ]
+        },
+        {
+            "group": [">=65", "HCM"],
+            "compartments":[
+                {
+                    "name":"S",
+                    "distribution":{"name":"transitionProb","transitionProb":0.0},
+                    "initialValue":999
+                },
+                {
+                    "name":"I",
+                    "distribution":{"name":"exponential","rate":0.5},
+                    "initialValue":1
+                },
+                {
+                    "name":"R",
+                    "distribution":{"name":"transitionProb","transitionProb":0.0},
+                    "initialValue":0
+                }
+            ]
+        },
+        {
+            "group": ["0-14", "HN"],
+            "compartments":[
+                {
+                    "name":"S",
+                    "distribution":{"name":"transitionProb","transitionProb":0.0},
+                    "initialValue":999
+                },
+                {
+                    "name":"I",
+                    "distribution":{"name":"exponential","rate":0.5},
+                    "initialValue":1
+                },
+                {
+                    "name":"R",
+                    "distribution":{"name":"transitionProb","transitionProb":0.0},
+                    "initialValue":0
+                }
+            ]
+        },
+        {
+            "group": ["15-64", "HN"],
+            "compartments":[
+                {
+                    "name":"S",
+                    "distribution":{"name":"transitionProb","transitionProb":0.0},
+                    "initialValue":999
+                },
+                {
+                    "name":"I",
+                    "distribution":{"name":"exponential","rate":0.5},
+                    "initialValue":1
+                },
+                {
+                    "name":"R",
+                    "distribution":{"name":"transitionProb","transitionProb":0.0},
+                    "initialValue":0
+                }
+            ]
+        },
+        {
+            "group": [">=65", "HN"],
+            "compartments":[
+                {
+                    "name":"S",
+                    "distribution":{"name":"transitionProb","transitionProb":0.0},
+                    "initialValue":999
+                },
+                {
+                    "name":"I",
+                    "distribution":{"name":"exponential","rate":0.5},
+                    "initialValue":1
+                },
+                {
+                    "name":"R",
+                    "distribution":{"name":"transitionProb","transitionProb":0.0},
+                    "initialValue":0
+                }
+            ]
+        }
+    ]
+}

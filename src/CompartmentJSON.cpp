@@ -8,7 +8,7 @@ CompartmentJSON::CompartmentJSON(nlohmann::json& jsonNode) {
     // Directly add transition probability: parameter is "transitionProb"
     if (jsonNode["distribution"]["name"] == "transitionProb") {
         double prob = jsonNode["distribution"]["transitionProb"];
-        prob /= Distribution::timeStep;
+        prob *= Distribution::timeStep;
         auto transitionProb = std::make_shared<TransitionProb>(prob);
         comp = std::make_shared<Compartment>(jsonNode["name"], jsonNode["initialValue"], transitionProb);
     }
@@ -22,7 +22,10 @@ CompartmentJSON::CompartmentJSON(nlohmann::json& jsonNode) {
     }
         // Weibull distribution: parameters are "scale" and "shape"
     else if (jsonNode["distribution"]["name"] == "weibull") {
-        auto weibull = std::make_shared<DiscreteWeibullDistribution>(jsonNode["distribution"]["scale"], jsonNode["distribution"]["shape"]);
+        double scale = jsonNode["distribution"]["scale"];
+        scale /= Distribution::timeStep;
+        double shape = jsonNode["distribution"]["shape"];
+        auto weibull = std::make_shared<DiscreteWeibullDistribution>(scale, shape);
         comp = std::make_shared<Compartment>(jsonNode["name"], jsonNode["initialValue"], weibull);
     }
         // Exponential distribution: parameter is "rate"
