@@ -4,6 +4,7 @@
 #include <fstream>
 #include <stdexcept>
 #include "json.h"
+#include "Contact.h"
 #include "Compartment.h"
 #include "Model.h"
 #include "FullModel.h"
@@ -40,21 +41,37 @@ int main() {
         Model::infectiousComps.push_back(infComp);
     }
 
+    // Initialize contactAssumption first because the contact will be generate following this order
+    for (std::string assumption: input["contactAssumption"]) {
+        Contact::contactAssumption.push_back(assumption);
+    }
+    std::vector<std::shared_ptr<Contact>> allContacts;
+    // Vector allContacts contains contacts sorted by contactAssumption
+    for (std::string contactType: Contact::contactAssumption) {
+        for (auto& contactConfig: input["contacts"]) {
+            std::string currentContactType = contactConfig["contactType"];
+            if (currentContactType == contactType) {
+                auto contact = std::make_shared<Contact>(contactConfig["contactType"], contactConfig["contactClasses"], contactConfig["contactProbs"]);
+                allContacts.push_back(contact);
+            }
+        }
+    }
+
     // ====== Initialize the full model with relationship between locations ======
-    FullModel allModels(input["locationContacts"]);
+    FullModel allModels(allContacts);
 
     // For each location:
-    for (auto& locationConfig: input["locations"]) {
+    for (auto& modelConfig: input["models"]) {
 
         // Generate all compartments in this location
         std::vector<std::shared_ptr<Compartment>> allCompartments;
-        for (auto& compConfig: locationConfig["compartments"]) {
+        for (auto& compConfig: modelConfig["compartments"]) {
             CompartmentJSON compJson(compConfig);
             allCompartments.push_back(compJson.getComp());
         }
 
         // Make model for this location
-        auto myModel = std::make_shared<Model>(locationConfig["name"], locationConfig["transmissionRate"]);
+        auto myModel = std::make_shared<Model>(modelConfig["modelGroup"], modelConfig["transmissionRate"]);
         myModel->addCompsFromConfig(allCompartments);
 
         // Because all compartments had been created, we can connect the compartments now
@@ -63,12 +80,14 @@ int main() {
         // Check cycle, sort and calculate population size
         myModel->sortComps();
         myModel->calcPopulationSize();
+        myModel->sortModelGroupByAssumption(allContacts);
 
         // Finally, add this model to the full model
         allModels.addModel(myModel);
     }
 
-    allModels.connectLocations("<->", ":");
+    allModels.connectModels();
+
 
     // ======================== End JSON input ==============================
 
@@ -87,7 +106,7 @@ int main() {
     // ================== End construct and run model ========================
 
     // ========================= Write output ================================
-    // Create json object to store all input parameters
+//    // Create json object to store all input parameters
 //    nlohmann::json writeConfig;
 //    writeConfig["daysFollowUp"] = Compartment::daysFollowUp;
 //    writeConfig["errorTolerance"] = Distribution::errorTolerance;
@@ -106,7 +125,7 @@ int main() {
 //        std::cout << "Successfully written input information into file: /home/thinh/Downloads/config2.json" <<
 //        std::endl;
 //    } else {
-//        std::cout << "Unable to write file" << std::endl;
+//        std::cout << "Unable to write config log file" << std::endl;
 //    }
 
     // Write output to CSV file
@@ -115,7 +134,15 @@ int main() {
     std::cin >> outputFolder;
     for (auto& model: allModels.getModels()) {
         Model* pModel = &(*model);
-        std::string outputFileName = model->getName() + ".csv";
+        std::string outputFileName;
+        for (size_t i {0}; i < model->getModelGroup().size(); ++i) {
+            if (i < (model->getModelGroup().size() - 1)) {
+                outputFileName += model->getModelGroup()[i] + "_";
+            } else if (i == (model->getModelGroup().size() - 1)) {
+                outputFileName += model->getModelGroup()[i];
+            }
+        }
+        outputFileName += ".csv";
         FileCSV file(outputFolder, outputFileName, pModel);
         file.writeFile();
     }

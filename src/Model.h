@@ -5,31 +5,50 @@
 #include <memory>
 #include <stack>
 #include "Compartment.h"
+#include "Contact.h"
 
 class Model {
 private:
-    std::string name;
-    std::string group;
+    std::vector<std::string> modelGroup;
     double transmissionRate {0};
     // Population size is computed after sortComps in main()
     double populationSize {0};
-    std::vector<std::weak_ptr<Model>> linkedLocations;
+    /**
+     * Contains all compartments of this model
+     */
+    std::vector<std::shared_ptr<Compartment>> comps;
+
+    /**
+     * Contains weak pointers to all models, including itself, with corresponding contact probability stored at the
+     * same index in vector linkedContactProb
+     */
+    std::vector<std::weak_ptr<Model>> linkedModels;
+
+    /**
+     * Contain the contact probabilities that corresponds to the same index in linkedModels
+     */
     std::vector<double> linkedContactProb;
+
+    // To be deprecated soon
     double selfContactProb {1};
 
-    std::vector<std::shared_ptr<Compartment>> comps;
+
 public:
     // Model structure and infectious compartment are the same for all models for a disease
     static inline std::vector<std::string> modelStructure;
     static inline std::vector<std::string> infectiousComps;
-    explicit Model(std::string name, double transmissionRate);
+    Model(std::vector<std::string> modelGroup, double transmissionRate);
     ~Model() {
 //        std::cout << name << " model destructor called." << std::endl;
     }
-    std::string getName();
+    std::vector<std::string> getModelGroup();
     std::vector<std::shared_ptr<Compartment>> getComps();
     void calcPopulationSize();
     double getPopulationSize();
+
+    std::vector<std::weak_ptr<Model>> getLinkedModels() {return linkedModels;};
+    std::vector<double> getLinkedContactProb() {return linkedContactProb;};
+
     /**
      * Compartments of a Model object are stored as pointer in vector <b>comps</b>, but we normally identify compartment
      * by name, this function take the compartment name as input and return the address of that compartment pointer
@@ -38,10 +57,17 @@ public:
      */
     std::weak_ptr<Compartment> getAddressFromName(std::string compName);
 
+    /**
+     * Ensure that the order of elements in model group follows instruction from contact assumption
+     * @param allContacts: a vector contains all Contact objects
+     */
+    void sortModelGroupByAssumption(std::vector<std::shared_ptr<Contact>> allContacts);
+
     // Interaction among locations
     void setSelfContactProb(double selfContactProb);
-    void addLinkedContactProb(double linkedContactProb);
-    void addLinkedLocation(std::weak_ptr<Model> linkedLocation);
+    void addNewLinkedContactProb(double linkedContactProb);
+    void updateLinkedContactProb(double newLinkedContactProb, size_t index);
+    void addLinkedModels(std::vector<std::weak_ptr<Model>> allModels);
 
     // Add compartment to model using JSON config file
     void addCompsFromConfig(std::vector<std::shared_ptr<Compartment>>& comps);
@@ -55,7 +81,9 @@ public:
      */
     int getIndex(std::shared_ptr<Compartment> comp);
 
-    // Functions used to
+    int getIndexLinkedModel(std::vector<std::string> modelGroup);
+
+    // Functions to check cycle and sort compartments to the correct order
     // Use depth-first-search algorithm to detect cycle https://www.geeksforgeeks.org/detect-cycle-in-a-graph/
     bool checkCycleHelper(size_t i, std::vector<bool>& visited, std::vector<bool>& recursiveStack);
     void checkCycle();
@@ -68,6 +96,11 @@ public:
      */
     void sortComps();
 
+    /**
+     * Re-calculation force of infection after each iteration
+     * @param iter: the iteration (or time) to be calculated
+     * @return
+     */
     double calcForceInfection(size_t iter);
 
     /**

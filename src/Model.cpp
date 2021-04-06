@@ -4,13 +4,15 @@
 #include <stack>
 #include <stdexcept>
 
-Model::Model(std::string name, double transmissionRate) {
-    this->name = name;
+Model::Model(std::vector<std::string> modelGroup, double transmissionRate) {
+    for (std::string group: modelGroup) {
+        this->modelGroup.push_back(group);
+    }
     this->transmissionRate = transmissionRate * Distribution::timeStep;
 }
 
-std::string Model::getName() {
-    return name;
+std::vector<std::string> Model::getModelGroup() {
+    return modelGroup;
 }
 
 std::vector<std::shared_ptr<Compartment>> Model::getComps() {
@@ -25,12 +27,16 @@ void Model::setSelfContactProb(double selfContactProb) {
     this->selfContactProb = selfContactProb;
 }
 
-void Model::addLinkedContactProb(double linkedContactProb) {
+void Model::addNewLinkedContactProb(double linkedContactProb) {
     this->linkedContactProb.push_back(linkedContactProb);
 }
 
-void Model::addLinkedLocation(std::weak_ptr<Model> linkedLocation) {
-    this->linkedLocations.push_back(linkedLocation);
+void Model::updateLinkedContactProb(double newLinkedContactProb, size_t index) {
+    linkedContactProb[index] *= newLinkedContactProb;
+}
+
+void Model::addLinkedModels(std::vector<std::weak_ptr<Model>> allModels) {
+    this->linkedModels = allModels;
 }
 
 void Model::addCompsFromConfig(std::vector<std::shared_ptr<Compartment>> &comps) {
@@ -111,6 +117,14 @@ int Model::getIndex(std::shared_ptr<Compartment> comp) {
     return index;
 }
 
+int Model::getIndexLinkedModel(std::vector<std::string> modelGroup) {
+    for (size_t i {0}; i < linkedModels.size(); ++i) {
+        if (modelGroup == linkedModels[i].lock()->getModelGroup()) {
+            return i;
+        }
+    }
+}
+
 bool Model::checkCycleHelper(size_t i, std::vector<bool> &visited, std::vector<bool> &recursiveStack) {
     if (!visited[i]) {
         visited[i] = true;
@@ -184,38 +198,21 @@ void Model::calcPopulationSize() {
 }
 
 double Model::calcForceInfection(size_t iter) {
-    // Force of infection: lambda = transmissionRate * contactProb * totalInfectious / N
-
-    // Within this location
-    double totalInfectiousWithin {0};
-    // Scan through all compartments, find compartments have the same name as in the infectiousComps vector
-    for (auto& comp: comps) {
-        for (std::string &infectiousComp: infectiousComps) {
-            if (comp->getName() == infectiousComp) {
-                totalInfectiousWithin += comp->getTotal()[iter - 1];
-            }
-        }
-    }
-    double infectiousWithin = selfContactProb * totalInfectiousWithin / populationSize;
-
-    // Between locations
-    double infectiousBetween {0};
-    if (!linkedLocations.empty()) {
-        // Start from the first linked location, perform the same process as within location
-        for (size_t i {0}; i < linkedLocations.size(); ++i) {
-            double totalInfectiousBetween {0};
-            for (auto& linkedLocationComp: linkedLocations[i].lock()->getComps()) {
-                for (std::string& infectiousComp: infectiousComps) {
-                    if (linkedLocationComp->getName() == infectiousComp) {
-                        totalInfectiousBetween += linkedLocationComp->getTotal()[iter - 1];
-                    }
+    // Force of infection: lambda = transmissionRate * contactProbs * totalInfectious / N
+    double forceInfection {0};
+    for (size_t i {0}; i < linkedModels.size(); ++i) {
+        double totalInfectious {0};
+        for (auto& linkedLocationComp: linkedModels[i].lock()->getComps()) {
+            for (std::string& infectiousComp: infectiousComps) {
+                if (linkedLocationComp->getName() == infectiousComp) {
+                    totalInfectious += linkedLocationComp->getTotal()[iter - 1];
                 }
             }
-            // Remember to multiply the linkedContactProb
-            infectiousBetween += linkedContactProb[i] * totalInfectiousBetween / linkedLocations[i].lock()->getPopulationSize() ;
         }
+        // Remember to multiply the linkedContactProb
+        forceInfection += transmissionRate * linkedContactProb[i] * totalInfectious / linkedModels[i].lock()->getPopulationSize() ;
     }
-    double forceInfection = transmissionRate * (infectiousWithin + infectiousBetween);
+
     return forceInfection;
 }
 
@@ -224,4 +221,21 @@ void Model::update(long iter) {
     for (auto& comp: comps) {
         comp->updateValue(iter, forceInfection);
     }
+}
+
+void Model::sortModelGroupByAssumption(std::vector<std::shared_ptr<Contact>> allContacts) {
+    std::vector<std::string> modelGroupSorted;
+    for (std::string assumptionOrder: Contact::contactAssumption) {
+        for (auto contact: allContacts) {
+            if (contact->getContactType() == assumptionOrder) {
+                std::vector<std::string> contactClasses = contact->getContactClasses();
+                for (std::string group: modelGroup) {
+                    if (std::find(contactClasses.begin(), contactClasses.end(), group) != contactClasses.end()) {
+                        modelGroupSorted.push_back(group);
+                    }
+                }
+            }
+        }
+    }
+    modelGroup = modelGroupSorted;
 }
