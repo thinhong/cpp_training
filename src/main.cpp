@@ -86,8 +86,8 @@ int main() {
         allModels.addModel(myModel);
     }
 
+    // After adding all models, connect them
     allModels.connectModels();
-
 
     // ======================== End JSON input ==============================
 

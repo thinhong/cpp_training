@@ -43,6 +43,7 @@ public:
     }
     std::vector<std::string> getModelGroup();
     std::vector<std::shared_ptr<Compartment>> getComps();
+    double getTransmissionRate() {return transmissionRate;};
     void calcPopulationSize();
     double getPopulationSize();
 

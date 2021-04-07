@@ -15,9 +15,9 @@ public:
     void addModel(std::shared_ptr<Model> model);
 
     // Helper functions
-//    std::weak_ptr<Model> getAddressFromName(std::string modelGroup);
     std::vector<std::shared_ptr<Model>> getModels();
-    std::vector<std::weak_ptr<Model>> getModelsFromGroup(std::string modelGroup);
+    std::vector<std::weak_ptr<Model>> getModelsWithGroup(std::vector<std::string> groupToGet);
+    double getContactProbByComparingPairs(std::vector<std::string> modelGroup);
 
     void connectModels();
 };

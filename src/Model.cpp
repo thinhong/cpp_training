@@ -212,7 +212,6 @@ double Model::calcForceInfection(size_t iter) {
         // Remember to multiply the linkedContactProb
         forceInfection += transmissionRate * linkedContactProb[i] * totalInfectious / linkedModels[i].lock()->getPopulationSize() ;
     }
-
     return forceInfection;
 }
 
