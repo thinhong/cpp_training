@@ -23,16 +23,12 @@ double Model::getPopulationSize() {
     return populationSize;
 }
 
-void Model::setSelfContactProb(double selfContactProb) {
-    this->selfContactProb = selfContactProb;
+void Model::addNewLinkedContactRate(double linkedContactRate) {
+    this->linkedContactRates.push_back(linkedContactRate);
 }
 
-void Model::addNewLinkedContactProb(double linkedContactProb) {
-    this->linkedContactProb.push_back(linkedContactProb);
-}
-
-void Model::updateLinkedContactProb(double newLinkedContactProb, size_t index) {
-    linkedContactProb[index] *= newLinkedContactProb;
+void Model::updateLinkedContactRate(double linkedContactRateToUpdate, size_t index) {
+    linkedContactRates[index] *= linkedContactRateToUpdate;
 }
 
 void Model::addLinkedModels(std::vector<std::weak_ptr<Model>> allModels) {
@@ -118,11 +114,17 @@ int Model::getIndex(std::shared_ptr<Compartment> comp) {
 }
 
 int Model::getIndexLinkedModel(std::vector<std::string> modelGroup) {
+    int index {0};
     for (size_t i {0}; i < linkedModels.size(); ++i) {
         if (modelGroup == linkedModels[i].lock()->getModelGroup()) {
-            return i;
+            index = i;
         }
     }
+    return index;
+}
+
+std::vector<std::weak_ptr<Model>> Model::getLinkedModels() {
+    return linkedModels;
 }
 
 bool Model::checkCycleHelper(size_t i, std::vector<bool> &visited, std::vector<bool> &recursiveStack) {
@@ -198,7 +200,7 @@ void Model::calcPopulationSize() {
 }
 
 double Model::calcForceInfection(size_t iter) {
-    // Force of infection: lambda = transmissionRate * contactProbs * totalInfectious / N
+    // Force of infection: lambda = transmissionRate * contactRates * totalInfectious / N
     double forceInfection {0};
     for (size_t i {0}; i < linkedModels.size(); ++i) {
         double totalInfectious {0};
@@ -209,8 +211,8 @@ double Model::calcForceInfection(size_t iter) {
                 }
             }
         }
-        // Remember to multiply the linkedContactProb
-        forceInfection += transmissionRate * linkedContactProb[i] * totalInfectious / linkedModels[i].lock()->getPopulationSize() ;
+        // Remember to multiply the linkedContactRates
+        forceInfection += transmissionRate * linkedContactRates[i] * totalInfectious / linkedModels[i].lock()->getPopulationSize() ;
     }
     return forceInfection;
 }

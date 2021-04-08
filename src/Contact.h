@@ -12,13 +12,13 @@ class Contact {
 private:
     std::string contactType;
     std::vector<std::string> contactClasses;
-    std::vector<std::string> contactProbs;
+    std::vector<std::string> contactRates;
 public:
-    Contact(std::string contactType, std::vector<std::string> contactClasses, std::vector<std::string> contactProbs);
+    Contact(std::string contactType, std::vector<std::string> contactClasses, std::vector<std::string> contactRates);
     static inline std::vector<std::string> contactAssumption;
     std::string getContactType();
     std::vector<std::string> getContactClasses();
-    std::vector<std::string> getContactProbs();
+    std::vector<std::string> getContactRates();
 };
 
 

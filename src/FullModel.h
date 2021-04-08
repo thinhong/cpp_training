@@ -16,8 +16,19 @@ public:
 
     // Helper functions
     std::vector<std::shared_ptr<Model>> getModels();
-    std::vector<std::weak_ptr<Model>> getModelsWithGroup(std::vector<std::string> groupToGet);
-    double getContactProbByComparingPairs(std::vector<std::string> modelGroup);
+    /**
+     * Get models that contain 1 or more specific groups of interest
+     * @param groupToGet: a vector contains the group names
+     * @return a vector of weak pointers of models
+     */
+    std::vector<std::weak_ptr<Model>> getModelsWithSpecificGroup(std::vector<std::string> groupToGet);
+
+    /**
+     *
+     * @param modelGroup
+     * @return
+     */
+    double getContactRateByComparingPairs(std::vector<std::string> modelGroup);
 
     void connectModels();
 };

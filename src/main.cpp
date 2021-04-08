@@ -51,7 +51,7 @@ int main() {
         for (auto& contactConfig: input["contacts"]) {
             std::string currentContactType = contactConfig["contactType"];
             if (currentContactType == contactType) {
-                auto contact = std::make_shared<Contact>(contactConfig["contactType"], contactConfig["contactClasses"], contactConfig["contactProbs"]);
+                auto contact = std::make_shared<Contact>(contactConfig["contactType"], contactConfig["contactClasses"], contactConfig["contactRates"]);
                 allContacts.push_back(contact);
             }
         }

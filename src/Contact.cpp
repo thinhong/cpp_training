@@ -4,13 +4,13 @@
 
 #include "Contact.h"
 
-Contact::Contact(std::string contactType, std::vector<std::string> contactClasses, std::vector<std::string> contactProbs) {
+Contact::Contact(std::string contactType, std::vector<std::string> contactClasses, std::vector<std::string> contactRates) {
     this->contactType = contactType;
     for (std::string contactClass: contactClasses) {
         this->contactClasses.push_back(contactClass);
     }
-    for (std::string contactProb: contactProbs) {
-        this->contactProbs.push_back(contactProb);
+    for (std::string contactRate: contactRates) {
+        this->contactRates.push_back(contactRate);
     }
 }
 
@@ -22,6 +22,6 @@ std::vector<std::string> Contact::getContactClasses() {
     return contactClasses;
 }
 
-std::vector<std::string> Contact::getContactProbs() {
-    return contactProbs;
+std::vector<std::string> Contact::getContactRates() {
+    return contactRates;
 }

@@ -20,25 +20,24 @@ private:
 
     /**
      * Contains weak pointers to all models, including itself, with corresponding contact probability stored at the
-     * same index in vector linkedContactProb
+     * same indices in vector linkedContactRates
      */
     std::vector<std::weak_ptr<Model>> linkedModels;
 
     /**
-     * Contain the contact probabilities that corresponds to the same index in linkedModels
+     * Contain the contact probabilities that corresponds to the same indices in linkedModels
      */
-    std::vector<double> linkedContactProb;
-
-    // To be deprecated soon
-    double selfContactProb {1};
-
-
+    std::vector<double> linkedContactRates;
 public:
     // Model structure and infectious compartment are the same for all models for a disease
     static inline std::vector<std::string> modelStructure;
     static inline std::vector<std::string> infectiousComps;
     Model(std::vector<std::string> modelGroup, double transmissionRate);
     ~Model() {
+//        std::string name;
+//        for (auto group: modelGroup) {
+//            name += group;
+//        }
 //        std::cout << name << " model destructor called." << std::endl;
     }
     std::vector<std::string> getModelGroup();
@@ -47,8 +46,7 @@ public:
     void calcPopulationSize();
     double getPopulationSize();
 
-    std::vector<std::weak_ptr<Model>> getLinkedModels() {return linkedModels;};
-    std::vector<double> getLinkedContactProb() {return linkedContactProb;};
+    std::vector<std::weak_ptr<Model>> getLinkedModels();
 
     /**
      * Compartments of a Model object are stored as pointer in vector <b>comps</b>, but we normally identify compartment
@@ -65,9 +63,8 @@ public:
     void sortModelGroupByAssumption(std::vector<std::shared_ptr<Contact>> allContacts);
 
     // Interaction among locations
-    void setSelfContactProb(double selfContactProb);
-    void addNewLinkedContactProb(double linkedContactProb);
-    void updateLinkedContactProb(double newLinkedContactProb, size_t index);
+    void addNewLinkedContactRate(double linkedContactRate);
+    void updateLinkedContactRate(double linkedContactRateToUpdate, size_t index);
     void addLinkedModels(std::vector<std::weak_ptr<Model>> allModels);
 
     // Add compartment to model using JSON config file
