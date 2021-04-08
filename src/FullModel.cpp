@@ -31,7 +31,7 @@ std::vector<std::weak_ptr<Model>> FullModel::getModelsWithGroup(std::vector<std:
 
 double FullModel::getContactProbByComparingPairs(std::vector<std::string> modelGroup) {
     double contactProb {0};
-    for (auto contactConfig: allContacts) {
+    for (auto& contactConfig: allContacts) {
         for (std::string contactProbConfig: contactConfig->getContactProbs()) {
             // Remove whitespace
             contactProbConfig.erase(remove(contactProbConfig.begin(), contactProbConfig.end(), ' '), contactProbConfig.end());
@@ -71,7 +71,7 @@ double FullModel::getContactProbByComparingPairs(std::vector<std::string> modelG
 void FullModel::connectModels() {
     // Create a vector of weak pointer to all models
     std::vector<std::weak_ptr<Model>> allModels;
-    for (auto model: models) {
+    for (auto& model: models) {
         allModels.push_back(model);
     }
     // Now begin the connection process
@@ -79,7 +79,7 @@ void FullModel::connectModels() {
         // Set linkedModels as all models
         model->addLinkedModels(allModels);
         size_t lastIndex = model->getModelGroup().size() - 1;
-        for (auto linkedModel: model->getLinkedModels()) {
+        for (auto& linkedModel: model->getLinkedModels()) {
             std::vector<std::string> classPair;
             classPair.push_back(model->getModelGroup()[lastIndex]);
             classPair.push_back(linkedModel.lock()->getModelGroup()[lastIndex]);
@@ -89,7 +89,7 @@ void FullModel::connectModels() {
         for (size_t i {0}; i <= lastIndex - 1; ++i) {
             groupToSubset.push_back(model->getModelGroup()[lastIndex - i]);
             std::vector<std::weak_ptr<Model>> subsetModels = getModelsWithGroup(groupToSubset);
-            for (auto subsetModel: subsetModels) {
+            for (auto& subsetModel: subsetModels) {
                 std::vector<std::string> classPair;
                 classPair.push_back(model->getModelGroup()[lastIndex - i - 1]);
                 classPair.push_back(subsetModel.lock()->getModelGroup()[lastIndex - i - 1]);
