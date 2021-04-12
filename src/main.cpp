@@ -19,10 +19,7 @@
 #include <chrono>
 
 int main() {
-    // Record execution time
-    auto startTime = std::chrono::high_resolution_clock::now();
-
-    // ========================== JSON input ==============================
+        // ========================== JSON input ==============================
 
     // Read a JSON input file to provide parameters
     std::string inputPath;
@@ -31,6 +28,9 @@ int main() {
     std::ifstream inputFile(inputPath);
     nlohmann::json input;
     inputFile >> input;
+
+    // Record execution time
+    auto startTime = std::chrono::high_resolution_clock::now();
 
     std::cout << "Reading input file..." << "\n";
 
