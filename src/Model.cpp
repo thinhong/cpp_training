@@ -6,13 +6,13 @@
 
 Model::Model(std::vector<std::string> modelGroup, double transmissionRate) {
     for (std::string group: modelGroup) {
-        this->modelGroup.push_back(group);
+        this->modelName.push_back(group);
     }
     this->transmissionRate = transmissionRate * Distribution::timeStep;
 }
 
 std::vector<std::string> Model::getModelGroup() {
-    return modelGroup;
+    return modelName;
 }
 
 std::vector<std::shared_ptr<Compartment>> Model::getComps() {
@@ -70,14 +70,14 @@ void Model::addCompsAndConnect(std::shared_ptr<Compartment>& A, std::shared_ptr<
     B->addLinkedWeight(weight);
 }
 
-void Model::connectComp(std::string transitionSymbol, std::string weightSymbol) {
+void Model::connectComp() {
     for (std::string flow: modelStructure) {
         // Remove whitespace
         flow.erase(remove(flow.begin(), flow.end(), ' '), flow.end());
 
-        int transitionSymbol_pos = flow.find(transitionSymbol);
+        int transitionSymbol_pos = flow.find("->");
         // Check whether there is a ":" symbol in this flow
-        int probSymbol_pos = flow.find(weightSymbol);
+        int probSymbol_pos = flow.find(':');
 
         // [inComp] [->] [outComp] [:] [prob]
         // inComp start from position 0 and spread from 0 -> transitionSymbol_pos => length = transitionSymbol_pos - 0 = transitionSymbol_pos
@@ -230,7 +230,7 @@ void Model::sortModelGroupByAssumption(std::vector<std::shared_ptr<Contact>> all
         for (auto contact: allContacts) {
             if (contact->getContactType() == assumptionOrder) {
                 std::vector<std::string> contactClasses = contact->getContactClasses();
-                for (std::string group: modelGroup) {
+                for (std::string group: modelName) {
                     if (std::find(contactClasses.begin(), contactClasses.end(), group) != contactClasses.end()) {
                         modelGroupSorted.push_back(group);
                     }
@@ -238,5 +238,5 @@ void Model::sortModelGroupByAssumption(std::vector<std::shared_ptr<Contact>> all
             }
         }
     }
-    modelGroup = modelGroupSorted;
+    modelName = modelGroupSorted;
 }

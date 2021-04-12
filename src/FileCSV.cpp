@@ -23,6 +23,7 @@ void FileCSV::writeFile() {
         fullPath = filePath + "/" + fileName;
     }
 
+    // If the directory is not exist, it will create a new directory with that name
     if(!std::filesystem::is_directory(filePath) || !std::filesystem::exists(filePath)) {
         std::cout << "Create directory " << filePath << " to store output..." << "\n";
         std::filesystem::create_directories(filePath);

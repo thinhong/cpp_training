@@ -12,6 +12,7 @@ private:
     std::vector<std::shared_ptr<Contact>> allContacts;
 public:
     explicit FullModel(std::vector<std::shared_ptr<Contact>> allContacts);
+    FullModel() = default;
     void addModel(std::shared_ptr<Model> model);
 
     // Helper functions

@@ -1,5 +1,5 @@
 {
-    "daysFollowUp": 15002,
+    "daysFollowUp": 50002,
     "errorTolerance": 0.01,
     "timeStep": 0.001,
     "modelStructure": ["S -> I", "I -> R"],
@@ -24,7 +24,7 @@
     ],
     "models":[
         {
-            "modelGroup": ["HCM", "0_14", "male"],
+            "modelName": ["HCM", "0_14", "male"],
             "transmissionRate": 1.5,
             "compartments":[
                 {
@@ -45,7 +45,7 @@
             ]
         },
         {
-            "modelGroup": ["HCM", "0_14", "female"],
+            "modelName": ["HCM", "0_14", "female"],
             "transmissionRate": 1.5,
             "compartments":[
                 {
@@ -66,7 +66,7 @@
             ]
         },
         {
-            "modelGroup": ["15_64", "male", "HCM"],
+            "modelName": ["15_64", "male", "HCM"],
             "transmissionRate": 1.5,
             "compartments":[
                 {
@@ -87,7 +87,7 @@
             ]
         },
         {
-            "modelGroup": ["15_64", "female", "HCM"],
+            "modelName": ["15_64", "female", "HCM"],
             "transmissionRate": 1.5,
             "compartments":[
                 {
@@ -108,7 +108,7 @@
             ]
         },
         {
-            "modelGroup": ["HCM", "male", "65"],
+            "modelName": ["HCM", "male", "65"],
             "transmissionRate": 1.5,
             "compartments":[
                 {
@@ -129,7 +129,7 @@
             ]
         },
         {
-            "modelGroup": ["HCM", "female", "65"],
+            "modelName": ["HCM", "female", "65"],
             "transmissionRate": 1.5,
             "compartments":[
                 {
@@ -150,7 +150,7 @@
             ]
         },
         {
-            "modelGroup": ["0_14", "HN", "male"],
+            "modelName": ["0_14", "HN", "male"],
             "transmissionRate": 1.5,
             "compartments":[
                 {
@@ -171,7 +171,7 @@
             ]
         },
         {
-            "modelGroup": ["0_14", "HN", "female"],
+            "modelName": ["0_14", "HN", "female"],
             "transmissionRate": 1.5,
             "compartments":[
                 {
@@ -192,7 +192,7 @@
             ]
         },
         {
-            "modelGroup": ["15_64", "HN", "male"],
+            "modelName": ["15_64", "HN", "male"],
             "transmissionRate": 1.5,
             "compartments":[
                 {
@@ -213,7 +213,7 @@
             ]
         },
         {
-            "modelGroup": ["15_64", "HN", "female"],
+            "modelName": ["15_64", "HN", "female"],
             "transmissionRate": 1.5,
             "compartments":[
                 {
@@ -234,7 +234,7 @@
             ]
         },
         {
-            "modelGroup": ["65", "male", "HN"],
+            "modelName": ["65", "male", "HN"],
             "transmissionRate": 1.5,
             "compartments":[
                 {
@@ -255,7 +255,7 @@
             ]
         },
         {
-            "modelGroup": ["65", "female", "HN"],
+            "modelName": ["65", "female", "HN"],
             "transmissionRate": 1.5,
             "compartments":[
                 {

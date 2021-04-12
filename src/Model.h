@@ -9,7 +9,7 @@
 
 class Model {
 private:
-    std::vector<std::string> modelGroup;
+    std::vector<std::string> modelName;
     double transmissionRate {0};
     // Population size is computed after sortComps in main()
     double populationSize {0};
@@ -35,7 +35,7 @@ public:
     Model(std::vector<std::string> modelGroup, double transmissionRate);
     ~Model() {
 //        std::string name;
-//        for (auto group: modelGroup) {
+//        for (auto group: modelName) {
 //            name += group;
 //        }
 //        std::cout << name << " model destructor called." << std::endl;
@@ -69,7 +69,7 @@ public:
 
     // Add compartment to model using JSON config file
     void addCompsFromConfig(std::vector<std::shared_ptr<Compartment>>& comps);
-    void connectComp(std::string transitionSymbol, std::string weightSymbol);
+    void connectComp();
     void addCompsAndConnect(std::shared_ptr<Compartment>& A, std::shared_ptr<Compartment>& B, double weight);
 
     /**

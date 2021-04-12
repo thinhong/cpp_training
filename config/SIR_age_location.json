@@ -19,7 +19,7 @@
     ],
     "models":[
         {
-            "modelGroup": ["HCM", "0_14"],
+            "modelName": ["HCM", "0_14"],
             "transmissionRate": 1.5,
             "compartments":[
                 {
@@ -40,7 +40,7 @@
             ]
         },
         {
-            "modelGroup": ["15_64", "HCM"],
+            "modelName": ["15_64", "HCM"],
             "transmissionRate": 1.5,
             "compartments":[
                 {
@@ -61,7 +61,7 @@
             ]
         },
         {
-            "modelGroup": ["HCM", "65"],
+            "modelName": ["HCM", "65"],
             "transmissionRate": 1.5,
             "compartments":[
                 {
@@ -82,7 +82,7 @@
             ]
         },
         {
-            "modelGroup": ["0_14", "HN"],
+            "modelName": ["0_14", "HN"],
             "transmissionRate": 1.5,
             "compartments":[
                 {
@@ -103,7 +103,7 @@
             ]
         },
         {
-            "modelGroup": ["15_64", "HN"],
+            "modelName": ["15_64", "HN"],
             "transmissionRate": 1.5,
             "compartments":[
                 {
@@ -124,7 +124,7 @@
             ]
         },
         {
-            "modelGroup": ["65", "HN"],
+            "modelName": ["65", "HN"],
             "transmissionRate": 1.5,
             "compartments":[
                 {

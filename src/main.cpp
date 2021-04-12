@@ -16,9 +16,13 @@
 #include "FileJSON.h"
 #include "CompartmentJSON.h"
 #include <filesystem>
+#include <chrono>
 
 int main() {
-    // ========================== Using JSON input ==============================
+    // Record execution time
+    auto startTime = std::chrono::high_resolution_clock::now();
+
+    // ========================== JSON input ==============================
 
     // Read a JSON input file to provide parameters
     std::string inputPath;
@@ -27,6 +31,8 @@ int main() {
     std::ifstream inputFile(inputPath);
     nlohmann::json input;
     inputFile >> input;
+
+    std::cout << "Reading input file..." << "\n";
 
     // Initialize parameters
     Compartment::daysFollowUp = input["daysFollowUp"];
@@ -42,22 +48,25 @@ int main() {
     }
 
     // Initialize contactAssumption first because the contact will be generate following this order
-    for (std::string assumption: input["contactAssumption"]) {
-        Contact::contactAssumption.push_back(assumption);
-    }
     std::vector<std::shared_ptr<Contact>> allContacts;
-    // Vector allContacts contains contacts sorted by contactAssumption
-    for (std::string contactType: Contact::contactAssumption) {
-        for (auto& contactConfig: input["contacts"]) {
-            std::string currentContactType = contactConfig["contactType"];
-            if (currentContactType == contactType) {
-                auto contact = std::make_shared<Contact>(contactConfig["contactType"], contactConfig["contactClasses"], contactConfig["contactRates"]);
-                allContacts.push_back(contact);
+    if (!input["contactAssumption"].is_null()) {
+        for (std::string assumption: input["contactAssumption"]) {
+            Contact::contactAssumption.push_back(assumption);
+        }
+        // Vector allContacts contains contacts sorted by contactAssumption
+        for (std::string contactType: Contact::contactAssumption) {
+            for (auto& contactConfig: input["contacts"]) {
+                std::string currentContactType = contactConfig["contactType"];
+                if (currentContactType == contactType) {
+                    auto contact = std::make_shared<Contact>(contactConfig["contactType"], contactConfig["contactClasses"], contactConfig["contactRates"]);
+                    allContacts.push_back(contact);
+                }
             }
         }
     }
 
-    // ====== Initialize the full model with relationship between locations ======
+
+    // ====== Initialize the full model ======
     FullModel allModels(allContacts);
 
     // For each location:
@@ -71,16 +80,18 @@ int main() {
         }
 
         // Make model for this location
-        auto myModel = std::make_shared<Model>(modelConfig["modelGroup"], modelConfig["transmissionRate"]);
+        auto myModel = std::make_shared<Model>(modelConfig["modelName"], modelConfig["transmissionRate"]);
         myModel->addCompsFromConfig(allCompartments);
 
         // Because all compartments had been created, we can connect the compartments now
-        myModel->connectComp("->", ":");
+        myModel->connectComp();
 
         // Check cycle, sort and calculate population size
         myModel->sortComps();
         myModel->calcPopulationSize();
-        myModel->sortModelGroupByAssumption(allContacts);
+        if (!allContacts.empty()) {
+            myModel->sortModelGroupByAssumption(allContacts);
+        }
 
         // Finally, add this model to the full model
         allModels.addModel(myModel);
@@ -88,6 +99,8 @@ int main() {
 
     // After adding all models, connect them
     allModels.connectModels();
+
+    std::cout << "Simulating..." << "\n";
 
     // ======================== End JSON input ==============================
 
@@ -102,6 +115,11 @@ int main() {
             myModel->update(i);
         }
     }
+
+    // Display execution time
+    auto elapsedTime = std::chrono::high_resolution_clock::now() - startTime;
+    long long seconds = std::chrono::duration_cast<std::chrono::seconds>(elapsedTime).count();
+    std::cout << "Simulation completed, elapsed time: " << seconds << " seconds\n";
 
     // ================== End construct and run model ========================
 
