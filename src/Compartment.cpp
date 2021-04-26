@@ -64,7 +64,13 @@ void Compartment::updateValue(long iter, double forceInfection) {
     if (subCompartmentValues.size() > 1) {
         outValue = 0;
         // Going backward from subCompartmentValues[n] -> subCompartmentValues[1]
-        for (size_t i {subCompartmentValues.size() - 1}; i > 0; --i) {
+        size_t startIndex {0};
+        if (iter <= (subCompartmentValues.size() - 1)) {
+            startIndex = iter;
+        } else {
+            startIndex = subCompartmentValues.size() - 1;
+        }
+        for (size_t i {startIndex}; i > 0; --i) {
             outValue += subCompartmentValues[i] * dist->getTransitionProb(i);
             subCompartmentValues[i] = subCompartmentValues[i - 1] * (1 - dist->getTransitionProb(i - 1));
         }
