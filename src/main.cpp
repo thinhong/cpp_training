@@ -1,6 +1,5 @@
 #include <iostream>
 #include <string>
-#include <array>
 #include <fstream>
 #include <stdexcept>
 #include "json.h"
@@ -10,15 +9,27 @@
 #include "FullModel.h"
 #include "Distribution/Distribution.h"
 #include "Distribution/TransitionProb.h"
-#include "Distribution/DiscreteGammaDistribution.h"
-#include "Distribution/DiscreteWeibullDistribution.h"
 #include "FileCSV.h"
-#include "FileJSON.h"
 #include "CompartmentJSON.h"
 #include <filesystem>
 #include <chrono>
+#include "Matrix.h"
 
 int main() {
+
+//    Matrix m1({{1, 2}, {3, 4}});
+//    Matrix m2({{0, 5}, {6, 7}});
+//    Matrix m3(m1.KroneckerProduct(m2));
+//    m3.displayMatrix();
+//    Matrix m4(m2.KroneckerProduct(m1));
+//    m4.displayMatrix();
+//
+//    Matrix v1({{1, -4, 7},{-2, 3, 3}});
+//    Matrix v2({{8, -9, -6, 5}, {1, -3, -4, 7}, {2, 8, -8, -3}, {1, 2, -5, -1}});
+//
+//    Matrix v(v1.KroneckerProduct(v2));
+//    v.displayMatrix();
+
         // ========================== JSON input ==============================
 
     // Read a JSON input file to provide parameters
@@ -29,7 +40,7 @@ int main() {
     nlohmann::json input;
     inputFile >> input;
 
-    // Record execution time
+    // Record execution time: https://stackoverflow.com/questions/21856025/getting-an-accurate-execution-time-in-c-micro-seconds
     auto startTime = std::chrono::high_resolution_clock::now();
 
     std::cout << "Reading input file..." << "\n";
@@ -64,7 +75,6 @@ int main() {
             }
         }
     }
-
 
     // ====== Initialize the full model ======
     FullModel allModels(allContacts);

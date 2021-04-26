@@ -99,7 +99,7 @@ void Compartment::updateValue(long iter, double forceInfection) {
     }
 
     // Finally sum up subCompartmentValues of this iteration to obtain total value
-    for (auto value: subCompartmentValues) {
+    for (auto& value: subCompartmentValues) {
         total[iter] += value;
     }
 }

@@ -127,6 +127,8 @@ initial_values <- c(
 # Input time values
 time_values <- seq(0, days) # days
 
+
+start_time <- Sys.time()
 # Solve the differential equations
 sir_values_1 <- ode(
   y = initial_values,
@@ -134,6 +136,11 @@ sir_values_1 <- ode(
   func = sir_equations,
   parms = parameters_values
 )
+
+end_time <- Sys.time()
+
+runtime <- end_time - start_time
+runtime
 
 # Make data frame from deSolve results
 sir_values_1 <- data.frame(sir_values_1)
@@ -166,7 +173,7 @@ ggplot(df_plot, aes(x = time, y = Value, col = Compartment)) +
   theme_minimal() +
   theme(text = element_text(size = 14))
 
-ggsave(file.path(outp, "ageLocation_discreteODE.pdf"), width = 7, height = 4)
+# ggsave(file.path(outp, "ageLocation_discreteODE.pdf"), width = 7, height = 4)
 
 # View data frame to compare
 df2[,grep("_0_14_HN", colnames(df2))]
