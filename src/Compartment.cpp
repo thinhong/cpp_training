@@ -105,13 +105,7 @@ void Compartment::updateValue(long iter, double forceInfection) {
     }
 
     // Finally sum up subCompartmentValues of this iteration to obtain total value
-    size_t stopIndex {0};
-    if (iter <= (subCompartmentValues.size() - 1)) {
-        stopIndex = iter;
-    } else {
-        stopIndex = subCompartmentValues.size() - 1;
-    }
-    for (size_t i {0}; i <= stopIndex; ++i) {
-        total[iter] += subCompartmentValues[i];
+    for (auto& value: subCompartmentValues) {
+        total[iter] += value;
     }
 }
