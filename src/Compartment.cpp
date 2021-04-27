@@ -77,7 +77,7 @@ void Compartment::updateValue(long iter, double forceInfection) {
         outValue += subCompartmentValues[0] * dist->getTransitionProb(0);
         subCompartmentValues[0] = 0;
         // Loop over all linkedCompartment, find the linkedCompartment with isIn == true
-        // Let subCompartmentValues[0] = outValue of that linkedCompartment
+        // Let subCompartmentValues[0] += outValue of that linkedCompartment
         // Multiply with linkedWeight for situations such as A -> Ar and I, I -> H_h, H_c and H_d
         for (size_t j {0}; j < linkedCompartment.size(); ++j) {
             if (isIn[j]) {
@@ -105,7 +105,13 @@ void Compartment::updateValue(long iter, double forceInfection) {
     }
 
     // Finally sum up subCompartmentValues of this iteration to obtain total value
-    for (auto& value: subCompartmentValues) {
-        total[iter] += value;
+    size_t stopIndex {0};
+    if (iter <= (subCompartmentValues.size() - 1)) {
+        stopIndex = iter;
+    } else {
+        stopIndex = subCompartmentValues.size() - 1;
+    }
+    for (size_t i {0}; i <= stopIndex; ++i) {
+        total[iter] += subCompartmentValues[i];
     }
 }
