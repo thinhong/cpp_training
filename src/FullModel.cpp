@@ -75,41 +75,46 @@ double FullModel::getContactRateByComparingPairs(std::vector<std::string> modelG
 void FullModel::connectModels() {
     // Create a vector of weak pointer to all models
     std::vector<std::weak_ptr<Model>> allModels;
+    // Make a vector contains all model
     for (auto& model: models) {
         allModels.push_back(model);
+    }
+    // For each model in this FullModel
+    for (auto& model: models) {
+        // Set linkedModels as all models
+        model->addLinkedModels(allModels);
+        for (auto& linkedModel: model->getLinkedModels()) {
+            model->addNewLinkedContactRate(1);
+        }
     }
     // Now begin the connection process
     if (models.size() > 1) {
         for (auto& model: models) {
-            // Set linkedModels as all models
-            model->addLinkedModels(allModels);
-            size_t lastIndex = model->getModelGroup().size() - 1;
-            for (auto& linkedModel: model->getLinkedModels()) {
-                std::vector<std::string> classPair;
-                classPair.push_back(model->getModelGroup()[lastIndex]);
-                classPair.push_back(linkedModel.lock()->getModelGroup()[lastIndex]);
-                model->addNewLinkedContactRate(getContactRateByComparingPairs(classPair));
+
+            for (auto group: model->getModelGroup()) {
+                std::cout << group << " ";
             }
-            if (allContacts.size() >= 2) {
-                std::vector<std::string> groupToSubset;
-                for (size_t i {0}; i <= lastIndex - 1; ++i) {
-                    groupToSubset.push_back(model->getModelGroup()[lastIndex - i]);
-                    std::vector<std::weak_ptr<Model>> subsetModels = getModelsWithSpecificGroup(groupToSubset);
-                    for (auto& subsetModel: subsetModels) {
-                        std::vector<std::string> classPair;
-                        classPair.push_back(model->getModelGroup()[lastIndex - i - 1]);
-                        classPair.push_back(subsetModel.lock()->getModelGroup()[lastIndex - i - 1]);
-                        // Get index of this subModel
-                        int k = model->getIndexLinkedModel(subsetModel.lock()->getModelGroup());
-                        model->updateLinkedContactRate(getContactRateByComparingPairs(classPair), k);
-                    }
+            std::cout << "\n";
+
+            for (auto& linkedModel: model->getLinkedModels()) {
+                for (size_t i {0}; i < model->getModelGroup().size(); ++i) {
+                    std::vector<std::string> classPair;
+                    classPair.push_back(model->getModelGroup()[i]);
+                    classPair.push_back(linkedModel.lock()->getModelGroup()[i]);
+                    int k = model->getIndexLinkedModel(linkedModel.lock()->getModelGroup());
+                    model->updateLinkedContactRate(getContactRateByComparingPairs(classPair), k);
                 }
             }
-        }
-    } else {
-        for (auto& model: models) {
-            model->addLinkedModels(allModels);
-            model->addNewLinkedContactRate(1);
+            for (auto& linkedModel: model->getLinkedModels()) {
+                for (auto linkedGroup: linkedModel.lock()->getModelGroup()) {
+                    std::cout << linkedGroup << " ";
+                }
+            }
+            std::cout << "\n";
+            for (auto linkedcontact: model->getLinkedContactRates()) {
+                std::cout << linkedcontact << " ";
+            }
+            std::cout << "\n";
         }
     }
 }

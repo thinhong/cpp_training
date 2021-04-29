@@ -2,7 +2,7 @@ library(deSolve)
 library(ggplot2)
 library(tidyr)
 
-discrete_p <- "/home/thinh/Dropbox/oucru/cpp/cpp_training/output/gender_age_location"
+discrete_p <- "/home/thinh/Downloads/cpp_training/output/gender_age_location"
 outp <- "/home/thinh/Dropbox/oucru/cpp/plots"
 
 days <- 20
@@ -286,4 +286,4 @@ ggplot(df_plot, aes(x = time, y = Value, col = Compartment)) +
 ggsave(file.path(outp, "genderAgeLocation_discreteODE.pdf"), width = 7, height = 5)
 
 # View data frame to compare
-df2[,grep("_female_0_14_HCM", colnames(df2))]
+df2[,grep("_female_65_HCM", colnames(df2))]

@@ -46,6 +46,9 @@ public:
     void calcPopulationSize();
     double getPopulationSize();
 
+    std::vector<double> getLinkedContactRates() {return linkedContactRates;};
+
+
     std::vector<std::weak_ptr<Model>> getLinkedModels();
 
     /**

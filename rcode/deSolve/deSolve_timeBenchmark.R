@@ -136,31 +136,31 @@ sir_equations <- function(time, variables, parameters) {
 
 # Input parameters
 parameters_values <- c(
-  beta_male_0_14_HCM <- 1.1,
-  beta_female_0_14_HCM <- 1.1,
-  beta_male_15_64_HCM <- 1.1,
-  beta_female_15_64_HCM <- 1.2,
-  beta_male_65_HCM <- 1.1,
-  beta_female_65_HCM <- 1.1,
-  beta_male_0_14_HN <- 1.2,
-  beta_female_0_14_HN <- 1.2,
-  beta_male_15_64_HN <- 1.1,
-  beta_female_15_64_HN <- 1.1,
-  beta_male_65_HN <- 1.1,
-  beta_female_65_HN <- 1.1,
+  beta_male_0_14_HCM <- 1.1/1000,
+  beta_female_0_14_HCM <- 1.1/1000,
+  beta_male_15_64_HCM <- 1.1/1000,
+  beta_female_15_64_HCM <- 1.2/1000,
+  beta_male_65_HCM <- 1.1/1000,
+  beta_female_65_HCM <- 1.1/1000,
+  beta_male_0_14_HN <- 1.2/1000,
+  beta_female_0_14_HN <- 1.2/1000,
+  beta_male_15_64_HN <- 1.1/1000,
+  beta_female_15_64_HN <- 1.1/1000,
+  beta_male_65_HN <- 1.1/1000,
+  beta_female_65_HN <- 1.1/1000,
   
-  gamma_male_0_14_HCM <- 0.3,
-  gamma_female_0_14_HCM <- 0.5,
-  gamma_male_15_64_HCM <- 0.2,
-  gamma_female_15_64_HCM <- 0.3,
-  gamma_male_65_HCM <- 0.25,
-  gamma_female_65_HCM <- 0.15,
-  gamma_male_0_14_HN <- 0.5,
-  gamma_female_0_14_HN <- 0.35,
-  gamma_male_15_64_HN <- 0.45,
-  gamma_female_15_64_HN <- 0.5,
-  gamma_male_65_HN <- 0.25,
-  gamma_female_65_HN <- 0.15,
+  gamma_male_0_14_HCM <- 0.3/1000,
+  gamma_female_0_14_HCM <- 0.5/1000,
+  gamma_male_15_64_HCM <- 0.2/1000,
+  gamma_female_15_64_HCM <- 0.3/1000,
+  gamma_male_65_HCM <- 0.25/1000,
+  gamma_female_65_HCM <- 0.15/1000,
+  gamma_male_0_14_HN <- 0.5/1000,
+  gamma_female_0_14_HN <- 0.35/1000,
+  gamma_male_15_64_HN <- 0.45/1000,
+  gamma_female_15_64_HN <- 0.5/1000,
+  gamma_male_65_HN <- 0.25/1000,
+  gamma_female_65_HN <- 0.15/1000,
   
   N_male_0_14_HCM <- 1000,
   N_female_0_14_HCM <- 1299,
@@ -234,7 +234,7 @@ initial_values <- c(
 
 
 # Input time values
-time_values <- seq(0, 50000) # days
+time_values <- seq(0, 500000) # days
 
 
 start_time <- Sys.time()
@@ -243,8 +243,7 @@ sir_values_1 <- ode(
   y = initial_values,
   times = time_values,
   func = sir_equations,
-  parms = parameters_values,
-  method = "euler", hini = 0.001,
+  parms = parameters_values
 )
 
 end_time <- Sys.time()
