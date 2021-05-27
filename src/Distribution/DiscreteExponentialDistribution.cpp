@@ -45,7 +45,7 @@ std::string DiscreteExponentialDistribution::getDistName() {
 }
 
 double DiscreteExponentialDistribution::getTransitionProb(size_t index) {
-    if (index > transitionProb.size()) {
+    if (index >= transitionProb.size()) {
         return 1;
     } else {
         return transitionProb[index];

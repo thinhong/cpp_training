@@ -38,7 +38,7 @@ std::string CustomDistribution::getDistName() {
 }
 
 double CustomDistribution::getTransitionProb(size_t index) {
-    if (index > transitionProb.size()) {
+    if (index >= transitionProb.size()) {
         return 1;
     } else {
         return transitionProb[index];

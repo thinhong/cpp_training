@@ -10,8 +10,8 @@
 class DiscreteExponentialDistribution: public Distribution {
 private:
     std::string distName {"exponential"};
-    double rate;
-    size_t maxDay;
+    double rate {0};
+    size_t maxDay {0};
     std::vector<double> transitionProb;
     void calcTransitionProb();
 public:

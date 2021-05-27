@@ -4,7 +4,6 @@
     "timeStep": 0.001,
     "modelStructure": ["S -> I", "I -> R"],
     "infectiousComps": ["I"],
-    "contactAssumption": ["age", "location"],
     "contacts": [
         {
             "contactType": "age",
@@ -17,7 +16,7 @@
             "contactRates": ["HCM <-> HCM: 0.85", "HCM <-> HN: 0.1", "HN <-> HN: 0.95"]
         }
     ],
-    "models":[
+    "models": [
         {
             "modelName": ["HCM", "0_14"],
             "transmissionRate": 1.5,

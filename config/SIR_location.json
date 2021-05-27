@@ -4,7 +4,6 @@
     "timeStep": 0.01,
     "modelStructure": ["S -> I", "I -> R"],
     "infectiousComps": ["I"],
-    "contactAssumption": ["location"],
     "contacts": [
         {
             "contactType": "location",
