@@ -11,7 +11,7 @@
             "compartments":[
                 {
                     "name":"S",
-                    "distribution":{"name":"transitionProb","transitionProb":0.0},
+                    "distribution":{"name":"none"},
                     "initialValue":999
                 },
                 {
@@ -21,7 +21,7 @@
                 },
                 {
                     "name":"R",
-                    "distribution":{"name":"transitionProb","transitionProb":0.0},
+                    "distribution":{"name":"none"},
                     "initialValue":0
                 }
             ]
