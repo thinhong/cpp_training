@@ -46,7 +46,6 @@ int main() {
     std::cout << "Reading input file..." << "\n";
 
     // Initialize parameters
-    Compartment::daysFollowUp = input["daysFollowUp"];
     Distribution::errorTolerance = input["errorTolerance"];
     if (!input["timeStep"].is_null()) {
         Distribution::timeStep = input["timeStep"];
@@ -57,6 +56,8 @@ int main() {
     for (std::string infComp: input["infectiousComps"]) {
         Model::infectiousComps.push_back(infComp);
     }
+
+    Compartment::timesFollowUp = static_cast<size_t>(static_cast<double>(input["daysFollowUp"]) / Distribution::timeStep + 1);
 
     // Initialize contactAssumption first because the contact will be generate following this order
     std::vector<std::shared_ptr<Contact>> allContacts;
@@ -91,6 +92,8 @@ int main() {
         // Check cycle, sort and calculate population size
         myModel->sortComps();
         myModel->calcPopulationSize();
+
+        // This is to make sure that ["HCM", "male"] == ["male", "HCM"]
         if (!allContacts.empty()) {
             myModel->sortModelGroupByAssumption(allContacts);
         }
@@ -112,7 +115,7 @@ int main() {
     // update location 1, then location 2, then move on to the next iteration. We never want to update a location
     // from iter 1 to iter 100 then continue to update the next location. So the "iter" for loop comes first, then
     // the "location" for loop
-    for (size_t i {1}; i < Compartment::daysFollowUp; i++) {
+    for (size_t i {1}; i < Compartment::timesFollowUp; i++) {
         for (auto& myModel: allModels.getModels()) {
             myModel->update(i);
         }
@@ -128,7 +131,7 @@ int main() {
     // ========================= Write output ================================
 //    // Create json object to store all input parameters
 //    nlohmann::json writeConfig;
-//    writeConfig["daysFollowUp"] = Compartment::daysFollowUp;
+//    writeConfig["timesFollowUp"] = Compartment::timesFollowUp;
 //    writeConfig["errorTolerance"] = Distribution::errorTolerance;
 //    writeConfig["populationSize"] = myModel.getPopulationSize();
 //    writeConfig["transmissionRate"] = transmissionRate;

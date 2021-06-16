@@ -51,7 +51,7 @@ TEST(ModelTest, test) {
     std::vector<std::string> infectiousComps {"I"};
 
     myModel.sortComps();
-    for (size_t i {1}; i < Compartment::daysFollowUp; i++) {
+    for (size_t i {1}; i < Compartment::timesFollowUp; i++) {
         double totalInfectious {0.0};
         for (auto& comp: myModel.getComps()) {
             for (std::string& iComp: infectiousComps) {

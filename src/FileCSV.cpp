@@ -49,7 +49,7 @@ void FileCSV::writeFile() {
             }
         }
         for (size_t i {0}; i < model->getComps()[0]->getTotal().size(); ++i) {
-            myFile << i << ",";
+            myFile << i * Distribution::timeStep << ",";
             for (size_t j {0}; j < model->getComps().size(); ++j) {
                 if (j == model->getComps().size() - 1) {
                     myFile << model->getComps()[j]->getTotal()[i] << "\n";

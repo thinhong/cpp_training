@@ -1,7 +1,7 @@
 {
-    "daysFollowUp": 50002,
+    "daysFollowUp": 50,
     "errorTolerance": 0.01,
-    "timeStep": 0.001,
+    "timeStep": 0.01,
     "modelStructure": ["S -> I", "I -> R"],
     "infectiousComps": ["I"],
     "contacts": [
