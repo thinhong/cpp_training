@@ -59,6 +59,15 @@ void Compartment::addIsIn(bool isIn) {
 }
 
 void Compartment::updateValue(long iter, double forceInfection) {
+    double inValue {0};
+    // Loop over all linkedCompartment, find the linkedCompartment with isIn == true
+    // Let subCompartmentValues[0] += outValue of that linkedCompartment
+    // Multiply with linkedWeight for situations such as A -> Ar and I, I -> H_h, H_c and H_d
+    for (size_t m {0}; m < linkedCompartment.size(); ++m) {
+        if (isIn[m]) {
+            inValue += linkedCompartment[m].lock()->outValue * linkedWeight[m];
+        }
+    }
     // Note: the first (S) and last (R, D) compartments must be defined using direct transition prob
     // For all compartments except the first and last compartments
     if (subCompartmentValues.size() > 1) {
@@ -76,14 +85,7 @@ void Compartment::updateValue(long iter, double forceInfection) {
         }
         outValue += subCompartmentValues[0] * dist->getTransitionProb(0);
         subCompartmentValues[0] = 0;
-        // Loop over all linkedCompartment, find the linkedCompartment with isIn == true
-        // Let subCompartmentValues[0] += outValue of that linkedCompartment
-        // Multiply with linkedWeight for situations such as A -> Ar and I, I -> H_h, H_c and H_d
-        for (size_t j {0}; j < linkedCompartment.size(); ++j) {
-            if (isIn[j]) {
-                subCompartmentValues[0] += linkedCompartment[j].lock()->outValue * linkedWeight[j];
-            }
-        }
+        subCompartmentValues[0] += inValue;
     }
     // For compartments using direct transition prob
     else if (subCompartmentValues.size() == 1) {
@@ -104,8 +106,9 @@ void Compartment::updateValue(long iter, double forceInfection) {
         }
     }
 
-    // Finally sum up subCompartmentValues of this iteration to obtain total value
-    for (auto& value: subCompartmentValues) {
-        total[iter] += value;
-    }
+    total[iter] = total[iter - 1] + inValue - outValue;
+//    // Finally sum up subCompartmentValues of this iteration to obtain total value
+//    for (auto& value: subCompartmentValues) {
+//        total[iter] += value;
+//    }
 }

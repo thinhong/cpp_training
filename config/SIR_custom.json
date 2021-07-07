@@ -1,15 +1,12 @@
 {
-    "daysFollowUp": 50,
+    "daysFollowUp": 502,
     "errorTolerance": 0.01,
-    "timeStep": 0.01,
     "modelStructure": ["S -> I", "I -> R"],
-    "parameters": {"beta": 0.015, "N": 1000},
     "infectiousComps": ["I"],
     "models":[
         {
             "modelName": ["test"],
             "transmissionRate": 1.5,
-            "expression": "beta * I / N",
             "compartments":[
                 {
                     "name":"S",
@@ -18,7 +15,7 @@
                 },
                 {
                     "name":"I",
-                    "distribution":{"name":"gamma","scale":2, "shape": 5},
+                    "distribution":{"name":"custom","waitingTime":[12, 50, 68, 17]},
                     "initialValue":1
                 },
                 {

@@ -4,11 +4,15 @@
 #include <stack>
 #include <stdexcept>
 
-Model::Model(std::vector<std::string> modelGroup, double transmissionRate) {
+Model::Model(std::vector<std::string> modelGroup, double transmissionRate, std::string expression,
+             std::vector<std::string> paramNames, std::vector<double> paramValues) {
     for (std::string group: modelGroup) {
         this->modelName.push_back(group);
     }
     this->transmissionRate = transmissionRate * Distribution::timeStep;
+    this->expression = expression;
+    this->paramNames = paramNames;
+    this->paramValues = paramValues;
 }
 
 std::vector<std::string> Model::getModelGroup() {
@@ -199,31 +203,6 @@ void Model::calcPopulationSize() {
     }
 }
 
-double Model::calcForceInfection(size_t iter) {
-    // Force of infection: lambda = transmissionRate * contactRates * totalInfectious / N
-    double forceInfection {0};
-    for (size_t i {0}; i < linkedModels.size(); ++i) {
-        double totalInfectious {0};
-        for (auto& linkedLocationComp: linkedModels[i].lock()->getComps()) {
-            for (std::string& infectiousComp: infectiousComps) {
-                if (linkedLocationComp->getName() == infectiousComp) {
-                    totalInfectious += linkedLocationComp->getTotal()[iter - 1];
-                }
-            }
-        }
-        // Remember to multiply the linkedContactRates
-        forceInfection += transmissionRate * linkedContactRates[i] * totalInfectious / linkedModels[i].lock()->getPopulationSize() ;
-    }
-    return forceInfection;
-}
-
-void Model::update(long iter) {
-    double forceInfection = calcForceInfection(iter);
-    for (auto& comp: comps) {
-        comp->updateValue(iter, forceInfection);
-    }
-}
-
 void Model::sortModelGroupByAssumption(std::vector<std::shared_ptr<Contact>> allContacts) {
     std::vector<std::string> modelGroupSorted;
     for (std::string assumptionOrder: Contact::contactAssumption) {
@@ -239,4 +218,44 @@ void Model::sortModelGroupByAssumption(std::vector<std::shared_ptr<Contact>> all
         }
     }
     modelName = modelGroupSorted;
+}
+
+double Model::calcForceInfection() {
+    double forceInfection {0};
+    mu::Parser p;
+    // Set expression
+    p.SetExpr(expression);
+    // Add fixed parameters
+    for (size_t i {0}; i < paramNames.size(); ++i) {
+        p.DefineVar(paramNames[i], &paramValues[i]);
+    }
+    // Add compartment values
+    for (size_t i {0}; i < allCompNames.size(); ++i) {
+        p.DefineVar(allCompNames[i], &allCompValues[i]);
+    }
+    forceInfection = p.Eval();
+    return forceInfection;
+}
+
+void Model::update(long iter) {
+    double forceInfection = calcForceInfection();
+    for (auto& comp: comps) {
+        comp->updateValue(iter, forceInfection);
+    }
+    updateAllCompValues(iter);
+}
+
+void Model::initAllComps() {
+    allCompNames.clear();
+    for (auto& comp: comps) {
+        allCompNames.push_back(comp->getName());
+        allCompValues.push_back(comp->getTotal()[0]);
+    }
+}
+
+void Model::updateAllCompValues(long iter) {
+    for (auto& comp: comps) {
+        allCompNames.push_back(comp->getName());
+        allCompValues.push_back(comp->getTotal()[iter]);
+    }
 }

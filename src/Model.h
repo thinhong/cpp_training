@@ -6,17 +6,27 @@
 #include <stack>
 #include "Compartment.h"
 #include "Contact.h"
+#include "muParser/muParser.h"
 
 class Model {
 private:
     std::vector<std::string> modelName;
-    double transmissionRate {0};
+    double transmissionRate;
     // Population size is computed after sortComps in main()
     double populationSize {0};
     /**
      * Contains all compartments of this model
      */
     std::vector<std::shared_ptr<Compartment>> comps;
+
+    // Extract these values from comps vector
+    std::vector<std::string> allCompNames;
+    std::vector<double> allCompValues;
+
+    std::vector<std::string> paramNames;
+    std::vector<double> paramValues;
+
+    std::string expression;
 
     /**
      * Contains weak pointers to all models, including itself, with corresponding contact probability stored at the
@@ -32,7 +42,8 @@ public:
     // Model structure and infectious compartment are the same for all models for a disease
     static inline std::vector<std::string> modelStructure;
     static inline std::vector<std::string> infectiousComps;
-    Model(std::vector<std::string> modelGroup, double transmissionRate);
+    Model(std::vector<std::string> modelGroup, double transmissionRate, std::string expression,
+          std::vector<std::string> paramNames, std::vector<double> paramValues);
     ~Model() {
 //        std::string name;
 //        for (auto group: modelName) {
@@ -102,7 +113,7 @@ public:
      * @param iter: the iteration (or time) to be calculated
      * @return
      */
-    double calcForceInfection(size_t iter);
+    double calcForceInfection();
 
     /**
      * Update subCompartmentValues and total for each compartments in the model
@@ -110,6 +121,15 @@ public:
      */
     void update(long iter);
 
+    /**
+     * Get all compartment names from the comps vector and also initial values of allCompValues
+     */
+    void initAllComps();
+
+    /**
+     * Helper function to update allCompValues after each iteration
+     */
+    void updateAllCompValues(long iter);
 
 };
 

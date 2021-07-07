@@ -14,25 +14,13 @@
 #include <filesystem>
 #include <chrono>
 #include "Matrix.h"
+#include "muParser/muParser.h"
+#include "helpers.h"
 
 int main() {
 
-//    Matrix m1({{1, 2}, {3, 4}});
-//    Matrix m2({{0, 5}, {6, 7}});
-//    Matrix m3(m1.KroneckerProduct(m2));
-//    m3.displayMatrix();
-//    Matrix m4(m2.KroneckerProduct(m1));
-//    m4.displayMatrix();
-//
-//    Matrix v1({{1, -4, 7},{-2, 3, 3}});
-//    Matrix v2({{8, -9, -6, 5}, {1, -3, -4, 7}, {2, 8, -8, -3}, {1, 2, -5, -1}});
-//
-//    Matrix v(v1.KroneckerProduct(v2));
-//    v.displayMatrix();
-
-        // ========================== JSON input ==============================
-
-    // Read a JSON input file to provide parameters
+    // ========================== JSON input ==============================
+    // Read JSON input file to provide parameters
     std::string inputPath;
     std::cout << "Enter full path to input file (ex: /home/Documents/config.json): ";
     std::cin >> inputPath;
@@ -50,14 +38,25 @@ int main() {
     if (!input["timeStep"].is_null()) {
         Distribution::timeStep = input["timeStep"];
     }
+    Compartment::timesFollowUp = static_cast<size_t>(static_cast<double>(input["daysFollowUp"]) / Distribution::timeStep + 1);
+
+    Model::modelStructure.clear();
     for (std::string structure: input["modelStructure"]) {
         Model::modelStructure.push_back(structure);
     }
+
+    std::vector<std::string> paramNames;
+    std::vector<double> paramValues;
+    for (auto& param: input["parameters"].items()) {
+        // All keys to paramNames and all values to paramValues
+        paramNames.push_back(param.key());
+        paramValues.push_back(param.value());
+    }
+
+    Model::infectiousComps.clear();
     for (std::string infComp: input["infectiousComps"]) {
         Model::infectiousComps.push_back(infComp);
     }
-
-    Compartment::timesFollowUp = static_cast<size_t>(static_cast<double>(input["daysFollowUp"]) / Distribution::timeStep + 1);
 
     // Initialize contactAssumption first because the contact will be generate following this order
     std::vector<std::shared_ptr<Contact>> allContacts;
@@ -83,7 +82,8 @@ int main() {
         }
 
         // Make model for this location
-        auto myModel = std::make_shared<Model>(modelConfig["modelName"], modelConfig["transmissionRate"]);
+        auto myModel = std::make_shared<Model>(modelConfig["modelName"], modelConfig["transmissionRate"],
+                                               modelConfig["expression"], paramNames, paramValues);
         myModel->addCompsFromConfig(allCompartments);
 
         // Because all compartments had been created, we can connect the compartments now
@@ -92,6 +92,7 @@ int main() {
         // Check cycle, sort and calculate population size
         myModel->sortComps();
         myModel->calcPopulationSize();
+        myModel->initAllComps();
 
         // This is to make sure that ["HCM", "male"] == ["male", "HCM"]
         if (!allContacts.empty()) {
