@@ -254,8 +254,8 @@ void Model::initAllComps() {
 }
 
 void Model::updateAllCompValues(long iter) {
-    for (auto& comp: comps) {
-        allCompNames.push_back(comp->getName());
-        allCompValues.push_back(comp->getTotal()[iter]);
+    for (size_t i {0}; i < comps.size(); ++i) {
+        allCompNames[i] = comps[i]->getName();
+        allCompValues[i] = comps[i]->getTotal()[iter];
     }
 }
