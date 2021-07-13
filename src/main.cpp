@@ -124,8 +124,10 @@ int main() {
 
     // Display execution time
     auto elapsedTime = std::chrono::high_resolution_clock::now() - startTime;
-    long long seconds = std::chrono::duration_cast<std::chrono::seconds>(elapsedTime).count();
-    std::cout << "Simulation completed, elapsed time: " << seconds << " seconds\n";
+    double seconds = std::chrono::duration_cast<std::chrono::milliseconds>(elapsedTime).count();
+    seconds /= 1000;
+    std::cout << "Simulation completed, elapsed time: ";
+    std::cout << std::fixed << std::setprecision(4) << seconds << " seconds\n";
 
     // ================== End construct and run model ========================
 
