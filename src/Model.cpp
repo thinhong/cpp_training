@@ -4,13 +4,11 @@
 #include <stack>
 #include <stdexcept>
 
-Model::Model(std::vector<std::string> modelGroup, double transmissionRate, std::string expression,
-             std::vector<std::string> paramNames, std::vector<double> paramValues) {
+Model::Model(std::vector<std::string> modelGroup, std::vector<std::string>& paramNames,
+             std::vector<double>& paramValues) {
     for (std::string group: modelGroup) {
         this->modelName.push_back(group);
     }
-    this->transmissionRate = transmissionRate * Distribution::timeStep;
-    this->expression = expression;
     this->paramNames = paramNames;
     this->paramValues = paramValues;
 }
@@ -21,10 +19,6 @@ std::vector<std::string> Model::getModelGroup() {
 
 std::vector<std::shared_ptr<Compartment>> Model::getComps() {
     return comps;
-}
-
-double Model::getPopulationSize() {
-    return populationSize;
 }
 
 void Model::addNewLinkedContactRate(double linkedContactRate) {
@@ -197,12 +191,6 @@ void Model::sortComps() {
     comps = sortedComps;
 }
 
-void Model::calcPopulationSize() {
-    for (auto& comp: comps) {
-        populationSize += comp->getTotal()[0];
-    }
-}
-
 void Model::sortModelGroupByAssumption(std::vector<std::shared_ptr<Contact>> allContacts) {
     std::vector<std::string> modelGroupSorted;
     for (std::string assumptionOrder: Contact::contactAssumption) {
@@ -220,27 +208,10 @@ void Model::sortModelGroupByAssumption(std::vector<std::shared_ptr<Contact>> all
     modelName = modelGroupSorted;
 }
 
-double Model::calcForceInfection() {
-    double forceInfection {0};
-    mu::Parser p;
-    // Set expression
-    p.SetExpr(expression);
-    // Add fixed parameters
-    for (size_t i {0}; i < paramNames.size(); ++i) {
-        p.DefineVar(paramNames[i], &paramValues[i]);
-    }
-    // Add compartment values
-    for (size_t i {0}; i < allCompNames.size(); ++i) {
-        p.DefineVar(allCompNames[i], &allCompValues[i]);
-    }
-    forceInfection = p.Eval();
-    return forceInfection;
-}
-
 void Model::update(long iter) {
-    double forceInfection = calcForceInfection();
     for (auto& comp: comps) {
-        comp->updateValue(iter, forceInfection);
+        comp->updateCompartment(iter, paramNames, paramValues,
+                                allCompNames, allCompValues);
     }
     updateAllCompValues(iter);
 }

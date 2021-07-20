@@ -6,6 +6,7 @@
 #include <memory>
 #include <string>
 #include "Distribution/Distribution.h"
+#include "muParser/muParser.h"
 
 class Compartment {
 private:
@@ -50,7 +51,13 @@ public:
      * Update subCompartmentValues and total at each iteration
      * @param iter
      */
-    void updateValue(long iter, double forceInfection);
+    void updateValue(long iter);
+
+    void updateMath(long iter, std::vector<std::string> paramNames, std::vector<double> paramValues,
+                    std::vector<std::string> allCompNames, std::vector<double> allCompValues);
+
+    void updateCompartment(long iter, std::vector<std::string> paramNames, std::vector<double> paramValues,
+                           std::vector<std::string> allCompNames, std::vector<double> allCompValues);
 };
 
 

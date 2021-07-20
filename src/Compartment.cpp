@@ -58,7 +58,39 @@ void Compartment::addIsIn(bool isIn) {
     }
 }
 
-void Compartment::updateValue(long iter, double forceInfection) {
+void Compartment::updateValue(long iter) {
+    outValue = 0;
+    // Going backward from subCompartmentValues[n] -> subCompartmentValues[1]
+    size_t startIndex {0};
+    if (iter < (subCompartmentValues.size() - 1)) {
+        startIndex = iter + 1;
+    } else {
+        startIndex = subCompartmentValues.size() - 1;
+    }
+    for (size_t i {startIndex}; i > 0; --i) {
+        outValue += subCompartmentValues[i] * dist->getTransitionProb(i);
+        subCompartmentValues[i] = subCompartmentValues[i - 1] * (1 - dist->getTransitionProb(i - 1));
+    }
+    outValue += subCompartmentValues[0] * dist->getTransitionProb(0);
+}
+
+void Compartment::updateMath(long iter, std::vector<std::string> paramNames, std::vector<double> paramValues,
+                             std::vector<std::string> allCompNames, std::vector<double> allCompValues) {
+    mu::Parser parser;
+    parser.SetExpr(dist->getDistName());
+    // Add parameter values
+    for (size_t i {0}; i < paramNames.size(); ++i) {
+        parser.DefineVar(paramNames[i], &paramValues[i]);
+    }
+    // Add compartment values
+    for (size_t i {0}; i < allCompNames.size(); ++i) {
+        parser.DefineVar(allCompNames[i], &allCompValues[i]);
+    }
+    outValue = parser.Eval();
+}
+
+void Compartment::updateCompartment(long iter, std::vector<std::string> paramNames, std::vector<double> paramValues,
+                                    std::vector<std::string> allCompNames, std::vector<double> allCompValues) {
     double inValue {0};
     // Loop over all linkedCompartment, find the linkedCompartment with isIn == true
     // Let subCompartmentValues[0] += outValue of that linkedCompartment
@@ -68,47 +100,18 @@ void Compartment::updateValue(long iter, double forceInfection) {
             inValue += linkedCompartment[m].lock()->outValue * linkedWeight[m];
         }
     }
-    // Note: the first (S) and last (R, D) compartments must be defined using direct transition prob
-    // For all compartments except the first and last compartments
-    if (subCompartmentValues.size() > 1) {
-        outValue = 0;
-        // Going backward from subCompartmentValues[n] -> subCompartmentValues[1]
-        size_t startIndex {0};
-        if (iter < (subCompartmentValues.size() - 1)) {
-            startIndex = iter + 1;
-        } else {
-            startIndex = subCompartmentValues.size() - 1;
-        }
-        for (size_t i {startIndex}; i > 0; --i) {
-            outValue += subCompartmentValues[i] * dist->getTransitionProb(i);
-            subCompartmentValues[i] = subCompartmentValues[i - 1] * (1 - dist->getTransitionProb(i - 1));
-        }
-        outValue += subCompartmentValues[0] * dist->getTransitionProb(0);
-        subCompartmentValues[0] = 0;
-        subCompartmentValues[0] += inValue;
+    if (dist->getDistName() == "gamma" || dist->getDistName() == "weibull" ||
+        dist->getDistName() == "exponential" || dist->getDistName() == "transitionProb" ||
+        dist->getDistName() == "custom") {
+        updateValue(iter);
+    } else {
+        updateMath(iter, paramNames, paramValues, allCompNames, allCompValues);
     }
-    // For compartments using direct transition prob
-    else if (subCompartmentValues.size() == 1) {
-        // First, check if it is the first compartment (S)
-        if (nInNodes == 0) {
-            outValue = subCompartmentValues[0] * forceInfection;
-            subCompartmentValues[0] -= outValue;
-        }
-        // Then check if it is the last compartment (R or D)
-        else {
-            outValue = subCompartmentValues[0] * dist->getTransitionProb(0);
-            for (size_t j {0}; j < linkedCompartment.size(); ++j) {
-                if (isIn[j]) {
-                    subCompartmentValues[0] += linkedCompartment[j].lock()->outValue * linkedWeight[j];
-                }
-            }
-            subCompartmentValues[0] -= outValue;
-        }
-    }
-
+    subCompartmentValues[0] = inValue;
     total[iter] = total[iter - 1] + inValue - outValue;
-//    // Finally sum up subCompartmentValues of this iteration to obtain total value
-//    for (auto& value: subCompartmentValues) {
-//        total[iter] += value;
-//    }
+
+    //    // Finally sum up subCompartmentValues of this iteration to obtain total value
+    //    for (auto& value: subCompartmentValues) {
+    //        total[iter] += value;
+    //    }
 }

@@ -46,6 +46,11 @@ CompartmentJSON::CompartmentJSON(nlohmann::json& jsonNode) {
         auto custom = std::make_shared<CustomDistribution>(waitingTime);
         comp = std::make_shared<Compartment>(jsonNode["name"], jsonNode["initialValue"], custom);
     }
+    else if (jsonNode["distribution"]["name"] == "mathExpression") {
+        std::string expression = jsonNode["distribution"]["expression"];
+        auto mathExpression = std::make_shared<MathExpression>(expression);
+        comp = std::make_shared<Compartment>(jsonNode["name"], jsonNode["initialValue"], mathExpression);
+    }
 
     // Also add linkedWeight and isIn to the compartment
     for (double weight: jsonNode["linkedWeight"]) {

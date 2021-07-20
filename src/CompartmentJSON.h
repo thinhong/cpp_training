@@ -13,6 +13,7 @@
 #include "Distribution/DiscreteWeibullDistribution.h"
 #include "Distribution/DiscreteExponentialDistribution.h"
 #include "Distribution/CustomDistribution.h"
+#include "Distribution/MathExpression.h"
 
 class CompartmentJSON {
 private:

@@ -11,22 +11,17 @@
 class Model {
 private:
     std::vector<std::string> modelName;
-    double transmissionRate;
-    // Population size is computed after sortComps in main()
-    double populationSize {0};
     /**
      * Contains all compartments of this model
      */
     std::vector<std::shared_ptr<Compartment>> comps;
 
-    // Extract these values from comps vector
-    std::vector<std::string> allCompNames;
-    std::vector<double> allCompValues;
-
     std::vector<std::string> paramNames;
     std::vector<double> paramValues;
 
-    std::string expression;
+    // Extract these values from comps vector
+    std::vector<std::string> allCompNames;
+    std::vector<double> allCompValues;
 
     /**
      * Contains weak pointers to all models, including itself, with corresponding contact probability stored at the
@@ -42,8 +37,7 @@ public:
     // Model structure and infectious compartment are the same for all models for a disease
     static inline std::vector<std::string> modelStructure;
     static inline std::vector<std::string> infectiousComps;
-    Model(std::vector<std::string> modelGroup, double transmissionRate, std::string expression,
-          std::vector<std::string> paramNames, std::vector<double> paramValues);
+    Model(std::vector<std::string> modelGroup, std::vector<std::string>& paramNames, std::vector<double>& paramValues);
     ~Model() {
 //        std::string name;
 //        for (auto group: modelName) {
@@ -53,9 +47,6 @@ public:
     }
     std::vector<std::string> getModelGroup();
     std::vector<std::shared_ptr<Compartment>> getComps();
-    double getTransmissionRate() {return transmissionRate;};
-    void calcPopulationSize();
-    double getPopulationSize();
 
     std::vector<double> getLinkedContactRates() {return linkedContactRates;};
 
@@ -107,13 +98,6 @@ public:
      * sorting algorithm
      */
     void sortComps();
-
-    /**
-     * Re-calculation force of infection after each iteration
-     * @param iter: the iteration (or time) to be calculated
-     * @return
-     */
-    double calcForceInfection();
 
     /**
      * Update subCompartmentValues and total for each compartments in the model

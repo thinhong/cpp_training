@@ -17,4 +17,4 @@ add_executable(SEAIHCR src/main.cpp
         src/muParser/muParser.h src/muParser/muParser.cpp src/muParser/muParserBase.cpp src/muParser/muParserBase.h
         src/muParser/muParserBytecode.cpp src/muParser/muParserBytecode.h src/muParser/muParserCallback.cpp src/muParser/muParserCallback.h src/muParser/muParserDef.h
         src/muParser/muParserError.cpp src/muParser/muParserError.h src/muParser/muParserFixes.h src/muParser/muParserTemplateMagic.h src/muParser/muParserTemplateMagic.h
-        src/muParser/muParserToken.h src/muParser/muParserTokenReader.h src/muParser/muParserTokenReader.cpp src/helpers.cpp src/helpers.h)
+        src/muParser/muParserToken.h src/muParser/muParserTokenReader.h src/muParser/muParserTokenReader.cpp src/helpers.cpp src/helpers.h src/Distribution/MathExpression.cpp src/Distribution/MathExpression.h)

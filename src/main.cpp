@@ -82,8 +82,7 @@ int main() {
         }
 
         // Make model for this location
-        auto myModel = std::make_shared<Model>(modelConfig["modelName"], modelConfig["transmissionRate"],
-                                               modelConfig["expression"], paramNames, paramValues);
+        auto myModel = std::make_shared<Model>(modelConfig["modelName"], paramNames, paramValues);
         myModel->addCompsFromConfig(allCompartments);
 
         // Because all compartments had been created, we can connect the compartments now
@@ -91,7 +90,6 @@ int main() {
 
         // Check cycle, sort and calculate population size
         myModel->sortComps();
-        myModel->calcPopulationSize();
         myModel->initAllComps();
 
         // This is to make sure that ["HCM", "male"] == ["male", "HCM"]

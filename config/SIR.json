@@ -9,11 +9,10 @@
         {
             "modelName": ["test"],
             "transmissionRate": 1.5,
-            "expression": "beta * I / N",
             "compartments":[
                 {
                     "name":"S",
-                    "distribution":{"name":"none"},
+                    "distribution":{"name":"mathExpression", "expression": "beta * S * I / N"},
                     "initialValue":999
                 },
                 {
