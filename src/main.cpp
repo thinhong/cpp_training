@@ -10,7 +10,6 @@
 #include "Distribution/Distribution.h"
 #include "Distribution/TransitionProb.h"
 #include "FileCSV.h"
-#include "CompartmentJSON.h"
 #include "ModelJSON.h"
 #include <filesystem>
 #include <chrono>

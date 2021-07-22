@@ -49,10 +49,8 @@ ModelJSON::ModelJSON(nlohmann::json &initialValues, nlohmann::json &parameters, 
         }
         std::weak_ptr<Compartment> inComp = model->getAddressFromName(inCompName);
         std::weak_ptr<Compartment> outComp = model->getAddressFromName(outCompName);
-        inComp.lock()->addLinkedCompartment(outComp);
-        outComp.lock()->addLinkedCompartment(inComp);
-        inComp.lock()->addIsIn(false);
-        outComp.lock()->addIsIn(true);
+        inComp.lock()->addLinkedCompartmentOut(outComp);
+        outComp.lock()->addLinkedCompartmentIn(inComp);
         inComp.lock()->addLinkedWeight(weight);
         outComp.lock()->addLinkedWeight(weight);
 

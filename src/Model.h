@@ -99,7 +99,7 @@ public:
      * Update subCompartmentValues and total for each compartments in the model
      * @param iter
      */
-    void update(long iter);
+    void update(size_t iter);
 
     /**
      * Get all compartment names from the comps vector and also initial values of allCompValues
@@ -109,7 +109,7 @@ public:
     /**
      * Helper function to update allCompValues after each iteration
      */
-    void updateAllCompValues(long iter);
+    void updateAllCompValues(size_t iter);
 
     std::vector<std::string> getModelGroup() {return {"test"};};
 

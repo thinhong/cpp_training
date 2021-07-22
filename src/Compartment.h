@@ -12,9 +12,9 @@ class Compartment {
 private:
     std::string name;
     std::shared_ptr<Distribution> dist;
-    std::vector<std::weak_ptr<Compartment>> linkedCompartment;
+    std::vector<std::weak_ptr<Compartment>> linkedCompartmentIn;
+    std::vector<std::weak_ptr<Compartment>> linkedCompartmentOut;
     std::vector<double> linkedWeight;
-    std::vector<bool> isIn;
     // Save nInNodes and nOutNodes as member variables instead of computing each time running updateValue to save computational cost
     size_t nInNodes {0};
     size_t nOutNodes {0};
@@ -37,7 +37,8 @@ public:
     std::vector<double> getSubCompartmentValues();
     std::string getName();
     std::vector<bool> getIsIn();
-    std::vector<std::weak_ptr<Compartment>> getLinkedCompartment();
+    std::vector<std::weak_ptr<Compartment>> getLinkedCompartmentIn();
+    std::vector<std::weak_ptr<Compartment>> getLinkedCompartmentOut();
     std::shared_ptr<Distribution> getDist();
     std::vector<double> getLinkedWeight();
     size_t getNInNodes();
@@ -45,8 +46,8 @@ public:
     // Setters
     void addDistribution(std::shared_ptr<Distribution> dist);
     void addLinkedWeight(double weight);
-    void addLinkedCompartment(std::weak_ptr<Compartment> linkedCompartment);
-    void addIsIn(bool isIn);
+    void addLinkedCompartmentIn(std::weak_ptr<Compartment> linkedCompartmentIn);
+    void addLinkedCompartmentOut(std::weak_ptr<Compartment> linkedCompartmentOut);
 
     /**
      * Update subCompartmentValues and total at each iteration

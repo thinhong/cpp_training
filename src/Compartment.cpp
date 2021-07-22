@@ -24,11 +24,11 @@ std::vector<double> Compartment::getSubCompartmentValues() {
 std::string Compartment::getName() {
     return name;
 }
-std::vector<bool> Compartment::getIsIn() {
-    return isIn;
+std::vector<std::weak_ptr<Compartment>> Compartment::getLinkedCompartmentIn() {
+    return linkedCompartmentIn;
 }
-std::vector<std::weak_ptr<Compartment>> Compartment::getLinkedCompartment() {
-    return linkedCompartment;
+std::vector<std::weak_ptr<Compartment>> Compartment::getLinkedCompartmentOut() {
+    return linkedCompartmentOut;
 }
 
 std::shared_ptr<Distribution> Compartment::getDist() {
@@ -44,21 +44,16 @@ size_t Compartment::getNInNodes() {
 }
 
 // Setters
-void Compartment::addLinkedCompartment(std::weak_ptr<Compartment> linkedCompartment) {
-    this->linkedCompartment.push_back(linkedCompartment);
+void Compartment::addLinkedCompartmentIn(std::weak_ptr<Compartment> linkedCompartmentIn) {
+    this->linkedCompartmentIn.push_back(linkedCompartmentIn);
+}
+
+void Compartment::addLinkedCompartmentOut(std::weak_ptr<Compartment> linkedCompartmentOut) {
+    this->linkedCompartmentOut.push_back(linkedCompartmentOut);
 }
 
 void Compartment::addLinkedWeight(double weight) {
     linkedWeight.push_back(weight);
-}
-
-void Compartment::addIsIn(bool isIn) {
-    this->isIn.push_back(isIn);
-    if (isIn) {
-        nInNodes += 1;
-    } else {
-        nOutNodes += 1;
-    }
 }
 
 void Compartment::updateValue(long iter) {
@@ -98,10 +93,8 @@ void Compartment::updateCompartment(long iter, std::vector<std::string> paramNam
     // Loop over all linkedCompartment, find the linkedCompartment with isIn == true
     // Let subCompartmentValues[0] += outValue of that linkedCompartment
     // Multiply with linkedWeight for situations such as A -> Ar and I, I -> H_h, H_c and H_d
-    for (size_t m {0}; m < linkedCompartment.size(); ++m) {
-        if (isIn[m]) {
-            inValue += linkedCompartment[m].lock()->outValue * linkedWeight[m];
-        }
+    for (size_t m {0}; m < linkedCompartmentIn.size(); ++m) {
+        inValue += linkedCompartmentIn[m].lock()->outValue * linkedWeight[m];
     }
     if (dist->getDistName() == "gamma" || dist->getDistName() == "weibull" ||
         dist->getDistName() == "exponential" || dist->getDistName() == "transitionProb" ||
