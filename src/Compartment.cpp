@@ -8,9 +8,9 @@ Compartment::Compartment(std::string name, double initVal) {
 }
 
 void Compartment::addDistribution(std::shared_ptr<Distribution> dist) {
-    this->dist = dist;
+    this->distribution = dist;
     // Each total value is binned into many subCompartmentValues, subCompartmentValues[0] is the initVal
-    subCompartmentValues.resize(this->dist->getMaxDay(), 0);
+    subCompartmentValues.resize(this->distribution->getMaxDay(), 0);
     subCompartmentValues[0] = total[0];
 }
 
@@ -32,15 +32,11 @@ std::vector<std::weak_ptr<Compartment>> Compartment::getLinkedCompartmentOut() {
 }
 
 std::shared_ptr<Distribution> Compartment::getDist() {
-    return dist;
+    return distribution;
 }
 
 std::vector<double> Compartment::getLinkedWeight() {
     return linkedWeight;
-}
-
-size_t Compartment::getNInNodes() {
-    return nInNodes;
 }
 
 // Setters
@@ -66,16 +62,16 @@ void Compartment::updateValue(long iter) {
         startIndex = subCompartmentValues.size() - 1;
     }
     for (size_t i {startIndex}; i > 0; --i) {
-        outValue += subCompartmentValues[i] * dist->getTransitionProb(i);
-        subCompartmentValues[i] = subCompartmentValues[i - 1] * (1 - dist->getTransitionProb(i - 1));
+        outValue += subCompartmentValues[i] * distribution->getTransitionProb(i);
+        subCompartmentValues[i] = subCompartmentValues[i - 1] * (1 - distribution->getTransitionProb(i - 1));
     }
-    outValue += subCompartmentValues[0] * dist->getTransitionProb(0);
+    outValue += subCompartmentValues[0] * distribution->getTransitionProb(0);
 }
 
 void Compartment::updateMath(long iter, std::vector<std::string> paramNames, std::vector<double> paramValues,
                              std::vector<std::string> allCompNames, std::vector<double> allCompValues) {
     mu::Parser parser;
-    parser.SetExpr(dist->getDistName());
+    parser.SetExpr(distribution->getDistName());
     // Add parameter values
     for (size_t i {0}; i < paramNames.size(); ++i) {
         parser.DefineVar(paramNames[i], &paramValues[i]);
@@ -96,9 +92,9 @@ void Compartment::updateCompartment(long iter, std::vector<std::string> paramNam
     for (size_t m {0}; m < linkedCompartmentIn.size(); ++m) {
         inValue += linkedCompartmentIn[m].lock()->outValue * linkedWeight[m];
     }
-    if (dist->getDistName() == "gamma" || dist->getDistName() == "weibull" ||
-        dist->getDistName() == "exponential" || dist->getDistName() == "transitionProb" ||
-        dist->getDistName() == "custom") {
+    if (distribution->getDistName() == "gamma" || distribution->getDistName() == "weibull" ||
+        distribution->getDistName() == "exponential" || distribution->getDistName() == "transitionProb" ||
+        distribution->getDistName() == "custom") {
         updateValue(iter);
     } else {
         updateMath(iter, paramNames, paramValues, allCompNames, allCompValues);

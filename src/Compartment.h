@@ -11,13 +11,10 @@
 class Compartment {
 private:
     std::string name;
-    std::shared_ptr<Distribution> dist;
+    std::shared_ptr<Distribution> distribution;
     std::vector<std::weak_ptr<Compartment>> linkedCompartmentIn;
     std::vector<std::weak_ptr<Compartment>> linkedCompartmentOut;
     std::vector<double> linkedWeight;
-    // Save nInNodes and nOutNodes as member variables instead of computing each time running updateValue to save computational cost
-    size_t nInNodes {0};
-    size_t nOutNodes {0};
     // Variables for computational analyses
     std::vector<double> total;
     std::vector<double> subCompartmentValues;
@@ -36,12 +33,10 @@ public:
     std::vector<double> getTotal();
     std::vector<double> getSubCompartmentValues();
     std::string getName();
-    std::vector<bool> getIsIn();
     std::vector<std::weak_ptr<Compartment>> getLinkedCompartmentIn();
     std::vector<std::weak_ptr<Compartment>> getLinkedCompartmentOut();
     std::shared_ptr<Distribution> getDist();
     std::vector<double> getLinkedWeight();
-    size_t getNInNodes();
 
     // Setters
     void addDistribution(std::shared_ptr<Distribution> dist);

@@ -5,7 +5,7 @@
     "initialValues": {"S": 999, "I": 1, "R": 0},
     "parameters": {"beta": 0.015, "N": 1000},
     "transitions": {
-        "S -> I": {"name":"mathExpression", "expression": "beta * S * I / N"}, 
-        "I -> R": {"name":"gamma", "scale": 2, "shape": 5}
+        "S -> I": {"distribution": "mathExpression", "expression": "beta * S * I / N"}, 
+        "I -> R": {"distribution": "gamma", "scale": 2, "shape": 5}
     }
 }

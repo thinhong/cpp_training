@@ -57,12 +57,6 @@ public:
      */
     std::weak_ptr<Compartment> getAddressFromName(std::string compName);
 
-    /**
-     * Ensure that the order of elements in model group follows instruction from contact assumption
-     * @param allContacts: a vector contains all Contact objects
-     */
-    void sortModelGroupByAssumption(std::vector<std::shared_ptr<Contact>> allContacts);
-
     // Interaction among locations
     void addNewLinkedContactRate(double linkedContactRate);
     void updateLinkedContactRate(double linkedContactRateToUpdate, size_t index);
@@ -70,8 +64,6 @@ public:
 
     // Add compartment to model using JSON config file
     void addCompsFromConfig(std::vector<std::shared_ptr<Compartment>>& comps);
-    void connectComp();
-    void addCompsAndConnect(std::shared_ptr<Compartment>& A, std::shared_ptr<Compartment>& B, double weight);
 
     /**
      * Return the index of a compartment in vector <b>comps</b>

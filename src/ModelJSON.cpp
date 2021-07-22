@@ -55,14 +55,14 @@ ModelJSON::ModelJSON(nlohmann::json &initialValues, nlohmann::json &parameters, 
         outComp.lock()->addLinkedWeight(weight);
 
         // Set distribution for the inCompartment
-        if (distributionConfig["name"] == "transitionProb") {
+        if (distributionConfig["distribution"] == "transitionProb") {
             double prob = distributionConfig["transitionProb"];
             prob *= Distribution::timeStep;
             auto transitionProb = std::make_shared<TransitionProb>(prob);
             inComp.lock()->addDistribution(transitionProb);
         }
             // Gamma distribution: parameters are "scale" and "shape"
-        else if (distributionConfig["name"] == "gamma") {
+        else if (distributionConfig["distribution"] == "gamma") {
             double scale = distributionConfig["scale"];
             scale /= Distribution::timeStep;
             double shape = distributionConfig["shape"];
@@ -70,7 +70,7 @@ ModelJSON::ModelJSON(nlohmann::json &initialValues, nlohmann::json &parameters, 
             inComp.lock()->addDistribution(gamma);
         }
             // Weibull distribution: parameters are "scale" and "shape"
-        else if (distributionConfig["name"] == "weibull") {
+        else if (distributionConfig["distribution"] == "weibull") {
             double scale = distributionConfig["scale"];
             scale /= Distribution::timeStep;
             double shape = distributionConfig["shape"];
@@ -78,19 +78,19 @@ ModelJSON::ModelJSON(nlohmann::json &initialValues, nlohmann::json &parameters, 
             inComp.lock()->addDistribution(weibull);
         }
             // Exponential distribution: parameter is "rate"
-        else if (distributionConfig["name"] == "exponential") {
+        else if (distributionConfig["distribution"] == "exponential") {
             double rate = distributionConfig["rate"];
             rate *= Distribution::timeStep;
             auto exponential = std::make_shared<DiscreteExponentialDistribution>(rate);
             inComp.lock()->addDistribution(exponential);
         }
             // Custom distribution: parameter is a vector "waitingTime"
-        else if (distributionConfig["name"] == "custom") {
+        else if (distributionConfig["distribution"] == "custom") {
             std::vector<double> waitingTime = distributionConfig["waitingTime"];
             auto custom = std::make_shared<CustomDistribution>(waitingTime);
             inComp.lock()->addDistribution(custom);
         }
-        else if (distributionConfig["name"] == "mathExpression") {
+        else if (distributionConfig["distribution"] == "mathExpression") {
             std::string expression = distributionConfig["expression"];
             auto mathExpression = std::make_shared<MathExpression>(expression);
             inComp.lock()->addDistribution(mathExpression);

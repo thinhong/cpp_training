@@ -2990,8 +2990,8 @@ void beta_cdf_values ( int &n_data, double &a, double &b, double &x,
 //    The function can also be evaluated by using the Statistics package:
 //
 //      Needs["Statistics`ContinuousDistributions`"]
-//      dist = BetaDistribution [ a, b ]
-//      CDF [ dist, x ]
+//      distribution = BetaDistribution [ a, b ]
+//      CDF [ distribution, x ]
 //
 //  Licensing:
 //
@@ -3477,8 +3477,8 @@ void beta_inc_values ( int &n_data, double &a, double &b, double &x,
 //    The function can also be evaluated by using the Statistics package:
 //
 //      Needs["Statistics`ContinuousDistributions`"]
-//      dist = BetaDistribution [ a, b ]
-//      CDF [ dist, x ]
+//      distribution = BetaDistribution [ a, b ]
+//      CDF [ distribution, x ]
 //
 //  Licensing:
 //
@@ -6360,8 +6360,8 @@ void cauchy_cdf_values ( int &n_data, double &mu, double &sigma, double &x,
 //    In Mathematica, the function can be evaluated by:
 //
 //      Needs["Statistics`ContinuousDistributions`"]
-//      dist = CauchyDistribution [ mu, sigma ]
-//      CDF [ dist, x ]
+//      distribution = CauchyDistribution [ mu, sigma ]
+//      CDF [ distribution, x ]
 //
 //  Licensing:
 //
@@ -7666,8 +7666,8 @@ void chi_square_cdf_values ( int &n_data, int &a, double &x, double &fx )
 //    In Mathematica, the function can be evaluated by:
 //
 //      Needs["Statistics`ContinuousDistributions`"]
-//      dist = ChiSquareDistribution [ df ]
-//      CDF [ dist, x ]
+//      distribution = ChiSquareDistribution [ df ]
+//      CDF [ distribution, x ]
 //
 //  Licensing:
 //
@@ -8038,8 +8038,8 @@ void chi_square_noncentral_cdf_values ( int &n_data, int &df, double &lambda,
 //    In Mathematica, the function can be evaluated by:
 //
 //      Needs["Statistics`ContinuousDistributions`"]
-//      dist = NoncentralChiSquareDistribution [ df, lambda ]
-//      CDF [ dist, x ]
+//      distribution = NoncentralChiSquareDistribution [ df, lambda ]
+//      CDF [ distribution, x ]
 //
 //  Licensing:
 //
@@ -14364,8 +14364,8 @@ void exponential_cdf_values ( int &n_data, double &lambda, double &x,
 //    In Mathematica, the function can be evaluated by:
 //
 //      Needs["Statistics`ContinuousDistributions`"]
-//      dist = ExponentialDistribution [ lambda ]
-//      CDF [ dist, x ]
+//      distribution = ExponentialDistribution [ lambda ]
+//      CDF [ distribution, x ]
 //
 //  Licensing:
 //
@@ -14793,8 +14793,8 @@ void extreme_values_cdf_values ( int &n_data, double &alpha, double &beta,
 //    In Mathematica, the function can be evaluated by:
 //
 //      Needs["Statistics`ContinuousDistributions`"]
-//      dist = ExtremeValuesDistribution [ alpha, beta ]
-//      CDF [ dist, x ]
+//      distribution = ExtremeValuesDistribution [ alpha, beta ]
+//      CDF [ distribution, x ]
 //
 //  Licensing:
 //
@@ -15212,8 +15212,8 @@ void f_cdf_values ( int &n_data, int &a, int &b, double &x, double &fx )
 //    In Mathematica, the function can be evaluated by:
 //
 //      Needs["Statistics`ContinuousDistributions`"]
-//      dist = FRatioDistribution [ dfn, dfd ]
-//      CDF [ dist, x ]
+//      distribution = FRatioDistribution [ dfn, dfd ]
+//      CDF [ distribution, x ]
 //
 //  Licensing:
 //
@@ -15642,8 +15642,8 @@ void f_noncentral_cdf_values ( int &n_data, int &n1, int &n2, double &lambda,
 //    In Mathematica, the function can be evaluated by:
 //
 //      Needs["Statistics`ContinuousDistributions`"]
-//      dist = NoncentralFRatioDistribution [ n1, n2, lambda ]
-//      CDF [ dist, x ]
+//      distribution = NoncentralFRatioDistribution [ n1, n2, lambda ]
+//      CDF [ distribution, x ]
 //
 //  Licensing:
 //
@@ -17471,8 +17471,8 @@ void gamma_cdf_values ( int &n_data, double &mu, double &sigma, double &x,
 //    In Mathematica, the function can be evaluated by:
 //
 //      Needs["Statistics`ContinuousDistributions`"]
-//      dist = GammaDistribution [ mu, sigma ]
-//      CDF [ dist, x ]
+//      distribution = GammaDistribution [ mu, sigma ]
+//      CDF [ distribution, x ]
 //
 //  Licensing:
 //
@@ -18662,8 +18662,8 @@ void geometric_cdf_values ( int &n_data, int &x, double &p, double &cdf )
 //    In Mathematica, the function can be evaluated by:
 //
 //      Needs["Statistics`DiscreteDistributions`]
-//      dist = GeometricDistribution [ p ]
-//      CDF [ dist, x ]
+//      distribution = GeometricDistribution [ p ]
+//      CDF [ distribution, x ]
 //
 //  Licensing:
 //
@@ -19969,8 +19969,8 @@ void hypergeometric_cdf_values ( int &n_data, int &sam, int &suc, int &pop,
 //    In Mathematica, the function can be evaluated by:
 //
 //      Needs["Statistics`DiscreteDistributions`]
-//      dist = HypergeometricDistribution [ sam, suc, pop ]
-//      CDF [ dist, n ]
+//      distribution = HypergeometricDistribution [ sam, suc, pop ]
+//      CDF [ distribution, n ]
 //
 //  Licensing:
 //
@@ -21917,8 +21917,8 @@ void laplace_cdf_values ( int &n_data, double &mu, double &beta, double &x,
 //    In Mathematica, the function can be evaluated by:
 //
 //      Needs["Statistics`ContinuousDistributions`"]
-//      dist = LaplaceDistribution [ mu, beta ]
-//      CDF [ dist, x ]
+//      distribution = LaplaceDistribution [ mu, beta ]
+//      CDF [ distribution, x ]
 //
 //  Licensing:
 //
@@ -22762,8 +22762,8 @@ void log_normal_cdf_values ( int &n_data, double &mu, double &sigma,
 //    In Mathematica, the function can be evaluated by:
 //
 //      Needs["Statistics`ContinuousDistributions`"]
-//      dist = LogNormalDistribution [ mu, sigma ]
-//      CDF [ dist, x ]
+//      distribution = LogNormalDistribution [ mu, sigma ]
+//      CDF [ distribution, x ]
 //
 //  Licensing:
 //
@@ -23257,8 +23257,8 @@ void log_series_cdf_values ( int &n_data, double &t, int &n, double &fx )
 //    In Mathematica, the function can be evaluated by:
 //
 //      Needs["Statistics`DiscreteDistributions`]
-//      dist = LogSeriesDistribution [ t ]
-//      CDF [ dist, n ]
+//      distribution = LogSeriesDistribution [ t ]
+//      CDF [ distribution, n ]
 //
 //  Licensing:
 //
@@ -24019,8 +24019,8 @@ void logistic_cdf_values ( int &n_data, double &mu, double &beta, double &x,
 //    In Mathematica, the function can be evaluated by:
 //
 //      Needs["Statistics`ContinuousDistributions`"]
-//      dist = LogisticDistribution [ mu, beta ]
-//      CDF [ dist, x ]
+//      distribution = LogisticDistribution [ mu, beta ]
+//      CDF [ distribution, x ]
 //
 //  Licensing:
 //
@@ -26223,8 +26223,8 @@ void negative_binomial_cdf_values ( int &n_data, int &f, int &s, double &p,
 //    In Mathematica, the function can be evaluated by:
 //
 //      Needs["Statistics`DiscreteDistributions`]
-//      dist = NegativeBinomialDistribution [ s, p ]
-//      CDF [ dist, f ]
+//      distribution = NegativeBinomialDistribution [ s, p ]
+//      CDF [ distribution, f ]
 //
 //  Licensing:
 //
@@ -26893,8 +26893,8 @@ void normal_01_cdf_values ( int &n_data, double &x, double &fx )
 //    In Mathematica, the function can be evaluated by:
 //
 //      Needs["Statistics`ContinuousDistributions`"]
-//      dist = NormalDistribution [ 0, 1 ]
-//      CDF [ dist, x ]
+//      distribution = NormalDistribution [ 0, 1 ]
+//      CDF [ distribution, x ]
 //
 //  Licensing:
 //
@@ -27451,8 +27451,8 @@ void normal_cdf_values ( int &n_data, double &mu, double &sigma, double &x,
 //    In Mathematica, the function can be evaluated by:
 //
 //      Needs["Statistics`ContinuousDistributions`"]
-//      dist = NormalDistribution [ mu, sigma ]
-//      CDF [ dist, x ]
+//      distribution = NormalDistribution [ mu, sigma ]
+//      CDF [ distribution, x ]
 //
 //  Licensing:
 //
@@ -30243,8 +30243,8 @@ void poisson_cdf_values ( int &n_data, double &a, int &x, double &fx )
 //    In Mathematica, the function can be evaluated by:
 //
 //      Needs["Statistics`DiscreteDistributions`]
-//      dist = PoissonDistribution [ a ]
-//      CDF [ dist, x ]
+//      distribution = PoissonDistribution [ a ]
+//      CDF [ distribution, x ]
 //
 //  Licensing:
 //
@@ -34533,8 +34533,8 @@ void rayleigh_cdf_values ( int &n_data, double &sigma, double &x, double &fx )
 //    In Mathematica, the function can be evaluated by:
 //
 //      Needs["Statistics`ContinuousDistributions`"]
-//      dist = RayleighDistribution [ sigma ]
-//      CDF [ dist, x ]
+//      distribution = RayleighDistribution [ sigma ]
+//      CDF [ distribution, x ]
 //
 //  Licensing:
 //
@@ -37209,8 +37209,8 @@ void student_cdf_values ( int &n_data, double &c, double &x, double &fx )
 //    In Mathematica, the function can be evaluated by:
 //
 //      Needs["Statistics`ContinuousDistributions`"]
-//      dist = StudentTDistribution [ c ]
-//      CDF [ dist, x ]
+//      distribution = StudentTDistribution [ c ]
+//      CDF [ distribution, x ]
 //
 //  Licensing:
 //
@@ -37764,8 +37764,8 @@ void student_noncentral_cdf_values ( int &n_data, int &df, double &lambda,
 //    In Mathematica, the function can be evaluated by:
 //
 //      Needs["Statistics`ContinuousDistributions`"]
-//      dist = NoncentralStudentTDistribution [ df, lambda ]
-//      CDF [ dist, x ]
+//      distribution = NoncentralStudentTDistribution [ df, lambda ]
+//      CDF [ distribution, x ]
 //
 //    Mathematica seems to have some difficulty computing this function
 //    to the desired number of digits.
@@ -40828,8 +40828,8 @@ void weibull_cdf_values ( int &n_data, double &alpha, double &beta,
 //    In Mathematica, the function can be evaluated by:
 //
 //      Needs["Statistics`ContinuousDistributions`"]
-//      dist = WeibullDistribution [ alpha, beta ]
-//      CDF [ dist, x ]
+//      distribution = WeibullDistribution [ alpha, beta ]
+//      CDF [ distribution, x ]
 //
 //  Licensing:
 //
