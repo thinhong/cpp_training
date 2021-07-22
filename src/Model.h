@@ -10,7 +10,6 @@
 
 class Model {
 private:
-    std::vector<std::string> modelName;
     /**
      * Contains all compartments of this model
      */
@@ -35,9 +34,8 @@ private:
     std::vector<double> linkedContactRates;
 public:
     // Model structure and infectious compartment are the same for all models for a disease
-    static inline std::vector<std::string> modelStructure;
-    static inline std::vector<std::string> infectiousComps;
-    Model(std::vector<std::string> modelGroup, std::vector<std::string>& paramNames, std::vector<double>& paramValues);
+    std::vector<std::string> transitions;
+    Model(std::vector<std::string>& paramNames, std::vector<double>& paramValues);
     ~Model() {
 //        std::string name;
 //        for (auto group: modelName) {
@@ -45,11 +43,9 @@ public:
 //        }
 //        std::cout << name << " model destructor called." << std::endl;
     }
-    std::vector<std::string> getModelGroup();
     std::vector<std::shared_ptr<Compartment>> getComps();
 
     std::vector<double> getLinkedContactRates() {return linkedContactRates;};
-
 
     std::vector<std::weak_ptr<Model>> getLinkedModels();
 
@@ -114,6 +110,8 @@ public:
      * Helper function to update allCompValues after each iteration
      */
     void updateAllCompValues(long iter);
+
+    std::vector<std::string> getModelGroup() {return {"test"};};
 
 };
 

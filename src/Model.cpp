@@ -4,17 +4,9 @@
 #include <stack>
 #include <stdexcept>
 
-Model::Model(std::vector<std::string> modelGroup, std::vector<std::string>& paramNames,
-             std::vector<double>& paramValues) {
-    for (std::string group: modelGroup) {
-        this->modelName.push_back(group);
-    }
+Model::Model(std::vector<std::string>& paramNames, std::vector<double>& paramValues) {
     this->paramNames = paramNames;
     this->paramValues = paramValues;
-}
-
-std::vector<std::string> Model::getModelGroup() {
-    return modelName;
 }
 
 std::vector<std::shared_ptr<Compartment>> Model::getComps() {
@@ -69,7 +61,7 @@ void Model::addCompsAndConnect(std::shared_ptr<Compartment>& A, std::shared_ptr<
 }
 
 void Model::connectComp() {
-    for (std::string flow: modelStructure) {
+    for (std::string flow: transitions) {
         // Remove whitespace
         flow.erase(remove(flow.begin(), flow.end(), ' '), flow.end());
 
@@ -191,22 +183,22 @@ void Model::sortComps() {
     comps = sortedComps;
 }
 
-void Model::sortModelGroupByAssumption(std::vector<std::shared_ptr<Contact>> allContacts) {
-    std::vector<std::string> modelGroupSorted;
-    for (std::string assumptionOrder: Contact::contactAssumption) {
-        for (auto contact: allContacts) {
-            if (contact->getContactType() == assumptionOrder) {
-                std::vector<std::string> contactClasses = contact->getContactClasses();
-                for (std::string group: modelName) {
-                    if (std::find(contactClasses.begin(), contactClasses.end(), group) != contactClasses.end()) {
-                        modelGroupSorted.push_back(group);
-                    }
-                }
-            }
-        }
-    }
-    modelName = modelGroupSorted;
-}
+//void Model::sortModelGroupByAssumption(std::vector<std::shared_ptr<Contact>> allContacts) {
+//    std::vector<std::string> modelGroupSorted;
+//    for (std::string assumptionOrder: Contact::contactAssumption) {
+//        for (auto contact: allContacts) {
+//            if (contact->getContactType() == assumptionOrder) {
+//                std::vector<std::string> contactClasses = contact->getContactClasses();
+//                for (std::string group: modelName) {
+//                    if (std::find(contactClasses.begin(), contactClasses.end(), group) != contactClasses.end()) {
+//                        modelGroupSorted.push_back(group);
+//                    }
+//                }
+//            }
+//        }
+//    }
+//    modelName = modelGroupSorted;
+//}
 
 void Model::update(long iter) {
     for (auto& comp: comps) {

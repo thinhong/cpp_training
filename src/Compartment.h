@@ -24,7 +24,7 @@ private:
     double outValue {0};
 public:
     static inline size_t timesFollowUp {200};
-    Compartment(std::string name, double initVal, std::shared_ptr<Distribution> dist);
+    Compartment(std::string name, double initVal);
 
     Compartment() = delete;
     Compartment(const Compartment& comp) = delete;
@@ -43,6 +43,7 @@ public:
     size_t getNInNodes();
 
     // Setters
+    void addDistribution(std::shared_ptr<Distribution> dist);
     void addLinkedWeight(double weight);
     void addLinkedCompartment(std::weak_ptr<Compartment> linkedCompartment);
     void addIsIn(bool isIn);

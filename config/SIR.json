@@ -2,30 +2,10 @@
     "daysFollowUp": 50,
     "errorTolerance": 0.01,
     "timeStep": 0.01,
-    "modelStructure": ["S -> I", "I -> R"],
+    "initialValues": {"S": 999, "I": 1, "R": 0},
     "parameters": {"beta": 0.015, "N": 1000},
-    "infectiousComps": ["I"],
-    "models":[
-        {
-            "modelName": ["test"],
-            "transmissionRate": 1.5,
-            "compartments":[
-                {
-                    "name":"S",
-                    "distribution":{"name":"mathExpression", "expression": "beta * S * I / N"},
-                    "initialValue":999
-                },
-                {
-                    "name":"I",
-                    "distribution":{"name":"gamma","scale":2, "shape": 5},
-                    "initialValue":1
-                },
-                {
-                    "name":"R",
-                    "distribution":{"name":"none"},
-                    "initialValue":0
-                }
-            ]
-        }
-    ]
+    "transitions": {
+        "S -> I": {"name":"mathExpression", "expression": "beta * S * I / N"}, 
+        "I -> R": {"name":"gamma", "scale": 2, "shape": 5}
+    }
 }

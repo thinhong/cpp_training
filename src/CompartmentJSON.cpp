@@ -10,12 +10,12 @@ CompartmentJSON::CompartmentJSON(nlohmann::json& jsonNode) {
         double prob = jsonNode["distribution"]["transitionProb"];
         prob *= Distribution::timeStep;
         auto transitionProb = std::make_shared<TransitionProb>(prob);
-        comp = std::make_shared<Compartment>(jsonNode["name"], jsonNode["initialValue"], transitionProb);
+        comp = std::make_shared<Compartment>(jsonNode["name"], jsonNode["initialValue"]);
     }
     else if (jsonNode["distribution"]["name"] == "none") {
         double prob = 0.0;
         auto transitionProb = std::make_shared<TransitionProb>(prob);
-        comp = std::make_shared<Compartment>(jsonNode["name"], jsonNode["initialValue"], transitionProb);
+        comp = std::make_shared<Compartment>(jsonNode["name"], jsonNode["initialValue"]);
     }
         // Gamma distribution: parameters are "scale" and "shape"
     else if (jsonNode["distribution"]["name"] == "gamma") {
@@ -23,7 +23,7 @@ CompartmentJSON::CompartmentJSON(nlohmann::json& jsonNode) {
         scale /= Distribution::timeStep;
         double shape = jsonNode["distribution"]["shape"];
         auto gamma = std::make_shared<DiscreteGammaDistribution>(scale, shape);
-        comp = std::make_shared<Compartment>(jsonNode["name"], jsonNode["initialValue"], gamma);
+        comp = std::make_shared<Compartment>(jsonNode["name"], jsonNode["initialValue"]);
     }
         // Weibull distribution: parameters are "scale" and "shape"
     else if (jsonNode["distribution"]["name"] == "weibull") {
@@ -31,25 +31,25 @@ CompartmentJSON::CompartmentJSON(nlohmann::json& jsonNode) {
         scale /= Distribution::timeStep;
         double shape = jsonNode["distribution"]["shape"];
         auto weibull = std::make_shared<DiscreteWeibullDistribution>(scale, shape);
-        comp = std::make_shared<Compartment>(jsonNode["name"], jsonNode["initialValue"], weibull);
+        comp = std::make_shared<Compartment>(jsonNode["name"], jsonNode["initialValue"]);
     }
         // Exponential distribution: parameter is "rate"
     else if (jsonNode["distribution"]["name"] == "exponential") {
         double rate = jsonNode["distribution"]["rate"];
         rate *= Distribution::timeStep;
         auto exponential = std::make_shared<DiscreteExponentialDistribution>(rate);
-        comp = std::make_shared<Compartment>(jsonNode["name"], jsonNode["initialValue"], exponential);
+        comp = std::make_shared<Compartment>(jsonNode["name"], jsonNode["initialValue"]);
     }
         // Custom distribution: parameter is a vector "waitingTime"
     else if (jsonNode["distribution"]["name"] == "custom") {
         std::vector<double> waitingTime = jsonNode["distribution"]["waitingTime"];
         auto custom = std::make_shared<CustomDistribution>(waitingTime);
-        comp = std::make_shared<Compartment>(jsonNode["name"], jsonNode["initialValue"], custom);
+        comp = std::make_shared<Compartment>(jsonNode["name"], jsonNode["initialValue"]);
     }
     else if (jsonNode["distribution"]["name"] == "mathExpression") {
         std::string expression = jsonNode["distribution"]["expression"];
         auto mathExpression = std::make_shared<MathExpression>(expression);
-        comp = std::make_shared<Compartment>(jsonNode["name"], jsonNode["initialValue"], mathExpression);
+        comp = std::make_shared<Compartment>(jsonNode["name"], jsonNode["initialValue"]);
     }
 
     // Also add linkedWeight and isIn to the compartment

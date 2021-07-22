@@ -1,14 +1,17 @@
 #include "Compartment.h"
 
 // Constructor
-Compartment::Compartment(std::string name, double initVal, std::shared_ptr<Distribution> dist) {
+Compartment::Compartment(std::string name, double initVal) {
     this->name = name;
-    this->dist = dist;
     total.resize(timesFollowUp);
     total[0] = initVal;
+}
+
+void Compartment::addDistribution(std::shared_ptr<Distribution> dist) {
+    this->dist = dist;
     // Each total value is binned into many subCompartmentValues, subCompartmentValues[0] is the initVal
     subCompartmentValues.resize(this->dist->getMaxDay(), 0);
-    subCompartmentValues[0] = initVal;
+    subCompartmentValues[0] = total[0];
 }
 
 // Define list of getters
