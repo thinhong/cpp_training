@@ -49,6 +49,8 @@ ModelJSON::ModelJSON(nlohmann::json &initialValues, nlohmann::json &parameters, 
         }
         std::weak_ptr<Compartment> inComp = model->getAddressFromName(inCompName);
         std::weak_ptr<Compartment> outComp = model->getAddressFromName(outCompName);
+
+        // Set linked compartment in and out and their weight
         inComp.lock()->addLinkedCompartmentOut(outComp);
         outComp.lock()->addLinkedCompartmentIn(inComp);
         inComp.lock()->addLinkedWeight(weight);
@@ -97,11 +99,13 @@ ModelJSON::ModelJSON(nlohmann::json &initialValues, nlohmann::json &parameters, 
         }
     }
     for (auto& comp: model->getComps()) {
-        if (!comp->getDist()) {
+        if (comp->getDist().empty()) {
             double prob = 0.0;
             auto transitionProb = std::make_shared<TransitionProb>(prob);
             comp->addDistribution(transitionProb);
         }
+        comp->setSubCompartmentValues();
+        comp->setOutValues();
     }
 }
 
