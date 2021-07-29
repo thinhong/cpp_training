@@ -7,7 +7,7 @@ Compartment::Compartment(std::string name, double initVal) {
     total[0] = initVal;
 }
 
-void Compartment::addDistribution(std::shared_ptr<Distribution>& dist) {
+void Compartment::addDistribution(std::shared_ptr<Distribution> dist) {
     this->distribution.push_back(dist);
 }
 

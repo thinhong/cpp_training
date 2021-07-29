@@ -45,7 +45,7 @@ public:
     std::vector<double> getOutValues() {return outValues;};
 
     // Setters
-    void addDistribution(std::shared_ptr<Distribution>& dist);
+    void addDistribution(std::shared_ptr<Distribution> dist);
     void addLinkedWeight(double weight);
     void addLinkedCompartmentIn(std::weak_ptr<Compartment>& linkedCompIn);
     void addLinkedCompartmentOut(std::weak_ptr<Compartment>& linkedCompOut);

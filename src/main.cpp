@@ -52,46 +52,46 @@ int main() {
 
     for (size_t i {1}; i < Compartment::timesFollowUp; i++) {
         myModel.getModel()->update(i);
-        std::cout << "====================================" << "\n";
-        std::cout << "Iteration " << i << "\n";
-        for (auto& comp: myModel.getModel()->getComps()) {
-            std::cout << "Compartment " << comp->getName() << "\n";
-            for (size_t i {0}; i < comp->getLinkedCompartmentOut().size(); ++i) {
-                std::cout << "Linked out " << i + 1 << ": " << comp->getLinkedCompartmentOut()[i].lock()->getName() << "\n";
-                for (size_t k {0}; k < comp->getSubCompartmentValues()[i].size(); ++k) {
-                    std::cout << comp->getSubCompartmentValues()[i][k] << " ";
-                }
-                std::cout << "\n";
-                std::cout << "Out value for " << comp->getLinkedCompartmentOut()[i].lock()->getName() << ": " <<
-                comp->getOutValues()[i] << "\n";
-            }
+//        std::cout << "====================================" << "\n";
+//        std::cout << "Iteration " << i << "\n";
+//        for (auto& comp: myModel.getModel()->getComps()) {
+//            std::cout << "Compartment " << comp->getName() << "\n";
+//            for (size_t i {0}; i < comp->getLinkedCompartmentOut().size(); ++i) {
+//                std::cout << "Linked out " << i + 1 << ": " << comp->getLinkedCompartmentOut()[i].lock()->getName() << "\n";
+//                for (size_t k {0}; k < comp->getSubCompartmentValues()[i].size(); ++k) {
+//                    std::cout << comp->getSubCompartmentValues()[i][k] << " ";
+//                }
+//                std::cout << "\n";
+//                std::cout << "Out value for " << comp->getLinkedCompartmentOut()[i].lock()->getName() << ": " <<
+//                comp->getOutValues()[i] << "\n";
+//            }
+//        }
+    }
+
+    // Display execution time
+    auto elapsedTime = std::chrono::high_resolution_clock::now() - startTime;
+    double seconds = std::chrono::duration_cast<std::chrono::milliseconds>(elapsedTime).count();
+    seconds /= 1000;
+    std::cout << "Simulation completed, elapsed time: ";
+    std::cout << std::fixed << std::setprecision(4) << seconds << " seconds\n";
+
+    // ================== End construct and run model ========================
+
+    // Write output to CSV file
+    std::string outputFolder;
+    std::cout << "Set path to the folder you want to save output file (ex: /home/Documents): ";
+    std::cin >> outputFolder;
+    Model* pModel = &(*myModel.getModel());
+    std::string outputFileName;
+    for (size_t i {0}; i < myModel.getModel()->getModelGroup().size(); ++i) {
+        if (i < (myModel.getModel()->getModelGroup().size() - 1)) {
+            outputFileName += myModel.getModel()->getModelGroup()[i] + "_";
+        } else if (i == (myModel.getModel()->getModelGroup().size() - 1)) {
+            outputFileName += myModel.getModel()->getModelGroup()[i];
         }
     }
-//
-//    // Display execution time
-//    auto elapsedTime = std::chrono::high_resolution_clock::now() - startTime;
-//    double seconds = std::chrono::duration_cast<std::chrono::milliseconds>(elapsedTime).count();
-//    seconds /= 1000;
-//    std::cout << "Simulation completed, elapsed time: ";
-//    std::cout << std::fixed << std::setprecision(4) << seconds << " seconds\n";
-//
-//    // ================== End construct and run model ========================
-//
-//    // Write output to CSV file
-//    std::string outputFolder;
-//    std::cout << "Set path to the folder you want to save output file (ex: /home/Documents): ";
-//    std::cin >> outputFolder;
-//    Model* pModel = &(*myModel.getModel());
-//    std::string outputFileName;
-//    for (size_t i {0}; i < myModel.getModel()->getModelGroup().size(); ++i) {
-//        if (i < (myModel.getModel()->getModelGroup().size() - 1)) {
-//            outputFileName += myModel.getModel()->getModelGroup()[i] + "_";
-//        } else if (i == (myModel.getModel()->getModelGroup().size() - 1)) {
-//            outputFileName += myModel.getModel()->getModelGroup()[i];
-//        }
-//    }
-//    outputFileName += ".csv";
-//    FileCSV file(outputFolder, outputFileName, pModel);
-//    file.writeFile();
+    outputFileName += ".csv";
+    FileCSV file(outputFolder, outputFileName, pModel);
+    file.writeFile();
 
 }
