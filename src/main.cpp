@@ -22,7 +22,7 @@ int main() {
     // ========================== JSON input ==============================
     // Read JSON input file to provide parameters
     std::string inputPath;
-    std::cout << "Enter full path to input file (ex: /home/Documents/config.json): ";
+    std::cout << "Enter full path to input file: ";
     std::cin >> inputPath;
     std::ifstream inputFile(inputPath);
     nlohmann::json input;
@@ -55,14 +55,14 @@ int main() {
 //        std::cout << "====================================" << "\n";
 //        std::cout << "Iteration " << i << "\n";
 //        for (auto& comp: myModel.getModel()->getComps()) {
-//            std::cout << "Compartment " << comp->getName() << "\n";
-//            for (size_t i {0}; i < comp->getLinkedCompartmentOut().size(); ++i) {
-//                std::cout << "Linked out " << i + 1 << ": " << comp->getLinkedCompartmentOut()[i].lock()->getName() << "\n";
-//                for (size_t k {0}; k < comp->getSubCompartmentValues()[i].size(); ++k) {
-//                    std::cout << comp->getSubCompartmentValues()[i][k] << " ";
+//            std::cout << "Compartment " << comp->getCompName() << "\n";
+//            for (size_t i {0}; i < comp->getOutCompartments().size(); ++i) {
+//                std::cout << "Linked out " << i + 1 << ": " << comp->getOutCompartments()[i].lock()->getCompName() << "\n";
+//                for (size_t k {0}; k < comp->getSubCompartmentValues().size(); ++k) {
+//                    std::cout << comp->getSubCompartmentValues()[k] << " ";
 //                }
 //                std::cout << "\n";
-//                std::cout << "Out value for " << comp->getLinkedCompartmentOut()[i].lock()->getName() << ": " <<
+//                std::cout << "Out value for " << comp->getOutCompartments()[i].lock()->getCompName() << ": " <<
 //                comp->getOutValues()[i] << "\n";
 //            }
 //        }

@@ -32,7 +32,7 @@ void Model::addCompsFromConfig(std::vector<std::shared_ptr<Compartment>> &comps)
 std::weak_ptr<Compartment> Model::getAddressFromName(std::string compName) {
     std::weak_ptr<Compartment> compAddress;
     for (auto& comp: comps) {
-        if (comp->getName() == compName) {
+        if (comp->getCompName() == compName) {
             compAddress = comp;
         }
     }
@@ -56,8 +56,8 @@ std::weak_ptr<Compartment> Model::getAddressFromName(std::string compName) {
 //    B->addLinkedCompartment(A);
 //    A->addIsIn(false);
 //    B->addIsIn(true);
-//    A->addLinkedWeight(1);
-//    B->addLinkedWeight(weight);
+//    A->addOutWeight(1);
+//    B->addOutWeight(weight);
 //}
 //
 //void Model::connectComp() {
@@ -88,8 +88,8 @@ std::weak_ptr<Compartment> Model::getAddressFromName(std::string compName) {
 //        outComp.lock()->addLinkedCompartment(inComp);
 //        inComp.lock()->addIsIn(false);
 //        outComp.lock()->addIsIn(true);
-//        inComp.lock()->addLinkedWeight(weight);
-//        outComp.lock()->addLinkedWeight(weight);
+//        inComp.lock()->addOutWeight(weight);
+//        outComp.lock()->addOutWeight(weight);
 //    }
 //
 //}
@@ -121,8 +121,8 @@ bool Model::checkCycleHelper(size_t i, std::vector<bool> &visited, std::vector<b
     if (!visited[i]) {
         visited[i] = true;
         recursiveStack[i] = true;
-        for (size_t j {0}; j < comps[i]->getLinkedCompartmentOut().size(); ++j) {
-            int index = getIndex(comps[i]->getLinkedCompartmentOut()[j].lock());
+        for (size_t j {0}; j < comps[i]->getOutCompartments().size(); ++j) {
+            int index = getIndex(comps[i]->getOutCompartments()[j].lock());
             if (!visited[index] && checkCycleHelper(index, visited, recursiveStack)) {
                 return true;
             }
@@ -154,8 +154,8 @@ void Model::checkCycle() {
 
 void Model::sortCompsHelper(size_t i, std::vector<bool> &visited, std::stack<std::shared_ptr<Compartment>> &stack) {
     visited[i] = true;
-    for (size_t j {0}; j < comps[i]->getLinkedCompartmentOut().size(); ++j) {
-        int index = getIndex(comps[i]->getLinkedCompartmentOut()[j].lock());
+    for (size_t j {0}; j < comps[i]->getOutCompartments().size(); ++j) {
+        int index = getIndex(comps[i]->getOutCompartments()[j].lock());
         if (!visited[index]) {
             sortCompsHelper(index, visited, stack);
         }
@@ -209,14 +209,14 @@ void Model::update(size_t iter) {
 void Model::initAllComps() {
     allCompNames.clear();
     for (auto& comp: comps) {
-        allCompNames.push_back(comp->getName());
-        allCompValues.push_back(comp->getTotal()[0]);
+        allCompNames.push_back(comp->getCompName());
+        allCompValues.push_back(comp->getCompTotal()[0]);
     }
 }
 
 void Model::updateAllCompValues(size_t iter) {
     for (size_t i {0}; i < comps.size(); ++i) {
-        allCompNames[i] = comps[i]->getName();
-        allCompValues[i] = comps[i]->getTotal()[iter];
+        allCompNames[i] = comps[i]->getCompName();
+        allCompValues[i] = comps[i]->getCompTotal()[iter];
     }
 }

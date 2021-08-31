@@ -5,6 +5,7 @@
 #include "ModelJSON.h"
 
 ModelJSON::ModelJSON(nlohmann::json &initialValues, nlohmann::json &parameters, nlohmann::json &transitions) {
+
     // Set parameters with parameters json
     std::vector<std::string> paramNames;
     std::vector<double> paramValues;
@@ -51,17 +52,17 @@ ModelJSON::ModelJSON(nlohmann::json &initialValues, nlohmann::json &parameters, 
         std::weak_ptr<Compartment> outComp = model->getAddressFromName(outCompName);
 
         // Set linked compartment in and out and their weight
-        inComp.lock()->addLinkedCompartmentOut(outComp);
-        outComp.lock()->addLinkedCompartmentIn(inComp);
-        inComp.lock()->addLinkedWeight(weight);
-        outComp.lock()->addLinkedWeight(weight);
+        inComp.lock()->addOutCompartment(outComp);
+        outComp.lock()->addInCompartment(inComp);
+        inComp.lock()->addOutWeight(weight);
+        outComp.lock()->addOutWeight(weight);
 
         // Set distribution for the inCompartment
         if (distributionConfig["distribution"] == "transitionProb") {
             double prob = distributionConfig["transitionProb"];
             prob *= Distribution::timeStep;
             auto transitionProb = std::make_shared<TransitionProb>(prob);
-            inComp.lock()->addDistribution(transitionProb);
+            inComp.lock()->addOutDistribution(transitionProb);
         }
             // Gamma distribution: parameters are "scale" and "shape"
         else if (distributionConfig["distribution"] == "gamma") {
@@ -69,7 +70,7 @@ ModelJSON::ModelJSON(nlohmann::json &initialValues, nlohmann::json &parameters, 
             scale /= Distribution::timeStep;
             double shape = distributionConfig["shape"];
             auto gamma = std::make_shared<DiscreteGammaDistribution>(scale, shape);
-            inComp.lock()->addDistribution(gamma);
+            inComp.lock()->addOutDistribution(gamma);
         }
             // Weibull distribution: parameters are "scale" and "shape"
         else if (distributionConfig["distribution"] == "weibull") {
@@ -77,34 +78,34 @@ ModelJSON::ModelJSON(nlohmann::json &initialValues, nlohmann::json &parameters, 
             scale /= Distribution::timeStep;
             double shape = distributionConfig["shape"];
             auto weibull = std::make_shared<DiscreteWeibullDistribution>(scale, shape);
-            inComp.lock()->addDistribution(weibull);
+            inComp.lock()->addOutDistribution(weibull);
         }
             // Exponential distribution: parameter is "rate"
         else if (distributionConfig["distribution"] == "exponential") {
             double rate = distributionConfig["rate"];
             rate *= Distribution::timeStep;
             auto exponential = std::make_shared<DiscreteExponentialDistribution>(rate);
-            inComp.lock()->addDistribution(exponential);
+            inComp.lock()->addOutDistribution(exponential);
         }
             // Custom distribution: parameter is a vector "waitingTime"
         else if (distributionConfig["distribution"] == "custom") {
             std::vector<double> waitingTime = distributionConfig["waitingTime"];
             auto custom = std::make_shared<CustomDistribution>(waitingTime);
-            inComp.lock()->addDistribution(custom);
+            inComp.lock()->addOutDistribution(custom);
         }
         else if (distributionConfig["distribution"] == "mathExpression") {
             std::string expression = distributionConfig["expression"];
             auto mathExpression = std::make_shared<MathExpression>(expression);
-            inComp.lock()->addDistribution(mathExpression);
+            inComp.lock()->addOutDistribution(mathExpression);
         }
     }
     for (auto& comp: model->getComps()) {
-        if (comp->getDist().empty()) {
+        if (comp->getOutDistributions().empty()) {
             double prob = 0.0;
             auto transitionProb = std::make_shared<TransitionProb>(prob);
-            comp->addDistribution(transitionProb);
+            comp->addOutDistribution(transitionProb);
         }
-        comp->setSubCompartmentValues();
+        comp->setLengthSubCompartment();
         comp->setOutValues();
     }
 }

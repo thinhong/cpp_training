@@ -29,7 +29,7 @@ void FileJSON::writeFile() {
 
     if (myFile.is_open()) {
         for (size_t i {}; i < model->getComps().size(); ++i) {
-            jsonObject[model->getComps()[i]->getName()] = model->getComps()[i]->getTotal();
+            jsonObject[model->getComps()[i]->getCompName()] = model->getComps()[i]->getCompTotal();
         }
         myFile << jsonObject;
         myFile.close();

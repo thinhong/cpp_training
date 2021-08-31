@@ -43,18 +43,18 @@ void FileCSV::writeFile() {
                 }
             }
             if (j == model->getComps().size() - 1) {
-                myFile << model->getComps()[j]->getName() << "_" << groupName << "\n";
+                myFile << model->getComps()[j]->getCompName() << "_" << groupName << "\n";
             } else {
-                myFile << model->getComps()[j]->getName() << "_" << groupName << ",";
+                myFile << model->getComps()[j]->getCompName() << "_" << groupName << ",";
             }
         }
-        for (size_t i {0}; i < model->getComps()[0]->getTotal().size(); ++i) {
+        for (size_t i {0}; i < model->getComps()[0]->getCompTotal().size(); ++i) {
             myFile << i * Distribution::timeStep << ",";
             for (size_t j {0}; j < model->getComps().size(); ++j) {
                 if (j == model->getComps().size() - 1) {
-                    myFile << model->getComps()[j]->getTotal()[i] << "\n";
+                    myFile << model->getComps()[j]->getCompTotal()[i] << "\n";
                 } else {
-                    myFile << model->getComps()[j]->getTotal()[i] << ",";
+                    myFile << model->getComps()[j]->getCompTotal()[i] << ",";
                 }
             }
         }

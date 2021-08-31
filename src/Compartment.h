@@ -10,21 +10,27 @@
 
 class Compartment {
 private:
-    std::string name;
-    std::vector<std::weak_ptr<Compartment>> linkedCompartmentIn;
-    // These four vectors (distribution, linkedCompartmentOut, subCompartmentValues, outValues)
-    // have the same length and the index is corresponding to each other
-    std::vector<std::shared_ptr<Distribution>> distribution;
-    std::vector<std::weak_ptr<Compartment>> linkedCompartmentOut;
-    std::vector<std::vector<double>> subCompartmentValues;
+    std::string compName;
+
+    // inCompartments: compartments that will move in to this state
+    std::vector<std::weak_ptr<Compartment>> inCompartments;
+
+    // outCompartments: compartments that this state will move out, with pre-defined outDistributions and outWeights,
+    // after calculation the final output will be sum into outValues
+    std::vector<std::weak_ptr<Compartment>> outCompartments;
+    std::vector<std::shared_ptr<Distribution>> outDistributions;
+    std::vector<double> outWeights;
     std::vector<double> outValues;
 
-    std::vector<double> linkedWeight;
-    // Variables for computational analyses
-    std::vector<double> total;
+    // The length of subCompartmentValues is the maximum length of vector transitionProb in outDistributions
+    std::vector<double> subCompartmentValues;
+
+    // total: the sum of all subCompartments
+    std::vector<double> compTotal;
 
 public:
     static inline size_t timesFollowUp {200};
+
     Compartment(std::string name, double initVal);
 
     Compartment() = delete;
@@ -34,34 +40,34 @@ public:
 //        std::cout << name << " compartment destructor called." << std::endl;
     }
     // Getters
-    std::vector<double> getTotal();
-    std::string getName();
-    std::vector<std::weak_ptr<Compartment>> getLinkedCompartmentIn();
-    std::vector<std::weak_ptr<Compartment>> getLinkedCompartmentOut();
-    std::vector<std::shared_ptr<Distribution>> getDist();
-    std::vector<double> getLinkedWeight();
+    std::vector<double> getCompTotal();
+    std::string getCompName();
+    std::vector<std::weak_ptr<Compartment>> getInCompartments();
+    std::vector<std::weak_ptr<Compartment>> getOutCompartments();
+    std::vector<std::shared_ptr<Distribution>> getOutDistributions();
+    std::vector<double> getOutWeights();
 
-    std::vector<std::vector<double>> getSubCompartmentValues() {return subCompartmentValues;};
+    std::vector<double> getSubCompartmentValues() {return subCompartmentValues;};
     std::vector<double> getOutValues() {return outValues;};
 
     // Setters
-    void addDistribution(std::shared_ptr<Distribution> dist);
-    void addLinkedWeight(double weight);
-    void addLinkedCompartmentIn(std::weak_ptr<Compartment>& linkedCompIn);
-    void addLinkedCompartmentOut(std::weak_ptr<Compartment>& linkedCompOut);
-    // subCompartmentValues and outValues are set after add all distributions
-    void setSubCompartmentValues();
+    void addOutDistribution(std::shared_ptr<Distribution> dist);
+    void addOutWeight(double weight);
+    void addInCompartment(std::weak_ptr<Compartment>& linkedCompIn);
+    void addOutCompartment(std::weak_ptr<Compartment>& linkedCompOut);
+
+    // subCompartmentValues and outValues are set after adding all distributions
+    void setLengthSubCompartment();
     void setOutValues();
-    double sumSubCompartmentValues(size_t index);
 
     /**
      * Update subCompartmentValues and total at each iteration
      * @param iter
      */
-    void updateSubComp(long iter, size_t index);
+    void updateSubCompByDist(long iter, size_t outIndex);
 
-    void updateMath(long iter, size_t index, std::vector<std::string>& paramNames, std::vector<double>& paramValues,
-                    std::vector<std::string>& allCompNames, std::vector<double>& allCompValues);
+    void updateSubCompByMath(size_t outIndex, std::vector<std::string>& paramNames, std::vector<double>& paramValues,
+                             std::vector<std::string>& allCompNames, std::vector<double>& allCompValues);
 
     void updateCompartment(long iter, std::vector<std::string>& paramNames, std::vector<double>& paramValues,
                            std::vector<std::string>& allCompNames, std::vector<double>& allCompValues);

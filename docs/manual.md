@@ -13,7 +13,7 @@ Each compartment should be constructed inside a couple of braces `{}` with 6 par
 * `initialValue`: number of individuals within this compartment at the initial stage (t = 0)
 * `linkedCompartment`: a vector of name of input or output compartments linked to this compartment
 * `isIn`: a vector of boolean value corresponding to each compartment in the linkedCompartment above, to determine that corresponding compartment is input or output compartment (`true` = input compartment, `false` = output compartment) 
-* `linkedWeight`: a vector of numbers indicate the "weight" of the corresponding compartment, view example below
+* `outWeights`: a vector of numbers indicate the "weight" of the corresponding compartment, view example below
 
 **Example**
 ```
@@ -23,7 +23,7 @@ Each compartment should be constructed inside a couple of braces `{}` with 6 par
     "initialValue":0.0,
     "linkedCompartment":["S","A"],
     "isIn":[true,false],
-    "linkedWeight":[1.0,1.0]
+    "outWeights":[1.0,1.0]
 }
 ```
 This `S -> E -> A`
@@ -35,7 +35,7 @@ This `S -> E -> A`
     "initialValue":0.0,
     "linkedCompartment":["E","A_r","I"],
     "isIn":[true,false,false],
-    "linkedWeight":[1.0,0.35,0.65]
+    "outWeights":[1.0,0.35,0.65]
 }
 ```
 
