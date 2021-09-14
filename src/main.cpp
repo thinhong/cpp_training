@@ -44,6 +44,9 @@ int main() {
     myModel.getModel()->sortComps();
     myModel.getModel()->initAllComps();
 
+    // Debug: view model structure
+//    viewModelStructure(myModel.getModel());
+
     std::cout << "Simulating..." << "\n";
 
     // ======================== End JSON input ==============================
@@ -52,20 +55,19 @@ int main() {
 
     for (size_t i {1}; i < Compartment::timesFollowUp; i++) {
         myModel.getModel()->update(i);
-//        std::cout << "====================================" << "\n";
-//        std::cout << "Iteration " << i << "\n";
-//        for (auto& comp: myModel.getModel()->getComps()) {
-//            std::cout << "Compartment " << comp->getCompName() << "\n";
-//            for (size_t i {0}; i < comp->getOutCompartments().size(); ++i) {
-//                std::cout << "Linked out " << i + 1 << ": " << comp->getOutCompartments()[i].lock()->getCompName() << "\n";
-//                for (size_t k {0}; k < comp->getSubCompartmentValues().size(); ++k) {
-//                    std::cout << comp->getSubCompartmentValues()[k] << " ";
-//                }
-//                std::cout << "\n";
-//                std::cout << "Out value for " << comp->getOutCompartments()[i].lock()->getCompName() << ": " <<
-//                comp->getOutValues()[i] << "\n";
-//            }
-//        }
+        std::cout << "====================================" << "\n";
+        std::cout << "Iteration " << i << "\n";
+        for (auto& comp: myModel.getModel()->getComps()) {
+            std::cout << "Compartment " << comp->getCompName() << "\n";
+            for (size_t k {0}; k < comp->getSubCompartmentValues().size(); ++k) {
+                std::cout << comp->getSubCompartmentValues()[k] << " ";
+            }
+            std::cout << "\n";
+            for (size_t j {0}; j < comp->getOutCompartments().size(); ++j) {
+                std::cout << "Out value for " << comp->getOutCompartments()[j].lock()->getCompName() << ": " <<
+                comp->getOutValues()[j] << "\n";
+            }
+        }
     }
 
     // Display execution time

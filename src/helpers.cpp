@@ -1,6 +1,4 @@
-#include <vector>
-#include <string>
-#include <algorithm>
+#include "helpers.h"
 
 std::vector<std::string> extractCompNames(std::string element) {
     std::vector<std::string> compNames;
@@ -17,4 +15,30 @@ std::vector<std::string> extractCompNames(std::string element) {
     std::string outCompName = element.substr(transitionSymbol_pos + 2, probSymbol_pos - (transitionSymbol_pos + 2));
     compNames.insert(compNames.end(), {inCompName, outCompName});
     return compNames;
+}
+
+void viewModelStructure(std::shared_ptr<Model> model) {
+    for (auto& comp: model->getComps()) {
+        std::cout << "Compartment " << comp->getCompName() << "\n";
+
+        std::cout << "In compartments: ";
+        for (auto& inComp: comp->getInCompartments()) {
+            std::cout << inComp.lock()->getCompName() << " ";
+        }
+        std::cout << "\n";
+
+        std::cout << "Out compartments: ";
+        for (auto& outComp: comp->getOutCompartments()) {
+            std::cout << outComp.lock()->getCompName() << " ";
+        }
+        std::cout << "\n";
+
+        std::cout << "Out weights: ";
+        for (auto& outWeight: comp->getOutWeights()) {
+            std::cout << outWeight << " ";
+        }
+        std::cout << "\n";
+
+        std::cout << "============" << "\n";
+    }
 }

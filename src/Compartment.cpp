@@ -12,7 +12,7 @@ void Compartment::addOutDistribution(std::shared_ptr<Distribution> dist) {
 }
 
 void Compartment::setOutValues() {
-    outValues.resize(outDistributions.size(), 0);
+    outValuesTotal.resize(outDistributions.size(), 0);
 }
 
 void Compartment::setLengthSubCompartment() {
@@ -24,6 +24,9 @@ void Compartment::setLengthSubCompartment() {
     }
     subCompartmentValues.resize(maxLength);
     subCompartmentValues[0] = compTotal[0];
+    // outSubCompartment is a clone of subCompartmentValues
+    outSubCompValues.resize(maxLength);
+    outSubCompValues[0] = compTotal[0];
 }
 
 // Define list of getters
@@ -65,7 +68,7 @@ void Compartment::addOutWeight(double weight) {
 }
 
 void Compartment::updateSubCompByDist(long iter, size_t outIndex) {
-    outValues[outIndex] = 0;
+    outValuesTotal[outIndex] = 0;
     // Going backward from subCompartmentValues[n] -> subCompartmentValues[1]
     // This startIndex is to reduce the number of calculations
     size_t startIndex {0};
@@ -74,15 +77,27 @@ void Compartment::updateSubCompByDist(long iter, size_t outIndex) {
     } else {
         startIndex = subCompartmentValues.size() - 1;
     }
-    for (size_t i {startIndex}; i > 0; --i) {
-        outValues[outIndex] += subCompartmentValues[i] * outDistributions[outIndex]->getTransitionProb(i);
-        subCompartmentValues[i] = subCompartmentValues[i - 1] * (1 - outDistributions[outIndex]->getTransitionProb(i - 1));
+    // Put if outside to check condition only once
+    if (outWeights[outIndex] == 1) {
+        for (size_t i {0}; i <= startIndex; ++i) {
+            outValuesTotal[outIndex] += subCompartmentValues[startIndex - i] * outDistributions[outIndex]->getTransitionProb(startIndex - i);
+            subCompartmentValues[startIndex - i] -= outSubCompValues[startIndex - i];
+            subCompartmentValues[startIndex - i] *= (1 - outDistributions[outIndex]->getTransitionProb(startIndex - i));
+        }
+        // After finishing, clean the outSubCompValues vector
+        std::fill(outSubCompValues.begin(), outSubCompValues.end(), 0);
+    } else if (outWeights[outIndex] < 1) {
+        for (size_t i {0}; i <= startIndex; ++i) {
+            outValuesTotal[outIndex] += subCompartmentValues[startIndex - i] * outDistributions[outIndex]->getTransitionProb(startIndex - i);
+            outSubCompValues[startIndex - i] += outWeights[outIndex] * subCompartmentValues[startIndex - i] * outDistributions[outIndex]->getTransitionProb(startIndex - i);
+        }
     }
-    outValues[outIndex] += subCompartmentValues[0] * outDistributions[outIndex]->getTransitionProb(0);
-    subCompartmentValues[0] = 0;
+
+    // Update compTotal after finish this outSubComp
+    compTotal[iter] -= outValuesTotal[outIndex];
 }
 
-void Compartment::updateSubCompByMath(size_t outIndex, std::vector<std::string>& paramNames, std::vector<double>& paramValues,
+void Compartment::updateSubCompByMath(long iter, size_t outIndex, std::vector<std::string>& paramNames, std::vector<double>& paramValues,
                                       std::vector<std::string>& allCompNames, std::vector<double>& allCompValues) {
     mu::Parser parser;
     parser.SetExpr(outDistributions[outIndex]->getDistName());
@@ -94,21 +109,42 @@ void Compartment::updateSubCompByMath(size_t outIndex, std::vector<std::string>&
     for (size_t i {0}; i < allCompNames.size(); ++i) {
         parser.DefineVar(allCompNames[i], &allCompValues[i]);
     }
-    // The result of this math expression is the outValues of this outIndex
-    outValues[outIndex] = parser.Eval();
-    // Now calculate how many people remain in each subCompartment
-    double sumSubComp {0};
-    for (size_t i_subComp {0}; i_subComp < subCompartmentValues.size(); ++i_subComp) {
-        sumSubComp += subCompartmentValues[i_subComp];
+    // The result of this math expression is the outValuesTotal of this outIndex
+    outValuesTotal[outIndex] = outWeights[outIndex] * parser.Eval();
+
+    // If outWeight = 1 then calculate directly in the subCompartment
+    if (outWeights[outIndex] == 1) {
+        // Calculate how many people remain in each subCompartment
+        double sumSubComp {0};
+        for (size_t i_subComp {0}; i_subComp < subCompartmentValues.size(); ++i_subComp) {
+            sumSubComp += subCompartmentValues[i_subComp];
+        }
+        double remainPct = (sumSubComp - outValuesTotal[outIndex]) / sumSubComp;
+        for (size_t i_subComp {0}; i_subComp < subCompartmentValues.size(); ++i_subComp) {
+            subCompartmentValues[i_subComp] *= remainPct;
+        }
+    } else if (outWeights[outIndex] < 1) {
+        // If weight < 1 then perform it on the outSubCompValues
+        double sumSubComp {0};
+        for (size_t i_subComp {0}; i_subComp < subCompartmentValues.size(); ++i_subComp) {
+            sumSubComp += subCompartmentValues[i_subComp];
+        }
+        double outPct = outValuesTotal[outIndex] / sumSubComp;
+        for (size_t i_subComp {0}; i_subComp < subCompartmentValues.size(); ++i_subComp) {
+            outSubCompValues[i_subComp] = outPct * subCompartmentValues[i_subComp];
+        }
     }
-    double remainPct = (sumSubComp - outValues[outIndex]) / sumSubComp;
-    for (size_t i_subComp {0}; i_subComp < subCompartmentValues.size(); ++i_subComp) {
-        subCompartmentValues[i_subComp] *= remainPct;
-    }
+
+    // Update compTotal after finish this outSubComp
+    compTotal[iter] -= outValuesTotal[outIndex];
 }
 
 void Compartment::updateCompartment(long iter, std::vector<std::string>& paramNames, std::vector<double>& paramValues,
                                     std::vector<std::string>& allCompNames, std::vector<double>& allCompValues) {
+
+    compTotal[iter] = compTotal[iter - 1];
+    std::fill(outSubCompValues.begin(), outSubCompValues.end(), 0);
+
     for (size_t outIndex {0}; outIndex < outCompartments.size(); ++outIndex) {
         if (outDistributions[outIndex]->getDistName() == "gamma" ||
             outDistributions[outIndex]->getDistName() == "weibull" ||
@@ -117,10 +153,24 @@ void Compartment::updateCompartment(long iter, std::vector<std::string>& paramNa
             outDistributions[outIndex]->getDistName() == "custom") {
             updateSubCompByDist(iter, outIndex);
         } else {
-            updateSubCompByMath(outIndex, paramNames, paramValues,
+            updateSubCompByMath(iter, outIndex, paramNames, paramValues,
                                 allCompNames, allCompValues);
         }
     }
+
+    size_t n_subComp = subCompartmentValues.size();
+    if (n_subComp == 1) {
+        subCompartmentValues[0] -= outSubCompValues[0];
+    } else {
+        for (size_t i_subComp {0}; i_subComp < n_subComp; ++i_subComp) {
+            if (i_subComp == n_subComp) {
+                subCompartmentValues[n_subComp - i_subComp] = 0;
+            } else {
+                subCompartmentValues[n_subComp - i_subComp] = subCompartmentValues[n_subComp - i_subComp - 1] - outSubCompValues[n_subComp - i_subComp - 1];
+            }
+        }
+    }
+
     // Add the inValue to subCompartmentValues[0]
     double inValue {0};
     // Loop over all inCompartments
@@ -129,15 +179,10 @@ void Compartment::updateCompartment(long iter, std::vector<std::string>& paramNa
         for (size_t outOfIn {0}; outOfIn < inCompartments[inIndex].lock()->outCompartments.size(); ++outOfIn) {
             // Based on name, find the outValue that correspond to this compartment and add to inValue
             if (compName == inCompartments[inIndex].lock()->outCompartments[outOfIn].lock()->getCompName()) {
-                inValue += outWeights[inIndex] * inCompartments[inIndex].lock()->outValues[outOfIn];
+                inValue += inCompartments[inIndex].lock()->outValuesTotal[outOfIn];
             }
         }
     }
-    subCompartmentValues[0] = inValue;
-    // Calculate compTotal = compTotal of the previous iteration + inValue - sumOutValues
-    double sumOutValues {0};
-    for (size_t outIndex {0}; outIndex < outValues.size(); ++outIndex) {
-        sumOutValues += outValues[outIndex];
-    }
-    compTotal[iter] = compTotal[iter - 1] + inValue - sumOutValues;
+    subCompartmentValues[0] += inValue;
+    compTotal[iter] += inValue;
 }

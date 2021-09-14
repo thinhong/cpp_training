@@ -16,11 +16,12 @@ private:
     std::vector<std::weak_ptr<Compartment>> inCompartments;
 
     // outCompartments: compartments that this state will move out, with pre-defined outDistributions and outWeights,
-    // after calculation the final output will be sum into outValues
+    // after calculation the final output will be sum into outValuesTotal
     std::vector<std::weak_ptr<Compartment>> outCompartments;
     std::vector<std::shared_ptr<Distribution>> outDistributions;
     std::vector<double> outWeights;
-    std::vector<double> outValues;
+    std::vector<double> outSubCompValues;
+    std::vector<double> outValuesTotal;
 
     // The length of subCompartmentValues is the maximum length of vector transitionProb in outDistributions
     std::vector<double> subCompartmentValues;
@@ -48,7 +49,7 @@ public:
     std::vector<double> getOutWeights();
 
     std::vector<double> getSubCompartmentValues() {return subCompartmentValues;};
-    std::vector<double> getOutValues() {return outValues;};
+    std::vector<double> getOutValues() {return outValuesTotal;};
 
     // Setters
     void addOutDistribution(std::shared_ptr<Distribution> dist);
@@ -56,7 +57,7 @@ public:
     void addInCompartment(std::weak_ptr<Compartment>& linkedCompIn);
     void addOutCompartment(std::weak_ptr<Compartment>& linkedCompOut);
 
-    // subCompartmentValues and outValues are set after adding all distributions
+    // subCompartmentValues and outValuesTotal are set after adding all distributions
     void setLengthSubCompartment();
     void setOutValues();
 
@@ -66,7 +67,7 @@ public:
      */
     void updateSubCompByDist(long iter, size_t outIndex);
 
-    void updateSubCompByMath(size_t outIndex, std::vector<std::string>& paramNames, std::vector<double>& paramValues,
+    void updateSubCompByMath(long iter, size_t outIndex, std::vector<std::string>& paramNames, std::vector<double>& paramValues,
                              std::vector<std::string>& allCompNames, std::vector<double>& allCompValues);
 
     void updateCompartment(long iter, std::vector<std::string>& paramNames, std::vector<double>& paramValues,

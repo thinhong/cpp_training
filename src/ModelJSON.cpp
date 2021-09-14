@@ -55,7 +55,6 @@ ModelJSON::ModelJSON(nlohmann::json &initialValues, nlohmann::json &parameters, 
         inComp.lock()->addOutCompartment(outComp);
         outComp.lock()->addInCompartment(inComp);
         inComp.lock()->addOutWeight(weight);
-        outComp.lock()->addOutWeight(weight);
 
         // Set distribution for the inCompartment
         if (distributionConfig["distribution"] == "transitionProb") {
