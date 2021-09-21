@@ -10,7 +10,6 @@
 class MathExpression: public Distribution {
 private:
     std::string expression;
-
 public:
     explicit MathExpression(std::string& expression);
     double getTransitionProb(size_t index) override;

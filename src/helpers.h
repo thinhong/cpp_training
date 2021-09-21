@@ -13,5 +13,6 @@
 
 std::vector<std::string> extractCompNames(std::string element);
 void viewModelStructure(std::shared_ptr<Model> model);
+void viewModelUpdate(std::shared_ptr<Model> model, long iter);
 
 #endif //MAIN_CPP_HELPERS_H

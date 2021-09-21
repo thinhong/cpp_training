@@ -31,9 +31,9 @@ ModelJSON::ModelJSON(nlohmann::json &initialValues, nlohmann::json &parameters, 
         // Remove whitespace
         flow.erase(remove(flow.begin(), flow.end(), ' '), flow.end());
 
-        int transitionSymbol_pos = flow.find("->");
+        unsigned long transitionSymbol_pos = flow.find("->");
         // Check whether there is a ":" symbol in this flow
-        int probSymbol_pos = flow.find(':');
+        unsigned long probSymbol_pos = flow.find(':');
 
         // [inComp] [->] [outComp] [:] [prob]
         // inComp start from position 0 and spread from 0 -> transitionSymbol_pos => length = transitionSymbol_pos - 0 = transitionSymbol_pos
@@ -60,7 +60,7 @@ ModelJSON::ModelJSON(nlohmann::json &initialValues, nlohmann::json &parameters, 
         if (distributionConfig["distribution"] == "transitionProb") {
             double prob = distributionConfig["transitionProb"];
             prob *= Distribution::timeStep;
-            auto transitionProb = std::make_shared<TransitionProb>(prob);
+            std::shared_ptr<Distribution> transitionProb = std::make_shared<TransitionProb>(prob);
             inComp.lock()->addOutDistribution(transitionProb);
         }
             // Gamma distribution: parameters are "scale" and "shape"
@@ -68,7 +68,7 @@ ModelJSON::ModelJSON(nlohmann::json &initialValues, nlohmann::json &parameters, 
             double scale = distributionConfig["scale"];
             scale /= Distribution::timeStep;
             double shape = distributionConfig["shape"];
-            auto gamma = std::make_shared<DiscreteGammaDistribution>(scale, shape);
+            std::shared_ptr<Distribution> gamma = std::make_shared<DiscreteGammaDistribution>(scale, shape);
             inComp.lock()->addOutDistribution(gamma);
         }
             // Weibull distribution: parameters are "scale" and "shape"
@@ -76,32 +76,32 @@ ModelJSON::ModelJSON(nlohmann::json &initialValues, nlohmann::json &parameters, 
             double scale = distributionConfig["scale"];
             scale /= Distribution::timeStep;
             double shape = distributionConfig["shape"];
-            auto weibull = std::make_shared<DiscreteWeibullDistribution>(scale, shape);
+            std::shared_ptr<Distribution> weibull = std::make_shared<DiscreteWeibullDistribution>(scale, shape);
             inComp.lock()->addOutDistribution(weibull);
         }
             // Exponential distribution: parameter is "rate"
         else if (distributionConfig["distribution"] == "exponential") {
             double rate = distributionConfig["rate"];
             rate *= Distribution::timeStep;
-            auto exponential = std::make_shared<DiscreteExponentialDistribution>(rate);
+            std::shared_ptr<Distribution> exponential = std::make_shared<DiscreteExponentialDistribution>(rate);
             inComp.lock()->addOutDistribution(exponential);
         }
             // Custom distribution: parameter is a vector "waitingTime"
         else if (distributionConfig["distribution"] == "custom") {
             std::vector<double> waitingTime = distributionConfig["waitingTime"];
-            auto custom = std::make_shared<CustomDistribution>(waitingTime);
+            std::shared_ptr<Distribution> custom = std::make_shared<CustomDistribution>(waitingTime);
             inComp.lock()->addOutDistribution(custom);
         }
         else if (distributionConfig["distribution"] == "mathExpression") {
             std::string expression = distributionConfig["expression"];
-            auto mathExpression = std::make_shared<MathExpression>(expression);
+            std::shared_ptr<Distribution> mathExpression = std::make_shared<MathExpression>(expression);
             inComp.lock()->addOutDistribution(mathExpression);
         }
     }
     for (auto& comp: model->getComps()) {
         if (comp->getOutDistributions().empty()) {
             double prob = 0.0;
-            auto transitionProb = std::make_shared<TransitionProb>(prob);
+            std::shared_ptr<Distribution> transitionProb = std::make_shared<TransitionProb>(prob);
             comp->addOutDistribution(transitionProb);
         }
         comp->setLengthSubCompartment();

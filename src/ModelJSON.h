@@ -20,6 +20,9 @@ class ModelJSON {
 private:
     std::shared_ptr<Model> model;
 public:
+    ~ModelJSON() {
+//        std::cout << "ModelJSON destructor called." << std::endl;
+    }
     explicit ModelJSON(nlohmann::json& initialValues, nlohmann::json& parameters, nlohmann::json& transitions);
     std::shared_ptr<Model> getModel();
 };

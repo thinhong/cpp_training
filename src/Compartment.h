@@ -5,6 +5,7 @@
 #include <vector>
 #include <memory>
 #include <string>
+#include <algorithm>
 #include "Distribution/Distribution.h"
 #include "muParser/muParser.h"
 
@@ -16,15 +17,15 @@ private:
     std::vector<std::weak_ptr<Compartment>> inCompartments;
 
     // outCompartments: compartments that this state will move out, with pre-defined outDistributions and outWeights,
-    // after calculation the final output will be sum into outValuesTotal
+    // after calculation the final output will be sum into outTotals
     std::vector<std::weak_ptr<Compartment>> outCompartments;
     std::vector<std::shared_ptr<Distribution>> outDistributions;
     std::vector<double> outWeights;
-    std::vector<double> outSubCompValues;
-    std::vector<double> outValuesTotal;
+    std::vector<double> outSubCompartments;
+    std::vector<double> outTotals;
 
-    // The length of subCompartmentValues is the maximum length of vector transitionProb in outDistributions
-    std::vector<double> subCompartmentValues;
+    // The length of subCompartments is the maximum length of vector transitionProb in outDistributions
+    std::vector<double> subCompartments;
 
     // total: the sum of all subCompartments
     std::vector<double> compTotal;
@@ -38,7 +39,7 @@ public:
     Compartment(const Compartment& comp) = delete;
 
     ~Compartment() {
-//        std::cout << name << " compartment destructor called." << std::endl;
+//        std::cout << compName << " compartment destructor called." << std::endl;
     }
     // Getters
     std::vector<double> getCompTotal();
@@ -48,24 +49,28 @@ public:
     std::vector<std::shared_ptr<Distribution>> getOutDistributions();
     std::vector<double> getOutWeights();
 
-    std::vector<double> getSubCompartmentValues() {return subCompartmentValues;};
-    std::vector<double> getOutValues() {return outValuesTotal;};
+    std::vector<double> getSubCompartmentValues() {return subCompartments;};
+    std::vector<double> getOutValues() {return outTotals;};
+    std::vector<double> getOutSubCompartments() {return outSubCompartments;};
 
     // Setters
-    void addOutDistribution(std::shared_ptr<Distribution> dist);
+    void addOutDistribution(std::shared_ptr<Distribution>& dist);
     void addOutWeight(double weight);
     void addInCompartment(std::weak_ptr<Compartment>& linkedCompIn);
     void addOutCompartment(std::weak_ptr<Compartment>& linkedCompOut);
 
-    // subCompartmentValues and outValuesTotal are set after adding all distributions
+    // subCompartments and outTotals are set after adding all distributions
     void setLengthSubCompartment();
     void setOutValues();
 
+    size_t findCompPosition(std::vector<std::string>& allCompNames);
+    void updateAllCompValuesFromComp(long iter, std::vector<double>& allCompValues, size_t pos);
+
     /**
-     * Update subCompartmentValues and total at each iteration
+     * Update subCompartments and total at each iteration
      * @param iter
      */
-    void updateSubCompByDist(long iter, size_t outIndex);
+    void updateSubCompByDist(long iter, size_t outIndex, std::vector<std::string>& allCompNames, std::vector<double>& allCompValues);
 
     void updateSubCompByMath(long iter, size_t outIndex, std::vector<std::string>& paramNames, std::vector<double>& paramValues,
                              std::vector<std::string>& allCompNames, std::vector<double>& allCompValues);

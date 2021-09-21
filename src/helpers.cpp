@@ -33,6 +33,12 @@ void viewModelStructure(std::shared_ptr<Model> model) {
         }
         std::cout << "\n";
 
+        std::cout << "Out distribution: ";
+        for (auto& outDist: comp->getOutDistributions()) {
+            std::cout << outDist << " (" << outDist->getDistName() << "), ";
+        }
+        std::cout << "\n";
+
         std::cout << "Out weights: ";
         for (auto& outWeight: comp->getOutWeights()) {
             std::cout << outWeight << " ";
@@ -40,5 +46,26 @@ void viewModelStructure(std::shared_ptr<Model> model) {
         std::cout << "\n";
 
         std::cout << "============" << "\n";
+    }
+}
+
+void viewModelUpdate(std::shared_ptr<Model> model, long iter) {
+    std::cout << "====================================" << "\n";
+    std::cout << "Iteration " << iter << "\n";
+    for (auto& comp: model->getComps()) {
+        std::cout << "Compartment " << comp->getCompName() << "\n";
+        for (size_t k {0}; k < comp->getSubCompartmentValues().size(); ++k) {
+            std::cout << comp->getSubCompartmentValues()[k] << " ";
+        }
+        std::cout << "\n";
+        for (size_t j {0}; j < comp->getOutCompartments().size(); ++j) {
+            std::cout << "Out value for " << comp->getOutCompartments()[j].lock()->getCompName() << ": " <<
+                      comp->getOutValues()[j] << "\n";
+        }
+        std::cout << "Total " << comp->getCompName() << ": ";
+        for (auto& total: comp->getCompTotal()) {
+            std::cout << total << " ";
+        }
+        std::cout << "\n";
     }
 }

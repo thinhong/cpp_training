@@ -3,18 +3,13 @@
 #include <fstream>
 #include <stdexcept>
 #include "json.h"
-#include "Contact.h"
 #include "Compartment.h"
-#include "Model.h"
 #include "FullModel.h"
 #include "Distribution/Distribution.h"
-#include "Distribution/TransitionProb.h"
 #include "FileCSV.h"
 #include "ModelJSON.h"
 #include <filesystem>
 #include <chrono>
-#include "Matrix.h"
-#include "muParser/muParser.h"
 #include "helpers.h"
 
 int main() {
@@ -44,7 +39,7 @@ int main() {
     myModel.getModel()->sortComps();
     myModel.getModel()->initAllComps();
 
-    // Debug: view model structure
+//    // Debug: view model structure
 //    viewModelStructure(myModel.getModel());
 
     std::cout << "Simulating..." << "\n";
@@ -53,21 +48,10 @@ int main() {
 
     // ==================== Construct and run model ==========================
 
-    for (size_t i {1}; i < Compartment::timesFollowUp; i++) {
+    for (long i {1}; i < Compartment::timesFollowUp; i++) {
         myModel.getModel()->update(i);
-        std::cout << "====================================" << "\n";
-        std::cout << "Iteration " << i << "\n";
-        for (auto& comp: myModel.getModel()->getComps()) {
-            std::cout << "Compartment " << comp->getCompName() << "\n";
-            for (size_t k {0}; k < comp->getSubCompartmentValues().size(); ++k) {
-                std::cout << comp->getSubCompartmentValues()[k] << " ";
-            }
-            std::cout << "\n";
-            for (size_t j {0}; j < comp->getOutCompartments().size(); ++j) {
-                std::cout << "Out value for " << comp->getOutCompartments()[j].lock()->getCompName() << ": " <<
-                comp->getOutValues()[j] << "\n";
-            }
-        }
+//        // Debug: view each time step update
+//        viewModelUpdate(myModel.getModel(), i);
     }
 
     // Display execution time

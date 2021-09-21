@@ -37,11 +37,7 @@ public:
     std::vector<std::string> transitions;
     Model(std::vector<std::string>& paramNames, std::vector<double>& paramValues);
     ~Model() {
-//        std::string name;
-//        for (auto group: modelName) {
-//            name += group;
-//        }
-//        std::cout << name << " model destructor called." << std::endl;
+//        std::cout << "Model destructor called." << std::endl;
     }
     std::vector<std::shared_ptr<Compartment>> getComps();
 
@@ -88,10 +84,10 @@ public:
     void sortComps();
 
     /**
-     * Update subCompartmentValues and total for each compartments in the model
+     * Update subCompartments and total for each compartments in the model
      * @param iter
      */
-    void update(size_t iter);
+    void update(long iter);
 
     /**
      * Get all compartment names from the comps vector and also initial values of allCompValues
