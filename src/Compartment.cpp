@@ -184,11 +184,15 @@ void Compartment::updateCompartment(long iter, std::vector<std::string>& paramNa
         }
     }
 
-    size_t n_subComp = subCompartments.size() - 1;
-    for (size_t i_subComp {n_subComp}; i_subComp > 0; --i_subComp) {
-        subCompartments[i_subComp] = subCompartments[i_subComp - 1] - outSubCompartments[i_subComp - 1];
+    if (subCompartments.size() == 1) {
+        subCompartments[0] -= outSubCompartments[0];
+    } else {
+        size_t n_subComp = subCompartments.size() - 1;
+        for (size_t i_subComp {n_subComp}; i_subComp > 0; --i_subComp) {
+            subCompartments[i_subComp] = subCompartments[i_subComp - 1] - outSubCompartments[i_subComp - 1];
+        }
+        subCompartments[0] = 0;
     }
-    subCompartments[0] = 0;
 
     // Add the inValue to subCompartments[0]
     double inValue {0};

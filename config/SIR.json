@@ -1,12 +1,11 @@
 {
-    "daysFollowUp": 10,
+    "daysFollowUp": 2,
     "errorTolerance": 0.01,
-    "timeStep": 0.001,
+    "timeStep": 1,
     "initialValues": {"S": 999, "I": 1, "R": 0, "V": 0},
-    "parameters": {"beta": 0.012, "N": 1000, "each": 1.1},
+    "parameters": {"beta": 1.2, "N": 1000, "each": 1.1},
     "transitions": {
         "S -> I": {"distribution": "mathExpression", "expression": "beta * S * I / N"}, 
-        "S -> V": {"distribution": "weibull", "scale": 2, "shape": 5},
         "V -> R": {"distribution": "exponential", "rate": 1.5}, 
         "I -> R": {"distribution": "gamma", "scale": 2, "shape": 3}
     }
