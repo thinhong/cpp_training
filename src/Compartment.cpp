@@ -82,7 +82,7 @@ void Compartment::updateSubCompByDist(long iter, size_t outIndex,
     // This startIndex is to reduce the number of calculations
     size_t startIndex {0};
     if (iter < (subCompartments.size() - 1)) {
-        startIndex = iter + 1;
+        startIndex = iter;
     } else {
         startIndex = subCompartments.size() - 1;
     }
@@ -164,6 +164,52 @@ void Compartment::updateSubCompByMath(long iter, size_t outIndex, std::vector<st
     updateAllCompValuesFromComp(iter, allCompValues, findCompPosition(allCompNames));
 }
 
+void Compartment::updateSubCompByFreq(long iter, size_t outIndex, std::vector<std::string> &allCompNames,
+                                      std::vector<double> &allCompValues) {
+
+    outTotals[outIndex] = outWeights[outIndex] * outDistributions[outIndex]->getTransitionProb(iter);
+
+    // If outWeight = 1 then calculate directly in the subCompartment
+    size_t startIndex {0};
+    if (iter < (subCompartments.size() - 1)) {
+        startIndex = iter;
+    } else {
+        startIndex = subCompartments.size() - 1;
+    }
+    if (outWeights[outIndex] == 1) {
+        for (size_t i {0}; i <= startIndex; ++i) {
+            subCompartments[startIndex - i] -= outSubCompartments[startIndex - i];
+        }
+        // After finishing, clean the outSubCompartments vector
+        std::fill(outSubCompartments.begin(), outSubCompartments.end(), 0);
+
+        // Calculate how many people remain in each subCompartment
+        double sumSubComp {0};
+        for (size_t i_subComp {0}; i_subComp < subCompartments.size(); ++i_subComp) {
+            sumSubComp += subCompartments[i_subComp];
+        }
+        double remainPct = (sumSubComp - outTotals[outIndex]) / sumSubComp;
+        for (size_t i_subComp {0}; i_subComp < subCompartments.size(); ++i_subComp) {
+            subCompartments[i_subComp] *= remainPct;
+        }
+    } else if (outWeights[outIndex] < 1) {
+        // If weight < 1 then perform it on the outSubCompartments
+        double sumSubComp {0};
+        for (size_t i_subComp {0}; i_subComp < subCompartments.size(); ++i_subComp) {
+            sumSubComp += subCompartments[i_subComp];
+        }
+        double outPct = outTotals[outIndex] / sumSubComp;
+        for (size_t i_subComp {0}; i_subComp < subCompartments.size(); ++i_subComp) {
+            outSubCompartments[i_subComp] = outPct * subCompartments[i_subComp];
+        }
+    }
+
+    // Update compTotal after finish this outSubComp
+    compTotal[iter] -= outTotals[outIndex];
+    // After updating compTotal, also update vector allCompValues
+    updateAllCompValuesFromComp(iter, allCompValues, findCompPosition(allCompNames));
+}
+
 void Compartment::updateCompartment(long iter, std::vector<std::string>& paramNames, std::vector<double>& paramValues,
                                     std::vector<std::string>& allCompNames, std::vector<double>& allCompValues) {
 
@@ -178,6 +224,8 @@ void Compartment::updateCompartment(long iter, std::vector<std::string>& paramNa
                 outDistributions[outIndex]->getDistName() == "transitionProb" ||
                 outDistributions[outIndex]->getDistName() == "custom") {
                 updateSubCompByDist(iter, outIndex, allCompNames, allCompValues);
+            } else if (outDistributions[outIndex]->getDistName() == "frequency") {
+                updateSubCompByFreq(iter, outIndex, allCompNames, allCompValues);
             } else {
                 updateSubCompByMath(iter, outIndex, paramNames, paramValues, allCompNames, allCompValues);
             }

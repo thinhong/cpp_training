@@ -51,7 +51,7 @@ int main() {
     for (long i {1}; i < Compartment::timesFollowUp; i++) {
         myModel.getModel()->update(i);
 //        // Debug: view each time step update
-        viewModelUpdate(myModel.getModel(), i);
+//        viewModelUpdate(myModel.getModel(), i);
     }
 
     // Display execution time

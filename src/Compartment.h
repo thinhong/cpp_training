@@ -75,6 +75,8 @@ public:
     void updateSubCompByMath(long iter, size_t outIndex, std::vector<std::string>& paramNames, std::vector<double>& paramValues,
                              std::vector<std::string>& allCompNames, std::vector<double>& allCompValues);
 
+    void updateSubCompByFreq(long iter, size_t outIndex, std::vector<std::string>& allCompNames, std::vector<double>& allCompValues);
+
     void updateCompartment(long iter, std::vector<std::string>& paramNames, std::vector<double>& paramValues,
                            std::vector<std::string>& allCompNames, std::vector<double>& allCompValues);
 };

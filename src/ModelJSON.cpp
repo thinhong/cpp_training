@@ -97,6 +97,11 @@ ModelJSON::ModelJSON(nlohmann::json &initialValues, nlohmann::json &parameters, 
             std::shared_ptr<Distribution> mathExpression = std::make_shared<MathExpression>(expression);
             inComp.lock()->addOutDistribution(mathExpression);
         }
+        else if (distributionConfig["distribution"] == "frequency") {
+            double freq = distributionConfig["frequency"];
+            std::shared_ptr<Distribution> frequency = std::make_shared<Frequency>(freq);
+            inComp.lock()->addOutDistribution(frequency);
+        }
     }
     for (auto& comp: model->getComps()) {
         if (comp->getOutDistributions().empty()) {

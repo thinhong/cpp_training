@@ -1,0 +1,11 @@
+{
+    "daysFollowUp": 10,
+    "errorTolerance": 0.01,
+    "timeStep": 0.001,
+    "initialValues": {"S": 999, "I": 1, "R": 0},
+    "parameters": {"beta": 0.0003, "N": 1000},
+    "transitions": {
+        "S -> I": {"distribution": "mathExpression", "expression": "beta * S * I / N"}, 
+        "I -> R": {"distribution": "gamma", "scale": 2, "shape": 5}
+    }
+}

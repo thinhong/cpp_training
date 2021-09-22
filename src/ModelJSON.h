@@ -15,6 +15,7 @@
 #include "Distribution/DiscreteExponentialDistribution.h"
 #include "Distribution/CustomDistribution.h"
 #include "Distribution/MathExpression.h"
+#include "Distribution/Frequency.h"
 
 class ModelJSON {
 private:
