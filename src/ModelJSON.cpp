@@ -4,7 +4,7 @@
 
 #include "ModelJSON.h"
 
-ModelJSON::ModelJSON(nlohmann::json &initialValues, nlohmann::json &parameters, nlohmann::json &transitions) {
+ModelJSON::ModelJSON(nlohmann::ordered_json &initialValues, nlohmann::ordered_json &parameters, nlohmann::ordered_json &transitions) {
 
     // Set parameters with parameters json
     std::vector<std::string> paramNames;

@@ -5,8 +5,8 @@
 #ifndef MAIN_CPP_MODELJSON_H
 #define MAIN_CPP_MODELJSON_H
 
-#include "json.h"
 #include <memory>
+#include "json.h"
 #include "Compartment.h"
 #include "Model.h"
 #include "Distribution/TransitionProb.h"
@@ -24,7 +24,7 @@ public:
     ~ModelJSON() {
 //        std::cout << "ModelJSON destructor called." << std::endl;
     }
-    explicit ModelJSON(nlohmann::json& initialValues, nlohmann::json& parameters, nlohmann::json& transitions);
+    explicit ModelJSON(nlohmann::ordered_json& initialValues, nlohmann::ordered_json& parameters, nlohmann::ordered_json& transitions);
     std::shared_ptr<Model> getModel();
 };
 

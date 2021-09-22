@@ -1,7 +1,6 @@
 #include <iostream>
 #include <string>
 #include <fstream>
-#include <stdexcept>
 #include "json.h"
 #include "Compartment.h"
 #include "FullModel.h"
@@ -20,7 +19,7 @@ int main() {
     std::cout << "Enter full path to input file: ";
     std::cin >> inputPath;
     std::ifstream inputFile(inputPath);
-    nlohmann::json input;
+    nlohmann::ordered_json input;
     inputFile >> input;
 
     // Record execution time: https://stackoverflow.com/questions/21856025/getting-an-accurate-execution-time-in-c-micro-seconds
@@ -35,7 +34,27 @@ int main() {
     }
     Compartment::timesFollowUp = static_cast<size_t>(static_cast<double>(input["daysFollowUp"]) / Distribution::timeStep + 1);
 
+    // Check whether all compartments have initial values
+    try {
+        if (!checkInitVal(input["initialValues"], input["transitions"]).empty()) {
+            throw 99;
+        }
+    }
+    catch (int exCode) {
+        std::vector<std::string> diffs = checkInitVal(input["initialValues"], input["transitions"]);
+        std::cout << "Compartment ";
+        for (auto& diff: diffs) {
+            std::cout << diff << " ";
+        }
+        if (diffs.size() == 1) {
+            std::cout << "is not initialised" << std::endl;
+        } else if (diffs.size() > 1) {
+            std::cout << "are not initialised" << std::endl;
+        }
+    }
+
     ModelJSON myModel(input["initialValues"], input["parameters"], input["transitions"]);
+
     myModel.getModel()->sortComps();
     myModel.getModel()->initAllComps();
 

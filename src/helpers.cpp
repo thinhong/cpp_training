@@ -69,3 +69,44 @@ void viewModelUpdate(std::shared_ptr<Model> model, long iter) {
         std::cout << "\n";
     }
 }
+
+std::vector<std::string> checkInitVal(nlohmann::ordered_json &initialValues, nlohmann::ordered_json &transitions) {
+    std::vector<std::string> compNamesInit;
+    std::vector<std::string> compNamesTransition;
+    std::vector<std::string> diffs;
+
+    // Get compNames in the initialValues json
+    for (auto& initVal: initialValues.items()) {
+        compNamesInit.push_back(initVal.key());
+    }
+    // Get compNames in the transitions json
+    for (auto& transition: transitions.items()) {
+        std::string flow = transition.key();
+        // Remove whitespace
+        flow.erase(remove(flow.begin(), flow.end(), ' '), flow.end());
+
+        unsigned long transitionSymbol_pos = flow.find("->");
+        // Check whether there is a ":" symbol in this flow
+        unsigned long probSymbol_pos = flow.find(':');
+
+        // [inComp] [->] [outComp] [:] [prob]
+        // inComp start from position 0 and spread from 0 -> transitionSymbol_pos => length = transitionSymbol_pos - 0 = transitionSymbol_pos
+        std::string inCompName = flow.substr(0, transitionSymbol_pos);
+        // outComp start from transitionSymbol_pos + 2 (transitionSymbol_pos is "->" therefore occupies 2 positions), and
+        // spread from transitionSymbol_pos + 2 to probSymbol_pos => length = probSymbol_pos - (transitionSymbol_pos + 2)
+        std::string outCompName = flow.substr(transitionSymbol_pos + 2, probSymbol_pos - (transitionSymbol_pos + 2));
+        compNamesTransition.push_back(inCompName);
+        compNamesTransition.push_back(outCompName);
+    }
+
+    // Sort the two vectors and get unique compNameTransition
+    std::sort(compNamesInit.begin(), compNamesInit.end());
+    std::sort(compNamesTransition.begin(), compNamesTransition.end());
+    compNamesTransition.erase(std::unique(compNamesTransition.begin(), compNamesTransition.end()), compNamesTransition.end());
+
+    std::set_difference(compNamesTransition.begin(), compNamesTransition.end(),
+                        compNamesInit.begin(), compNamesInit.end(),
+                        std::inserter(diffs, diffs.begin()));
+
+    return diffs;
+}
