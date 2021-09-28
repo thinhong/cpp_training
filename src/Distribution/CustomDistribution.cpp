@@ -2,7 +2,6 @@
 // Created by thinh on 04/03/2021.
 //
 
-#include <iostream>
 #include <algorithm>
 #include <stdexcept>
 #include "CustomDistribution.h"
@@ -15,7 +14,6 @@ void CustomDistribution::calcTransitionProb() {
 
     // Remember to calculate max day
     maxDay = transitionProb.size();
-    std::cout << maxDay << "\n";
 }
 
 CustomDistribution::CustomDistribution(std::vector<double> waitingTime) {
