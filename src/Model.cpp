@@ -13,18 +13,6 @@ std::vector<std::shared_ptr<Compartment>> Model::getComps() {
     return comps;
 }
 
-void Model::addNewLinkedContactRate(double linkedContactRate) {
-    this->linkedContactRates.push_back(linkedContactRate);
-}
-
-void Model::updateLinkedContactRate(double linkedContactRateToUpdate, size_t index) {
-    linkedContactRates[index] *= linkedContactRateToUpdate;
-}
-
-void Model::addLinkedModels(std::vector<std::weak_ptr<Model>> allModels) {
-    this->linkedModels = allModels;
-}
-
 void Model::addCompsFromConfig(std::vector<std::shared_ptr<Compartment>> &comps) {
     this->comps = comps;
 }
@@ -46,20 +34,6 @@ int Model::getIndex(std::shared_ptr<Compartment> comp) {
         index = it - comps.begin();
     }
     return index;
-}
-
-int Model::getIndexLinkedModel(std::vector<std::string> modelGroup) {
-    int index {0};
-    for (size_t i {0}; i < linkedModels.size(); ++i) {
-        if (modelGroup == linkedModels[i].lock()->getModelGroup()) {
-            index = i;
-        }
-    }
-    return index;
-}
-
-std::vector<std::weak_ptr<Model>> Model::getLinkedModels() {
-    return linkedModels;
 }
 
 bool Model::checkCycleHelper(size_t i, std::vector<bool> &visited, std::vector<bool> &recursiveStack) {

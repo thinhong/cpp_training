@@ -34,18 +34,10 @@ void FileCSV::writeFile() {
     if (myFile.is_open()) {
         myFile << "Time,";
         for (size_t j {0}; j < model->getComps().size(); ++j) {
-            std::string groupName;
-            for (size_t i {0}; i < model->getModelGroup().size(); ++i) {
-                if (i < (model->getModelGroup().size() - 1)) {
-                    groupName += model->getModelGroup()[i] + "_";
-                } else if (i == (model->getModelGroup().size() - 1)) {
-                    groupName += model->getModelGroup()[i];
-                }
-            }
             if (j == model->getComps().size() - 1) {
-                myFile << model->getComps()[j]->getCompName() << "_" << groupName << "\n";
+                myFile << model->getComps()[j]->getCompName() << "\n";
             } else {
-                myFile << model->getComps()[j]->getCompName() << "_" << groupName << ",";
+                myFile << model->getComps()[j]->getCompName() << ",";
             }
         }
         for (size_t i {0}; i < model->getComps()[0]->getCompTotal().size(); ++i) {

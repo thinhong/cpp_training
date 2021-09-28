@@ -13,7 +13,7 @@ add_executable(SEAIHCR src/main.cpp
         src/Distribution/TransitionProb.cpp src/Distribution/TransitionProb.h
         src/Distribution/DiscreteExponentialDistribution.cpp src/Distribution/DiscreteExponentialDistribution.h
         src/Distribution/CustomDistribution.cpp src/Distribution/CustomDistribution.h
-        src/File.cpp src/File.h src/FileCSV.cpp src/FileCSV.h src/FileJSON.cpp src/FileJSON.h src/FullModel.cpp src/FullModel.h src/Contact.cpp src/Contact.h src/Matrix.cpp src/Matrix.h
+        src/File.cpp src/File.h src/FileCSV.cpp src/FileCSV.h src/FileJSON.cpp src/FileJSON.h
         src/muParser/muParser.h src/muParser/muParser.cpp src/muParser/muParserBase.cpp src/muParser/muParserBase.h
         src/muParser/muParserBytecode.cpp src/muParser/muParserBytecode.h src/muParser/muParserCallback.cpp src/muParser/muParserCallback.h src/muParser/muParserDef.h
         src/muParser/muParserError.cpp src/muParser/muParserError.h src/muParser/muParserFixes.h src/muParser/muParserTemplateMagic.h src/muParser/muParserTemplateMagic.h

@@ -3,7 +3,6 @@
 #include <fstream>
 #include "json.h"
 #include "Compartment.h"
-#include "FullModel.h"
 #include "Distribution/Distribution.h"
 #include "FileCSV.h"
 #include "ModelJSON.h"
@@ -88,15 +87,7 @@ int main() {
     std::cout << "Set path to the folder you want to save output file (ex: /home/Documents): ";
     std::cin >> outputFolder;
     Model* pModel = &(*myModel.getModel());
-    std::string outputFileName;
-    for (size_t i {0}; i < myModel.getModel()->getModelGroup().size(); ++i) {
-        if (i < (myModel.getModel()->getModelGroup().size() - 1)) {
-            outputFileName += myModel.getModel()->getModelGroup()[i] + "_";
-        } else if (i == (myModel.getModel()->getModelGroup().size() - 1)) {
-            outputFileName += myModel.getModel()->getModelGroup()[i];
-        }
-    }
-    outputFileName += ".csv";
+    std::string outputFileName = "output.csv";
     FileCSV file(outputFolder, outputFileName, pModel);
     file.writeFile();
 

@@ -5,7 +5,6 @@
 #include <memory>
 #include <stack>
 #include "Compartment.h"
-#include "Contact.h"
 #include "muParser/muParser.h"
 
 class Model {
@@ -41,10 +40,6 @@ public:
     }
     std::vector<std::shared_ptr<Compartment>> getComps();
 
-    std::vector<double> getLinkedContactRates() {return linkedContactRates;};
-
-    std::vector<std::weak_ptr<Model>> getLinkedModels();
-
     /**
      * Compartments of a Model object are stored as pointer in vector <b>comps</b>, but we normally identify compartment
      * by name, this function take the compartment name as input and return the address of that compartment pointer
@@ -52,11 +47,6 @@ public:
      * @return a weak pointer of that compartment
      */
     std::weak_ptr<Compartment> getAddressFromName(std::string compName);
-
-    // Interaction among locations
-    void addNewLinkedContactRate(double linkedContactRate);
-    void updateLinkedContactRate(double linkedContactRateToUpdate, size_t index);
-    void addLinkedModels(std::vector<std::weak_ptr<Model>> allModels);
 
     // Add compartment to model using JSON config file
     void addCompsFromConfig(std::vector<std::shared_ptr<Compartment>>& comps);
@@ -67,8 +57,6 @@ public:
      * @return the index of that compartment
      */
     int getIndex(std::shared_ptr<Compartment> comp);
-
-    int getIndexLinkedModel(std::vector<std::string> modelGroup);
 
     // Functions to check cycle and sort compartments to the correct order
     // Use depth-first-search algorithm to detect cycle https://www.geeksforgeeks.org/detect-cycle-in-a-graph/
@@ -98,9 +86,6 @@ public:
      * Helper function to update allCompValues after each iteration
      */
     void updateAllCompValues(size_t iter);
-
-    std::vector<std::string> getModelGroup() {return {"test"};};
-
 };
 
 
