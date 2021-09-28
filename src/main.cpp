@@ -51,6 +51,7 @@ int main() {
         } else if (diffs.size() > 1) {
             std::cout << "are not initialised" << std::endl;
         }
+        std::exit(EXIT_FAILURE);
     }
 
     ModelJSON myModel(input["initialValues"], input["parameters"], input["transitions"]);

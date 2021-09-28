@@ -81,20 +81,26 @@ std::vector<std::string> checkInitVal(nlohmann::ordered_json &initialValues, nlo
     }
     // Get compNames in the transitions json
     for (auto& transition: transitions.items()) {
+        std::string inCompName;
+        std::string outCompName;
+
         std::string flow = transition.key();
         // Remove whitespace
         flow.erase(remove(flow.begin(), flow.end(), ' '), flow.end());
 
         unsigned long transitionSymbol_pos = flow.find("->");
         // Check whether there is a ":" symbol in this flow
-        unsigned long probSymbol_pos = flow.find(':');
+        unsigned long probSymbol_pos = flow.find('*');
 
         // [inComp] [->] [outComp] [:] [prob]
         // inComp start from position 0 and spread from 0 -> transitionSymbol_pos => length = transitionSymbol_pos - 0 = transitionSymbol_pos
-        std::string inCompName = flow.substr(0, transitionSymbol_pos);
-        // outComp start from transitionSymbol_pos + 2 (transitionSymbol_pos is "->" therefore occupies 2 positions), and
-        // spread from transitionSymbol_pos + 2 to probSymbol_pos => length = probSymbol_pos - (transitionSymbol_pos + 2)
-        std::string outCompName = flow.substr(transitionSymbol_pos + 2, probSymbol_pos - (transitionSymbol_pos + 2));
+        inCompName = flow.substr(0, transitionSymbol_pos);
+        if (probSymbol_pos != -1) {
+            outCompName = flow.substr(probSymbol_pos + 1);
+        } else {
+            // If no weight is defined (S -> I), outCompName start from transitionSymbol_pos + 2 and spans to the end
+            outCompName = flow.substr(transitionSymbol_pos + 2);
+        }
         compNamesTransition.push_back(inCompName);
         compNamesTransition.push_back(outCompName);
     }

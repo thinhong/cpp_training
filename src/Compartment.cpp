@@ -154,7 +154,7 @@ void Compartment::updateSubCompByMath(long iter, size_t outIndex, std::vector<st
         }
         double outPct = outTotals[outIndex] / sumSubComp;
         for (size_t i_subComp {0}; i_subComp < subCompartments.size(); ++i_subComp) {
-            outSubCompartments[i_subComp] = outPct * subCompartments[i_subComp];
+            outSubCompartments[i_subComp] += outPct * subCompartments[i_subComp];
         }
     }
 
@@ -200,7 +200,7 @@ void Compartment::updateSubCompByFreq(long iter, size_t outIndex, std::vector<st
         }
         double outPct = outTotals[outIndex] / sumSubComp;
         for (size_t i_subComp {0}; i_subComp < subCompartments.size(); ++i_subComp) {
-            outSubCompartments[i_subComp] = outPct * subCompartments[i_subComp];
+            outSubCompartments[i_subComp] += outPct * subCompartments[i_subComp];
         }
     }
 

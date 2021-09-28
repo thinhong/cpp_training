@@ -33,19 +33,20 @@ ModelJSON::ModelJSON(nlohmann::ordered_json &initialValues, nlohmann::ordered_js
 
         unsigned long transitionSymbol_pos = flow.find("->");
         // Check whether there is a ":" symbol in this flow
-        unsigned long probSymbol_pos = flow.find(':');
+        unsigned long probSymbol_pos = flow.find('*');
+        std::string inCompName;
+        std::string outCompName;
+        double weight;
 
         // [inComp] [->] [outComp] [:] [prob]
         // inComp start from position 0 and spread from 0 -> transitionSymbol_pos => length = transitionSymbol_pos - 0 = transitionSymbol_pos
-        std::string inCompName = flow.substr(0, transitionSymbol_pos);
-        // outComp start from transitionSymbol_pos + 2 (transitionSymbol_pos is "->" therefore occupies 2 positions), and
-        // spread from transitionSymbol_pos + 2 to probSymbol_pos => length = probSymbol_pos - (transitionSymbol_pos + 2)
-        std::string outCompName = flow.substr(transitionSymbol_pos + 2, probSymbol_pos - (transitionSymbol_pos + 2));
-        // prob start from probSymbol_pos + 1 and spread to the end of the string
-        double weight;
+        inCompName = flow.substr(0, transitionSymbol_pos);
         if (probSymbol_pos != -1) {
-            weight = std::stod(flow.substr(probSymbol_pos + 1));
+            outCompName = flow.substr(probSymbol_pos + 1);
+            weight = std::stod(flow.substr(transitionSymbol_pos + 2, probSymbol_pos - (transitionSymbol_pos + 2)));
         } else {
+            // If no weight is defined (S -> I), outCompName start from transitionSymbol_pos + 2 and spans to the end
+            outCompName = flow.substr(transitionSymbol_pos + 2);
             weight = 1;
         }
         std::weak_ptr<Compartment> inComp = model->getAddressFromName(inCompName);
@@ -108,6 +109,7 @@ ModelJSON::ModelJSON(nlohmann::ordered_json &initialValues, nlohmann::ordered_js
             double prob = 0.0;
             std::shared_ptr<Distribution> transitionProb = std::make_shared<TransitionProb>(prob);
             comp->addOutDistribution(transitionProb);
+            comp->addOutWeight(1);
         }
         comp->setLengthSubCompartment();
         comp->setOutValues();
