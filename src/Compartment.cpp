@@ -222,7 +222,7 @@ void Compartment::updateCompartment(long iter, std::vector<std::string>& paramNa
                 outDistributions[outIndex]->getDistName() == "weibull" ||
                 outDistributions[outIndex]->getDistName() == "exponential" ||
                 outDistributions[outIndex]->getDistName() == "transitionProb" ||
-                outDistributions[outIndex]->getDistName() == "custom") {
+                outDistributions[outIndex]->getDistName() == "values") {
                 updateSubCompByDist(iter, outIndex, allCompNames, allCompValues);
             } else if (outDistributions[outIndex]->getDistName() == "frequency") {
                 updateSubCompByFreq(iter, outIndex, allCompNames, allCompValues);

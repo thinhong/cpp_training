@@ -87,11 +87,11 @@ ModelJSON::ModelJSON(nlohmann::ordered_json &initialValues, nlohmann::ordered_js
             std::shared_ptr<Distribution> exponential = std::make_shared<DiscreteExponentialDistribution>(rate);
             inComp.lock()->addOutDistribution(exponential);
         }
-            // Custom distribution: parameter is a vector "waitingTime"
-        else if (distributionConfig["distribution"] == "custom") {
+            // Values distribution: parameter is a vector "waitingTime"
+        else if (distributionConfig["distribution"] == "values") {
             std::vector<double> waitingTime = distributionConfig["waitingTime"];
-            std::shared_ptr<Distribution> custom = std::make_shared<CustomDistribution>(waitingTime);
-            inComp.lock()->addOutDistribution(custom);
+            std::shared_ptr<Distribution> values = std::make_shared<ValuesDistribution>(waitingTime);
+            inComp.lock()->addOutDistribution(values);
         }
         else if (distributionConfig["distribution"] == "mathExpression") {
             std::string expression = distributionConfig["expression"];
