@@ -1,5 +1,7 @@
 # cpp_training
 
+Note: This software only support Xcode >= 11 (having `filesystem` header)
+
 ## Instructions
 
 1. Clone the project repo
