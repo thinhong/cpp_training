@@ -4,7 +4,7 @@
 
 #include <iostream>
 #include "DiscreteExponentialDistribution.h"
-#include "../prob.h"
+#include "myProb.h"
 
 void DiscreteExponentialDistribution::calcTransitionProb() {
     // First, generate cumulative probability

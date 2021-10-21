@@ -3,7 +3,7 @@
 //
 
 #include <iostream>
-#include "../prob.h"
+#include "myProb.h"
 #include "DiscreteWeibullDistribution.h"
 
 void DiscreteWeibullDistribution::calcTransitionProb() {

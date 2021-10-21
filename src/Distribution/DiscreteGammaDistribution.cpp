@@ -2,7 +2,7 @@
 // Created by thinh on 05/02/2021.
 //
 
-#include "../prob.h"
+#include "myProb.h"
 #include "DiscreteGammaDistribution.h"
 #include <iostream>
 
