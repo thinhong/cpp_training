@@ -1,7 +1,5 @@
 # cpp_training
 
-Note: This software only support Xcode >= 11 (having `filesystem` header)
-
 ## Instructions
 
 1. Clone the project repo
@@ -22,10 +20,13 @@ make
 
 A message will appear asking you to set path to input file, output folder and output file name.
 ```
-Enter full path to input file (ex: /home/Documents/config.json): 
+Enter path to input file (ex: /home/Documents/config.json): 
 Set path to the folder you want to save output file (ex: /home/Documents): 
 ```
-The output will be saved as `output.csv` in your output folder.
+* Path can be absolute path or relative path
+* The output folder will be created if it is not existed
+* The output will be saved as `output.csv` in your given output folder
+* If `output.csv` already exists in the output folder, it will be overwritten 
 
 ## Config file
 ```
