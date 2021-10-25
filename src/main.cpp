@@ -15,7 +15,7 @@ int main() {
     // ========================== JSON input ==============================
     // Read JSON input file to provide parameters
     std::string inputPath;
-    std::cout << "Enter full path to input file: ";
+    std::cout << "Enter path to input file: ";
     std::cin >> inputPath;
     std::ifstream inputFile(inputPath);
     nlohmann::ordered_json input;

@@ -20,7 +20,7 @@ make
 
 A message will appear asking you to set path to input file, output folder and output file name.
 ```
-Enter path to input file (ex: /home/Documents/config.json): 
+Enter path to input file: 
 Set path to the folder you want to save output file (ex: /home/Documents): 
 ```
 * Path can be absolute path or relative path
