@@ -31,7 +31,7 @@ Set path to the folder you want to save output file (ex: /home/Documents):
 ## Config file
 ```
 {
-    "daysFollowUp": 10,
+    "simulationDuration": 10,
     "errorTolerance": 0.01,
     "timeStep": 1,
     "initialValues": {"S": 999, "I": 1, "R": 0, "V": 0},
@@ -44,8 +44,10 @@ Set path to the folder you want to save output file (ex: /home/Documents):
     }
 }
 ```
-* `daysFollowUp`: suppose the unit of time is days, this define the number of days for follow-up
-* `errorTolerance`: a float number that determine when a probability reach (1 - errorTolerance) it will be rounded to 1.0
+* `simulationDuration`: suppose the unit of time is days, this define the number of days for follow-up
+* `errorTolerance`: the cdf of a distribution will never reach 1.0, this  indicate when to round the cdf to 1.0
+    * When the cdf reach 0.99 (which means errorTolerance = 0.01) it will be rounded to 1.0 and the day that cdf = 0.99 is number of subcompartments
+    * If `errorTolerance = 0` and the program run endlessly because it produces infinite subcompartments
 * `timeStep`: if a day is binned into 100 smaller time bins, a time step will be 0.01 day, define here `"timeStep": 0.01`
 * `initialValues`: number of individuals in a compartment at the first time step
 * `parameters`: if we define a compartment transition using math expression, define all the parameters here
