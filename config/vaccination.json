@@ -1,5 +1,5 @@
 {
-    "daysFollowUp": 30,
+    "simulationDuration": 30,
     "errorTolerance": 0.01,
     "timeStep": 0.01,
     "initialValues": {"S": 999, "I": 1, "R": 0, "V": 0},

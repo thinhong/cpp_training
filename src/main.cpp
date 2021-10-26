@@ -26,13 +26,6 @@ int main() {
 
     std::cout << "Reading input file..." << "\n";
 
-    // Initialize parameters: errorTolerance, timeStep and daysFollowUp
-    Distribution::errorTolerance = input["errorTolerance"];
-    if (!input["timeStep"].is_null()) {
-        Distribution::timeStep = input["timeStep"];
-    }
-    Compartment::timesFollowUp = static_cast<size_t>(static_cast<double>(input["daysFollowUp"]) / Distribution::timeStep + 1);
-
     // Check whether all compartments have initial values
     try {
         if (!checkInitVal(input["initialValues"], input["transitions"]).empty()) {
@@ -52,6 +45,24 @@ int main() {
         }
         std::exit(EXIT_FAILURE);
     }
+
+    // Then check errorTolerance > 0
+    try {
+        if (input["errorTolerance"] == 0) {
+            throw 99;
+        }
+    }
+    catch (int exCode) {
+        std::cout << "Error: errorTolerance must > 0" << std::endl;
+        std::exit(EXIT_FAILURE);
+    }
+
+    // Initialize parameters: errorTolerance, timeStep and daysFollowUp
+    Distribution::errorTolerance = input["errorTolerance"];
+    if (!input["timeStep"].is_null()) {
+        Distribution::timeStep = input["timeStep"];
+    }
+    Compartment::timesFollowUp = static_cast<size_t>(static_cast<double>(input["simulationDuration"]) / Distribution::timeStep + 1);
 
     ModelJSON myModel(input["initialValues"], input["parameters"], input["transitions"]);
 
