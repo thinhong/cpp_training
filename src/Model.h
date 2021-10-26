@@ -5,7 +5,7 @@
 #include <memory>
 #include <stack>
 #include "Compartment.h"
-#include "muParser/muParser.h"
+#include "muParser.h"
 
 class Model {
 private:

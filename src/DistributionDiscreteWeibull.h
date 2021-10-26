@@ -7,7 +7,7 @@
 
 #include "Distribution.h"
 
-class DiscreteWeibullDistribution: public Distribution {
+class DistributionDiscreteWeibull: public Distribution {
 private:
     std::string distName {"weibull"};
     double scale {0};
@@ -16,7 +16,7 @@ private:
     std::vector<double> transitionProb;
     void calcTransitionProb();
 public:
-    DiscreteWeibullDistribution(double scale, double shape);
+    DistributionDiscreteWeibull(double scale, double shape);
     std::string getDistName() override;
     double getTransitionProb(size_t index) override;
     size_t getMaxDay() override;

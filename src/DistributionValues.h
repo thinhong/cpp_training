@@ -9,7 +9,7 @@
 #include <vector>
 #include "Distribution.h"
 
-class ValuesDistribution: public Distribution {
+class DistributionValues: public Distribution {
 private:
     std::string distName {"values"};
     std::vector<double> waitingTime;
@@ -17,7 +17,7 @@ private:
     std::vector<double> transitionProb;
     void calcTransitionProb();
 public:
-    explicit ValuesDistribution(std::vector<double> waitingTime);
+    explicit DistributionValues(std::vector<double> waitingTime);
     double getTransitionProb(size_t index) override;
     std::string getDistName() override;
     size_t getMaxDay() override;

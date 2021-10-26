@@ -3,7 +3,7 @@
 #include <fstream>
 #include "json.h"
 #include "Compartment.h"
-#include "Distribution/Distribution.h"
+#include "Distribution.h"
 #include "FileCSV.h"
 #include "ModelJSON.h"
 #include <filesystem>

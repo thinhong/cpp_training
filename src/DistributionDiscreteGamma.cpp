@@ -3,10 +3,10 @@
 //
 
 #include "myProb.h"
-#include "DiscreteGammaDistribution.h"
+#include "DistributionDiscreteGamma.h"
 #include <iostream>
 
-void DiscreteGammaDistribution::calcTransitionProb() {
+void DistributionDiscreteGamma::calcTransitionProb() {
     // First, generate cumulative probability
     double tempProb {0};
     std::vector<double> cumulativeProb;
@@ -39,18 +39,18 @@ void DiscreteGammaDistribution::calcTransitionProb() {
 //    std::cout << maxDay << "\n";
 }
 
-DiscreteGammaDistribution::DiscreteGammaDistribution(double scale, double shape) {
+DistributionDiscreteGamma::DistributionDiscreteGamma(double scale, double shape) {
     this->scale = scale;
     this->shape = shape;
     this->calcTransitionProb();
 }
 
-DiscreteGammaDistribution::DiscreteGammaDistribution(std::vector<double> &cumulativeProb) {
+DistributionDiscreteGamma::DistributionDiscreteGamma(std::vector<double> &cumulativeProb) {
     this->transitionProb = cumulativeProb;
     this->maxDay = cumulativeProb.size();
 }
 
-double DiscreteGammaDistribution::getTransitionProb(size_t index) {
+double DistributionDiscreteGamma::getTransitionProb(size_t index) {
     if (index >= transitionProb.size()) {
         return 1;
     } else {
@@ -58,18 +58,18 @@ double DiscreteGammaDistribution::getTransitionProb(size_t index) {
     }
 }
 
-size_t DiscreteGammaDistribution::getMaxDay() {
+size_t DistributionDiscreteGamma::getMaxDay() {
     return maxDay;
 }
 
-std::string DiscreteGammaDistribution::getDistName() {
+std::string DistributionDiscreteGamma::getDistName() {
     return distName;
 }
 
-double DiscreteGammaDistribution::getScale() {
+double DistributionDiscreteGamma::getScale() {
     return scale;
 }
 
-double DiscreteGammaDistribution::getShape() {
+double DistributionDiscreteGamma::getShape() {
     return shape;
 }

@@ -4,9 +4,9 @@
 
 #include <algorithm>
 #include <stdexcept>
-#include "ValuesDistribution.h"
+#include "DistributionValues.h"
 
-void ValuesDistribution::calcTransitionProb() {
+void DistributionValues::calcTransitionProb() {
     // Compute transitionProb using waiting time
     for (size_t k {0}; k < waitingTime.size(); ++k) {
         transitionProb.push_back(calcTransitionProbHelper(waitingTime, k));
@@ -16,7 +16,7 @@ void ValuesDistribution::calcTransitionProb() {
     maxDay = transitionProb.size();
 }
 
-ValuesDistribution::ValuesDistribution(std::vector<double> waitingTime) {
+DistributionValues::DistributionValues(std::vector<double> waitingTime) {
     // Make sure that waiting time distribution is a probability distribution (sum = 1)
     double sumWaitingTime {0};
     for (auto& wt: waitingTime) {
@@ -31,11 +31,11 @@ ValuesDistribution::ValuesDistribution(std::vector<double> waitingTime) {
     this->calcTransitionProb();
 }
 
-std::string ValuesDistribution::getDistName() {
+std::string DistributionValues::getDistName() {
     return distName;
 }
 
-double ValuesDistribution::getTransitionProb(size_t index) {
+double DistributionValues::getTransitionProb(size_t index) {
     if (index >= transitionProb.size()) {
         return 1;
     } else {
@@ -43,10 +43,10 @@ double ValuesDistribution::getTransitionProb(size_t index) {
     }
 }
 
-size_t ValuesDistribution::getMaxDay() {
+size_t DistributionValues::getMaxDay() {
     return maxDay;
 }
 
-std::vector<double> ValuesDistribution::getWaitingTime() {
+std::vector<double> DistributionValues::getWaitingTime() {
     return waitingTime;
 }

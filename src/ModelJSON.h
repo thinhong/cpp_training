@@ -9,13 +9,13 @@
 #include "json.h"
 #include "Compartment.h"
 #include "Model.h"
-#include "Distribution/TransitionProb.h"
-#include "Distribution/DiscreteGammaDistribution.h"
-#include "Distribution/DiscreteWeibullDistribution.h"
-#include "Distribution/DiscreteExponentialDistribution.h"
-#include "Distribution/ValuesDistribution.h"
-#include "Distribution/MathExpression.h"
-#include "Distribution/Frequency.h"
+#include "DistributionTransitionProb.h"
+#include "DistributionDiscreteGamma.h"
+#include "DistributionDiscreteWeibull.h"
+#include "DistributionDiscreteExponential.h"
+#include "DistributionValues.h"
+#include "DistributionMathExpression.h"
+#include "DistributionFrequency.h"
 
 class ModelJSON {
 private:

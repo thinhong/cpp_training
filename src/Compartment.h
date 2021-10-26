@@ -6,8 +6,8 @@
 #include <memory>
 #include <string>
 #include <algorithm>
-#include "Distribution/Distribution.h"
-#include "muParser/muParser.h"
+#include "Distribution.h"
+#include "muParser.h"
 
 class Compartment {
 private:

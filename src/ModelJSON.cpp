@@ -61,7 +61,7 @@ ModelJSON::ModelJSON(nlohmann::ordered_json &initialValues, nlohmann::ordered_js
         if (distributionConfig["distribution"] == "transitionProb") {
             double prob = distributionConfig["transitionProb"];
             prob *= Distribution::timeStep;
-            std::shared_ptr<Distribution> transitionProb = std::make_shared<TransitionProb>(prob);
+            std::shared_ptr<Distribution> transitionProb = std::make_shared<DistributionTransitionProb>(prob);
             inComp.lock()->addOutDistribution(transitionProb);
         }
             // Gamma distribution: parameters are "scale" and "shape"
@@ -69,7 +69,7 @@ ModelJSON::ModelJSON(nlohmann::ordered_json &initialValues, nlohmann::ordered_js
             double scale = distributionConfig["scale"];
             scale /= Distribution::timeStep;
             double shape = distributionConfig["shape"];
-            std::shared_ptr<Distribution> gamma = std::make_shared<DiscreteGammaDistribution>(scale, shape);
+            std::shared_ptr<Distribution> gamma = std::make_shared<DistributionDiscreteGamma>(scale, shape);
             inComp.lock()->addOutDistribution(gamma);
         }
             // Weibull distribution: parameters are "scale" and "shape"
@@ -77,37 +77,37 @@ ModelJSON::ModelJSON(nlohmann::ordered_json &initialValues, nlohmann::ordered_js
             double scale = distributionConfig["scale"];
             scale /= Distribution::timeStep;
             double shape = distributionConfig["shape"];
-            std::shared_ptr<Distribution> weibull = std::make_shared<DiscreteWeibullDistribution>(scale, shape);
+            std::shared_ptr<Distribution> weibull = std::make_shared<DistributionDiscreteWeibull>(scale, shape);
             inComp.lock()->addOutDistribution(weibull);
         }
             // Exponential distribution: parameter is "rate"
         else if (distributionConfig["distribution"] == "exponential") {
             double rate = distributionConfig["rate"];
             rate *= Distribution::timeStep;
-            std::shared_ptr<Distribution> exponential = std::make_shared<DiscreteExponentialDistribution>(rate);
+            std::shared_ptr<Distribution> exponential = std::make_shared<DistributionDiscreteExponential>(rate);
             inComp.lock()->addOutDistribution(exponential);
         }
             // Values distribution: parameter is a vector "waitingTime"
         else if (distributionConfig["distribution"] == "values") {
             std::vector<double> waitingTime = distributionConfig["waitingTime"];
-            std::shared_ptr<Distribution> values = std::make_shared<ValuesDistribution>(waitingTime);
+            std::shared_ptr<Distribution> values = std::make_shared<DistributionValues>(waitingTime);
             inComp.lock()->addOutDistribution(values);
         }
         else if (distributionConfig["distribution"] == "mathExpression") {
             std::string expression = distributionConfig["expression"];
-            std::shared_ptr<Distribution> mathExpression = std::make_shared<MathExpression>(expression);
+            std::shared_ptr<Distribution> mathExpression = std::make_shared<DistributionMathExpression>(expression);
             inComp.lock()->addOutDistribution(mathExpression);
         }
         else if (distributionConfig["distribution"] == "frequency") {
             double freq = distributionConfig["frequency"];
-            std::shared_ptr<Distribution> frequency = std::make_shared<Frequency>(freq);
+            std::shared_ptr<Distribution> frequency = std::make_shared<DistributionFrequency>(freq);
             inComp.lock()->addOutDistribution(frequency);
         }
     }
     for (auto& comp: model->getComps()) {
         if (comp->getOutDistributions().empty()) {
             double prob = 0.0;
-            std::shared_ptr<Distribution> transitionProb = std::make_shared<TransitionProb>(prob);
+            std::shared_ptr<Distribution> transitionProb = std::make_shared<DistributionTransitionProb>(prob);
             comp->addOutDistribution(transitionProb);
             comp->addOutWeight(1);
         }

@@ -4,9 +4,9 @@
 
 #include <iostream>
 #include "myProb.h"
-#include "DiscreteWeibullDistribution.h"
+#include "DistributionDiscreteWeibull.h"
 
-void DiscreteWeibullDistribution::calcTransitionProb() {
+void DistributionDiscreteWeibull::calcTransitionProb() {
     // First, generate cumulative probability
     double tempProb {0};
     std::vector<double> cumulativeProb;
@@ -39,13 +39,13 @@ void DiscreteWeibullDistribution::calcTransitionProb() {
 //    std::cout << maxDay << "\n";
 }
 
-DiscreteWeibullDistribution::DiscreteWeibullDistribution(double scale, double shape) {
+DistributionDiscreteWeibull::DistributionDiscreteWeibull(double scale, double shape) {
     this->scale = scale;
     this->shape = shape;
     this->calcTransitionProb();
 }
 
-double DiscreteWeibullDistribution::getTransitionProb(size_t index) {
+double DistributionDiscreteWeibull::getTransitionProb(size_t index) {
     if (index >= transitionProb.size()) {
         return 1;
     } else {
@@ -53,18 +53,18 @@ double DiscreteWeibullDistribution::getTransitionProb(size_t index) {
     }
 }
 
-size_t DiscreteWeibullDistribution::getMaxDay() {
+size_t DistributionDiscreteWeibull::getMaxDay() {
     return maxDay;
 }
 
-double DiscreteWeibullDistribution::getScale() {
+double DistributionDiscreteWeibull::getScale() {
     return scale;
 }
 
-double DiscreteWeibullDistribution::getShape() {
+double DistributionDiscreteWeibull::getShape() {
     return shape;
 }
 
-std::string DiscreteWeibullDistribution::getDistName() {
+std::string DistributionDiscreteWeibull::getDistName() {
     return distName;
 }

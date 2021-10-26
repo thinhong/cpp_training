@@ -1,5 +1,5 @@
 #include "Model.h"
-#include "Distribution/Distribution.h"
+#include "Distribution.h"
 #include <algorithm>
 #include <stack>
 #include <stdexcept>

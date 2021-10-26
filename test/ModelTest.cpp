@@ -1,12 +1,12 @@
 #include <gtest/gtest.h>
-#include "../src/Distribution/Distribution.h"
-#include "../src/Distribution/Distribution.cpp"
-#include "../src/Distribution/TransitionProb.h"
-#include "../src/Distribution/TransitionProb.cpp"
-#include "../src/Distribution/DiscreteGammaDistribution.h"
-#include "../src/Distribution/DiscreteGammaDistribution.cpp"
-#include "../src/Distribution/ValuesDistribution.h"
-#include "../src/Distribution/ValuesDistribution.cpp"
+#include "../src/Distribution.h"
+#include "../src/Distribution.cpp"
+#include "../src/DistributionTransitionProb.h"
+#include "../src/DistributionTransitionProb.cpp"
+#include "../src/DistributionDiscreteGamma.h"
+#include "../src/DistributionDiscreteGamma.cpp"
+#include "../src/DistributionValues.h"
+#include "../src/DistributionValues.cpp"
 #include "../src/Compartment.h"
 #include "../src/Compartment.cpp"
 #include "../src/prob.h"
@@ -16,12 +16,12 @@
 
 TEST(GammaTest, getCumulativeProb) {
     std::vector<double> cumProb = {0.5, 0.6, 0.7};
-    DiscreteGammaDistribution dist(cumProb);
+    DistributionDiscreteGamma dist(cumProb);
     EXPECT_EQ(0.5, dist.getTransitionProb(0));
 }
 
 TEST(GammaTest, calcCumulativeProb) {
-    DiscreteGammaDistribution dist(1, 1);
+    DistributionDiscreteGamma dist(1, 1);
     EXPECT_NEAR(0.6321206, dist.getTransitionProb(1), 0.00001);
     EXPECT_NEAR(0.8646647, dist.getTransitionProb(2), 0.00001);
     EXPECT_NEAR(0.9502129, dist.getTransitionProb(3), 0.00001);
@@ -29,7 +29,7 @@ TEST(GammaTest, calcCumulativeProb) {
 
 TEST(CustomDistributionTest, getCumulativeProb) {
     std::vector<double> cumProb = {0.5, 0.6, 0.7};
-    ValuesDistribution dist(cumProb);
+    DistributionValues dist(cumProb);
     EXPECT_TRUE(true);
 }
 
@@ -38,10 +38,10 @@ TEST(ModelTest, test) {
     const double transRate = 2.0;
     auto forceInfection = std::make_shared<double>();
     std::vector<double> cumProb = {0.0, 0.3, 1};
-    auto S = make_shared<Compartment>("S", 10000, make_shared<TransitionProb>(forceInfection));
-    auto I = make_shared<Compartment>("I", 500, make_shared<DiscreteGammaDistribution>(cumProb));
-    auto R = make_shared<Compartment>("R", 0, make_shared<TransitionProb>(make_shared<double>(0.0)));
-    auto D = make_shared<Compartment>("D", 0, make_shared<TransitionProb>(make_shared<double>(0.0)));
+    auto S = make_shared<Compartment>("S", 10000, make_shared<DistributionTransitionProb>(forceInfection));
+    auto I = make_shared<Compartment>("I", 500, make_shared<DistributionDiscreteGamma>(cumProb));
+    auto R = make_shared<Compartment>("R", 0, make_shared<DistributionTransitionProb>(make_shared<double>(0.0)));
+    auto D = make_shared<Compartment>("D", 0, make_shared<DistributionTransitionProb>(make_shared<double>(0.0)));
 
     Model myModel;
     myModel.addCompsAndConnect(S, I, 1);
