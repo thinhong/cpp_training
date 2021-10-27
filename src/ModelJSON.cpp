@@ -67,7 +67,6 @@ ModelJSON::ModelJSON(nlohmann::ordered_json &initialValues, nlohmann::ordered_js
             // Gamma distribution: parameters are "scale" and "shape"
         else if (distributionConfig["distribution"] == "gamma") {
             double scale = distributionConfig["scale"];
-            scale /= Distribution::timeStep;
             double shape = distributionConfig["shape"];
             std::shared_ptr<Distribution> gamma = std::make_shared<DistributionDiscreteGamma>(scale, shape);
             inComp.lock()->addOutDistribution(gamma);
@@ -75,7 +74,6 @@ ModelJSON::ModelJSON(nlohmann::ordered_json &initialValues, nlohmann::ordered_js
             // Weibull distribution: parameters are "scale" and "shape"
         else if (distributionConfig["distribution"] == "weibull") {
             double scale = distributionConfig["scale"];
-            scale /= Distribution::timeStep;
             double shape = distributionConfig["shape"];
             std::shared_ptr<Distribution> weibull = std::make_shared<DistributionDiscreteWeibull>(scale, shape);
             inComp.lock()->addOutDistribution(weibull);
@@ -83,9 +81,14 @@ ModelJSON::ModelJSON(nlohmann::ordered_json &initialValues, nlohmann::ordered_js
             // Exponential distribution: parameter is "rate"
         else if (distributionConfig["distribution"] == "exponential") {
             double rate = distributionConfig["rate"];
-            rate *= Distribution::timeStep;
             std::shared_ptr<Distribution> exponential = std::make_shared<DistributionDiscreteExponential>(rate);
             inComp.lock()->addOutDistribution(exponential);
+        }
+        else if (distributionConfig["distribution"] == "lognormal") {
+            double mu = distributionConfig["mu"];
+            double sigma = distributionConfig["sigma"];
+            std::shared_ptr<Distribution> lognormal = std::make_shared<DistributionLogNormal>(mu, sigma);
+            inComp.lock()->addOutDistribution(lognormal);
         }
             // Values distribution: parameter is a vector "waitingTime"
         else if (distributionConfig["distribution"] == "values") {

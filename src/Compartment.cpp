@@ -248,6 +248,7 @@ void Compartment::updateCompartment(long iter, std::vector<std::string>& paramNa
             if (outDistributions[outIndex]->getDistName() == "gamma" ||
                 outDistributions[outIndex]->getDistName() == "weibull" ||
                 outDistributions[outIndex]->getDistName() == "exponential" ||
+                outDistributions[outIndex]->getDistName() == "lognormal" ||
                 outDistributions[outIndex]->getDistName() == "transitionProb" ||
                 outDistributions[outIndex]->getDistName() == "values") {
                 updateSubCompByDist(iter, outIndex, allCompNames, allCompValues);

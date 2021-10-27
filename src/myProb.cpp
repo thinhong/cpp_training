@@ -2,6 +2,8 @@
 # include <cmath>
 # include <iostream>
 
+
+
 double normal_01_cdf ( double x )
 
 //****************************************************************************80
@@ -101,6 +103,47 @@ double normal_01_cdf ( double x )
     {
         cdf = 1.0 - q;
     }
+
+    return cdf;
+}
+//****************************************************************************80
+
+double normal_cdf ( double x, double mu, double sigma )
+
+//****************************************************************************80
+//
+//  Purpose:
+//
+//    NORMAL_CDF evaluates the Normal CDF.
+//
+//  Licensing:
+//
+//    This code is distributed under the GNU LGPL license.
+//
+//  Modified:
+//
+//    19 September 2004
+//
+//  Author:
+//
+//    John Burkardt
+//
+//  Parameters:
+//
+//    Input, double X, the argument of the CDF.
+//
+//    Input, double MU, SIGMA, the mean and standard deviation.
+//    SIGMA should not be zero.
+//
+//    Output, double CDF, the value of the CDF.
+//
+{
+    double cdf;
+    double y;
+
+    y = ( x - mu ) / sigma;
+
+    cdf = normal_01_cdf ( y );
 
     return cdf;
 }
@@ -480,3 +523,51 @@ double weibull_cdf ( double x, double a, double b, double c )
 }
 //****************************************************************************80
 
+double log_normal_cdf ( double x, double a, double b )
+
+//****************************************************************************80
+//
+//  Purpose:
+//
+//    LOG_NORMAL_CDF evaluates the Lognormal CDF.
+//
+//  Licensing:
+//
+//    This code is distributed under the GNU LGPL license.
+//
+//  Modified:
+//
+//    19 September 2004
+//
+//  Author:
+//
+//    John Burkardt
+//
+//  Parameters:
+//
+//    Input, double X, the argument of the PDF.
+//    0.0 < X.
+//
+//    Input, double A, B, the parameters of the PDF.
+//    0.0 < B.
+//
+//    Output, double CDF, the value of the CDF.
+//
+{
+    double cdf;
+    double logx;
+
+    if ( x <= 0.0 )
+    {
+        cdf = 0.0;
+    }
+    else
+    {
+        logx = log ( x );
+
+        cdf = normal_cdf ( logx, a, b );
+    }
+
+    return cdf;
+}
+//****************************************************************************80
