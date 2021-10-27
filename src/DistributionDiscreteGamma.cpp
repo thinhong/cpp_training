@@ -10,7 +10,7 @@ void DistributionDiscreteGamma::calcTransitionProb() {
     // First, generate cumulative probability
     double tempProb {0};
     std::vector<double> cumulativeProb;
-    size_t i {0};
+    double i {0};
     while (tempProb <= (1 - Distribution::errorTolerance)) {
         // https://people.sc.fsu.edu/~jburkardt/cpp_src/prob/prob.cpp
         // A controls the location of the peak;  A is often chosen to be 0.0.
@@ -18,7 +18,7 @@ void DistributionDiscreteGamma::calcTransitionProb() {
         // C is the "shape" parameter; 0.0 < C, and is often 1.0.
         tempProb = gamma_cdf(i, 0, scale, shape);
         cumulativeProb.push_back(tempProb);
-        ++i;
+        i += Distribution::timeStep;
     }
     cumulativeProb.push_back(1);
 

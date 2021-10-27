@@ -13,6 +13,7 @@
 #include "DistributionDiscreteGamma.h"
 #include "DistributionDiscreteWeibull.h"
 #include "DistributionDiscreteExponential.h"
+#include "DistributionLogNormal.h"
 #include "DistributionValues.h"
 #include "DistributionMathExpression.h"
 #include "DistributionFrequency.h"

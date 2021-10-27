@@ -6,7 +6,7 @@
     "parameters": {"beta": 0.012, "N": 1000},
     "transitions": {
         "S -> I": {"distribution": "mathExpression", "expression": "beta * S * I / N"}, 
-        "S -> V": {"distribution": "frequency", "frequency": 0.05},
+        "S -> V": {"distribution": "frequency", "frequency": 0.5},
         "V -> R": {"distribution": "mathExpression", "expression": "beta * V * I / N"}, 
         "I -> R": {"distribution": "gamma", "scale": 2, "shape": 3}
     }

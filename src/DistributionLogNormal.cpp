@@ -1,19 +1,18 @@
 //
-// Created by thinh on 05/03/2021.
+// Created by thinh on 27/10/2021.
 //
 
-#include <iostream>
-#include "DistributionDiscreteExponential.h"
 #include "myProb.h"
+#include "DistributionLogNormal.h"
+#include <iostream>
 
-void DistributionDiscreteExponential::calcTransitionProb() {
+void DistributionLogNormal::calcTransitionProb() {
     // First, generate cumulative probability
     double tempProb {0};
     std::vector<double> cumulativeProb;
     double i {0};
     while (tempProb <= (1 - Distribution::errorTolerance)) {
-        // https://people.sc.fsu.edu/~jburkardt/cpp_src/prob/prob.cpp
-        tempProb = exponential_cdf(i, 0, 1/rate);
+        tempProb = log_normal_cdf(i, mu, sigma);
         cumulativeProb.push_back(tempProb);
         i += Distribution::timeStep;
     }
@@ -35,16 +34,13 @@ void DistributionDiscreteExponential::calcTransitionProb() {
     maxDay = transitionProb.size();
 }
 
-DistributionDiscreteExponential::DistributionDiscreteExponential(double rate) {
-    this->rate = rate;
+DistributionLogNormal::DistributionLogNormal(double mu, double sigma) {
+    this->mu = mu;
+    this->sigma = sigma;
     this->calcTransitionProb();
 }
 
-std::string DistributionDiscreteExponential::getDistName() {
-    return distName;
-}
-
-double DistributionDiscreteExponential::getTransitionProb(size_t index) {
+double DistributionLogNormal::getTransitionProb(size_t index) {
     if (index >= transitionProb.size()) {
         return 1;
     } else {
@@ -52,10 +48,18 @@ double DistributionDiscreteExponential::getTransitionProb(size_t index) {
     }
 }
 
-size_t DistributionDiscreteExponential::getMaxDay() {
+size_t DistributionLogNormal::getMaxDay() {
     return maxDay;
 }
 
-double DistributionDiscreteExponential::getRate() {
-    return rate;
+std::string DistributionLogNormal::getDistName() {
+    return distName;
+}
+
+double DistributionLogNormal::getMu() {
+    return mu;
+}
+
+double DistributionLogNormal::getSigma() {
+    return sigma;
 }
