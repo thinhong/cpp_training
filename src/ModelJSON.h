@@ -14,7 +14,7 @@
 #include "DistributionDiscreteWeibull.h"
 #include "DistributionDiscreteExponential.h"
 #include "DistributionLogNormal.h"
-#include "DistributionValues.h"
+#include "DistributionNonparametric.h"
 #include "DistributionMathExpression.h"
 #include "DistributionConstant.h"
 

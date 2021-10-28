@@ -5,8 +5,8 @@
 #include "../src/DistributionTransitionProb.cpp"
 #include "../src/DistributionDiscreteGamma.h"
 #include "../src/DistributionDiscreteGamma.cpp"
-#include "../src/DistributionValues.h"
-#include "../src/DistributionValues.cpp"
+#include "../src/DistributionNonparametric.h"
+#include "../src/DistributionNonparametric.cpp"
 #include "../src/Compartment.h"
 #include "../src/Compartment.cpp"
 #include "../src/prob.h"
@@ -29,7 +29,7 @@ TEST(GammaTest, calcCumulativeProb) {
 
 TEST(CustomDistributionTest, getCumulativeProb) {
     std::vector<double> cumProb = {0.5, 0.6, 0.7};
-    DistributionValues dist(cumProb);
+    DistributionNonparametric dist(cumProb);
     EXPECT_TRUE(true);
 }
 

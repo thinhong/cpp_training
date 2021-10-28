@@ -38,7 +38,7 @@ Set path to the folder you want to save output file (ex: /home/Documents):
     "parameters": {"beta": 1.2, "N": 1000},
     "transitions": {
         "S -> 0.3 * I": {"distribution": "mathExpression", "expression": "beta * S * I / N"}, 
-        "S -> 0.7 * V": {"distribution": "frequency", "frequency": 2},
+        "S -> 0.7 * V": {"distribution": "constant", "constant": 2},
         "V -> R": {"distribution": "exponential", "rate": 1.5}, 
         "I -> R": {"distribution": "gamma", "scale": 2, "shape": 3}
     }
@@ -60,6 +60,6 @@ Set path to the folder you want to save output file (ex: /home/Documents):
     * `weibull`: parameters are `scale` and `shape`
     * `exponential`: parameter is `rate`
     * `mathExpression`: put any math expression to the `mathExpression` parameter, the expression can contains compartment names and other parameters that have been predefined in `parameters`
-    * `frequency`: parameter is `frequency`, set a fixed number of individuals moving per time step
+    * `constant`: parameter is `constant`, set a fixed number of individuals moving per time step
     * `transitionProb`: parameter is `transitionProb`, a fix rate transition moving per time step
-    * `custom`: parameter is `waitingTime`, put a vector contains the waiting time distribution, the values can be percentages or frequencies, for example `{"distribution": "custom", "waitingTime": [1, 2, 3, 4]}`
+    * `nonparametric`: parameter is `waitingTime`, put a vector contains the waiting time values, the values can be percentages or frequencies, for example `{"distribution": "nonparametric", "waitingTime": [3, 5.323, 2, 2.02, 3, 3, 1]}`

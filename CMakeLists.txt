@@ -12,7 +12,7 @@ add_executable(discreteModel src/main.cpp
         src/DistributionDiscreteWeibull.cpp src/DistributionDiscreteWeibull.h
         src/DistributionTransitionProb.cpp src/DistributionTransitionProb.h
         src/DistributionDiscreteExponential.cpp src/DistributionDiscreteExponential.h
-        src/DistributionValues.cpp src/DistributionValues.h
+        src/DistributionNonparametric.cpp src/DistributionNonparametric.h
         src/File.cpp src/File.h src/FileCSV.cpp src/FileCSV.h
         src/muParser.h src/muParser.cpp src/muParserBase.cpp src/muParserBase.h
         src/muParserBytecode.cpp src/muParserBytecode.h src/muParserCallback.cpp src/muParserCallback.h src/muParserDef.h

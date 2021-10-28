@@ -250,9 +250,9 @@ void Compartment::updateCompartment(long iter, std::vector<std::string>& paramNa
                 outDistributions[outIndex]->getDistName() == "exponential" ||
                 outDistributions[outIndex]->getDistName() == "lognormal" ||
                 outDistributions[outIndex]->getDistName() == "transitionProb" ||
-                outDistributions[outIndex]->getDistName() == "values") {
+                outDistributions[outIndex]->getDistName() == "nonparametric") {
                 updateSubCompByDist(iter, outIndex, allCompNames, allCompValues);
-            } else if (outDistributions[outIndex]->getDistName() == "frequency") {
+            } else if (outDistributions[outIndex]->getDistName() == "constant") {
                 updateSubCompByFreq(iter, outIndex, allCompNames, allCompValues);
             } else {
                 updateSubCompByMath(iter, outIndex, paramNames, paramValues, allCompNames, allCompValues);
