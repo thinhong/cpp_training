@@ -59,6 +59,7 @@ Set path to the folder you want to save output file (ex: /home/Documents):
     * `gamma`: parameters are `scale` and `shape`
     * `weibull`: parameters are `scale` and `shape`
     * `exponential`: parameter is `rate`
+    * `lognormal`: parameters are `mu` and `sigma`
     * `mathExpression`: put any math expression to the `mathExpression` parameter, the expression can contains compartment names and other parameters that have been predefined in `parameters`
     * `constant`: parameter is `constant`, set a fixed number of individuals moving per time step
     * `transitionProb`: parameter is `transitionProb`, a fix rate transition moving per time step
