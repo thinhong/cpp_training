@@ -63,7 +63,7 @@ size_t DistributionDiscreteGamma::getMaxDay() {
 }
 
 std::string DistributionDiscreteGamma::getDistName() {
-    return distName;
+    return "gamma";
 }
 
 double DistributionDiscreteGamma::getScale() {

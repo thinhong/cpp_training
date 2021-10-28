@@ -9,7 +9,6 @@
 
 class DistributionDiscreteWeibull: public Distribution {
 private:
-    std::string distName {"weibull"};
     double scale {0};
     double shape {0};
     size_t maxDay {0};

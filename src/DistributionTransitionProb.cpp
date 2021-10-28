@@ -17,5 +17,5 @@ size_t DistributionTransitionProb::getMaxDay() {
 }
 
 std::string DistributionTransitionProb::getDistName() {
-    return distName;
+    return "transitionProb";
 }
