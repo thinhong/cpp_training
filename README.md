@@ -1,4 +1,4 @@
-[![Build with Make](https://github.com/thinhong/cpp_training/workflows/build/badge.svg)](https://github.com/thinhong/cpp_training/actions)
+[![build](https://github.com/thinhong/cpp_training/actions/workflows/c-cpp.yml/badge.svg)](https://github.com/thinhong/cpp_training/actions/workflows/c-cpp.yml)
 
 # cpp_training
 
