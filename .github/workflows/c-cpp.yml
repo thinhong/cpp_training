@@ -1,4 +1,4 @@
-name: cppmake
+name: build
 
 on:
   push:
