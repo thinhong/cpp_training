@@ -41,7 +41,7 @@ DistributionDiscreteExponential::DistributionDiscreteExponential(double rate) {
 }
 
 std::string DistributionDiscreteExponential::getDistName() {
-    return distName;
+    return "exponential";
 }
 
 double DistributionDiscreteExponential::getTransitionProb(size_t index) {

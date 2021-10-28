@@ -66,5 +66,5 @@ double DistributionDiscreteWeibull::getShape() {
 }
 
 std::string DistributionDiscreteWeibull::getDistName() {
-    return distName;
+    return "weibull";
 }

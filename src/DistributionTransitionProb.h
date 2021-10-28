@@ -11,7 +11,6 @@
 // Transition probability is used to directly add transitionProb instead of define the distribution of waiting time
 class DistributionTransitionProb: public Distribution {
 private:
-    std::string distName {"transitionProb"};
     double transitionProb;
 public:
     explicit DistributionTransitionProb(double transitionProb);

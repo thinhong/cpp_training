@@ -17,4 +17,4 @@ add_executable(discreteModel src/main.cpp
         src/muParser.h src/muParser.cpp src/muParserBase.cpp src/muParserBase.h
         src/muParserBytecode.cpp src/muParserBytecode.h src/muParserCallback.cpp src/muParserCallback.h src/muParserDef.h
         src/muParserError.cpp src/muParserError.h src/muParserFixes.h src/muParserTemplateMagic.h src/muParserTemplateMagic.h
-        src/muParserToken.h src/muParserTokenReader.h src/muParserTokenReader.cpp src/DistributionMathExpression.cpp src/DistributionMathExpression.h src/ModelJSON.cpp src/ModelJSON.h src/helpers.cpp src/helpers.h src/DistributionFrequency.cpp src/DistributionFrequency.h src/myProb.cpp src/myProb.h src/DistributionLogNormal.cpp src/DistributionLogNormal.h)
+        src/muParserToken.h src/muParserTokenReader.h src/muParserTokenReader.cpp src/DistributionMathExpression.cpp src/DistributionMathExpression.h src/ModelJSON.cpp src/ModelJSON.h src/helpers.cpp src/helpers.h src/DistributionConstant.cpp src/DistributionConstant.h src/myProb.cpp src/myProb.h src/DistributionLogNormal.cpp src/DistributionLogNormal.h)

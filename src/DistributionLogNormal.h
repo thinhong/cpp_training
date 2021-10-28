@@ -9,7 +9,6 @@
 
 class DistributionLogNormal: public Distribution {
 private:
-    std::string distName {"lognormal"};
     double mu {0};
     double sigma {0};
     size_t maxDay {0};

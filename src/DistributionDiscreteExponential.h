@@ -9,7 +9,6 @@
 
 class DistributionDiscreteExponential: public Distribution {
 private:
-    std::string distName {"exponential"};
     double rate {0};
     size_t maxDay {0};
     std::vector<double> transitionProb;

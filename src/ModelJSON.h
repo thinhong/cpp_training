@@ -16,7 +16,7 @@
 #include "DistributionLogNormal.h"
 #include "DistributionValues.h"
 #include "DistributionMathExpression.h"
-#include "DistributionFrequency.h"
+#include "DistributionConstant.h"
 
 class ModelJSON {
 private:

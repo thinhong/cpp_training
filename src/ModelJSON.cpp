@@ -101,10 +101,10 @@ ModelJSON::ModelJSON(nlohmann::ordered_json &initialValues, nlohmann::ordered_js
             std::shared_ptr<Distribution> mathExpression = std::make_shared<DistributionMathExpression>(expression);
             inComp.lock()->addOutDistribution(mathExpression);
         }
-        else if (distributionConfig["distribution"] == "frequency") {
-            double freq = distributionConfig["frequency"];
-            std::shared_ptr<Distribution> frequency = std::make_shared<DistributionFrequency>(freq);
-            inComp.lock()->addOutDistribution(frequency);
+        else if (distributionConfig["distribution"] == "constant") {
+            double con = distributionConfig["constant"];
+            std::shared_ptr<Distribution> constant = std::make_shared<DistributionConstant>(con);
+            inComp.lock()->addOutDistribution(constant);
         }
     }
     for (auto& comp: model->getComps()) {
