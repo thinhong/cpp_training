@@ -6,6 +6,7 @@
 #define MAIN_CPP_MODELJSON_H
 
 #include <memory>
+#include <sstream>
 #include "json.h"
 #include "Compartment.h"
 #include "Model.h"

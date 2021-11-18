@@ -97,7 +97,7 @@ void Compartment::updateSubCompByDist(long iter, size_t outIndex,
         std::fill(outSubCompartments.begin(), outSubCompartments.end(), 0);
     } else if (outWeights[outIndex] < 1) {
         for (size_t i {0}; i <= startIndex; ++i) {
-            outTotals[outIndex] += subCompartments[startIndex - i] * outDistributions[outIndex]->getTransitionProb(startIndex - i);
+            outTotals[outIndex] += outWeights[outIndex] * subCompartments[startIndex - i] * outDistributions[outIndex]->getTransitionProb(startIndex - i);
             outSubCompartments[startIndex - i] += outWeights[outIndex] * subCompartments[startIndex - i] * outDistributions[outIndex]->getTransitionProb(startIndex - i);
         }
     }
