@@ -27,9 +27,15 @@ void viewModelStructure(std::shared_ptr<Model> model) {
         }
         std::cout << "\n";
 
-        std::cout << "Out compartments: ";
+        std::cout << "Out compartments (derived from pointer): ";
         for (auto& outComp: comp->getOutCompartments()) {
             std::cout << outComp.lock()->getCompName() << " ";
+        }
+        std::cout << "\n";
+
+        std::cout << "Out compartments (direct from outCompartmentNames): ";
+        for (auto& outComp: comp->getOutCompartmentNames()) {
+            std::cout << outComp << " ";
         }
         std::cout << "\n";
 
