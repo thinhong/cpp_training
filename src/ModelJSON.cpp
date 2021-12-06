@@ -98,6 +98,7 @@ ModelJSON::ModelJSON(nlohmann::ordered_json &initialValues, nlohmann::ordered_js
                 std::weak_ptr<Compartment> outComp = model->getAddressFromName(outComps[i]);
 
                 inComp.lock()->addOutCompartment(outComp);
+                inComp.lock()->addOutCompartmentName(outComps[i]);
                 outComp.lock()->addInCompartment(inComp);
                 // Here we add to weight not to probability because we need them to be calculated concurrently
                 inComp.lock()->addOutWeight(weights[i]);
@@ -111,69 +112,104 @@ ModelJSON::ModelJSON(nlohmann::ordered_json &initialValues, nlohmann::ordered_js
             std::weak_ptr<Compartment> inComp = model->getAddressFromName(inCompName);
             std::weak_ptr<Compartment> outComp = model->getAddressFromName(outCompName);
 
-            // Set linked compartment in and out and their weight
-            inComp.lock()->addOutCompartment(outComp);
-            outComp.lock()->addInCompartment(inComp);
-            inComp.lock()->addOutWeight(weight);
-
             // Set distribution for the inCompartment
+            // If outCompartment is not added, then add the distribution, if it has been added then edit the distribution
             if (distributionConfig["distribution"] == "transitionProb") {
                 double prob = distributionConfig["transitionProb"];
                 prob *= Distribution::timeStep;
                 std::shared_ptr<Distribution> transitionProb = std::make_shared<DistributionTransitionProb>(prob);
-                inComp.lock()->addOutDistribution(transitionProb);
+                if (inComp.lock()->isOutCompAdded(outCompName) == false) {
+                    inComp.lock()->addOutDistribution(transitionProb);
+                } else {
+                    inComp.lock()->editOutDistribution(outCompName, transitionProb);
+                }
             }
                 // Gamma distribution: parameters are "scale" and "shape"
             else if (distributionConfig["distribution"] == "gamma") {
                 double scale = distributionConfig["scale"];
                 double shape = distributionConfig["shape"];
                 std::shared_ptr<Distribution> gamma = std::make_shared<DistributionDiscreteGamma>(scale, shape);
-                inComp.lock()->addOutDistribution(gamma);
+                if (inComp.lock()->isOutCompAdded(outCompName) == false) {
+                    inComp.lock()->addOutDistribution(gamma);
+                } else {
+                    inComp.lock()->editOutDistribution(outCompName, gamma);
+                }
             }
                 // Weibull distribution: parameters are "scale" and "shape"
             else if (distributionConfig["distribution"] == "weibull") {
                 double scale = distributionConfig["scale"];
                 double shape = distributionConfig["shape"];
                 std::shared_ptr<Distribution> weibull = std::make_shared<DistributionDiscreteWeibull>(scale, shape);
-                inComp.lock()->addOutDistribution(weibull);
+                if (inComp.lock()->isOutCompAdded(outCompName) == false) {
+                    inComp.lock()->addOutDistribution(weibull);
+                } else {
+                    inComp.lock()->editOutDistribution(outCompName, weibull);
+                }
             }
                 // Exponential distribution: parameter is "rate"
             else if (distributionConfig["distribution"] == "exponential") {
                 double rate = distributionConfig["rate"];
                 std::shared_ptr<Distribution> exponential = std::make_shared<DistributionDiscreteExponential>(rate);
-                inComp.lock()->addOutDistribution(exponential);
+                if (inComp.lock()->isOutCompAdded(outCompName) == false) {
+                    inComp.lock()->addOutDistribution(exponential);
+                } else {
+                    inComp.lock()->editOutDistribution(outCompName, exponential);
+                }
             }
             else if (distributionConfig["distribution"] == "lognormal") {
                 double mu = distributionConfig["mu"];
                 double sigma = distributionConfig["sigma"];
                 std::shared_ptr<Distribution> lognormal = std::make_shared<DistributionLogNormal>(mu, sigma);
-                inComp.lock()->addOutDistribution(lognormal);
+                if (inComp.lock()->isOutCompAdded(outCompName) == false) {
+                    inComp.lock()->addOutDistribution(lognormal);
+                } else {
+                    inComp.lock()->editOutDistribution(outCompName, lognormal);
+                }
             }
                 // Values distribution: parameter is a vector "waitingTime"
             else if (distributionConfig["distribution"] == "values") {
                 std::vector<double> waitingTime = distributionConfig["waitingTime"];
                 std::shared_ptr<Distribution> values = std::make_shared<DistributionNonparametric>(waitingTime);
-                inComp.lock()->addOutDistribution(values);
+                if (inComp.lock()->isOutCompAdded(outCompName) == false) {
+                    inComp.lock()->addOutDistribution(values);
+                } else {
+                    inComp.lock()->editOutDistribution(outCompName, values);
+                }
             }
             else if (distributionConfig["distribution"] == "mathExpression") {
                 std::string expression = distributionConfig["expression"];
                 std::shared_ptr<Distribution> mathExpression = std::make_shared<DistributionMathExpression>(expression);
-                inComp.lock()->addOutDistribution(mathExpression);
+                if (inComp.lock()->isOutCompAdded(outCompName) == false) {
+                    inComp.lock()->addOutDistribution(mathExpression);
+                } else {
+                    inComp.lock()->editOutDistribution(outCompName, mathExpression);
+                }
             }
             else if (distributionConfig["distribution"] == "constant") {
                 double constVal = distributionConfig["constant"];
                 std::shared_ptr<Distribution> constant = std::make_shared<DistributionConstant>(constVal);
-                inComp.lock()->addOutDistribution(constant);
+                if (inComp.lock()->isOutCompAdded(outCompName) == false) {
+                    inComp.lock()->addOutDistribution(constant);
+                } else {
+                    inComp.lock()->editOutDistribution(outCompName, constant);
+                }
+            }
+
+            // If outCompartment has not been added: set linked compartment in, out, outName, weight
+            if (inComp.lock()->isOutCompAdded(outCompName) == false) {
+                inComp.lock()->addOutCompartment(outComp);
+                inComp.lock()->addOutCompartmentName(outCompName);
+                outComp.lock()->addInCompartment(inComp);
+                inComp.lock()->addOutWeight(weight);
             }
         }
     }
 
     // Finally, looking back all compartments to see any compartment does not have a distribution
-    // Impute it with transitionProb = 1
+    // Impute it with transitionProb = 0
     for (auto& comp: model->getComps()) {
         if (comp->getOutDistributions().empty()) {
-            double prob = 0.0;
-            std::shared_ptr<Distribution> transitionProb = std::make_shared<DistributionTransitionProb>(prob);
+            std::shared_ptr<Distribution> transitionProb = std::make_shared<DistributionTransitionProb>(0);
             comp->addOutDistribution(transitionProb);
             comp->addOutWeight(1);
         }

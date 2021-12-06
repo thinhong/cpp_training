@@ -69,8 +69,8 @@ int main() {
     myModel.getModel()->sortComps();
     myModel.getModel()->initAllComps();
 
-//    // Debug: view model structure
-    viewModelStructure(myModel.getModel());
+    // Debug: view model structure
+//    viewModelStructure(myModel.getModel());
 
     std::cout << "Simulating..." << "\n";
 
@@ -81,7 +81,7 @@ int main() {
     for (long i {1}; i < Compartment::timesFollowUp; i++) {
         myModel.getModel()->update(i);
         // Debug: view each time step update
-        viewModelUpdate(myModel.getModel(), i);
+//        viewModelUpdate(myModel.getModel(), i);
     }
 
     // Display execution time

@@ -1,5 +1,5 @@
 {
-    "simulationDuration": 1,
+    "simulationDuration": 20,
     "errorTolerance": 0.01,
     "timeStep": 0.01,
     "initialValues": {"S": 999, "I": 1, "R": 0, "V": 0, "VA": 0, "VS": 0},
@@ -8,6 +8,8 @@
         "0.3 * S -> I": {"distribution": "mathExpression", "expression": "beta * S * I / N"}, 
         "0.7 * S -> V": {"distribution": "constant", "constant": 0.5},
         "V -> VA, VS, R": {"distribution": "multinomial", "probabilities": [0.1, 0.3, 0.6]}, 
-        "I -> R": {"distribution": "gamma", "scale": 2, "shape": 3}
+        "V -> VA": {"distribution": "gamma", "scale": 2, "shape": 3},
+        "V -> VS": {"distribution": "constant", "constant": 0.5},
+        "I -> R": {"distribution": "exponential", "rate": 1.5}
     }
 }
