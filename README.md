@@ -4,6 +4,8 @@
 
 ## Instructions
 
+You need CMake to configure the project and the GCC or Clang compiler and associated tool chain.
+
 1. Clone the project repo
 ```
 git clone https://github.com/thinhong/cpp_training.git
@@ -56,13 +58,14 @@ Set path to the folder you want to save output file (ex: /home/Documents):
 * `transitions`:
     * `S -> I`: compartment S transitions to compartment I
     * `S -> I` then `S -> V`: compartment S transitions to compartment I, then the rest of S transitions to I
-    * `S -> 0.3 * I`, `S -> 0.7 * V`: S concurrently transitions to I and V, of which 30% moves to I and 70% moves to V
+* To define multinomial 
+    * `0.3 * S -> I`, `0.7 * S -> V`: S concurrently transitions to I and V, of which 30% moves to I and 70% moves to V
 * `distribution`: distribution of waiting time, could be one of the followings
-    * `gamma`: parameters are `scale` and `shape`
-    * `weibull`: parameters are `scale` and `shape`
-    * `exponential`: parameter is `rate`
-    * `lognormal`: parameters are `mu` and `sigma`
-    * `mathExpression`: put any math expression to the `mathExpression` parameter, the expression can contains compartment names and other parameters that have been predefined in `parameters`
-    * `constant`: parameter is `constant`, set a fixed number of individuals moving per time step
-    * `transitionProb`: parameter is `transitionProb`, a fix rate transition moving per time step
+    * `gamma` (gamma distribution): parameters are `scale` and `shape`
+    * `weibull` (weibull distribution): parameters are `scale` and `shape`
+    * `exponential` (exponential distribution): parameter is `rate`
+    * `lognormal` (log-normal distribution): parameters are `mu` and `sigma`
+    * `mathExpression` (math expression): put any math expression to the `mathExpression` parameter, the expression can contains compartment names and other parameters that have been predefined in `parameters`
+    * `constant` (constant): parameter is `constant`, set a fixed number of individuals moving per time step
+    * `transitionProb` (transition probability): parameter is `transitionProb`, a fix rate transition moving per time step
     * `nonparametric`: parameter is `waitingTime`, put a vector contains the waiting time values, the values can be percentages or frequencies, for example `{"distribution": "nonparametric", "waitingTime": [3, 5.323, 2, 2.02, 3, 3, 1]}`
