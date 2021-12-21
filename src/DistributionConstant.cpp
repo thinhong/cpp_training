@@ -4,8 +4,8 @@
 
 #include "DistributionConstant.h"
 
-DistributionConstant::DistributionConstant(double frequency) {
-    this->frequency = frequency;
+DistributionConstant::DistributionConstant(double constValue) {
+    this->constant = constValue;
 }
 
 std::string DistributionConstant::getDistName() {
@@ -13,7 +13,7 @@ std::string DistributionConstant::getDistName() {
 }
 
 double DistributionConstant::getTransitionProb(size_t index) {
-    return frequency;
+    return constant;
 }
 
 size_t DistributionConstant::getMaxDay() {

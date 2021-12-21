@@ -167,7 +167,7 @@ ModelJSON::ModelJSON(nlohmann::ordered_json &initialValues, nlohmann::ordered_js
                 }
             }
                 // Values distribution: parameter is a vector "waitingTime"
-            else if (distributionConfig["distribution"] == "values") {
+            else if (distributionConfig["distribution"] == "nonparametric") {
                 std::vector<double> waitingTime = distributionConfig["waitingTime"];
                 std::shared_ptr<Distribution> values = std::make_shared<DistributionNonparametric>(waitingTime);
                 if (inComp.lock()->isOutCompAdded(outCompName) == false) {
