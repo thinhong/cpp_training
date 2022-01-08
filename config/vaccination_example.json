@@ -1,0 +1,16 @@
+{
+    "simulationDuration": 20,
+    "errorTolerance": 0.01,
+    "timeStep": 0.01,
+    "transitions": {
+        "S -> I": {"distribution": "mathExpression", "expression": "beta * S * (I + IA + IH + ID) / N"}, 
+        "I -> IA, IH": {"distribution": "multinomial", "probabilities": [0.2, 0.3]}, 
+        "I -> ID": {"distribution": "gamma", "scale": 2, "shape": 3},
+        "IA -> R": {"distribution": "nonparametric", "waitingTime": [3, 5.232, 2, 2.02, 3, 3, 1]},
+        "IH -> R": {"distribution": "gamma", "scale": 2, "shape": 3},
+        "ID -> D": {"distribution": "exponential", "rate": 1.5},
+        "S -> V": {"distribution": "constant", "constant": 0.5}
+    },
+    "parameters": {"beta": 0.012, "N": 1000},
+    "initialValues": {"S": 999, "I": 1, "R": 0, "V": 0, "IA": 0, "IH": 0, "ID": 0, "D": 0}
+}

@@ -23,10 +23,9 @@ int main() {
 
     // Record execution time: https://stackoverflow.com/questions/21856025/getting-an-accurate-execution-time-in-c-micro-seconds
     auto startTime = std::chrono::high_resolution_clock::now();
-
     std::cout << "Reading input file..." << "\n";
 
-    // Check whether all compartments have initial values
+    // ======== Check whether all compartments have initial values ========
     try {
         if (!checkInitVal(input["initialValues"], input["transitions"]).empty()) {
             throw 99;
@@ -56,17 +55,21 @@ int main() {
         std::cout << "Error: errorTolerance must > 0" << std::endl;
         std::exit(EXIT_FAILURE);
     }
+    // =====================================================================
 
     // Initialize parameters: errorTolerance, timeStep and daysFollowUp
     Distribution::errorTolerance = input["errorTolerance"];
     if (!input["timeStep"].is_null()) {
         Distribution::timeStep = input["timeStep"];
     }
-    Compartment::timesFollowUp = static_cast<size_t>(static_cast<double>(input["simulationDuration"]) / Distribution::timeStep + 1);
 
+    // Compute real time follow up by dividing simulation duration to time step
+    Compartment::timesFollowUp = static_cast<size_t>(static_cast<double>(input["simulationDuration"]) / Distribution::timeStep + 1);
+    // Make model object
     ModelJSON myModel(input["initialValues"], input["parameters"], input["transitions"]);
 
-    myModel.getModel()->sortComps();
+    // sortComps is no longer required because we let the user define the order of operations
+    myModel.getModel()->sortCompsByInputTransition();
     myModel.getModel()->initAllComps();
 
     // Debug: view model structure
