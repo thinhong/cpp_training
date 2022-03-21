@@ -68,7 +68,7 @@ int main() {
     // Make model object
     ModelJSON myModel(input["initialValues"], input["parameters"], input["transitions"]);
 
-    // sortComps is no longer required because we let the user define the order of operations
+    // We sort the comps with order defined by input transition
     myModel.getModel()->sortCompsByInputTransition();
     myModel.getModel()->initAllComps();
 
